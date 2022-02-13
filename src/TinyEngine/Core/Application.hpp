@@ -1,6 +1,8 @@
 ﻿#ifndef _APPLICATION_HEADER_
 #define _APPLICATION_HEADER_
 
+#include <memory>
+
 namespace TinyEngine::Core
 {
 	class ApplicationDelegate
@@ -14,10 +16,19 @@ namespace TinyEngine::Core
 		virtual void OnInit() {}
 
 		virtual void OnDeinit() {}
+
+		virtual void OnUpdate() {}
+		virtual void OnDraw() {}
+		virtual void OnEvent() {}
 	};
 
-	class Application final
+	class Window;
+
+	class Application final : public std::enable_shared_from_this<Application>
 	{
+	public:
+		using WindowPtr = std::shared_ptr<Window>;
+
 	public:
 		Application(ApplicationDelegate& delegate);
 		~Application() = default;
@@ -33,8 +44,13 @@ namespace TinyEngine::Core
 
 		void OnExecute();
 
+		void OnUpdate();
+		void OnDraw();
+		void OnEvent();
+
 	private:
 		ApplicationDelegate& _delegate;
+		WindowPtr _window;
 	};
 }
 
