@@ -10,6 +10,10 @@ find_package(SFML COMPONENTS audio graphics main network system window REQUIRED)
 set(TGUI_STATIC_LIBRARIES TRUE)
 find_package(TGUI REQUIRED)
 
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/pugixml" "${CMAKE_CURRENT_BINARY_DIR}/deps/pugixml")
+set_target_properties(pugixml-static PROPERTIES FOLDER "deps")
+#set_target_properties(aob PROPERTIES FOLDER "deps")
+
 include(cmake/src.cmake)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/src" FILES ${ENGINE_HEADERS} ${ENGINE_SOURCES})
 add_library(TinyEngine ${ENGINE_HEADERS} ${ENGINE_SOURCES})
@@ -22,4 +26,5 @@ target_link_libraries(TinyEngine PUBLIC
 	sfml-system
 	sfml-window
 	tgui
+	pugixml-static
 )
