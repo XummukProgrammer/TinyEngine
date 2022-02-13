@@ -1,11 +1,16 @@
 ﻿#include "Application.hpp"
 
 #include <TinyEngine/Core/Window.hpp>
+#include <TinyEngine/Core/WindowLoader.hpp>
+#include <TinyEngine/Core/LoaderManager.hpp>
+#include <TinyEngine/Core/FileSystemManager.hpp>
 
 namespace TinyEngine::Core
 {
-	Application::Application(ApplicationDelegate& delegate)
+	Application::Application(ApplicationDelegate& delegate, int argc, char** argv)
 		: _delegate(delegate)
+		, _argc(argc)
+		, _argv(argv)
 	{ 
 	}
 
@@ -21,9 +26,13 @@ namespace TinyEngine::Core
 
 	void Application::OnPreInit()
 	{ 
+		FileSystemManager::GetInstance().SetExecuteDir(_argc, _argv);
+
 		auto weakThis = weak_from_this();
 
 		WindowInfo windowInfo;
+		WindowLoader windowLoader(&windowInfo);
+		LoaderManager::GetInstance().LoadFromFile(&windowLoader);
 		_window = std::make_shared<Window>(windowInfo);
 		_window->SetOnUpdateCallback([weakThis]()
 		{

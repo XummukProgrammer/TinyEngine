@@ -30,7 +30,7 @@ namespace TinyEngine::Core
 		using WindowPtr = std::shared_ptr<Window>;
 
 	public:
-		Application(ApplicationDelegate& delegate);
+		Application(ApplicationDelegate& delegate, int argc, char** argv);
 		~Application() = default;
 
 	public:
@@ -50,6 +50,10 @@ namespace TinyEngine::Core
 
 	private:
 		ApplicationDelegate& _delegate;
+
+		int _argc = 0;
+		char** _argv;
+
 		WindowPtr _window;
 	};
 }

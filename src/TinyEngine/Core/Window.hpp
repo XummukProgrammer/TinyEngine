@@ -16,7 +16,7 @@ namespace TinyEngine::Core
 	{
 		unsigned width = 800;
 		unsigned height = 600;
-		std::wstring title = L"TinyEngine";
+		std::string title = "TinyEngine";
 		unsigned maxFramerate = 60;
 		bool isVerticalSyncEnabled = false;
 	};
