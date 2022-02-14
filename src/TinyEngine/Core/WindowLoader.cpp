@@ -2,6 +2,7 @@
 
 #include <TinyEngine/Core/FileSystemManager.hpp>
 #include <TinyEngine/Core/Window.hpp>
+#include <TinyEngine/Utils/XmlUtils.hpp>
 
 namespace TinyEngine::Core
 {
@@ -30,30 +31,11 @@ namespace TinyEngine::Core
 
         if (auto settingsNode = node.child("settings"))
         {
-            if (auto widthAttribute = settingsNode.attribute("width"))
-            {
-                _windowInfo->width = widthAttribute.as_uint();
-            }
-
-            if (auto heightAttribute = settingsNode.attribute("height"))
-            {
-                _windowInfo->height = heightAttribute.as_uint();
-            }
-
-            if (auto titleAttribute = settingsNode.attribute("title"))
-            {
-                _windowInfo->title = titleAttribute.as_string();
-            }
-
-            if (auto maxFramerateAttribute = settingsNode.attribute("maxFramerate"))
-            {
-                _windowInfo->maxFramerate = maxFramerateAttribute.as_uint();
-            }
-
-            if (auto isVerticalSyncEnabledAttribute = settingsNode.attribute("isVerticalSyncEnabled"))
-            {
-                _windowInfo->isVerticalSyncEnabled = isVerticalSyncEnabledAttribute.as_bool();
-            }
+            _windowInfo->width = Utils::XmlUtils::GetAttributeUnsignedOrDefault(settingsNode, "width", 800);
+            _windowInfo->height = Utils::XmlUtils::GetAttributeUnsignedOrDefault(settingsNode, "height", 600);
+            _windowInfo->title = Utils::XmlUtils::GetAttributeStringOrDefault(settingsNode, "title", "TinyEngine");
+            _windowInfo->maxFramerate = Utils::XmlUtils::GetAttributeUnsignedOrDefault(settingsNode, "maxFramerate", 60);
+            _windowInfo->isVerticalSyncEnabled = Utils::XmlUtils::GetAttributeBoolOrDefault(settingsNode, "isVerticalSyncEnabled", false);
         }
 
         return true;
