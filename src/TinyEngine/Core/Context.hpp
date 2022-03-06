@@ -34,19 +34,19 @@ namespace TinyEngine::Core
 		void SetOnPreInitCallback(const PreInitCallback& callback) { _onPreInitCallback = callback; }
 		void OnPreInit();
 
-		void SetOnInitCallback(const PreInitCallback& callback) { _onInitCallback = callback; }
+		void SetOnInitCallback(const InitCallback& callback) { _onInitCallback = callback; }
 		void OnInit();
 
-		void SetOnDeinitCallback(const PreInitCallback& callback) { _onDeinitCallback = callback; }
+		void SetOnDeinitCallback(const DeinitCallback& callback) { _onDeinitCallback = callback; }
 		void OnDeinit();
 
-		void SetOnUpdateCallback(const PreInitCallback& callback) { _onUpdateCallback = callback; }
+		void SetOnUpdateCallback(const UpdateCallback& callback) { _onUpdateCallback = callback; }
 		void OnUpdate();
 
-		void SetOnDrawCallback(const PreInitCallback& callback) { _onDrawCallback = callback; }
+		void SetOnDrawCallback(const DrawCallback& callback) { _onDrawCallback = callback; }
 		void OnDraw();
 
-		void SetOnEventCallback(const PreInitCallback& callback) { _onEventCallback = callback; }
+		void SetOnEventCallback(const EventCallback& callback) { _onEventCallback = callback; }
 		void OnEvent();
 
 		FileSystemPtr GetFileSystem() const;
