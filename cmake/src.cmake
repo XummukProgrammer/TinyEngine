@@ -10,7 +10,6 @@ set(ENGINE_HEADERS
 	
 	src/TinyEngine/Properties/Properties.hpp
 	src/TinyEngine/Properties/IProperty.hpp
-	src/TinyEngine/Properties/PropertyData.hpp
 	src/TinyEngine/Properties/Data/IntProperty.hpp
 )
 
@@ -25,6 +24,5 @@ set(ENGINE_SOURCES
 	
 	src/TinyEngine/Properties/Properties.cpp
 	src/TinyEngine/Properties/IProperty.cpp
-	src/TinyEngine/Properties/PropertyData.cpp
 	src/TinyEngine/Properties/Data/IntProperty.cpp
 )

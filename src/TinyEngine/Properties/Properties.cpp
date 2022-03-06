@@ -24,7 +24,7 @@ namespace TinyEngine::Properties
 	void Properties::SetIntProperty(std::string_view key, int value)
 	{ 
 		auto property = std::make_shared<Data::IntProperty>();
-		property->SetData(value);
+		property->SetValue(value);
 		SetProperty(key, std::move(property));
 	}
 
@@ -34,7 +34,7 @@ namespace TinyEngine::Properties
 		{
 			if (auto intProperty = std::dynamic_pointer_cast<Data::IntProperty>(property))
 			{
-				return intProperty->GetData();
+				return intProperty->GetValue();
 			}
 		}
 
