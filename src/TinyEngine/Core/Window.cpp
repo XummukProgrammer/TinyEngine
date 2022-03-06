@@ -10,7 +10,7 @@
 namespace TinyEngine::Core
 {
 	static inline const std::string FILE_PATH = "window.xml";
-    static inline const DirType DIR_TYPE = DirType::Configs;
+	static inline const DirType DIR_TYPE = DirType::Configs;
 
 	Window::Window()
 		: Window(WindowInfo())
