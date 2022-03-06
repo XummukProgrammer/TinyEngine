@@ -1,6 +1,9 @@
 ﻿#include "Properties.hpp"
 
+#include <TinyEngine/Properties/Data/BoolProperty.hpp>
 #include <TinyEngine/Properties/Data/IntProperty.hpp>
+#include <TinyEngine/Properties/Data/FloatProperty.hpp>
+#include <TinyEngine/Properties/Data/StringProperty.hpp>
 
 namespace TinyEngine::Properties
 {
@@ -21,6 +24,41 @@ namespace TinyEngine::Properties
 		return nullptr;
 	}
 
+	/// ~~~~~~~~~~~~~~~~~
+	void Properties::SetBoolProperty(std::string_view key, bool value)
+	{ 
+		if (auto property = GetBoolProperty(key))
+		{
+			property->SetValue(value);
+			return;
+		}
+
+		auto property = std::make_shared<Data::BoolProperty>();
+		property->SetValue(value);
+		SetProperty(key, std::move(property));
+	}
+
+	bool Properties::GetBoolProperty(std::string_view key, bool default) const
+	{
+		if (auto property = GetBoolProperty(key))
+		{
+			return property->GetValue();
+		}
+
+		return default;
+	}
+
+	Properties::BoolPropertyPtr Properties::GetBoolProperty(std::string_view key) const
+	{
+		if (auto property = GetProperty(key))
+		{
+			return std::dynamic_pointer_cast<Data::BoolProperty>(property);
+		}
+
+		return nullptr;
+	}
+
+	/// ~~~~~~~~~~~~~~~~~
 	void Properties::SetIntProperty(std::string_view key, int value)
 	{ 
 		if (auto property = GetIntProperty(key))
@@ -38,10 +76,7 @@ namespace TinyEngine::Properties
 	{
 		if (auto property = GetProperty(key))
 		{
-			if (auto intProperty = std::dynamic_pointer_cast<Data::IntProperty>(property))
-			{
-				return intProperty;
-			}
+			return std::dynamic_pointer_cast<Data::IntProperty>(property);
 		}
 
 		return nullptr;
@@ -55,5 +90,73 @@ namespace TinyEngine::Properties
 		}
 
 		return default;
+	}
+
+	/// ~~~~~~~~~~~~~~~~~
+	void Properties::SetFloatProperty(std::string_view key, float value)
+	{ 
+		if (auto property = GetFloatProperty(key))
+		{
+			property->SetValue(value);
+			return;
+		}
+
+		auto property = std::make_shared<Data::FloatProperty>();
+		property->SetValue(value);
+		SetProperty(key, std::move(property));
+	}
+
+	float Properties::GetFloatProperty(std::string_view key, float default) const
+	{
+		if (auto property = GetFloatProperty(key))
+		{
+			return property->GetValue();
+		}
+
+		return default;
+	}
+
+	Properties::FloatPropertyPtr Properties::GetFloatProperty(std::string_view key) const
+	{
+		if (auto property = GetProperty(key))
+		{
+			return std::dynamic_pointer_cast<Data::FloatProperty>(property);
+		}
+
+		return nullptr;
+	}
+
+	/// ~~~~~~~~~~~~~~~~~
+	void Properties::SetStringProperty(std::string_view key, std::string_view value)
+	{ 
+		if (auto property = GetStringProperty(key))
+		{
+			property->SetValue(value);
+			return;
+		}
+
+		auto property = std::make_shared<Data::StringProperty>();
+		property->SetValue(value);
+		SetProperty(key, std::move(property));
+	}
+
+	std::string Properties::GetStringProperty(std::string_view key, const std::string& default) const
+	{
+		if (auto property = GetStringProperty(key))
+		{
+			return property->GetValue();
+		}
+
+		return default;
+	}
+
+	Properties::StringPropertyPtr Properties::GetStringProperty(std::string_view key) const
+	{
+		if (auto property = GetProperty(key))
+		{
+			return std::dynamic_pointer_cast<Data::StringProperty>(property);
+		}
+
+		return nullptr;
 	}
 }

@@ -10,7 +10,10 @@ set(ENGINE_HEADERS
 	
 	src/TinyEngine/Properties/Properties.hpp
 	src/TinyEngine/Properties/IProperty.hpp
+	src/TinyEngine/Properties/Data/BoolProperty.hpp
 	src/TinyEngine/Properties/Data/IntProperty.hpp
+	src/TinyEngine/Properties/Data/FloatProperty.hpp
+	src/TinyEngine/Properties/Data/StringProperty.hpp
 )
 
 set(ENGINE_SOURCES
@@ -24,5 +27,8 @@ set(ENGINE_SOURCES
 	
 	src/TinyEngine/Properties/Properties.cpp
 	src/TinyEngine/Properties/IProperty.cpp
+	src/TinyEngine/Properties/Data/BoolProperty.cpp
 	src/TinyEngine/Properties/Data/IntProperty.cpp
+	src/TinyEngine/Properties/Data/FloatProperty.cpp
+	src/TinyEngine/Properties/Data/StringProperty.cpp
 )
