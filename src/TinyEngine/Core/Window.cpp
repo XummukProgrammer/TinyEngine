@@ -80,16 +80,16 @@ namespace TinyEngine::Core
 		auto&& path = context->GetFileSystem()->BuildPath(DIR_TYPE, FILE_PATH);
 
 		pugi::xml_document doc;
-        doc.load_file(path.c_str());
-        auto root = doc.child("root");
+		doc.load_file(path.c_str());
+		auto root = doc.child("root");
 
 		if (auto settingsNode = root.child("settings"))
-        {
-            width = Utils::XmlUtils::GetAttributeUnsignedOrDefault(settingsNode, "width", 800);
-            height = Utils::XmlUtils::GetAttributeUnsignedOrDefault(settingsNode, "height", 600);
-            title = Utils::XmlUtils::GetAttributeStringOrDefault(settingsNode, "title", "TinyEngine");
-            maxFramerate = Utils::XmlUtils::GetAttributeUnsignedOrDefault(settingsNode, "maxFramerate", 60);
-            isVerticalSyncEnabled = Utils::XmlUtils::GetAttributeBoolOrDefault(settingsNode, "isVerticalSyncEnabled", false);
-        }
+		{
+			width = Utils::XmlUtils::GetAttributeUnsignedOrDefault(settingsNode, "width", 800);
+			height = Utils::XmlUtils::GetAttributeUnsignedOrDefault(settingsNode, "height", 600);
+			title = Utils::XmlUtils::GetAttributeStringOrDefault(settingsNode, "title", "TinyEngine");
+			maxFramerate = Utils::XmlUtils::GetAttributeUnsignedOrDefault(settingsNode, "maxFramerate", 60);
+			isVerticalSyncEnabled = Utils::XmlUtils::GetAttributeBoolOrDefault(settingsNode, "isVerticalSyncEnabled", false);
+		}
 	}
 }
