@@ -1,7 +1,14 @@
 ﻿#include "Context.hpp"
 
+#include <TinyEngine/Core/FileSystem.hpp>
+
 namespace TinyEngine::Core
 {
+	Context::Context()
+		: _fileSystem(std::make_shared<FileSystem>())
+	{ 
+	}
+
 	void Context::OnPreInit()
 	{ 
 		if (_onPreInitCallback)
@@ -48,5 +55,10 @@ namespace TinyEngine::Core
 		{
 			_onEventCallback(shared_from_this());
 		}
+	}
+
+	Context::FileSystemPtr Context::GetFileSystem() const
+	{
+		return _fileSystem;
 	}
 }

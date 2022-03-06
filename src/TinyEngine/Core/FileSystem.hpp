@@ -1,7 +1,8 @@
-﻿#ifndef _FILE_SYSTEM_MANAGER_HEADER_
-#define _FILE_SYSTEM_MANAGER_HEADER_
+﻿#ifndef _FILE_SYSTEM_HEADER_
+#define _FILE_SYSTEM_HEADER_
 
 #include <string>
+#include <map>
 
 namespace TinyEngine::Core
 {
@@ -11,14 +12,11 @@ namespace TinyEngine::Core
 		Assets
 	};
 
-	class FileSystemManager final
+	class FileSystem final
 	{
 	public:
-		FileSystemManager() = default;
-		~FileSystemManager() = default;
-
-	public:
-		static FileSystemManager& GetInstance();
+		FileSystem() = default;
+		~FileSystem() = default;
 
 	public:
 		void SetExecuteDir(int argc, char** argv);
@@ -32,8 +30,7 @@ namespace TinyEngine::Core
 		std::string _executeDir;
 
 	private:
-		static inline const std::string CONFIGS_DIR_PATH = "../configs";
-		static inline const std::string ASSETS_DIR_PATH = "../assets";
+		static const std::map<DirType, std::string> DIR_PATHS;
 	};
 }
 

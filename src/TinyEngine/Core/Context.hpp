@@ -6,10 +6,13 @@
 
 namespace TinyEngine::Core
 {
-	class Context : public std::enable_shared_from_this<Context>
+	class FileSystem;
+
+	class Context final : public std::enable_shared_from_this<Context>
 	{
 	public:
 		using Ptr = std::shared_ptr<Context>;
+		using FileSystemPtr = std::shared_ptr<FileSystem>;
 		using PreInitCallback = std::function<void(Ptr)>;
 		using InitCallback = std::function<void(Ptr)>;
 		using DeinitCallback = std::function<void(Ptr)>;
@@ -18,7 +21,7 @@ namespace TinyEngine::Core
 		using EventCallback = std::function<void(Ptr)>;
 
 	public:
-		Context() = default;
+		Context();
 		~Context() = default;
 
 	public:
@@ -40,7 +43,11 @@ namespace TinyEngine::Core
 		void SetOnEventCallback(const PreInitCallback& callback) { _onEventCallback = callback; }
 		void OnEvent();
 
+		FileSystemPtr GetFileSystem() const;
+
 	private:
+		FileSystemPtr _fileSystem;
+
 		PreInitCallback _onPreInitCallback;
 		InitCallback _onInitCallback;
 		DeinitCallback _onDeinitCallback;

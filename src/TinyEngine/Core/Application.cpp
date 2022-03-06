@@ -2,8 +2,7 @@
 
 #include <TinyEngine/Core/Window.hpp>
 #include <TinyEngine/Core/WindowLoader.hpp>
-#include <TinyEngine/Core/LoaderManager.hpp>
-#include <TinyEngine/Core/FileSystemManager.hpp>
+#include <TinyEngine/Core/FileSystem.hpp>
 #include <TinyEngine/Core/Context.hpp>
 
 namespace TinyEngine::Core
@@ -32,13 +31,11 @@ namespace TinyEngine::Core
 
 	void Application::OnPreInit()
 	{ 
-		FileSystemManager::GetInstance().SetExecuteDir(_argc, _argv);
+		_context->GetFileSystem()->SetExecuteDir(_argc, _argv);
 
 		auto weakThis = weak_from_this();
 
 		WindowInfo windowInfo;
-		WindowLoader windowLoader(&windowInfo);
-		LoaderManager::GetInstance().LoadFromFile(&windowLoader);
 		_window = std::make_shared<Window>(windowInfo);
 		_window->SetOnUpdateCallback([weakThis]()
 		{
