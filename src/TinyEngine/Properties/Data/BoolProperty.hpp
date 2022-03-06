@@ -15,6 +15,8 @@ namespace TinyEngine::Properties::Data
 		void SetValue(bool value) { _value = value; }
 		bool GetValue() const { return _value; }
 
+		std::string ToString() const override;
+
 	private:
 		bool _value = false;
 	};

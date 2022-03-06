@@ -5,6 +5,8 @@
 #include <TinyEngine/Properties/Data/FloatProperty.hpp>
 #include <TinyEngine/Properties/Data/StringProperty.hpp>
 
+#include <fmt/format.h>
+
 namespace TinyEngine::Properties
 {
 	void Properties::SetProperty(std::string_view key, IPropertyPtr&& property)
@@ -158,5 +160,31 @@ namespace TinyEngine::Properties
 		}
 
 		return nullptr;
+	}
+
+	/// ~~~~~~~~~~~~~~~~~
+	std::map<std::string, std::string> Properties::GetAllPropertiesStringValue() const
+	{
+		std::map<std::string, std::string> properties;
+
+		for (const auto& [ key, value ] : _properties)
+		{
+			properties[key] = value->ToString();
+		}
+
+		return properties;
+	}
+
+	void Properties::DebugPrintAllProperties()
+	{ 
+		std::string printString;
+		auto&& properties = GetAllPropertiesStringValue();
+
+		for (const auto& [ key, value ] : properties)
+		{
+			printString += fmt::format("Key: {} | Value: {}\n", key, value);
+		}
+
+		fmt::print(printString);
 	}
 }

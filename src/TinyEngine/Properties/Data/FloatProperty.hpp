@@ -15,6 +15,8 @@ namespace TinyEngine::Properties::Data
 		void SetValue(float value) { _value = value; }
 		float GetValue() const { return _value; }
 
+		std::string ToString() const override;
+
 	private:
 		float _value = 0.f;
 	};

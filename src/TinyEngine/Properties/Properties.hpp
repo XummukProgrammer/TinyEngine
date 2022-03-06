@@ -43,6 +43,9 @@ namespace TinyEngine::Properties
 		void SetStringProperty(std::string_view key, std::string_view value);
 		std::string GetStringProperty(std::string_view key, const std::string& default) const;
 
+		std::map<std::string, std::string> GetAllPropertiesStringValue() const;
+		void DebugPrintAllProperties();
+
 	private:
 		void SetProperty(std::string_view key, IPropertyPtr&& property);
 		IPropertyPtr GetProperty(std::string_view key) const;
