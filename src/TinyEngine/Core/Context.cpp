@@ -1,11 +1,13 @@
 ﻿#include "Context.hpp"
 
 #include <TinyEngine/Core/FileSystem.hpp>
+#include <TinyEngine/Properties/Properties.hpp>
 
 namespace TinyEngine::Core
 {
 	Context::Context()
 		: _fileSystem(std::make_shared<FileSystem>())
+		, _sessionProperties(std::make_shared<Properties::Properties>())
 	{ 
 	}
 
@@ -60,5 +62,10 @@ namespace TinyEngine::Core
 	Context::FileSystemPtr Context::GetFileSystem() const
 	{
 		return _fileSystem;
+	}
+
+	Context::PropertiesPtr Context::GetSessionProperties() const
+	{
+		return _sessionProperties;
 	}
 }

@@ -4,4 +4,6 @@
 #include <TinyEngine/Core/Application.hpp>
 #include <TinyEngine/Core/Context.hpp>
 
+#include <TinyEngine/Properties/Properties.hpp>
+
 #endif // _TINY_ENGINE_HEADER_

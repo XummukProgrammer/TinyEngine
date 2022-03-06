@@ -70,6 +70,7 @@ namespace TinyEngine::Core
 	void Application::OnDeinit()
 	{ 
 		_context->OnDeinit();
+		_context.reset();
 	}
 
 	void Application::OnExecute()

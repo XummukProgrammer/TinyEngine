@@ -4,6 +4,11 @@
 #include <functional>
 #include <memory>
 
+namespace TinyEngine::Properties
+{
+	class Properties;
+}
+
 namespace TinyEngine::Core
 {
 	class FileSystem;
@@ -13,12 +18,13 @@ namespace TinyEngine::Core
 	public:
 		using Ptr = std::shared_ptr<Context>;
 		using FileSystemPtr = std::shared_ptr<FileSystem>;
-		using PreInitCallback = std::function<void(Ptr)>;
-		using InitCallback = std::function<void(Ptr)>;
-		using DeinitCallback = std::function<void(Ptr)>;
-		using UpdateCallback = std::function<void(Ptr)>;
-		using DrawCallback = std::function<void(Ptr)>;
-		using EventCallback = std::function<void(Ptr)>;
+		using PropertiesPtr = std::shared_ptr<Properties::Properties>;
+		using PreInitCallback = std::function<void(const Ptr&)>;
+		using InitCallback = std::function<void(const Ptr&)>;
+		using DeinitCallback = std::function<void(const Ptr&)>;
+		using UpdateCallback = std::function<void(const Ptr&)>;
+		using DrawCallback = std::function<void(const Ptr&)>;
+		using EventCallback = std::function<void(const Ptr&)>;
 
 	public:
 		Context();
@@ -44,9 +50,11 @@ namespace TinyEngine::Core
 		void OnEvent();
 
 		FileSystemPtr GetFileSystem() const;
+		PropertiesPtr GetSessionProperties() const;
 
 	private:
 		FileSystemPtr _fileSystem;
+		PropertiesPtr _sessionProperties;
 
 		PreInitCallback _onPreInitCallback;
 		InitCallback _onInitCallback;
