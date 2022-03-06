@@ -5,35 +5,22 @@
 
 namespace TinyEngine::Core
 {
-	class ApplicationDelegate
-	{
-	public:
-		ApplicationDelegate() = default;
-		virtual ~ApplicationDelegate() = default;
-
-	public:
-		virtual void OnPreInit() {}
-		virtual void OnInit() {}
-
-		virtual void OnDeinit() {}
-
-		virtual void OnUpdate() {}
-		virtual void OnDraw() {}
-		virtual void OnEvent() {}
-	};
-
 	class Window;
+	class Context;
 
 	class Application final : public std::enable_shared_from_this<Application>
 	{
 	public:
 		using WindowPtr = std::shared_ptr<Window>;
+		using ContextPtr = std::shared_ptr<Context>;
 
 	public:
-		Application(ApplicationDelegate& delegate, int argc, char** argv);
+		Application(int argc, char** argv);
 		~Application() = default;
 
 	public:
+		ContextPtr GetContext() const;
+
 		void Start();
 
 	private:
@@ -49,12 +36,11 @@ namespace TinyEngine::Core
 		void OnEvent();
 
 	private:
-		ApplicationDelegate& _delegate;
-
 		int _argc = 0;
 		char** _argv;
 
 		WindowPtr _window;
+		ContextPtr _context;
 	};
 }
 

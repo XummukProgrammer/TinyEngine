@@ -4,14 +4,20 @@
 #include <TinyEngine/Core/WindowLoader.hpp>
 #include <TinyEngine/Core/LoaderManager.hpp>
 #include <TinyEngine/Core/FileSystemManager.hpp>
+#include <TinyEngine/Core/Context.hpp>
 
 namespace TinyEngine::Core
 {
-	Application::Application(ApplicationDelegate& delegate, int argc, char** argv)
-		: _delegate(delegate)
-		, _argc(argc)
+	Application::Application(int argc, char** argv)
+		: _argc(argc)
 		, _argv(argv)
+		, _context(std::make_shared<Context>())
 	{ 
+	}
+
+	Application::ContextPtr Application::GetContext() const
+	{
+		return _context;
 	}
 
 	void Application::Start()
@@ -56,17 +62,17 @@ namespace TinyEngine::Core
 			}
 		});
 
-		_delegate.OnPreInit();
+		_context->OnPreInit();
 	}
 
 	void Application::OnInit()
 	{ 
-		_delegate.OnInit();
+		_context->OnInit();
 	}
 
 	void Application::OnDeinit()
 	{ 
-		_delegate.OnDeinit();
+		_context->OnDeinit();
 	}
 
 	void Application::OnExecute()
@@ -76,16 +82,16 @@ namespace TinyEngine::Core
 
 	void Application::OnUpdate()
 	{ 
-		_delegate.OnUpdate();
+		_context->OnUpdate();
 	}
 
 	void Application::OnDraw()
 	{ 
-		_delegate.OnDraw();
+		_context->OnDraw();
 	}
 
 	void Application::OnEvent()
 	{ 
-		_delegate.OnEvent();
+		_context->OnEvent();
 	}
 }
