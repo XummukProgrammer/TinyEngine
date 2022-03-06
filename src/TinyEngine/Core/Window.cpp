@@ -1,9 +1,21 @@
 ﻿#include "Window.hpp"
 
+#include <TinyEngine/Core/Context.hpp>
+#include <TinyEngine/Core/FileSystem.hpp>
+#include <TinyEngine/Utils/XmlUtils.hpp>
+
 #include <SFML/Graphics.hpp>
+#include <pugixml.hpp>
 
 namespace TinyEngine::Core
 {
+	static inline const std::string FILE_PATH = "window.xml";
+    static inline const DirType DIR_TYPE = DirType::Configs;
+
+	Window::Window()
+		: Window(WindowInfo())
+	{ }
+
 	Window::Window(const WindowInfo& info)
 	{ 
 		_renderWindow = std::make_shared<sf::RenderWindow>(sf::VideoMode(info.width, info.height), info.title);
@@ -61,5 +73,23 @@ namespace TinyEngine::Core
 		{
 			_onEventCallback();
 		}
+	}
+
+	void WindowInfo::LoadFromFile(const std::shared_ptr<Context>& context)
+	{ 
+		auto&& path = context->GetFileSystem()->BuildPath(DIR_TYPE, FILE_PATH);
+
+		pugi::xml_document doc;
+        doc.load_file(path.c_str());
+        auto root = doc.child("root");
+
+		if (auto settingsNode = root.child("settings"))
+        {
+            width = Utils::XmlUtils::GetAttributeUnsignedOrDefault(settingsNode, "width", 800);
+            height = Utils::XmlUtils::GetAttributeUnsignedOrDefault(settingsNode, "height", 600);
+            title = Utils::XmlUtils::GetAttributeStringOrDefault(settingsNode, "title", "TinyEngine");
+            maxFramerate = Utils::XmlUtils::GetAttributeUnsignedOrDefault(settingsNode, "maxFramerate", 60);
+            isVerticalSyncEnabled = Utils::XmlUtils::GetAttributeBoolOrDefault(settingsNode, "isVerticalSyncEnabled", false);
+        }
 	}
 }

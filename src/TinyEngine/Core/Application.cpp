@@ -1,7 +1,6 @@
 ﻿#include "Application.hpp"
 
 #include <TinyEngine/Core/Window.hpp>
-#include <TinyEngine/Core/WindowLoader.hpp>
 #include <TinyEngine/Core/FileSystem.hpp>
 #include <TinyEngine/Core/Context.hpp>
 
@@ -36,6 +35,7 @@ namespace TinyEngine::Core
 		auto weakThis = weak_from_this();
 
 		WindowInfo windowInfo;
+		windowInfo.LoadFromFile(_context);
 		_window = std::make_shared<Window>(windowInfo);
 		_window->SetOnUpdateCallback([weakThis]()
 		{
