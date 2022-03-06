@@ -23,19 +23,35 @@ namespace TinyEngine::Properties
 
 	void Properties::SetIntProperty(std::string_view key, int value)
 	{ 
+		if (auto property = GetIntProperty(key))
+		{
+			property->SetValue(value);
+			return;
+		}
+
 		auto property = std::make_shared<Data::IntProperty>();
 		property->SetValue(value);
 		SetProperty(key, std::move(property));
 	}
 
-	int Properties::GetIntProperty(std::string_view key, int default) const
+	Properties::IntPropertyPtr Properties::GetIntProperty(std::string_view key) const
 	{
 		if (auto property = GetProperty(key))
 		{
 			if (auto intProperty = std::dynamic_pointer_cast<Data::IntProperty>(property))
 			{
-				return intProperty->GetValue();
+				return intProperty;
 			}
+		}
+
+		return nullptr;
+	}
+
+	int Properties::GetIntProperty(std::string_view key, int default) const
+	{
+		if (auto property = GetIntProperty(key))
+		{
+			return property->GetValue();
 		}
 
 		return default;
