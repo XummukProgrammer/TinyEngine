@@ -9,7 +9,8 @@ namespace TinyEngine::Core
 	const std::map<DirType, std::string> FileSystem::DIR_PATHS =
 	{
 		{ DirType::Configs, "../configs" },
-		{ DirType::Assets, "../assets" }
+		{ DirType::Assets, "../assets" },
+		{ DirType::Data, "../data" }
 	};
 
 	void FileSystem::SetExecuteDir(int argc, char** argv)

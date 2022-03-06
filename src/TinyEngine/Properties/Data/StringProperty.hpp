@@ -18,6 +18,10 @@ namespace TinyEngine::Properties::Data
 		const std::string& GetValue() const { return _value; }
 
 		std::string ToString() const override;
+		std::string GetType() const override;
+
+		void SaveToFile(pugi::xml_node& node) override;
+		void LoadFromFile(pugi::xml_node& node) override;
 
 	private:
 		std::string _value;

@@ -5,6 +5,11 @@
 #include <map>
 #include <memory>
 
+namespace TinyEngine::Core
+{
+	class Context;
+}
+
 namespace TinyEngine::Properties
 {
 	namespace Data
@@ -17,7 +22,7 @@ namespace TinyEngine::Properties
 
 	class IProperty;
 
-	class Properties final
+	class Properties
 	{
 	public:
 		using IPropertyPtr = std::shared_ptr<IProperty>;
@@ -28,7 +33,7 @@ namespace TinyEngine::Properties
 
 	public:
 		Properties() = default;
-		~Properties() = default;
+		virtual ~Properties() = default;
 
 	public:
 		void SetBoolProperty(std::string_view key, bool value);
@@ -46,7 +51,7 @@ namespace TinyEngine::Properties
 		std::map<std::string, std::string> GetAllPropertiesStringValue() const;
 		void DebugPrintAllProperties();
 
-	private:
+	protected:
 		void SetProperty(std::string_view key, IPropertyPtr&& property);
 		IPropertyPtr GetProperty(std::string_view key) const;
 
@@ -55,8 +60,22 @@ namespace TinyEngine::Properties
 		FloatPropertyPtr GetFloatProperty(std::string_view key) const;
 		StringPropertyPtr GetStringProperty(std::string_view key) const;
 
-	public:
+		const std::map<std::string, IPropertyPtr>& GetData() const;
+
+	private:
 		std::map<std::string, IPropertyPtr> _properties;
+	};
+
+	/// ~~~~~~~~~~~~~~~~~
+	class XmlProperties final : public Properties
+	{
+	public:
+		XmlProperties() = default;
+		~XmlProperties() = default;
+
+	public:
+		void SaveToFile(const std::shared_ptr<Core::Context>& context, const std::string& filePath);
+		void LoadFromFile(const std::shared_ptr<Core::Context>& context, const std::string& filePath);
 	};
 }
 

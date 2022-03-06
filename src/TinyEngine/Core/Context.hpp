@@ -7,6 +7,7 @@
 namespace TinyEngine::Properties
 {
 	class Properties;
+	class XmlProperties;
 }
 
 namespace TinyEngine::Core
@@ -19,6 +20,7 @@ namespace TinyEngine::Core
 		using Ptr = std::shared_ptr<Context>;
 		using FileSystemPtr = std::shared_ptr<FileSystem>;
 		using PropertiesPtr = std::shared_ptr<Properties::Properties>;
+		using XmlPropertiesPtr = std::shared_ptr<Properties::XmlProperties>;
 		using PreInitCallback = std::function<void(const Ptr&)>;
 		using InitCallback = std::function<void(const Ptr&)>;
 		using DeinitCallback = std::function<void(const Ptr&)>;
@@ -52,9 +54,14 @@ namespace TinyEngine::Core
 		FileSystemPtr GetFileSystem() const;
 		PropertiesPtr GetSessionProperties() const;
 
+		XmlPropertiesPtr GetIOProperties() const;
+		void IOPropertiesSaveToFile();
+		void IOPropertiesLoadFromFile();
+
 	private:
 		FileSystemPtr _fileSystem;
 		PropertiesPtr _sessionProperties;
+		XmlPropertiesPtr _IOProperties;
 
 		PreInitCallback _onPreInitCallback;
 		InitCallback _onInitCallback;

@@ -9,7 +9,8 @@ namespace TinyEngine::Core
 	enum class DirType
 	{
 		Configs,
-		Assets
+		Assets,
+		Data
 	};
 
 	class FileSystem final

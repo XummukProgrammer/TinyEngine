@@ -3,6 +3,7 @@
 #include <TinyEngine/Core/Window.hpp>
 #include <TinyEngine/Core/FileSystem.hpp>
 #include <TinyEngine/Core/Context.hpp>
+#include <TinyEngine/Properties/Properties.hpp>
 
 namespace TinyEngine::Core
 {
@@ -31,6 +32,7 @@ namespace TinyEngine::Core
 	void Application::OnPreInit()
 	{ 
 		_context->GetFileSystem()->SetExecuteDir(_argc, _argv);
+		_context->IOPropertiesLoadFromFile();
 
 		auto weakThis = weak_from_this();
 
@@ -70,6 +72,7 @@ namespace TinyEngine::Core
 	void Application::OnDeinit()
 	{ 
 		_context->OnDeinit();
+		_context->IOPropertiesSaveToFile();
 		_context.reset();
 	}
 

@@ -5,10 +5,16 @@
 #include <TinyEngine/Properties/Data/FloatProperty.hpp>
 #include <TinyEngine/Properties/Data/StringProperty.hpp>
 
+#include <TinyEngine/Core/Context.hpp>
+#include <TinyEngine/Core/FileSystem.hpp>
+
 #include <fmt/format.h>
+#include <pugixml.hpp>
 
 namespace TinyEngine::Properties
 {
+	static inline const Core::DirType DIR_TYPE = Core::DirType::Data;
+
 	void Properties::SetProperty(std::string_view key, IPropertyPtr&& property)
 	{ 
 		_properties[std::string{key}] = std::move(property);
@@ -162,6 +168,11 @@ namespace TinyEngine::Properties
 		return nullptr;
 	}
 
+	const std::map<std::string, Properties::IPropertyPtr>& Properties::GetData() const
+	{
+		return _properties;
+	}
+
 	/// ~~~~~~~~~~~~~~~~~
 	std::map<std::string, std::string> Properties::GetAllPropertiesStringValue() const
 	{
@@ -186,5 +197,63 @@ namespace TinyEngine::Properties
 		}
 
 		fmt::print(printString);
+	}
+
+	/// ~~~~~~~~~~~~~~~~~
+	void XmlProperties::SaveToFile(const std::shared_ptr<Core::Context>& context, const std::string& filePath)
+	{ 
+		pugi::xml_document doc;
+		auto&& rootNode = doc.append_child("root");
+
+		for (const auto& [ key, property ] : GetData())
+		{
+			auto&& propertyNode = rootNode.append_child(key.c_str());
+			auto&& propertyTypeAttr = propertyNode.append_attribute("type");
+			propertyTypeAttr.set_value(property->GetType().c_str());
+			property->SaveToFile(propertyNode);
+		}
+
+		auto&& path = context->GetFileSystem()->BuildPath(DIR_TYPE, filePath);
+		doc.save_file(path.c_str());
+	}
+
+	void XmlProperties::LoadFromFile(const std::shared_ptr<Core::Context>& context, const std::string& filePath)
+	{
+		auto&& path = context->GetFileSystem()->BuildPath(DIR_TYPE, filePath);
+
+		pugi::xml_document doc;
+		doc.load_file(path.c_str());
+
+		auto&& rootNode = doc.child("root");
+
+		for (auto&& propertyNode = rootNode.first_child(); propertyNode; propertyNode = propertyNode.next_sibling())
+		{
+			auto&& propertyTypeAttr = propertyNode.attribute("type");
+			auto&& propertyType = std::string{propertyTypeAttr.value()};
+
+			IPropertyPtr property;
+
+			if (propertyType == "bool")
+			{
+				property = std::make_shared<Data::BoolProperty>();
+			}
+			else if (propertyType == "int")
+			{
+				property = std::make_shared<Data::IntProperty>();
+			}
+			else if (propertyType == "float")
+			{
+				property = std::make_shared<Data::FloatProperty>();
+			}
+			else if (propertyType == "string")
+			{
+				property = std::make_shared<Data::StringProperty>();
+			}
+
+			property->LoadFromFile(propertyNode);
+
+			auto&& propertyKey = std::string{propertyNode.name()};
+			SetProperty(propertyKey, std::move(property));
+		}
 	}
 }
