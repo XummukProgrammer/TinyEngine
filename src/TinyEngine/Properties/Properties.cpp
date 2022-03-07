@@ -7,6 +7,7 @@
 
 #include <TinyEngine/Core/Context.hpp>
 #include <TinyEngine/Core/FileSystem.hpp>
+#include <TinyEngine/Core/Factory.hpp>
 
 #include <fmt/format.h>
 #include <pugixml.hpp>
@@ -231,29 +232,13 @@ namespace TinyEngine::Properties
 			auto&& propertyTypeAttr = propertyNode.attribute("type");
 			auto&& propertyType = std::string{propertyTypeAttr.value()};
 
-			IPropertyPtr property;
+			if (auto property = context->GetFactory()->Create<IProperty>(propertyType))
+			{
+				property->LoadFromFile(propertyNode);
 
-			if (propertyType == "bool")
-			{
-				property = std::make_shared<Data::BoolProperty>();
+				auto&& propertyKey = std::string{propertyNode.name()};
+				SetProperty(propertyKey, std::move(property));
 			}
-			else if (propertyType == "int")
-			{
-				property = std::make_shared<Data::IntProperty>();
-			}
-			else if (propertyType == "float")
-			{
-				property = std::make_shared<Data::FloatProperty>();
-			}
-			else if (propertyType == "string")
-			{
-				property = std::make_shared<Data::StringProperty>();
-			}
-
-			property->LoadFromFile(propertyNode);
-
-			auto&& propertyKey = std::string{propertyNode.name()};
-			SetProperty(propertyKey, std::move(property));
 		}
 	}
 }

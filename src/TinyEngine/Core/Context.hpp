@@ -13,6 +13,7 @@ namespace TinyEngine::Properties
 namespace TinyEngine::Core
 {
 	class FileSystem;
+	class Factory;
 
 	class Context final : public std::enable_shared_from_this<Context>
 	{
@@ -21,6 +22,7 @@ namespace TinyEngine::Core
 		using FileSystemPtr = std::shared_ptr<FileSystem>;
 		using PropertiesPtr = std::shared_ptr<Properties::Properties>;
 		using XmlPropertiesPtr = std::shared_ptr<Properties::XmlProperties>;
+		using FactoryPtr = std::shared_ptr<Factory>;
 		using PreInitCallback = std::function<void(const Ptr&)>;
 		using InitCallback = std::function<void(const Ptr&)>;
 		using DeinitCallback = std::function<void(const Ptr&)>;
@@ -53,6 +55,7 @@ namespace TinyEngine::Core
 
 		FileSystemPtr GetFileSystem() const;
 		PropertiesPtr GetSessionProperties() const;
+		FactoryPtr GetFactory() const;
 
 		XmlPropertiesPtr GetIOProperties() const;
 		void IOPropertiesSaveToFile();
@@ -62,6 +65,7 @@ namespace TinyEngine::Core
 		FileSystemPtr _fileSystem;
 		PropertiesPtr _sessionProperties;
 		XmlPropertiesPtr _IOProperties;
+		FactoryPtr _factory;
 
 		PreInitCallback _onPreInitCallback;
 		InitCallback _onInitCallback;

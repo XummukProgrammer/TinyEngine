@@ -5,6 +5,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/FileSystem.hpp
 	src/TinyEngine/Core/Window.hpp
 	src/TinyEngine/Core/Context.hpp
+	src/TinyEngine/Core/Factory.hpp
 	
 	src/TinyEngine/Utils/XmlUtils.hpp
 	
@@ -22,6 +23,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/FileSystem.cpp
 	src/TinyEngine/Core/Window.cpp
 	src/TinyEngine/Core/Context.cpp
+	src/TinyEngine/Core/Factory.cpp
 	
 	src/TinyEngine/Utils/XmlUtils.cpp
 	

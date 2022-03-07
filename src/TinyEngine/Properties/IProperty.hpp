@@ -1,13 +1,15 @@
 ﻿#ifndef _INTERFACE_PROPERTY_HEADER_
 #define _INTERFACE_PROPERTY_HEADER_
 
+#include <TinyEngine/Core/Factory.hpp>
+
 #include <pugixml.hpp>
 
 #include <string>
 
 namespace TinyEngine::Properties
 {
-	class IProperty
+	class IProperty : public Core::IFactory
 	{
 	public:
 		IProperty() = default;

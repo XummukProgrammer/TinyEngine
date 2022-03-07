@@ -4,6 +4,10 @@
 #include <TinyEngine/Core/FileSystem.hpp>
 #include <TinyEngine/Core/Context.hpp>
 #include <TinyEngine/Properties/Properties.hpp>
+#include <TinyEngine/Properties/Data/BoolProperty.hpp>
+#include <TinyEngine/Properties/Data/IntProperty.hpp>
+#include <TinyEngine/Properties/Data/FloatProperty.hpp>
+#include <TinyEngine/Properties/Data/StringProperty.hpp>
 
 namespace TinyEngine::Core
 {
@@ -32,6 +36,10 @@ namespace TinyEngine::Core
 	void Application::OnPreInit()
 	{ 
 		_context->GetFileSystem()->SetExecuteDir(_argc, _argv);
+		_context->GetFactory()->Register<Properties::Data::BoolProperty>("bool");
+		_context->GetFactory()->Register<Properties::Data::IntProperty>("int");
+		_context->GetFactory()->Register<Properties::Data::FloatProperty>("float");
+		_context->GetFactory()->Register<Properties::Data::StringProperty>("string");
 		_context->IOPropertiesLoadFromFile();
 
 		auto weakThis = weak_from_this();
