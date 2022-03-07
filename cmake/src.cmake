@@ -15,6 +15,8 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Properties/Data/IntProperty.hpp
 	src/TinyEngine/Properties/Data/FloatProperty.hpp
 	src/TinyEngine/Properties/Data/StringProperty.hpp
+	
+	src/TinyEngine/Level/Level.hpp
 )
 
 set(ENGINE_SOURCES
@@ -33,4 +35,6 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Properties/Data/IntProperty.cpp
 	src/TinyEngine/Properties/Data/FloatProperty.cpp
 	src/TinyEngine/Properties/Data/StringProperty.cpp
+	
+	src/TinyEngine/Level/Level.cpp
 )

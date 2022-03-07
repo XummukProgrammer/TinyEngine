@@ -3,6 +3,7 @@
 #include <TinyEngine/Core/FileSystem.hpp>
 #include <TinyEngine/Properties/Properties.hpp>
 #include <TinyEngine/Core/Factory.hpp>
+#include <TinyEngine/Level/Level.hpp>
 
 namespace TinyEngine::Core
 {
@@ -13,55 +14,80 @@ namespace TinyEngine::Core
 		, _sessionProperties(std::make_shared<Properties::Properties>())
 		, _IOProperties(std::make_shared<Properties::XmlProperties>())
 		, _factory(std::make_shared<Factory>())
+		, _level(std::make_shared<Level::Level>())
 	{ 
 	}
 
 	void Context::OnPreInit()
 	{ 
+		auto&& sharedThis = shared_from_this();
+
 		if (_onPreInitCallback)
 		{
-			_onPreInitCallback(shared_from_this());
+			_onPreInitCallback(sharedThis);
 		}
+
+		_level->OnPreInit(sharedThis);
 	}
 
 	void Context::OnInit()
 	{ 
+		auto&& sharedThis = shared_from_this();
+
 		if (_onInitCallback)
 		{
-			_onInitCallback(shared_from_this());
+			_onInitCallback(sharedThis);
 		}
+
+		_level->OnInit(sharedThis);
 	}
 
 	void Context::OnDeinit()
 	{ 
+		auto&& sharedThis = shared_from_this();
+
 		if (_onDeinitCallback)
 		{
-			_onDeinitCallback(shared_from_this());
+			_onDeinitCallback(sharedThis);
 		}
+
+		_level->OnDeinit(sharedThis);
 	}
 
 	void Context::OnUpdate()
 	{ 
+		auto&& sharedThis = shared_from_this();
+
 		if (_onUpdateCallback)
 		{
-			_onUpdateCallback(shared_from_this());
+			_onUpdateCallback(sharedThis);
 		}
+
+		_level->OnUpdate(sharedThis);
 	}
 
 	void Context::OnDraw()
 	{ 
+		auto&& sharedThis = shared_from_this();
+
 		if (_onDrawCallback)
 		{
-			_onDrawCallback(shared_from_this());
+			_onDrawCallback(sharedThis);
 		}
+
+		_level->OnDraw(sharedThis);
 	}
 
 	void Context::OnEvent()
 	{ 
+		auto&& sharedThis = shared_from_this();
+
 		if (_onEventCallback)
 		{
-			_onEventCallback(shared_from_this());
+			_onEventCallback(sharedThis);
 		}
+
+		_level->OnEvent(sharedThis);
 	}
 
 	Context::FileSystemPtr Context::GetFileSystem() const
@@ -77,6 +103,11 @@ namespace TinyEngine::Core
 	Context::FactoryPtr Context::GetFactory() const
 	{
 		return _factory;
+	}
+
+	Context::LevelPtr Context::GetLevel() const
+	{
+		return _level;
 	}
 
 	Context::XmlPropertiesPtr Context::GetIOProperties() const

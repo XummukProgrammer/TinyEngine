@@ -10,6 +10,11 @@ namespace TinyEngine::Properties
 	class XmlProperties;
 }
 
+namespace TinyEngine::Level
+{
+	class Level;
+}
+
 namespace TinyEngine::Core
 {
 	class FileSystem;
@@ -22,6 +27,7 @@ namespace TinyEngine::Core
 		using FileSystemPtr = std::shared_ptr<FileSystem>;
 		using PropertiesPtr = std::shared_ptr<Properties::Properties>;
 		using XmlPropertiesPtr = std::shared_ptr<Properties::XmlProperties>;
+		using LevelPtr = std::shared_ptr<Level::Level>;
 		using FactoryPtr = std::shared_ptr<Factory>;
 		using PreInitCallback = std::function<void(const Ptr&)>;
 		using InitCallback = std::function<void(const Ptr&)>;
@@ -56,6 +62,7 @@ namespace TinyEngine::Core
 		FileSystemPtr GetFileSystem() const;
 		PropertiesPtr GetSessionProperties() const;
 		FactoryPtr GetFactory() const;
+		LevelPtr GetLevel() const;
 
 		XmlPropertiesPtr GetIOProperties() const;
 		void IOPropertiesSaveToFile();
@@ -66,6 +73,7 @@ namespace TinyEngine::Core
 		PropertiesPtr _sessionProperties;
 		XmlPropertiesPtr _IOProperties;
 		FactoryPtr _factory;
+		LevelPtr _level;
 
 		PreInitCallback _onPreInitCallback;
 		InitCallback _onInitCallback;
