@@ -210,7 +210,7 @@ namespace TinyEngine::Properties
 		{
 			auto&& propertyNode = rootNode.append_child(key.c_str());
 			auto&& propertyTypeAttr = propertyNode.append_attribute("type");
-			propertyTypeAttr.set_value(property->GetType().c_str());
+			propertyTypeAttr.set_value(property->GetClassName().c_str());
 			property->SaveToFile(propertyNode);
 		}
 

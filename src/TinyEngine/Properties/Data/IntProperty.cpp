@@ -7,11 +7,6 @@ namespace TinyEngine::Properties::Data
         return std::to_string(_value);
     }
 
-    std::string IntProperty::GetType() const
-    {
-        return "int";
-    }
-
     void IntProperty::SaveToFile(pugi::xml_node& node)
     { 
         auto&& attr = node.append_attribute("value");

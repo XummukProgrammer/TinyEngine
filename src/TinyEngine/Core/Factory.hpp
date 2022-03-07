@@ -13,6 +13,10 @@ namespace TinyEngine::Core
 	public:
 		IFactory() = default;
 		virtual ~IFactory() = default;
+
+	public:
+		virtual std::string GetClassName() const = 0;
+		static std::string GetStaticClassName() { return "IFactory"; }
 	};
 
 	class Factory final
@@ -27,7 +31,7 @@ namespace TinyEngine::Core
 
 	public:
 		template<typename T>
-		void Register(std::string_view key);
+		void Register();
 
 		template<typename T>
 		std::shared_ptr<T> Create(std::string_view key) const;
@@ -37,9 +41,9 @@ namespace TinyEngine::Core
 	};
 
 	template<typename T>
-	void Factory::Register(std::string_view key)
+	void Factory::Register()
 	{ 
-		_creator.emplace(std::string{key}, []()
+		_creator.emplace(T::GetStaticClassName(), []()
 		{
 			return std::make_shared<T>();
 		});
@@ -64,5 +68,11 @@ namespace TinyEngine::Core
 		return nullptr;
 	}
 }
+
+#define FACTORY_CLASS(className) \
+	public: \
+		static std::string GetStaticClassName() { return #className; } \
+		virtual std::string GetClassName() const { return className::GetStaticClassName(); } \
+	private:
 
 #endif // _FACTORY_HEADER_

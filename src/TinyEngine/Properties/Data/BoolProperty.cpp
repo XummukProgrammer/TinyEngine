@@ -7,11 +7,6 @@ namespace TinyEngine::Properties::Data
 		return _value ? "true" : "false";
 	}
 
-	std::string BoolProperty::GetType() const
-	{
-		return "bool";
-	}
-
 	void BoolProperty::SaveToFile(pugi::xml_node& node)
 	{ 
 		auto&& attr = node.append_attribute("value");

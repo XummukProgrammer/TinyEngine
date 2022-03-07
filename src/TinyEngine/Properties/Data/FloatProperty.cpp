@@ -7,11 +7,6 @@ namespace TinyEngine::Properties::Data
         return std::to_string(_value);
     }
 
-    std::string FloatProperty::GetType() const
-    {
-        return "float";
-    }
-
     void FloatProperty::SaveToFile(pugi::xml_node& node)
     { 
         auto&& attr = node.append_attribute("value");

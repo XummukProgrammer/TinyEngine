@@ -9,6 +9,8 @@ namespace TinyEngine::Properties::Data
 {
 	class StringProperty final : public IProperty
 	{
+		FACTORY_CLASS(StringProperty)
+
 	public:
 		StringProperty() = default;
 		~StringProperty() = default;
@@ -18,7 +20,6 @@ namespace TinyEngine::Properties::Data
 		const std::string& GetValue() const { return _value; }
 
 		std::string ToString() const override;
-		std::string GetType() const override;
 
 		void SaveToFile(pugi::xml_node& node) override;
 		void LoadFromFile(pugi::xml_node& node) override;

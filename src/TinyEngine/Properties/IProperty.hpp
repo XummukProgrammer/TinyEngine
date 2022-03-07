@@ -17,7 +17,6 @@ namespace TinyEngine::Properties
 
 	public:
 		virtual std::string ToString() const = 0;
-		virtual std::string GetType() const = 0;
 
 		virtual void SaveToFile(pugi::xml_node& node) = 0;
 		virtual void LoadFromFile(pugi::xml_node& node) = 0;

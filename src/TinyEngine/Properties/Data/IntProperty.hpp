@@ -7,6 +7,8 @@ namespace TinyEngine::Properties::Data
 {
 	class IntProperty final : public IProperty
 	{
+		FACTORY_CLASS(IntProperty)
+
 	public:
 		IntProperty() = default;
 		~IntProperty() = default;
@@ -16,7 +18,6 @@ namespace TinyEngine::Properties::Data
 		int GetValue() const { return _value; }
 
 		std::string ToString() const override;
-		std::string GetType() const override;
 
 		void SaveToFile(pugi::xml_node& node) override;
 		void LoadFromFile(pugi::xml_node& node) override;

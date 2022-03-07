@@ -7,6 +7,8 @@ namespace TinyEngine::Properties::Data
 {
 	class FloatProperty final : public IProperty
 	{
+		FACTORY_CLASS(FloatProperty)
+
 	public:
 		FloatProperty() = default;
 		~FloatProperty() = default;
@@ -16,7 +18,6 @@ namespace TinyEngine::Properties::Data
 		float GetValue() const { return _value; }
 
 		std::string ToString() const override;
-		std::string GetType() const override;
 
 		void SaveToFile(pugi::xml_node& node) override;
 		void LoadFromFile(pugi::xml_node& node) override;
