@@ -10,13 +10,19 @@ namespace TinyEngine::Level
 		_weakContext = weakContext;
 	}
 
+	void Entity::OnInit()
+	{ 
+		auto&& context = _weakContext.lock();
+
+		for (const auto& component : _components)
+		{
+			component->OnInit(context);
+		}
+	}
+
 	void Entity::OnUpdate()
 	{ 
 		auto&& context = _weakContext.lock();
-		if (!context)
-		{
-			return;
-		}
 
 		for (const auto& component : _components)
 		{
@@ -27,6 +33,5 @@ namespace TinyEngine::Level
 	void Entity::AddBaseComponent(const ComponentPtr& component)
 	{ 
 		_components.push_back(component);
-		component->OnCreate(_weakContext.lock());
 	}
 }

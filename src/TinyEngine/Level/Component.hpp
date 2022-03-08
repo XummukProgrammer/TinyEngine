@@ -20,8 +20,6 @@ namespace TinyEngine::Level
 		virtual ~Component() = default;
 
 	public:
-		virtual void OnCreate(const ContextPtr& context) {}
-
 		virtual void OnInit(const ContextPtr& context) {}
 		virtual void OnDeinit(const ContextPtr& context) {}
 

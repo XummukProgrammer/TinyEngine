@@ -48,7 +48,6 @@ namespace TinyEngine::Level
 	void Level::AddScene(const ContextPtr& context, const ScenePtr& scene)
 	{ 
 		_scenes.push_back(scene);
-		scene->OnCreate(context);
 	}
 
 	void Level::SetCurrentScene(const ContextPtr& context, const ScenePtr& scene)

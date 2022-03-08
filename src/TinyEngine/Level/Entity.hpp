@@ -29,9 +29,7 @@ namespace TinyEngine::Level
 		template<typename T>
 		void AddComponent();
 
-		void OnCreate() {}
-
-		void OnInit() {}
+		void OnInit();
 		void OnDeinit() {}
 
 		void OnUpdate();
