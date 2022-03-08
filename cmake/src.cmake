@@ -17,6 +17,9 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Properties/Data/StringProperty.hpp
 	
 	src/TinyEngine/Level/Level.hpp
+	src/TinyEngine/Level/Component.hpp
+	src/TinyEngine/Level/Entity.hpp
+	src/TinyEngine/Level/Scene.hpp
 )
 
 set(ENGINE_SOURCES
@@ -37,4 +40,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Properties/Data/StringProperty.cpp
 	
 	src/TinyEngine/Level/Level.cpp
+	src/TinyEngine/Level/Component.cpp
+	src/TinyEngine/Level/Entity.cpp
+	src/TinyEngine/Level/Scene.cpp
 )

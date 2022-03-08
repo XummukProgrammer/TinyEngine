@@ -6,4 +6,9 @@
 
 #include <TinyEngine/Properties/Properties.hpp>
 
+#include <TinyEngine/Level/Level.hpp>
+#include <TinyEngine/Level/Component.hpp>
+#include <TinyEngine/Level/Entity.hpp>
+#include <TinyEngine/Level/Scene.hpp>
+
 #endif // _TINY_ENGINE_HEADER_

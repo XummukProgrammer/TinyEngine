@@ -110,6 +110,26 @@ namespace TinyEngine::Core
 		return _level;
 	}
 
+	Context::EntityPtr Context::CreateEntity()
+	{
+		return _level->CreateEntity(shared_from_this());
+	}
+
+	void Context::AddEntity(const EntityPtr& entity)
+	{ 
+		_level->AddEntity(entity);
+	}
+
+	void Context::AddScene(const ScenePtr& scene)
+	{ 
+		_level->AddScene(shared_from_this(), scene);
+	}
+
+	void Context::SetCurrentScene(const ScenePtr& scene)
+	{ 
+		_level->SetCurrentScene(shared_from_this(), scene);
+	}
+
 	Context::XmlPropertiesPtr Context::GetIOProperties() const
 	{
 		return _IOProperties;

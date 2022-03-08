@@ -13,6 +13,8 @@ namespace TinyEngine::Properties
 namespace TinyEngine::Level
 {
 	class Level;
+	class Scene;
+	class Entity;
 }
 
 namespace TinyEngine::Core
@@ -29,6 +31,8 @@ namespace TinyEngine::Core
 		using XmlPropertiesPtr = std::shared_ptr<Properties::XmlProperties>;
 		using LevelPtr = std::shared_ptr<Level::Level>;
 		using FactoryPtr = std::shared_ptr<Factory>;
+		using ScenePtr = std::shared_ptr<Level::Scene>;
+		using EntityPtr = std::shared_ptr<Level::Entity>;
 		using PreInitCallback = std::function<void(const Ptr&)>;
 		using InitCallback = std::function<void(const Ptr&)>;
 		using DeinitCallback = std::function<void(const Ptr&)>;
@@ -62,7 +66,14 @@ namespace TinyEngine::Core
 		FileSystemPtr GetFileSystem() const;
 		PropertiesPtr GetSessionProperties() const;
 		FactoryPtr GetFactory() const;
+
 		LevelPtr GetLevel() const;
+
+		EntityPtr CreateEntity();
+		void AddEntity(const EntityPtr& entity);
+
+		void AddScene(const ScenePtr& scene);
+		void SetCurrentScene(const ScenePtr& scene);
 
 		XmlPropertiesPtr GetIOProperties() const;
 		void IOPropertiesSaveToFile();
