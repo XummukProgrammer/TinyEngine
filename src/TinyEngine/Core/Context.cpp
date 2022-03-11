@@ -120,9 +120,9 @@ namespace TinyEngine::Core
 		_level->AddEntity(entity);
 	}
 
-	void Context::AddScene(const ScenePtr& scene)
+	void Context::AddScene(std::string_view key, const ScenePtr& scene)
 	{ 
-		_level->AddScene(shared_from_this(), scene);
+		_level->AddScene(shared_from_this(), key, scene);
 	}
 
 	void Context::SetCurrentScene(const ScenePtr& scene)

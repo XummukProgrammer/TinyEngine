@@ -74,7 +74,7 @@ namespace TinyEngine::Core
 		EntityPtr CreateEntity();
 		void AddEntity(const EntityPtr& entity);
 
-		void AddScene(const ScenePtr& scene);
+		void AddScene(std::string_view key, const ScenePtr& scene);
 		void SetCurrentScene(const ScenePtr& scene);
 
 		XmlPropertiesPtr GetIOProperties() const;

@@ -3,6 +3,8 @@
 
 #include <memory>
 #include <vector>
+#include <map>
+#include <string>
 
 namespace TinyEngine::Core
 {
@@ -38,8 +40,9 @@ namespace TinyEngine::Level
 		void AddEntity(const EntityPtr& entity);
 		void RemoveEntity(const EntityPtr& entity);
 
-		void AddScene(const ContextPtr& context, const ScenePtr& scene);
+		void AddScene(const ContextPtr& context, std::string_view key, const ScenePtr& scene);
 		void SetCurrentScene(const ScenePtr& scene);
+		ScenePtr GetScene(std::string_view key) const;
 
 	private:
 		void TryUpdateCurrentScene(const ContextPtr& context);
@@ -48,7 +51,7 @@ namespace TinyEngine::Level
 	private:
 		std::vector<EntityPtr> _entities;
 
-		std::vector<ScenePtr> _scenes;
+		std::map<std::string, ScenePtr> _scenes;
 		ScenePtr _currentScene;
 		ScenePtr _nextScene;
 	};

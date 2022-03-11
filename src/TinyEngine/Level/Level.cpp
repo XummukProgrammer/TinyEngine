@@ -57,9 +57,9 @@ namespace TinyEngine::Level
 		entity->Remove();
 	}
 
-	void Level::AddScene(const ContextPtr& context, const ScenePtr& scene)
+	void Level::AddScene(const ContextPtr& context, std::string_view key, const ScenePtr& scene)
 	{ 
-		_scenes.push_back(scene);
+		_scenes[std::string{key}] = scene;
 	}
 
 	void Level::TryUpdateCurrentScene(const ContextPtr& context)
@@ -69,25 +69,15 @@ namespace TinyEngine::Level
 			return;
 		}
 
-		_currentScene = _nextScene;
-		_nextScene.reset();
-
-		for (auto it = _scenes.begin(); it != _scenes.end(); ++it)
+		if (_currentScene)
 		{
-			auto& scene = *it;
-
-			if (scene->shared_from_this() == scene)
-			{
-				if (_currentScene)
-				{
-					_currentScene->OnExit(context);
-				}
-
-				_currentScene = scene;
-				_currentScene->OnEnter(context);
-				return;
-			}
+			_currentScene->OnExit(context);
 		}
+
+		_currentScene = _nextScene;
+		_currentScene->OnEnter(context);
+
+		_nextScene.reset();
 	}
 
 	void Level::TryRemoveEntities(const ContextPtr& context)
@@ -111,5 +101,17 @@ namespace TinyEngine::Level
 	void Level::SetCurrentScene(const ScenePtr& scene)
 	{ 
 		_nextScene = scene;
+	}
+
+	Level::ScenePtr Level::GetScene(std::string_view key) const
+	{
+		auto it = _scenes.find(std::string{key});
+
+		if (it != _scenes.end())
+		{
+			return it->second;
+		}
+
+		return nullptr;
 	}
 }
