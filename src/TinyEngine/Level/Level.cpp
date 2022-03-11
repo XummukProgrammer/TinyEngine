@@ -24,12 +24,16 @@ namespace TinyEngine::Level
 
 		for (const auto& entity : _entities)
 		{
-			entity->OnUpdate();
+			if (entity->IsValid())
+			{
+				entity->OnUpdate();
+			}
 		}
 	}
 
 	void Level::OnDraw(const ContextPtr& context)
 	{ 
+
 	}
 
 	void Level::OnEvent(const ContextPtr& context)

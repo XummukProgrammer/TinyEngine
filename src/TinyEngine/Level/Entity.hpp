@@ -34,6 +34,8 @@ namespace TinyEngine::Level
 
 		void OnUpdate();
 
+		bool IsValid() const;
+
 		void Remove();
 		bool IsRemoved() const;
 

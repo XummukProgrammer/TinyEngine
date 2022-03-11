@@ -30,6 +30,11 @@ namespace TinyEngine::Level
 		}
 	}
 
+	bool Entity::IsValid() const
+	{
+		return !IsRemoved();
+	}
+
 	void Entity::Remove()
 	{
 		_isRemoved = true;
