@@ -35,6 +35,11 @@ namespace TinyEngine::Level
 
 	void Scene::RemoveAllEntities()
 	{
+		for (const auto& entity : _entities)
+		{
+			entity->Remove();
+		}
+
 		_entities.clear();
 	}
 
