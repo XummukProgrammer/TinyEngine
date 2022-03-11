@@ -77,7 +77,7 @@ namespace TinyEngine::Core
 
 	void WindowInfo::LoadFromFile(const std::shared_ptr<Context>& context)
 	{ 
-		auto&& path = context->GetFileSystem()->BuildPath(DIR_TYPE, FILE_PATH);
+		auto&& path = context->BuildPath(DIR_TYPE, FILE_PATH);
 
 		pugi::xml_document doc;
 		doc.load_file(path.c_str());

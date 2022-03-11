@@ -22,6 +22,8 @@ namespace TinyEngine::Core
 	class FileSystem;
 	class Factory;
 
+	enum class DirType;
+
 	class Context final : public std::enable_shared_from_this<Context>
 	{
 	public:
@@ -78,6 +80,8 @@ namespace TinyEngine::Core
 		XmlPropertiesPtr GetIOProperties() const;
 		void IOPropertiesSaveToFile();
 		void IOPropertiesLoadFromFile();
+
+		std::string BuildPath(DirType dirType, const std::string& path) const;
 
 	private:
 		FileSystemPtr _fileSystem;

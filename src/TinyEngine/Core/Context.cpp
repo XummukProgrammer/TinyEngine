@@ -144,4 +144,9 @@ namespace TinyEngine::Core
 	{ 
 		_IOProperties->LoadFromFile(shared_from_this(), IO_PROPERTIES_FILE_PATH);
 	}
+
+	std::string Context::BuildPath(DirType dirType, const std::string& path) const
+	{
+		return _fileSystem->BuildPath(dirType, path);
+	}
 }
