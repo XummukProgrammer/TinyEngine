@@ -40,10 +40,12 @@ namespace TinyEngine::Level
 		EntityPtr CreateEntity(const ContextPtr& context) const;
 		void AddEntity(const EntityPtr& entity);
 		void RemoveEntity(const EntityPtr& entity);
+		void RemoveEntities();
 
 		void AddScene(const ContextPtr& context, std::string_view key, const ScenePtr& scene);
 		void SetCurrentScene(const ScenePtr& scene);
 		ScenePtr GetScene(std::string_view key) const;
+		void RemoveScenes();
 
 	private:
 		void TryRemoveEntities(const ContextPtr& context);
@@ -53,10 +55,12 @@ namespace TinyEngine::Level
 
 	private:
 		std::vector<EntityPtr> _entities;
+		bool _isRemovedEntities = false;
 
 		std::map<std::string, ScenePtr> _scenes;
 		ScenePtr _currentScene;
 		ScenePtr _nextScene;
+		bool _isRemovedScenes = false;
 	};
 }
 

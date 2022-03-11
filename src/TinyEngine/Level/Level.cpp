@@ -59,6 +59,11 @@ namespace TinyEngine::Level
 		entity->Remove();
 	}
 
+	void Level::RemoveEntities()
+	{ 
+		_isRemovedEntities = true;
+	}
+
 	void Level::AddScene(const ContextPtr& context, std::string_view key, const ScenePtr& scene)
 	{ 
 		_scenes[std::string{key}] = scene;
@@ -84,6 +89,12 @@ namespace TinyEngine::Level
 
 	void Level::TryRemoveScenes(const ContextPtr& context)
 	{ 
+		if (_isRemovedScenes)
+		{
+			_scenes.clear();
+			return;
+		}
+
 		bool isRemovedCurrentScene = false;
 
 		for (auto it = _scenes.begin(); it != _scenes.end();)
@@ -120,13 +131,29 @@ namespace TinyEngine::Level
 
 	void Level::TryRemoveEntities(const ContextPtr& context)
 	{
+		auto onRemoveEntity = [](const auto& entity)
+		{
+			entity->OnDeinit();
+		};
+
+		if (_isRemovedEntities)
+		{
+			for (const auto& entity : _entities)
+			{
+				onRemoveEntity(entity);
+			}
+
+			_entities.clear();
+			return;
+		}
+
 		for (auto it = _entities.begin(); it != _entities.end();)
 		{
 			auto& entity = *it;
 
 			if (entity->IsRemoved())
 			{
-				entity->OnDeinit();
+				onRemoveEntity(entity);
 				it = _entities.erase(it);
 			}
 			else
@@ -151,5 +178,10 @@ namespace TinyEngine::Level
 		}
 
 		return nullptr;
+	}
+
+	void Level::RemoveScenes()
+	{
+		_isRemovedScenes = true;
 	}
 }

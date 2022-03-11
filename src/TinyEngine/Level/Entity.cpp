@@ -20,6 +20,16 @@ namespace TinyEngine::Level
 		}
 	}
 
+	void Entity::OnDeinit()
+	{ 
+		auto&& context = _weakContext.lock();
+
+		for (const auto& component : _components)
+		{
+			component->OnDeinit(context);
+		}
+	}
+
 	void Entity::OnUpdate()
 	{ 
 		TryRemoveComponents();
@@ -33,6 +43,11 @@ namespace TinyEngine::Level
 				component->OnUpdate(context);
 			}
 		}
+	}
+
+	void Entity::RemoveComponents()
+	{ 
+		_isRemovedComponents = true;
 	}
 
 	bool Entity::IsValid() const
@@ -59,13 +74,29 @@ namespace TinyEngine::Level
 	{ 
 		auto&& context = _weakContext.lock();
 
+		auto onRemoveComponent = [context](const auto& component)
+		{
+			component->OnDeinit(context);
+		};
+
+		if (_isRemovedComponents)
+		{
+			for (const auto& component : _components)
+			{
+				onRemoveComponent(component);
+			}
+
+			_components.clear();
+			return;
+		}
+
 		for (auto it = _components.begin(); it != _components.end();)
 		{
 			auto& component = *it;
 
 			if (component->IsRemoved())
 			{
-				component->OnDeinit(context);
+				onRemoveComponent(component);
 
 				it = _components.erase(it);
 			}

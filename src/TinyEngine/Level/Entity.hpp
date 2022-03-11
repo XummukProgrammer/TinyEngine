@@ -27,7 +27,7 @@ namespace TinyEngine::Level
 
 	public:
 		void OnInit();
-		void OnDeinit() {}
+		void OnDeinit();
 
 		void OnUpdate();
 
@@ -43,6 +43,8 @@ namespace TinyEngine::Level
 		template<typename T>
 		void RemoveComponent();
 
+		void RemoveComponents();
+
 		bool IsValid() const;
 
 		void Remove();
@@ -57,6 +59,7 @@ namespace TinyEngine::Level
 		WeakContextPtr _weakContext;
 		std::vector<ComponentPtr> _components;
 		bool _isRemoved = false;
+		bool _isRemovedComponents = false;
 	};
 
 	template<typename T>
