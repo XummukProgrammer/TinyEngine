@@ -105,11 +105,6 @@ namespace TinyEngine::Core
 		return _factory;
 	}
 
-	Context::LevelPtr Context::GetLevel() const
-	{
-		return _level;
-	}
-
 	Context::EntityPtr Context::CreateEntity()
 	{
 		return _level->CreateEntity(shared_from_this());

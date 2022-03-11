@@ -70,8 +70,6 @@ namespace TinyEngine::Core
 		PropertiesPtr GetSessionProperties() const;
 		FactoryPtr GetFactory() const;
 
-		LevelPtr GetLevel() const;
-
 		EntityPtr CreateEntity();
 		void AddEntity(const EntityPtr& entity);
 
