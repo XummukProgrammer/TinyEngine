@@ -4,6 +4,8 @@
 #include <TinyEngine/Properties/Properties.hpp>
 #include <TinyEngine/Core/Factory.hpp>
 #include <TinyEngine/Level/Level.hpp>
+#include <TinyEngine/Level/Entity.hpp>
+#include <TinyEngine/Level/Scene.hpp>
 
 namespace TinyEngine::Core
 {
@@ -115,6 +117,16 @@ namespace TinyEngine::Core
 		_level->AddEntity(entity);
 	}
 
+	void Context::RemoveEntity(const EntityPtr& entity)
+	{ 
+		entity->Remove();
+	}
+
+	void Context::RemoveEntities()
+	{ 
+		_level->RemoveEntities();
+	}
+
 	void Context::AddScene(std::string_view key, const ScenePtr& scene)
 	{ 
 		_level->AddScene(shared_from_this(), key, scene);
@@ -123,6 +135,21 @@ namespace TinyEngine::Core
 	void Context::SetCurrentScene(const ScenePtr& scene)
 	{ 
 		_level->SetCurrentScene(scene);
+	}
+
+	Context::ScenePtr Context::GetCurrentScene() const
+	{
+		return _level->GetCurrentScene();
+	}
+
+	Context::ScenePtr Context::GetScene(std::string_view key) const
+	{
+		return _level->GetScene(key);
+	}
+
+	void Context::RemoveScenes()
+	{ 
+		_level->RemoveScenes();
 	}
 
 	Context::XmlPropertiesPtr Context::GetIOProperties() const

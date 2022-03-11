@@ -168,6 +168,11 @@ namespace TinyEngine::Level
 		_nextScene = scene;
 	}
 
+	Level::ScenePtr Level::GetCurrentScene() const
+	{
+		return _currentScene;
+	}
+
 	Level::ScenePtr Level::GetScene(std::string_view key) const
 	{
 		auto it = _scenes.find(std::string{key});

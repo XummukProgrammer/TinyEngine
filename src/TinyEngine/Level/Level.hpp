@@ -44,6 +44,7 @@ namespace TinyEngine::Level
 
 		void AddScene(const ContextPtr& context, std::string_view key, const ScenePtr& scene);
 		void SetCurrentScene(const ScenePtr& scene);
+		ScenePtr GetCurrentScene() const;
 		ScenePtr GetScene(std::string_view key) const;
 		void RemoveScenes();
 
