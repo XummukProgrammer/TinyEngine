@@ -1,6 +1,8 @@
 ﻿#ifndef _ENTITY_HEADER_
 #define _ENTITY_HEADER_
 
+#include <TinyEngine/Level/Component.hpp>
+
 #include <memory>
 #include <vector>
 
@@ -35,6 +37,12 @@ namespace TinyEngine::Level
 		template<typename T>
 		void AddComponent();
 
+		template<typename T>
+		std::shared_ptr<T> GetComponent() const;
+
+		template<typename T>
+		void RemoveComponent();
+
 		bool IsValid() const;
 
 		void Remove();
@@ -55,6 +63,29 @@ namespace TinyEngine::Level
 	void Entity::AddComponent()
 	{ 
 		AddBaseComponent(std::make_shared<T>());
+	}
+
+	template<typename T>
+	std::shared_ptr<T> Entity::GetComponent() const
+	{
+		for (const auto& component : _components)
+		{
+			if (auto castedComponent = std::dynamic_pointer_cast<T>(component))
+			{
+				return castedComponent;
+			}
+		}
+
+		return nullptr;
+	}
+
+	template<typename T>
+	void Entity::RemoveComponent()
+	{ 
+		if (auto component = GetComponent<T>())
+		{
+			component->Remove();
+		}
 	}
 }
 
