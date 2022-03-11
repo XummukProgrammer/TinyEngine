@@ -36,7 +36,6 @@ namespace TinyEngine::Level
 		const std::vector<EntityPtr>& GetEntities() const;
 		void AddEntity(const ContextPtr& context, const EntityPtr& entity);
 
-		// TODO: Доработать
 		void RemoveAllEntities();
 
 	private:
