@@ -19,6 +19,8 @@ namespace TinyEngine::Level
 
 	void Level::OnUpdate(const ContextPtr& context)
 	{
+		TryUpdateCurrentScene(context);
+
 		for (const auto& entity : _entities)
 		{
 			entity->OnUpdate();
@@ -50,8 +52,16 @@ namespace TinyEngine::Level
 		_scenes.push_back(scene);
 	}
 
-	void Level::SetCurrentScene(const ContextPtr& context, const ScenePtr& scene)
+	void Level::TryUpdateCurrentScene(const ContextPtr& context)
 	{ 
+		if (!_nextScene)
+		{
+			return;
+		}
+
+		_currentScene = _nextScene;
+		_nextScene.reset();
+
 		for (auto it = _scenes.begin(); it != _scenes.end(); ++it)
 		{
 			auto& scene = *it;
@@ -68,5 +78,10 @@ namespace TinyEngine::Level
 				return;
 			}
 		}
+	}
+
+	void Level::SetCurrentScene(const ScenePtr& scene)
+	{ 
+		_nextScene = scene;
 	}
 }

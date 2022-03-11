@@ -127,7 +127,7 @@ namespace TinyEngine::Core
 
 	void Context::SetCurrentScene(const ScenePtr& scene)
 	{ 
-		_level->SetCurrentScene(shared_from_this(), scene);
+		_level->SetCurrentScene(scene);
 	}
 
 	Context::XmlPropertiesPtr Context::GetIOProperties() const

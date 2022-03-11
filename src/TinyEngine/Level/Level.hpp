@@ -38,13 +38,17 @@ namespace TinyEngine::Level
 		void AddEntity(const EntityPtr& entity);
 
 		void AddScene(const ContextPtr& context, const ScenePtr& scene);
-		void SetCurrentScene(const ContextPtr& context, const ScenePtr& scene);
+		void SetCurrentScene(const ScenePtr& scene);
+
+	private:
+		void TryUpdateCurrentScene(const ContextPtr& context);
 
 	private:
 		std::vector<EntityPtr> _entities;
 
 		std::vector<ScenePtr> _scenes;
 		ScenePtr _currentScene;
+		ScenePtr _nextScene;
 	};
 }
 
