@@ -36,6 +36,7 @@ namespace TinyEngine::Level
 		void OnDraw(const ContextPtr& context);
 		void OnEvent(const ContextPtr& context);
 
+	public:
 		EntityPtr CreateEntity(const ContextPtr& context) const;
 		void AddEntity(const EntityPtr& entity);
 		void RemoveEntity(const EntityPtr& entity);

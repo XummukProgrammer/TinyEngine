@@ -65,6 +65,7 @@ namespace TinyEngine::Core
 		void SetOnEventCallback(const EventCallback& callback) { _onEventCallback = callback; }
 		void OnEvent();
 
+	public:
 		FileSystemPtr GetFileSystem() const;
 		PropertiesPtr GetSessionProperties() const;
 		FactoryPtr GetFactory() const;

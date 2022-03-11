@@ -24,15 +24,16 @@ namespace TinyEngine::Level
 		~Entity() = default;
 
 	public:
-		void SetContext(const WeakContextPtr& weakContext);
-
-		template<typename T>
-		void AddComponent();
-
 		void OnInit();
 		void OnDeinit() {}
 
 		void OnUpdate();
+
+	public:
+		void SetContext(const WeakContextPtr& weakContext);
+
+		template<typename T>
+		void AddComponent();
 
 		bool IsValid() const;
 
