@@ -34,12 +34,16 @@ namespace TinyEngine::Level
 
 		void OnUpdate();
 
+		void Remove();
+		bool IsRemoved() const;
+
 	private:
 		void AddBaseComponent(const ComponentPtr& component);
 
 	private:
 		WeakContextPtr _weakContext;
 		std::vector<ComponentPtr> _components;
+		bool _isRemoved = false;
 	};
 
 	template<typename T>

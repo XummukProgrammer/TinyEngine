@@ -20,6 +20,7 @@ namespace TinyEngine::Level
 	void Level::OnUpdate(const ContextPtr& context)
 	{
 		TryUpdateCurrentScene(context);
+		TryRemoveEntities(context);
 
 		for (const auto& entity : _entities)
 		{
@@ -45,6 +46,11 @@ namespace TinyEngine::Level
 	void Level::AddEntity(const EntityPtr& entity)
 	{ 
 		_entities.push_back(entity);
+	}
+
+	void Level::RemoveEntity(const EntityPtr& entity)
+	{ 
+		entity->Remove();
 	}
 
 	void Level::AddScene(const ContextPtr& context, const ScenePtr& scene)
@@ -76,6 +82,24 @@ namespace TinyEngine::Level
 				_currentScene = scene;
 				_currentScene->OnEnter(context);
 				return;
+			}
+		}
+	}
+
+	void Level::TryRemoveEntities(const ContextPtr& context)
+	{
+		for (auto it = _entities.begin(); it != _entities.end();)
+		{
+			auto& entity = *it;
+
+			if (entity->IsRemoved())
+			{
+				entity->OnDeinit();
+				it = _entities.erase(it);
+			}
+			else
+			{
+				++it;
 			}
 		}
 	}

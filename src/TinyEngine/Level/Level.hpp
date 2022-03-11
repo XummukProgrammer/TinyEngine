@@ -36,12 +36,14 @@ namespace TinyEngine::Level
 
 		EntityPtr CreateEntity(const ContextPtr& context) const;
 		void AddEntity(const EntityPtr& entity);
+		void RemoveEntity(const EntityPtr& entity);
 
 		void AddScene(const ContextPtr& context, const ScenePtr& scene);
 		void SetCurrentScene(const ScenePtr& scene);
 
 	private:
 		void TryUpdateCurrentScene(const ContextPtr& context);
+		void TryRemoveEntities(const ContextPtr& context);
 
 	private:
 		std::vector<EntityPtr> _entities;
