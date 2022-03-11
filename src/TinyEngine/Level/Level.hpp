@@ -46,8 +46,10 @@ namespace TinyEngine::Level
 		ScenePtr GetScene(std::string_view key) const;
 
 	private:
-		void TryUpdateCurrentScene(const ContextPtr& context);
 		void TryRemoveEntities(const ContextPtr& context);
+
+		void TryUpdateCurrentScene(const ContextPtr& context);
+		void TryRemoveScenes(const ContextPtr& context);
 
 	private:
 		std::vector<EntityPtr> _entities;

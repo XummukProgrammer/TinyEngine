@@ -43,6 +43,21 @@ namespace TinyEngine::Level
 		_entities.clear();
 	}
 
+	bool Scene::IsValid() const
+	{
+		return !IsRemoved();
+	}
+
+	void Scene::Remove()
+	{ 
+		_isRemoved = true;
+	}
+
+	bool Scene::IsRemoved() const
+	{
+		return _isRemoved;
+	}
+
 	void Scene::OnInitEntities(const ContextPtr& context)
 	{ 
 		for (const auto& entity : _entities)

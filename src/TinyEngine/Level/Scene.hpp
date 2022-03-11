@@ -29,6 +29,12 @@ namespace TinyEngine::Level
 
 		virtual void OnUpdate(const ContextPtr& context) {}
 
+	public:
+		bool IsValid() const;
+
+		void Remove();
+		bool IsRemoved() const;
+
 	protected:
 		virtual void OnLoadEntities(const ContextPtr& context) {}
 		virtual void OnRemoveEntities(const ContextPtr& context);
@@ -44,6 +50,7 @@ namespace TinyEngine::Level
 
 	private:
 		std::vector<EntityPtr> _entities;
+		bool _isRemoved = false;
 	};
 }
 

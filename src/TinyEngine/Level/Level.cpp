@@ -19,7 +19,9 @@ namespace TinyEngine::Level
 
 	void Level::OnUpdate(const ContextPtr& context)
 	{
+		TryRemoveScenes(context);
 		TryUpdateCurrentScene(context);
+
 		TryRemoveEntities(context);
 
 		for (const auto& entity : _entities)
@@ -78,6 +80,42 @@ namespace TinyEngine::Level
 		_currentScene->OnEnter(context);
 
 		_nextScene.reset();
+	}
+
+	void Level::TryRemoveScenes(const ContextPtr& context)
+	{ 
+		bool isRemovedCurrentScene = false;
+
+		for (auto it = _scenes.begin(); it != _scenes.end();)
+		{
+			auto& scene = it->second;
+
+			if (scene->IsRemoved())
+			{
+				if (scene == _currentScene)
+				{
+					isRemovedCurrentScene = true;
+				}
+
+				it = _scenes.erase(it);
+			}
+			else
+			{
+				++it;
+			}
+		}
+
+		if (isRemovedCurrentScene)
+		{
+			if (!_scenes.empty())
+			{
+				SetCurrentScene(_scenes.at(0));
+			}
+			else
+			{
+				_currentScene.reset();
+			}
+		}
 	}
 
 	void Level::TryRemoveEntities(const ContextPtr& context)
