@@ -43,6 +43,8 @@ namespace TinyEngine::Level
 	private:
 		void AddBaseComponent(const ComponentPtr& component);
 
+		void TryRemoveComponents();
+
 	private:
 		WeakContextPtr _weakContext;
 		std::vector<ComponentPtr> _components;

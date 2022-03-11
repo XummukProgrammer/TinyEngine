@@ -22,11 +22,16 @@ namespace TinyEngine::Level
 
 	void Entity::OnUpdate()
 	{ 
+		TryRemoveComponents();
+
 		auto&& context = _weakContext.lock();
 
 		for (const auto& component : _components)
 		{
-			component->OnUpdate(context);
+			if (component->IsValid())
+			{
+				component->OnUpdate(context);
+			}
 		}
 	}
 
@@ -48,5 +53,26 @@ namespace TinyEngine::Level
 	void Entity::AddBaseComponent(const ComponentPtr& component)
 	{ 
 		_components.push_back(component);
+	}
+
+	void Entity::TryRemoveComponents()
+	{ 
+		auto&& context = _weakContext.lock();
+
+		for (auto it = _components.begin(); it != _components.end();)
+		{
+			auto& component = *it;
+
+			if (component->IsRemoved())
+			{
+				component->OnDeinit(context);
+
+				it = _components.erase(it);
+			}
+			else
+			{
+				++it;
+			}
+		}
 	}
 }

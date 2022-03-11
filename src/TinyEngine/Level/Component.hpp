@@ -24,6 +24,15 @@ namespace TinyEngine::Level
 		virtual void OnDeinit(const ContextPtr& context) {}
 
 		virtual void OnUpdate(const ContextPtr& context) {}
+
+	public:
+		bool IsValid() const;
+
+		void Remove();
+		bool IsRemoved() const;
+
+	private:
+		bool _isRemoved = false;
 	};
 }
 
