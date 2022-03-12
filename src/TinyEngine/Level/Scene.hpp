@@ -35,14 +35,15 @@ namespace TinyEngine::Level
 		void Remove();
 		bool IsRemoved() const;
 
+		EntityPtr CreateAndAddEntity(const ContextPtr& context);
+		void RemoveEntity(const ContextPtr& context, const EntityPtr& entity);
+		void RemoveEntities(const ContextPtr& context);
+
 	protected:
 		virtual void OnLoadEntities(const ContextPtr& context) {}
 		virtual void OnRemoveEntities(const ContextPtr& context);
 
 		const std::vector<EntityPtr>& GetEntities() const;
-		void AddEntity(const ContextPtr& context, const EntityPtr& entity);
-
-		void RemoveAllEntities();
 
 	private:
 		void OnInitEntities(const ContextPtr& context);

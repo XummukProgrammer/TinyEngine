@@ -19,7 +19,7 @@ namespace TinyEngine::Level
 
 	void Scene::OnRemoveEntities(const ContextPtr& context)
 	{ 
-		RemoveAllEntities();
+		RemoveEntities(context);
 	}
 
 	const std::vector<Scene::EntityPtr>& Scene::GetEntities() const
@@ -27,13 +27,7 @@ namespace TinyEngine::Level
 		return _entities;
 	}
 
-	void Scene::AddEntity(const ContextPtr& context, const EntityPtr& entity)
-	{ 
-		context->AddEntity(entity);
-		_entities.push_back(entity);
-	}
-
-	void Scene::RemoveAllEntities()
+	void Scene::RemoveEntities(const ContextPtr& context)
 	{
 		for (const auto& entity : _entities)
 		{
@@ -56,6 +50,32 @@ namespace TinyEngine::Level
 	bool Scene::IsRemoved() const
 	{
 		return _isRemoved;
+	}
+
+	Scene::EntityPtr Scene::CreateAndAddEntity(const ContextPtr& context)
+	{
+		auto entity = context->CreateEntity();
+
+		context->AddEntity(entity);
+		_entities.push_back(entity);
+
+		return entity;
+	}
+
+	void Scene::RemoveEntity(const ContextPtr& context, const EntityPtr& entity)
+	{ 
+		context->RemoveEntity(entity);
+
+		for (auto it = _entities.begin(); it != _entities.end(); ++it)
+		{
+			auto& sceneEntity = *it;
+
+			if (sceneEntity == entity)
+			{
+				_entities.erase(it);
+				return;
+			}
+		}
 	}
 
 	void Scene::OnInitEntities(const ContextPtr& context)

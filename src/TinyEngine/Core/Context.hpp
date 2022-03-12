@@ -70,6 +70,8 @@ namespace TinyEngine::Core
 		PropertiesPtr GetSessionProperties() const;
 		FactoryPtr GetFactory() const;
 
+		// Методы для работы с сущностями используется только в сцене, как основном хранилище.
+		// Не рекомендуется использовать методы на прямую.
 		EntityPtr CreateEntity();
 		void AddEntity(const EntityPtr& entity);
 		void RemoveEntity(const EntityPtr& entity);
