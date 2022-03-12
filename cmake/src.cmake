@@ -8,6 +8,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Factory.hpp
 	
 	src/TinyEngine/Utils/XmlUtils.hpp
+	src/TinyEngine/Utils/Singleton.hpp
 	
 	src/TinyEngine/Properties/Properties.hpp
 	src/TinyEngine/Properties/IProperty.hpp
@@ -38,6 +39,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Factory.cpp
 	
 	src/TinyEngine/Utils/XmlUtils.cpp
+	src/TinyEngine/Utils/Singleton.cpp
 	
 	src/TinyEngine/Properties/Properties.cpp
 	src/TinyEngine/Properties/IProperty.cpp

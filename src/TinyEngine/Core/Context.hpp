@@ -1,6 +1,8 @@
 ﻿#ifndef _CONTEXT_HEADER_
 #define _CONTEXT_HEADER_
 
+#include <TinyEngine/Utils/Singleton.hpp>
+
 #include <functional>
 #include <memory>
 
@@ -29,7 +31,7 @@ namespace TinyEngine::Core
 
 	enum class DirType;
 
-	class Context final : public std::enable_shared_from_this<Context>
+	class Context final : public std::enable_shared_from_this<Context>, public Utils::Singleton<Context>
 	{
 	public:
 		using Ptr = std::shared_ptr<Context>;
