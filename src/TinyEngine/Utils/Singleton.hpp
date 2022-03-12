@@ -13,7 +13,7 @@ namespace TinyEngine::Utils
 		virtual ~Singleton() = default;
 
 	public:
-		static std::unique_ptr<T> GetInstance();
+		static T& GetInstance();
 
 	private:
 		static std::unique_ptr<T> _instance;
@@ -23,14 +23,14 @@ namespace TinyEngine::Utils
 	std::unique_ptr<T> Singleton<T>::_instance;
 
 	template<typename T>
-	std::unique_ptr<T> Singleton<T>::GetInstance()
+	T& Singleton<T>::GetInstance()
 	{
 		if (!_instance)
 		{
 			_instance = std::make_unique<T>();
 		}
 
-		return _instance;
+		return *_instance.get();
 	}
 }
 

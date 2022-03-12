@@ -232,7 +232,7 @@ namespace TinyEngine::Properties
 			auto&& propertyTypeAttr = propertyNode.attribute("type");
 			auto&& propertyType = std::string{propertyTypeAttr.value()};
 
-			if (auto property = context->GetFactory()->Create<IProperty>(propertyType))
+			if (auto property = Core::Factory::GetInstance().Create<IProperty>(propertyType))
 			{
 				property->LoadFromFile(propertyNode);
 

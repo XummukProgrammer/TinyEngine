@@ -27,7 +27,6 @@ namespace TinyEngine::Render
 namespace TinyEngine::Core
 {
 	class FileSystem;
-	class Factory;
 
 	enum class DirType;
 
@@ -39,7 +38,6 @@ namespace TinyEngine::Core
 		using PropertiesPtr = std::shared_ptr<Properties::Properties>;
 		using XmlPropertiesPtr = std::shared_ptr<Properties::XmlProperties>;
 		using LevelPtr = std::shared_ptr<Level::Level>;
-		using FactoryPtr = std::shared_ptr<Factory>;
 		using ScenePtr = std::shared_ptr<Level::Scene>;
 		using EntityPtr = std::shared_ptr<Level::Entity>;
 		using RenderPtr = std::shared_ptr<Render::Render>;
@@ -76,7 +74,6 @@ namespace TinyEngine::Core
 	public:
 		FileSystemPtr GetFileSystem() const;
 		PropertiesPtr GetSessionProperties() const;
-		FactoryPtr GetFactory() const;
 		RenderPtr GetRender() const;
 
 		// Методы для работы с сущностями используется только в сцене, как основном хранилище.
@@ -102,7 +99,6 @@ namespace TinyEngine::Core
 		FileSystemPtr _fileSystem;
 		PropertiesPtr _sessionProperties;
 		XmlPropertiesPtr _IOProperties;
-		FactoryPtr _factory;
 		LevelPtr _level;
 		RenderPtr _render;
 

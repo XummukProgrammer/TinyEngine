@@ -2,7 +2,6 @@
 
 #include <TinyEngine/Core/FileSystem.hpp>
 #include <TinyEngine/Properties/Properties.hpp>
-#include <TinyEngine/Core/Factory.hpp>
 #include <TinyEngine/Level/Level.hpp>
 #include <TinyEngine/Level/Entity.hpp>
 #include <TinyEngine/Level/Scene.hpp>
@@ -16,7 +15,6 @@ namespace TinyEngine::Core
 		: _fileSystem(std::make_shared<FileSystem>())
 		, _sessionProperties(std::make_shared<Properties::Properties>())
 		, _IOProperties(std::make_shared<Properties::XmlProperties>())
-		, _factory(std::make_shared<Factory>())
 		, _level(std::make_shared<Level::Level>())
 		, _render(std::make_shared<Render::Render>())
 	{ 
@@ -107,11 +105,6 @@ namespace TinyEngine::Core
 	Context::PropertiesPtr Context::GetSessionProperties() const
 	{
 		return _sessionProperties;
-	}
-
-	Context::FactoryPtr Context::GetFactory() const
-	{
-		return _factory;
 	}
 
 	Context::RenderPtr Context::GetRender() const

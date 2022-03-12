@@ -36,10 +36,10 @@ namespace TinyEngine::Core
 	void Application::OnPreInit()
 	{ 
 		_context->GetFileSystem()->SetExecuteDir(_argc, _argv);
-		_context->GetFactory()->Register<Properties::Data::BoolProperty>();
-		_context->GetFactory()->Register<Properties::Data::IntProperty>();
-		_context->GetFactory()->Register<Properties::Data::FloatProperty>();
-		_context->GetFactory()->Register<Properties::Data::StringProperty>();
+		Factory::GetInstance().Register<Properties::Data::BoolProperty>();
+		Factory::GetInstance().Register<Properties::Data::IntProperty>();
+		Factory::GetInstance().Register<Properties::Data::FloatProperty>();
+		Factory::GetInstance().Register<Properties::Data::StringProperty>();
 		_context->IOPropertiesLoadFromFile();
 
 		auto weakThis = weak_from_this();

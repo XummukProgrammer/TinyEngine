@@ -1,6 +1,8 @@
 ﻿#ifndef _FACTORY_HEADER_
 #define _FACTORY_HEADER_
 
+#include <TinyEngine/Utils/Singleton.hpp>
+
 #include <map>
 #include <functional>
 #include <memory>
@@ -19,7 +21,7 @@ namespace TinyEngine::Core
 		static std::string GetStaticClassName() { return "IFactory"; }
 	};
 
-	class Factory final
+	class Factory final : public Utils::Singleton<Factory>
 	{
 	public:
 		using IFactoryPtr = std::shared_ptr<IFactory>;
