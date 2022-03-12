@@ -87,6 +87,8 @@ namespace TinyEngine::Level
 			}
 
 			_components.clear();
+			_isRemovedComponents = false;
+
 			return;
 		}
 

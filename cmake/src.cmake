@@ -20,6 +20,13 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Level/Component.hpp
 	src/TinyEngine/Level/Entity.hpp
 	src/TinyEngine/Level/Scene.hpp
+	
+	src/TinyEngine/Render/IObject.hpp
+	src/TinyEngine/Render/VisualObject.hpp
+	src/TinyEngine/Render/ILayer.hpp
+	src/TinyEngine/Render/ObjectsLayer.hpp
+	src/TinyEngine/Render/Layers.hpp
+	src/TinyEngine/Render/Render.hpp
 )
 
 set(ENGINE_SOURCES
@@ -43,4 +50,11 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Level/Component.cpp
 	src/TinyEngine/Level/Entity.cpp
 	src/TinyEngine/Level/Scene.cpp
+	
+	src/TinyEngine/Render/IObject.cpp
+	src/TinyEngine/Render/VisualObject.cpp
+	src/TinyEngine/Render/ILayer.cpp
+	src/TinyEngine/Render/ObjectsLayer.cpp
+	src/TinyEngine/Render/Layers.cpp
+	src/TinyEngine/Render/Render.cpp
 )

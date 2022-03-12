@@ -17,6 +17,11 @@ namespace TinyEngine::Level
 	class Entity;
 }
 
+namespace TinyEngine::Render
+{
+	class Render;
+}
+
 namespace TinyEngine::Core
 {
 	class FileSystem;
@@ -35,6 +40,7 @@ namespace TinyEngine::Core
 		using FactoryPtr = std::shared_ptr<Factory>;
 		using ScenePtr = std::shared_ptr<Level::Scene>;
 		using EntityPtr = std::shared_ptr<Level::Entity>;
+		using RenderPtr = std::shared_ptr<Render::Render>;
 		using PreInitCallback = std::function<void(const Ptr&)>;
 		using InitCallback = std::function<void(const Ptr&)>;
 		using DeinitCallback = std::function<void(const Ptr&)>;
@@ -69,6 +75,7 @@ namespace TinyEngine::Core
 		FileSystemPtr GetFileSystem() const;
 		PropertiesPtr GetSessionProperties() const;
 		FactoryPtr GetFactory() const;
+		RenderPtr GetRender() const;
 
 		// Методы для работы с сущностями используется только в сцене, как основном хранилище.
 		// Не рекомендуется использовать методы на прямую.
@@ -95,6 +102,7 @@ namespace TinyEngine::Core
 		XmlPropertiesPtr _IOProperties;
 		FactoryPtr _factory;
 		LevelPtr _level;
+		RenderPtr _render;
 
 		PreInitCallback _onPreInitCallback;
 		InitCallback _onInitCallback;

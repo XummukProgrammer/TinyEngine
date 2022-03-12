@@ -6,6 +6,7 @@
 #include <TinyEngine/Level/Level.hpp>
 #include <TinyEngine/Level/Entity.hpp>
 #include <TinyEngine/Level/Scene.hpp>
+#include <TinyEngine/Render/Render.hpp>
 
 namespace TinyEngine::Core
 {
@@ -17,6 +18,7 @@ namespace TinyEngine::Core
 		, _IOProperties(std::make_shared<Properties::XmlProperties>())
 		, _factory(std::make_shared<Factory>())
 		, _level(std::make_shared<Level::Level>())
+		, _render(std::make_shared<Render::Render>())
 	{ 
 	}
 
@@ -30,6 +32,7 @@ namespace TinyEngine::Core
 		}
 
 		_level->OnPreInit(sharedThis);
+		_render->OnPreInit(sharedThis);
 	}
 
 	void Context::OnInit()
@@ -42,6 +45,7 @@ namespace TinyEngine::Core
 		}
 
 		_level->OnInit(sharedThis);
+		_render->OnInit(sharedThis);
 	}
 
 	void Context::OnDeinit()
@@ -54,6 +58,7 @@ namespace TinyEngine::Core
 		}
 
 		_level->OnDeinit(sharedThis);
+		_render->OnDeinit(sharedThis);
 	}
 
 	void Context::OnUpdate()
@@ -66,6 +71,7 @@ namespace TinyEngine::Core
 		}
 
 		_level->OnUpdate(sharedThis);
+		_render->OnUpdate(sharedThis);
 	}
 
 	void Context::OnDraw()
@@ -78,6 +84,7 @@ namespace TinyEngine::Core
 		}
 
 		_level->OnDraw(sharedThis);
+		_render->OnDraw(sharedThis);
 	}
 
 	void Context::OnEvent()
@@ -105,6 +112,11 @@ namespace TinyEngine::Core
 	Context::FactoryPtr Context::GetFactory() const
 	{
 		return _factory;
+	}
+
+	Context::RenderPtr Context::GetRender() const
+	{
+		return _render;
 	}
 
 	Context::EntityPtr Context::CreateEntity()

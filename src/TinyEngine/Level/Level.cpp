@@ -92,6 +92,8 @@ namespace TinyEngine::Level
 		if (_isRemovedScenes)
 		{
 			_scenes.clear();
+			_isRemovedScenes = false;
+
 			return;
 		}
 
@@ -144,6 +146,8 @@ namespace TinyEngine::Level
 			}
 
 			_entities.clear();
+			_isRemovedEntities = false;
+
 			return;
 		}
 
