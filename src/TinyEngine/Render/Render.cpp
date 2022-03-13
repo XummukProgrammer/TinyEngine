@@ -9,29 +9,29 @@ namespace TinyEngine::Render
 	{ 
 	}
 
-	void Render::OnPreInit(const ContextPtr& context)
+	void Render::OnPreInit()
 	{ 
-		_layers->OnPreInit(context);
+		_layers->OnPreInit();
 	}
 
-	void Render::OnInit(const ContextPtr& context)
+	void Render::OnInit()
 	{ 
-		_layers->OnInit(context);
+		_layers->OnInit();
 	}
 
-	void Render::OnDeinit(const ContextPtr& context)
+	void Render::OnDeinit()
 	{ 
-		_layers->OnDeinit(context);
+		_layers->OnDeinit();
 	}
 
-	void Render::OnUpdate(const ContextPtr& context)
+	void Render::OnUpdate()
 	{ 
-		_layers->OnUpdate(context);
+		_layers->OnUpdate();
 	}
 
-	void Render::OnDraw(const ContextPtr& context)
+	void Render::OnDraw()
 	{ 
-		_layers->OnDraw(context);
+		_layers->OnDraw();
 	}
 
 	Render::LayersPtr Render::GetLayers() const

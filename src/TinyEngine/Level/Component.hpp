@@ -3,27 +3,19 @@
 
 #include <memory>
 
-namespace TinyEngine::Core
-{
-	class Context;
-}
-
 namespace TinyEngine::Level
 {
 	class Component
 	{
 	public:
-		using ContextPtr = std::shared_ptr<Core::Context>;
-
-	public:
 		Component() = default;
 		virtual ~Component() = default;
 
 	public:
-		virtual void OnInit(const ContextPtr& context) {}
-		virtual void OnDeinit(const ContextPtr& context) {}
+		virtual void OnInit() {}
+		virtual void OnDeinit() {}
 
-		virtual void OnUpdate(const ContextPtr& context) {}
+		virtual void OnUpdate() {}
 
 	public:
 		bool IsValid() const;

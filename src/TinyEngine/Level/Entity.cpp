@@ -5,28 +5,19 @@
 
 namespace TinyEngine::Level
 {
-	void Entity::SetContext(const WeakContextPtr& weakContext)
-	{ 
-		_weakContext = weakContext;
-	}
-
 	void Entity::OnInit()
 	{ 
-		auto&& context = _weakContext.lock();
-
 		for (const auto& component : _components)
 		{
-			component->OnInit(context);
+			component->OnInit();
 		}
 	}
 
 	void Entity::OnDeinit()
 	{ 
-		auto&& context = _weakContext.lock();
-
 		for (const auto& component : _components)
 		{
-			component->OnDeinit(context);
+			component->OnDeinit();
 		}
 	}
 
@@ -34,13 +25,11 @@ namespace TinyEngine::Level
 	{ 
 		TryRemoveComponents();
 
-		auto&& context = _weakContext.lock();
-
 		for (const auto& component : _components)
 		{
 			if (component->IsValid())
 			{
-				component->OnUpdate(context);
+				component->OnUpdate();
 			}
 		}
 	}
@@ -72,11 +61,9 @@ namespace TinyEngine::Level
 
 	void Entity::TryRemoveComponents()
 	{ 
-		auto&& context = _weakContext.lock();
-
-		auto onRemoveComponent = [context](const auto& component)
+		auto onRemoveComponent = [](const auto& component)
 		{
-			component->OnDeinit(context);
+			component->OnDeinit();
 		};
 
 		if (_isRemovedComponents)

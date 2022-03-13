@@ -6,11 +6,6 @@
 #include <memory>
 #include <vector>
 
-namespace TinyEngine::Core
-{
-	class Context;
-}
-
 namespace TinyEngine::Level
 {
 	class Component;
@@ -19,7 +14,6 @@ namespace TinyEngine::Level
 	{
 	public:
 		using ComponentPtr = std::shared_ptr<Component>;
-		using WeakContextPtr = std::weak_ptr<Core::Context>;
 
 	public:
 		Entity() = default;
@@ -32,8 +26,6 @@ namespace TinyEngine::Level
 		void OnUpdate();
 
 	public:
-		void SetContext(const WeakContextPtr& weakContext);
-
 		template<typename T>
 		void AddComponent();
 
@@ -56,7 +48,6 @@ namespace TinyEngine::Level
 		void TryRemoveComponents();
 
 	private:
-		WeakContextPtr _weakContext;
 		std::vector<ComponentPtr> _components;
 		bool _isRemoved = false;
 		bool _isRemovedComponents = false;

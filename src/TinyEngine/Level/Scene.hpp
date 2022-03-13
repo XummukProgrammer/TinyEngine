@@ -4,11 +4,6 @@
 #include <memory>
 #include <vector>
 
-namespace TinyEngine::Core
-{
-	class Context;
-}
-
 namespace TinyEngine::Level
 {
 	class Entity;
@@ -16,7 +11,6 @@ namespace TinyEngine::Level
 	class Scene : public std::enable_shared_from_this<Scene>
 	{
 	public:
-		using ContextPtr = std::shared_ptr<Core::Context>;
 		using EntityPtr = std::shared_ptr<Entity>;
 
 	public:
@@ -24,10 +18,10 @@ namespace TinyEngine::Level
 		virtual ~Scene() = default;
 
 	public:
-		virtual void OnEnter(const ContextPtr& context);
-		virtual void OnExit(const ContextPtr& context);
+		virtual void OnEnter();
+		virtual void OnExit();
 
-		virtual void OnUpdate(const ContextPtr& context) {}
+		virtual void OnUpdate() {}
 
 	public:
 		bool IsValid() const;
@@ -35,19 +29,19 @@ namespace TinyEngine::Level
 		void Remove();
 		bool IsRemoved() const;
 
-		EntityPtr CreateAndAddEntity(const ContextPtr& context);
-		void RemoveEntity(const ContextPtr& context, const EntityPtr& entity);
-		void RemoveEntities(const ContextPtr& context);
+		EntityPtr CreateAndAddEntity();
+		void RemoveEntity(const EntityPtr& entity);
+		void RemoveEntities();
 
 	protected:
-		virtual void OnLoadEntities(const ContextPtr& context) {}
-		virtual void OnRemoveEntities(const ContextPtr& context);
+		virtual void OnLoadEntities() {}
+		virtual void OnRemoveEntities();
 
 		const std::vector<EntityPtr>& GetEntities() const;
 
 	private:
-		void OnInitEntities(const ContextPtr& context);
-		void OnDeinitEntities(const ContextPtr& context);
+		void OnInitEntities();
+		void OnDeinitEntities();
 
 	private:
 		std::vector<EntityPtr> _entities;

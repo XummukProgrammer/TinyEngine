@@ -8,11 +8,6 @@
 #include <map>
 #include <string>
 
-namespace TinyEngine::Core
-{
-	class Context;
-}
-
 namespace TinyEngine::Level
 {
 	class Entity;
@@ -21,7 +16,6 @@ namespace TinyEngine::Level
 	class Level final : public Utils::Singleton<Level>
 	{
 	public:
-		using ContextPtr = std::shared_ptr<Core::Context>;
 		using EntityPtr = std::shared_ptr<Entity>;
 		using ScenePtr = std::shared_ptr<Scene>;
 
@@ -30,31 +24,31 @@ namespace TinyEngine::Level
 		~Level() = default;
 
 	public:
-		void OnPreInit(const ContextPtr& context);
-		void OnInit(const ContextPtr& context);
-		void OnDeinit(const ContextPtr& context);
+		void OnPreInit();
+		void OnInit();
+		void OnDeinit();
 
-		void OnUpdate(const ContextPtr& context);
-		void OnDraw(const ContextPtr& context);
-		void OnEvent(const ContextPtr& context);
+		void OnUpdate();
+		void OnDraw();
+		void OnEvent();
 
 	public:
-		EntityPtr CreateEntity(const ContextPtr& context) const;
+		EntityPtr CreateEntity() const;
 		void AddEntity(const EntityPtr& entity);
 		void RemoveEntity(const EntityPtr& entity);
 		void RemoveEntities();
 
-		void AddScene(const ContextPtr& context, std::string_view key, const ScenePtr& scene);
+		void AddScene(std::string_view key, const ScenePtr& scene);
 		void SetCurrentScene(const ScenePtr& scene);
 		ScenePtr GetCurrentScene() const;
 		ScenePtr GetScene(std::string_view key) const;
 		void RemoveScenes();
 
 	private:
-		void TryRemoveEntities(const ContextPtr& context);
+		void TryRemoveEntities();
 
-		void TryUpdateCurrentScene(const ContextPtr& context);
-		void TryRemoveScenes(const ContextPtr& context);
+		void TryUpdateCurrentScene();
+		void TryRemoveScenes();
 
 	private:
 		std::vector<EntityPtr> _entities;

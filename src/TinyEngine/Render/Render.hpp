@@ -5,11 +5,6 @@
 
 #include <memory>
 
-namespace TinyEngine::Core
-{
-	class Context;
-}
-
 namespace TinyEngine::Render
 {
 	class Layers;
@@ -17,7 +12,6 @@ namespace TinyEngine::Render
 	class Render final : public Utils::Singleton<Render>
 	{
 	public:
-		using ContextPtr = std::shared_ptr<Core::Context>;
 		using LayersPtr = std::shared_ptr<Layers>;
 
 	public:
@@ -25,12 +19,12 @@ namespace TinyEngine::Render
 		~Render() = default;
 
 	public:
-		virtual void OnPreInit(const ContextPtr& context);
-		virtual void OnInit(const ContextPtr& context);
-		virtual void OnDeinit(const ContextPtr& context);
+		virtual void OnPreInit();
+		virtual void OnInit();
+		virtual void OnDeinit();
 
-		virtual void OnUpdate(const ContextPtr& context);
-		virtual void OnDraw(const ContextPtr& context);
+		virtual void OnUpdate();
+		virtual void OnDraw();
 
 	public:
 		LayersPtr GetLayers() const;

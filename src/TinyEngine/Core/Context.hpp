@@ -20,12 +20,12 @@ namespace TinyEngine::Core
 		using Ptr = std::shared_ptr<Context>;
 		using PropertiesPtr = std::shared_ptr<Properties::Properties>;
 		using XmlPropertiesPtr = std::shared_ptr<Properties::XmlProperties>;
-		using PreInitCallback = std::function<void(const Ptr&)>;
-		using InitCallback = std::function<void(const Ptr&)>;
-		using DeinitCallback = std::function<void(const Ptr&)>;
-		using UpdateCallback = std::function<void(const Ptr&)>;
-		using DrawCallback = std::function<void(const Ptr&)>;
-		using EventCallback = std::function<void(const Ptr&)>;
+		using PreInitCallback = std::function<void()>;
+		using InitCallback = std::function<void()>;
+		using DeinitCallback = std::function<void()>;
+		using UpdateCallback = std::function<void()>;
+		using DrawCallback = std::function<void()>;
+		using EventCallback = std::function<void()>;
 
 	public:
 		Context();
@@ -52,10 +52,9 @@ namespace TinyEngine::Core
 
 	public:
 		PropertiesPtr GetSessionProperties() const;
-
+		
 		XmlPropertiesPtr GetIOProperties() const;
-		void IOPropertiesSaveToFile();
-		void IOPropertiesLoadFromFile();
+		std::string GetIOPropertiesPath() const;
 
 	private:
 		PropertiesPtr _sessionProperties;

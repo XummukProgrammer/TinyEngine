@@ -5,11 +5,6 @@
 #include <map>
 #include <memory>
 
-namespace TinyEngine::Core
-{
-	class Context;
-}
-
 namespace TinyEngine::Properties
 {
 	namespace Data
@@ -74,8 +69,8 @@ namespace TinyEngine::Properties
 		~XmlProperties() = default;
 
 	public:
-		void SaveToFile(const std::shared_ptr<Core::Context>& context, const std::string& filePath);
-		void LoadFromFile(const std::shared_ptr<Core::Context>& context, const std::string& filePath);
+		void SaveToFile(const std::string& filePath);
+		void LoadFromFile(const std::string& filePath);
 	};
 }
 

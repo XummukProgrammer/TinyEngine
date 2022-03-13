@@ -14,13 +14,7 @@ namespace TinyEngine::Core
 	Application::Application(int argc, char** argv)
 		: _argc(argc)
 		, _argv(argv)
-		, _context(std::make_shared<Context>())
 	{ 
-	}
-
-	Application::ContextPtr Application::GetContext() const
-	{
-		return _context;
 	}
 
 	void Application::Start()
@@ -42,12 +36,12 @@ namespace TinyEngine::Core
 		Factory::GetInstance().Register<Properties::Data::FloatProperty>();
 		Factory::GetInstance().Register<Properties::Data::StringProperty>();
 
-		_context->IOPropertiesLoadFromFile();
+		Context::GetInstance().GetIOProperties()->LoadFromFile(Context::GetInstance().GetIOPropertiesPath());
 
 		auto weakThis = weak_from_this();
 
 		WindowInfo windowInfo;
-		windowInfo.LoadFromFile(_context);
+		windowInfo.LoadFromFile();
 		_window = std::make_shared<Window>(windowInfo);
 		_window->SetOnUpdateCallback([weakThis]()
 		{
@@ -71,19 +65,18 @@ namespace TinyEngine::Core
 			}
 		});
 
-		_context->OnPreInit();
+		Context::GetInstance().OnPreInit();
 	}
 
 	void Application::OnInit()
 	{ 
-		_context->OnInit();
+		Context::GetInstance().OnInit();
 	}
 
 	void Application::OnDeinit()
 	{ 
-		_context->OnDeinit();
-		_context->IOPropertiesSaveToFile();
-		_context.reset();
+		Context::GetInstance().OnDeinit();
+		Context::GetInstance().GetIOProperties()->SaveToFile(Context::GetInstance().GetIOPropertiesPath());
 	}
 
 	void Application::OnExecute()
@@ -93,16 +86,16 @@ namespace TinyEngine::Core
 
 	void Application::OnUpdate()
 	{ 
-		_context->OnUpdate();
+		Context::GetInstance().OnUpdate();
 	}
 
 	void Application::OnDraw()
 	{ 
-		_context->OnDraw();
+		Context::GetInstance().OnDraw();
 	}
 
 	void Application::OnEvent()
 	{ 
-		_context->OnEvent();
+		Context::GetInstance().OnEvent();
 	}
 }

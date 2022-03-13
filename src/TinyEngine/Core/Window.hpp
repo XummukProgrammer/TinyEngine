@@ -12,8 +12,6 @@ namespace sf
 
 namespace TinyEngine::Core
 {
-	class Context;
-
 	struct WindowInfo
 	{
 		unsigned width = 800;
@@ -22,7 +20,7 @@ namespace TinyEngine::Core
 		unsigned maxFramerate = 60;
 		bool isVerticalSyncEnabled = false;
 
-		void LoadFromFile(const std::shared_ptr<Context>& context);
+		void LoadFromFile();
 	};
 
 	class Window final

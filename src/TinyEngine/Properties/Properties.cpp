@@ -201,7 +201,7 @@ namespace TinyEngine::Properties
 	}
 
 	/// ~~~~~~~~~~~~~~~~~
-	void XmlProperties::SaveToFile(const std::shared_ptr<Core::Context>& context, const std::string& filePath)
+	void XmlProperties::SaveToFile(const std::string& filePath)
 	{ 
 		pugi::xml_document doc;
 		auto&& rootNode = doc.append_child("root");
@@ -218,7 +218,7 @@ namespace TinyEngine::Properties
 		doc.save_file(path.c_str());
 	}
 
-	void XmlProperties::LoadFromFile(const std::shared_ptr<Core::Context>& context, const std::string& filePath)
+	void XmlProperties::LoadFromFile(const std::string& filePath)
 	{
 		auto&& path = Core::FileSystem::GetInstance().BuildPath(DIR_TYPE, filePath);
 

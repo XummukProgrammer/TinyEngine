@@ -5,24 +5,24 @@
 
 namespace TinyEngine::Level
 {
-	void Level::OnPreInit(const ContextPtr& context)
+	void Level::OnPreInit()
 	{ 
 	}
 
-	void Level::OnInit(const ContextPtr& context)
+	void Level::OnInit()
 	{ 
 	}
 
-	void Level::OnDeinit(const ContextPtr& context)
+	void Level::OnDeinit()
 	{ 
 	}
 
-	void Level::OnUpdate(const ContextPtr& context)
+	void Level::OnUpdate()
 	{
-		TryRemoveScenes(context);
-		TryUpdateCurrentScene(context);
+		TryRemoveScenes();
+		TryUpdateCurrentScene();
 
-		TryRemoveEntities(context);
+		TryRemoveEntities();
 
 		for (const auto& entity : _entities)
 		{
@@ -33,19 +33,18 @@ namespace TinyEngine::Level
 		}
 	}
 
-	void Level::OnDraw(const ContextPtr& context)
+	void Level::OnDraw()
 	{ 
 
 	}
 
-	void Level::OnEvent(const ContextPtr& context)
+	void Level::OnEvent()
 	{ 
 	}
 
-	Level::EntityPtr Level::CreateEntity(const ContextPtr& context) const
+	Level::EntityPtr Level::CreateEntity() const
 	{
 		auto entity = std::make_shared<Entity>();
-		entity->SetContext(context);
 		return entity;
 	}
 
@@ -64,12 +63,12 @@ namespace TinyEngine::Level
 		_isRemovedEntities = true;
 	}
 
-	void Level::AddScene(const ContextPtr& context, std::string_view key, const ScenePtr& scene)
+	void Level::AddScene(std::string_view key, const ScenePtr& scene)
 	{ 
 		_scenes[std::string{key}] = scene;
 	}
 
-	void Level::TryUpdateCurrentScene(const ContextPtr& context)
+	void Level::TryUpdateCurrentScene()
 	{ 
 		if (!_nextScene)
 		{
@@ -78,16 +77,16 @@ namespace TinyEngine::Level
 
 		if (_currentScene)
 		{
-			_currentScene->OnExit(context);
+			_currentScene->OnExit();
 		}
 
 		_currentScene = _nextScene;
-		_currentScene->OnEnter(context);
+		_currentScene->OnEnter();
 
 		_nextScene.reset();
 	}
 
-	void Level::TryRemoveScenes(const ContextPtr& context)
+	void Level::TryRemoveScenes()
 	{ 
 		if (_isRemovedScenes)
 		{
@@ -131,7 +130,7 @@ namespace TinyEngine::Level
 		}
 	}
 
-	void Level::TryRemoveEntities(const ContextPtr& context)
+	void Level::TryRemoveEntities()
 	{
 		auto onRemoveEntity = [](const auto& entity)
 		{

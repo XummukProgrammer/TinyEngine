@@ -18,79 +18,67 @@ namespace TinyEngine::Core
 
 	void Context::OnPreInit()
 	{ 
-		auto&& sharedThis = shared_from_this();
-
 		if (_onPreInitCallback)
 		{
-			_onPreInitCallback(sharedThis);
+			_onPreInitCallback();
 		}
 
-		Level::Level::GetInstance().OnPreInit(sharedThis);
-		Render::Render::GetInstance().OnPreInit(sharedThis);
+		Level::Level::GetInstance().OnPreInit();
+		Render::Render::GetInstance().OnPreInit();
 	}
 
 	void Context::OnInit()
 	{ 
-		auto&& sharedThis = shared_from_this();
-
 		if (_onInitCallback)
 		{
-			_onInitCallback(sharedThis);
+			_onInitCallback();
 		}
 
-		Level::Level::GetInstance().OnInit(sharedThis);
-		Render::Render::GetInstance().OnInit(sharedThis);
+		Level::Level::GetInstance().OnInit();
+		Render::Render::GetInstance().OnInit();
 	}
 
 	void Context::OnDeinit()
 	{ 
-		auto&& sharedThis = shared_from_this();
-
 		if (_onDeinitCallback)
 		{
-			_onDeinitCallback(sharedThis);
+			_onDeinitCallback();
 		}
 
-		Level::Level::GetInstance().OnDeinit(sharedThis);
-		Render::Render::GetInstance().OnDeinit(sharedThis);
+		Level::Level::GetInstance().OnDeinit();
+		Render::Render::GetInstance().OnDeinit();
 	}
 
 	void Context::OnUpdate()
 	{ 
-		auto&& sharedThis = shared_from_this();
-
 		if (_onUpdateCallback)
 		{
-			_onUpdateCallback(sharedThis);
+			_onUpdateCallback();
 		}
 
-		Level::Level::GetInstance().OnUpdate(sharedThis);
-		Render::Render::GetInstance().OnUpdate(sharedThis);
+		Level::Level::GetInstance().OnUpdate();
+		Render::Render::GetInstance().OnUpdate();
 	}
 
 	void Context::OnDraw()
 	{ 
-		auto&& sharedThis = shared_from_this();
-
 		if (_onDrawCallback)
 		{
-			_onDrawCallback(sharedThis);
+			_onDrawCallback();
 		}
 
-		Level::Level::GetInstance().OnDraw(sharedThis);
-		Render::Render::GetInstance().OnDraw(sharedThis);
+		Level::Level::GetInstance().OnDraw();
+		Render::Render::GetInstance().OnDraw();
 	}
 
 	void Context::OnEvent()
 	{ 
-		auto&& sharedThis = shared_from_this();
-
 		if (_onEventCallback)
 		{
-			_onEventCallback(sharedThis);
+			_onEventCallback();
 		}
 
-		Level::Level::GetInstance().OnEvent(sharedThis);
+		Level::Level::GetInstance().OnEvent();
 	}
 
 	Context::PropertiesPtr Context::GetSessionProperties() const
@@ -103,13 +91,8 @@ namespace TinyEngine::Core
 		return _IOProperties;
 	}
 
-	void Context::IOPropertiesSaveToFile()
-	{ 
-		_IOProperties->SaveToFile(shared_from_this(), IO_PROPERTIES_FILE_PATH);
-	}
-
-	void Context::IOPropertiesLoadFromFile()
-	{ 
-		_IOProperties->LoadFromFile(shared_from_this(), IO_PROPERTIES_FILE_PATH);
+	std::string Context::GetIOPropertiesPath() const
+	{
+		return std::string();
 	}
 }

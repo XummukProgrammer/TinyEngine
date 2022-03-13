@@ -3,46 +3,46 @@
 
 namespace TinyEngine::Render
 {
-	void Layers::OnPreInit(const ContextPtr& context)
+	void Layers::OnPreInit()
 	{ 
 	}
 
-	void Layers::OnInit(const ContextPtr& context)
+	void Layers::OnInit()
 	{ 
 	}
 
-	void Layers::OnDeinit(const ContextPtr& context)
+	void Layers::OnDeinit()
 	{ 
 	}
 
-	void Layers::OnUpdate(const ContextPtr& context)
+	void Layers::OnUpdate()
 	{ 
-		TryRemoveLayers(context);
+		TryRemoveLayers();
 
 		for (const auto& [ key, layer ] : _layers)
 		{
 			if (layer->IsValid())
 			{
-				layer->OnUpdate(context);
+				layer->OnUpdate();
 			}
 		}
 	}
 
-	void Layers::OnDraw(const ContextPtr& context)
+	void Layers::OnDraw()
 	{ 
 		for (const auto& [ key, layer ] : _layers)
 		{
 			if (layer->IsValid())
 			{
-				layer->OnDraw(context);
+				layer->OnDraw();
 			}
 		}
 	}
 
-	void Layers::AddLayer(const ContextPtr& context, std::string_view key, const ILayerPtr& layer)
+	void Layers::AddLayer(std::string_view key, const ILayerPtr& layer)
 	{ 
 		_layers[std::string{key}] = layer;
-		layer->OnInit(context);
+		layer->OnInit();
 	}
 
 	Layers::ILayerPtr Layers::GetLayer(std::string_view key) const
@@ -70,11 +70,11 @@ namespace TinyEngine::Render
 		_isRemoveLayers = true;
 	}
 
-	void Layers::TryRemoveLayers(const ContextPtr& context)
+	void Layers::TryRemoveLayers()
 	{ 
-		auto onRemoveLayer = [context](const auto& layer)
+		auto onRemoveLayer = [](const auto& layer)
 		{
-			layer->OnDeinit(context);
+			layer->OnDeinit();
 		};
 
 		if (_isRemoveLayers)

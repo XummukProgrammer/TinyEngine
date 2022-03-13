@@ -75,7 +75,7 @@ namespace TinyEngine::Core
 		}
 	}
 
-	void WindowInfo::LoadFromFile(const std::shared_ptr<Context>& context)
+	void WindowInfo::LoadFromFile()
 	{ 
 		auto&& path = FileSystem::GetInstance().BuildPath(DIR_TYPE, FILE_PATH);
 
