@@ -1,6 +1,8 @@
 ﻿#ifndef _RENDER_HEADER_
 #define _RENDER_HEADER_
 
+#include <TinyEngine/Utils/Singleton.hpp>
+
 #include <memory>
 
 namespace TinyEngine::Core
@@ -12,7 +14,7 @@ namespace TinyEngine::Render
 {
 	class Layers;
 
-	class Render final
+	class Render final : public Utils::Singleton<Render>
 	{
 	public:
 		using ContextPtr = std::shared_ptr<Core::Context>;

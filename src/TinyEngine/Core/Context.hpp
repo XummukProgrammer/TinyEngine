@@ -12,11 +12,6 @@ namespace TinyEngine::Properties
 	class XmlProperties;
 }
 
-namespace TinyEngine::Render
-{
-	class Render;
-}
-
 namespace TinyEngine::Core
 {
 	class Context final : public std::enable_shared_from_this<Context>, public Utils::Singleton<Context>
@@ -25,7 +20,6 @@ namespace TinyEngine::Core
 		using Ptr = std::shared_ptr<Context>;
 		using PropertiesPtr = std::shared_ptr<Properties::Properties>;
 		using XmlPropertiesPtr = std::shared_ptr<Properties::XmlProperties>;
-		using RenderPtr = std::shared_ptr<Render::Render>;
 		using PreInitCallback = std::function<void(const Ptr&)>;
 		using InitCallback = std::function<void(const Ptr&)>;
 		using DeinitCallback = std::function<void(const Ptr&)>;
@@ -58,7 +52,6 @@ namespace TinyEngine::Core
 
 	public:
 		PropertiesPtr GetSessionProperties() const;
-		RenderPtr GetRender() const;
 
 		XmlPropertiesPtr GetIOProperties() const;
 		void IOPropertiesSaveToFile();
@@ -67,7 +60,6 @@ namespace TinyEngine::Core
 	private:
 		PropertiesPtr _sessionProperties;
 		XmlPropertiesPtr _IOProperties;
-		RenderPtr _render;
 
 		PreInitCallback _onPreInitCallback;
 		InitCallback _onInitCallback;

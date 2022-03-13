@@ -13,7 +13,6 @@ namespace TinyEngine::Core
 	Context::Context()
 		: _sessionProperties(std::make_shared<Properties::Properties>())
 		, _IOProperties(std::make_shared<Properties::XmlProperties>())
-		, _render(std::make_shared<Render::Render>())
 	{ 
 	}
 
@@ -27,7 +26,7 @@ namespace TinyEngine::Core
 		}
 
 		Level::Level::GetInstance().OnPreInit(sharedThis);
-		_render->OnPreInit(sharedThis);
+		Render::Render::GetInstance().OnPreInit(sharedThis);
 	}
 
 	void Context::OnInit()
@@ -40,7 +39,7 @@ namespace TinyEngine::Core
 		}
 
 		Level::Level::GetInstance().OnInit(sharedThis);
-		_render->OnInit(sharedThis);
+		Render::Render::GetInstance().OnInit(sharedThis);
 	}
 
 	void Context::OnDeinit()
@@ -53,7 +52,7 @@ namespace TinyEngine::Core
 		}
 
 		Level::Level::GetInstance().OnDeinit(sharedThis);
-		_render->OnDeinit(sharedThis);
+		Render::Render::GetInstance().OnDeinit(sharedThis);
 	}
 
 	void Context::OnUpdate()
@@ -66,7 +65,7 @@ namespace TinyEngine::Core
 		}
 
 		Level::Level::GetInstance().OnUpdate(sharedThis);
-		_render->OnUpdate(sharedThis);
+		Render::Render::GetInstance().OnUpdate(sharedThis);
 	}
 
 	void Context::OnDraw()
@@ -79,7 +78,7 @@ namespace TinyEngine::Core
 		}
 
 		Level::Level::GetInstance().OnDraw(sharedThis);
-		_render->OnDraw(sharedThis);
+		Render::Render::GetInstance().OnDraw(sharedThis);
 	}
 
 	void Context::OnEvent()
@@ -97,11 +96,6 @@ namespace TinyEngine::Core
 	Context::PropertiesPtr Context::GetSessionProperties() const
 	{
 		return _sessionProperties;
-	}
-
-	Context::RenderPtr Context::GetRender() const
-	{
-		return _render;
 	}
 
 	Context::XmlPropertiesPtr Context::GetIOProperties() const
