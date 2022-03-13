@@ -1,6 +1,5 @@
 ﻿#include "Context.hpp"
 
-#include <TinyEngine/Core/FileSystem.hpp>
 #include <TinyEngine/Properties/Properties.hpp>
 #include <TinyEngine/Level/Level.hpp>
 #include <TinyEngine/Level/Entity.hpp>
@@ -12,8 +11,7 @@ namespace TinyEngine::Core
 	const std::string IO_PROPERTIES_FILE_PATH = "io_properties.xml";
 
 	Context::Context()
-		: _fileSystem(std::make_shared<FileSystem>())
-		, _sessionProperties(std::make_shared<Properties::Properties>())
+		: _sessionProperties(std::make_shared<Properties::Properties>())
 		, _IOProperties(std::make_shared<Properties::XmlProperties>())
 		, _level(std::make_shared<Level::Level>())
 		, _render(std::make_shared<Render::Render>())
@@ -97,11 +95,6 @@ namespace TinyEngine::Core
 		_level->OnEvent(sharedThis);
 	}
 
-	Context::FileSystemPtr Context::GetFileSystem() const
-	{
-		return _fileSystem;
-	}
-
 	Context::PropertiesPtr Context::GetSessionProperties() const
 	{
 		return _sessionProperties;
@@ -170,10 +163,5 @@ namespace TinyEngine::Core
 	void Context::IOPropertiesLoadFromFile()
 	{ 
 		_IOProperties->LoadFromFile(shared_from_this(), IO_PROPERTIES_FILE_PATH);
-	}
-
-	std::string Context::BuildPath(DirType dirType, const std::string& path) const
-	{
-		return _fileSystem->BuildPath(dirType, path);
 	}
 }

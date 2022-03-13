@@ -214,13 +214,13 @@ namespace TinyEngine::Properties
 			property->SaveToFile(propertyNode);
 		}
 
-		auto&& path = context->BuildPath(DIR_TYPE, filePath);
+		auto&& path = Core::FileSystem::GetInstance().BuildPath(DIR_TYPE, filePath);
 		doc.save_file(path.c_str());
 	}
 
 	void XmlProperties::LoadFromFile(const std::shared_ptr<Core::Context>& context, const std::string& filePath)
 	{
-		auto&& path = context->BuildPath(DIR_TYPE, filePath);
+		auto&& path = Core::FileSystem::GetInstance().BuildPath(DIR_TYPE, filePath);
 
 		pugi::xml_document doc;
 		doc.load_file(path.c_str());

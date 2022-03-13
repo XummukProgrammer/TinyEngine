@@ -26,15 +26,10 @@ namespace TinyEngine::Render
 
 namespace TinyEngine::Core
 {
-	class FileSystem;
-
-	enum class DirType;
-
 	class Context final : public std::enable_shared_from_this<Context>, public Utils::Singleton<Context>
 	{
 	public:
 		using Ptr = std::shared_ptr<Context>;
-		using FileSystemPtr = std::shared_ptr<FileSystem>;
 		using PropertiesPtr = std::shared_ptr<Properties::Properties>;
 		using XmlPropertiesPtr = std::shared_ptr<Properties::XmlProperties>;
 		using LevelPtr = std::shared_ptr<Level::Level>;
@@ -72,7 +67,6 @@ namespace TinyEngine::Core
 		void OnEvent();
 
 	public:
-		FileSystemPtr GetFileSystem() const;
 		PropertiesPtr GetSessionProperties() const;
 		RenderPtr GetRender() const;
 
@@ -93,10 +87,7 @@ namespace TinyEngine::Core
 		void IOPropertiesSaveToFile();
 		void IOPropertiesLoadFromFile();
 
-		std::string BuildPath(DirType dirType, const std::string& path) const;
-
 	private:
-		FileSystemPtr _fileSystem;
 		PropertiesPtr _sessionProperties;
 		XmlPropertiesPtr _IOProperties;
 		LevelPtr _level;
