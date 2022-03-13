@@ -1,6 +1,8 @@
 ﻿#ifndef _LEVEL_HEADER_
 #define _LEVEL_HEADER_
 
+#include <TinyEngine/Utils/Singleton.hpp>
+
 #include <memory>
 #include <vector>
 #include <map>
@@ -16,7 +18,7 @@ namespace TinyEngine::Level
 	class Entity;
 	class Scene;
 
-	class Level final
+	class Level final : public Utils::Singleton<Level>
 	{
 	public:
 		using ContextPtr = std::shared_ptr<Core::Context>;

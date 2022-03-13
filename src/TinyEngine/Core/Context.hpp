@@ -12,13 +12,6 @@ namespace TinyEngine::Properties
 	class XmlProperties;
 }
 
-namespace TinyEngine::Level
-{
-	class Level;
-	class Scene;
-	class Entity;
-}
-
 namespace TinyEngine::Render
 {
 	class Render;
@@ -32,9 +25,6 @@ namespace TinyEngine::Core
 		using Ptr = std::shared_ptr<Context>;
 		using PropertiesPtr = std::shared_ptr<Properties::Properties>;
 		using XmlPropertiesPtr = std::shared_ptr<Properties::XmlProperties>;
-		using LevelPtr = std::shared_ptr<Level::Level>;
-		using ScenePtr = std::shared_ptr<Level::Scene>;
-		using EntityPtr = std::shared_ptr<Level::Entity>;
 		using RenderPtr = std::shared_ptr<Render::Render>;
 		using PreInitCallback = std::function<void(const Ptr&)>;
 		using InitCallback = std::function<void(const Ptr&)>;
@@ -70,19 +60,6 @@ namespace TinyEngine::Core
 		PropertiesPtr GetSessionProperties() const;
 		RenderPtr GetRender() const;
 
-		// Методы для работы с сущностями используется только в сцене, как основном хранилище.
-		// Не рекомендуется использовать методы на прямую.
-		EntityPtr CreateEntity();
-		void AddEntity(const EntityPtr& entity);
-		void RemoveEntity(const EntityPtr& entity);
-		void RemoveEntities();
-
-		void AddScene(std::string_view key, const ScenePtr& scene);
-		void SetCurrentScene(const ScenePtr& scene);
-		ScenePtr GetCurrentScene() const;
-		ScenePtr GetScene(std::string_view key) const;
-		void RemoveScenes();
-
 		XmlPropertiesPtr GetIOProperties() const;
 		void IOPropertiesSaveToFile();
 		void IOPropertiesLoadFromFile();
@@ -90,7 +67,6 @@ namespace TinyEngine::Core
 	private:
 		PropertiesPtr _sessionProperties;
 		XmlPropertiesPtr _IOProperties;
-		LevelPtr _level;
 		RenderPtr _render;
 
 		PreInitCallback _onPreInitCallback;

@@ -2,6 +2,7 @@
 
 #include <TinyEngine/Core/Context.hpp>
 #include <TinyEngine/Level/Entity.hpp>
+#include <TinyEngine/Level/Level.hpp>
 
 namespace TinyEngine::Level
 {
@@ -54,9 +55,9 @@ namespace TinyEngine::Level
 
 	Scene::EntityPtr Scene::CreateAndAddEntity(const ContextPtr& context)
 	{
-		auto entity = context->CreateEntity();
+		auto entity = Level::GetInstance().CreateEntity(nullptr);
 
-		context->AddEntity(entity);
+		Level::GetInstance().AddEntity(entity);
 		_entities.push_back(entity);
 
 		return entity;
@@ -64,7 +65,7 @@ namespace TinyEngine::Level
 
 	void Scene::RemoveEntity(const ContextPtr& context, const EntityPtr& entity)
 	{ 
-		context->RemoveEntity(entity);
+		Level::GetInstance().RemoveEntity(entity);
 
 		for (auto it = _entities.begin(); it != _entities.end(); ++it)
 		{
