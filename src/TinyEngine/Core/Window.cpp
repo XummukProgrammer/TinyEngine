@@ -51,6 +51,11 @@ namespace TinyEngine::Core
 		}
 	}
 
+	void Window::Draw(const sf::Drawable& drawable)
+	{ 
+		_renderWindow->draw(drawable);
+	}
+
 	void Window::OnUpdate()
 	{ 
 		if (_onUpdateCallback)

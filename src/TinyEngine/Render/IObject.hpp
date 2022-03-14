@@ -17,6 +17,15 @@ namespace TinyEngine::Render
 
 		virtual void OnUpdate() {}
 		virtual void OnDraw() {}
+
+	public:
+		bool IsValid() const;
+
+		void Remove();
+		bool IsRemoved() const;
+
+	private:
+		bool _isRemoved = false;
 	};
 }
 

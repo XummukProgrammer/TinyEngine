@@ -1,6 +1,8 @@
 ﻿#ifndef _WINDOW_HEADER_
 #define _WINDOW_HEADER_
 
+#include <SFML/Graphics/Drawable.hpp>
+
 #include <memory>
 #include <string>
 #include <functional>
@@ -41,6 +43,9 @@ namespace TinyEngine::Core
 		void SetOnEventCallback(const EventCallback& callback) { _onEventCallback = callback; }
 
 		void OnExecute();
+
+	public:
+		void Draw(const sf::Drawable& drawable);
 
 	private:
 		void OnUpdate();
