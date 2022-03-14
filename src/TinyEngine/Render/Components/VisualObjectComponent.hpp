@@ -3,6 +3,11 @@
 
 #include <TinyEngine/Level/Component.hpp>
 
+namespace TinyEngine::Level
+{
+	class TransformComponent;
+}
+
 namespace TinyEngine::Render
 {
 	class ObjectsLayer;
@@ -13,6 +18,7 @@ namespace TinyEngine::Render
 	public:
 		using ObjectsLayerPtr = std::shared_ptr<ObjectsLayer>;
 		using VisualObjectPtr = std::shared_ptr<VisualObject>;
+		using WeakTransformComponent = std::weak_ptr<Level::TransformComponent>;
 
 	public:
 		VisualObjectComponent();
@@ -22,6 +28,8 @@ namespace TinyEngine::Render
 		void OnInit() override;
 		void OnDeinit() override;
 
+		void OnUpdate() override;
+
 	public:
 		void SetObjectsLayer(const ObjectsLayerPtr& objectsLayer);
 
@@ -30,6 +38,7 @@ namespace TinyEngine::Render
 	private:
 		ObjectsLayerPtr _objectsLayer;
 		VisualObjectPtr _visualObject;
+		WeakTransformComponent _weakTransformComponent;
 	};
 }
 

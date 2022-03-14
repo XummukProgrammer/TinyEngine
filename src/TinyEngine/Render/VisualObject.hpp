@@ -3,16 +3,45 @@
 
 #include <TinyEngine/Render/IObject.hpp>
 
+#include <SFML/System/Vector2.hpp>
+
+#include <memory>
+
+namespace sf
+{
+	class Sprite;
+}
+
 namespace TinyEngine::Render
 {
 	class VisualObject final : public IObject
 	{
 	public:
-		VisualObject() = default;
+		using SpritePtr = std::shared_ptr<sf::Sprite>;
+
+	public:
+		VisualObject();
 		~VisualObject() = default;
 
 	public:
+		void OnDeinit() override;
+
 		void OnDraw() override;
+
+	public:
+		SpritePtr GetSprite() const;
+
+		void SetPosition(const sf::Vector2f& position);
+		const sf::Vector2f& GetPosition() const;
+
+		void SetScale(const sf::Vector2f& scale);
+		const sf::Vector2f& GetScale() const;
+
+		void SetRotation(float rotation);
+		float GetRotation() const;
+
+	private:
+		SpritePtr _sprite;
 	};
 }
 

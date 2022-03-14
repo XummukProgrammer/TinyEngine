@@ -57,6 +57,7 @@ namespace TinyEngine::Level
 	void Entity::AddBaseComponent(const ComponentPtr& component)
 	{ 
 		_components.push_back(component);
+		component->SetEntity(shared_from_this());
 	}
 
 	void Entity::TryRemoveComponents()

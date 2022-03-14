@@ -10,7 +10,7 @@ namespace TinyEngine::Level
 {
 	class Component;
 
-	class Entity final
+	class Entity final : public std::enable_shared_from_this<Entity>
 	{
 	public:
 		using ComponentPtr = std::shared_ptr<Component>;

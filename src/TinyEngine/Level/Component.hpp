@@ -5,8 +5,14 @@
 
 namespace TinyEngine::Level
 {
+	class Entity;
+
 	class Component
 	{
+	public:
+		using EntityPtr = std::shared_ptr<Entity>;
+		using WeakEntityPtr = std::weak_ptr<Entity>;
+
 	public:
 		Component() = default;
 		virtual ~Component() = default;
@@ -18,6 +24,9 @@ namespace TinyEngine::Level
 		virtual void OnUpdate() {}
 
 	public:
+		void SetEntity(const WeakEntityPtr& weakEntity);
+		EntityPtr GetEntity() const;
+
 		bool IsValid() const;
 
 		void Remove();
@@ -25,6 +34,7 @@ namespace TinyEngine::Level
 
 	private:
 		bool _isRemoved = false;
+		WeakEntityPtr _weakEntity;
 	};
 }
 

@@ -10,6 +10,7 @@
 #include <TinyEngine/Level/Component.hpp>
 #include <TinyEngine/Level/Entity.hpp>
 #include <TinyEngine/Level/Scene.hpp>
+#include <TinyEngine/Level/Components/TransformComponent.hpp>
 
 #include <TinyEngine/Render/Render.hpp>
 #include <TinyEngine/Render/Layers.hpp>
