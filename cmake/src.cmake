@@ -28,6 +28,8 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Render/ObjectsLayer.hpp
 	src/TinyEngine/Render/Layers.hpp
 	src/TinyEngine/Render/Render.hpp
+	src/TinyEngine/Render/Components/VisualObjectComponent.hpp
+	src/TinyEngine/Render/Components/ObjectsLayerComponent.hpp
 )
 
 set(ENGINE_SOURCES
@@ -59,4 +61,6 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Render/ObjectsLayer.cpp
 	src/TinyEngine/Render/Layers.cpp
 	src/TinyEngine/Render/Render.cpp
+	src/TinyEngine/Render/Components/VisualObjectComponent.cpp
+	src/TinyEngine/Render/Components/ObjectsLayerComponent.cpp
 )

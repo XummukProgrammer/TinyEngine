@@ -15,5 +15,7 @@
 #include <TinyEngine/Render/Layers.hpp>
 #include <TinyEngine/Render/VisualObject.hpp>
 #include <TinyEngine/Render/ObjectsLayer.hpp>
+#include <TinyEngine/Render/Components/VisualObjectComponent.hpp>
+#include <TinyEngine/Render/Components/ObjectsLayerComponent.hpp>
 
 #endif // _TINY_ENGINE_HEADER_
