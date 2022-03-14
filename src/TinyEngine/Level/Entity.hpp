@@ -27,7 +27,7 @@ namespace TinyEngine::Level
 
 	public:
 		template<typename T>
-		void AddComponent();
+		std::shared_ptr<T> AddComponent();
 
 		template<typename T>
 		std::shared_ptr<T> GetComponent() const;
@@ -54,9 +54,11 @@ namespace TinyEngine::Level
 	};
 
 	template<typename T>
-	void Entity::AddComponent()
+	std::shared_ptr<T> Entity::AddComponent()
 	{ 
-		AddBaseComponent(std::make_shared<T>());
+		auto component = std::make_shared<T>();
+		AddBaseComponent(component);
+		return component;
 	}
 
 	template<typename T>
