@@ -14,6 +14,7 @@ namespace TinyEngine::Utils
 
 	public:
 		static T& GetInstance();
+		static void ResetInstance();
 
 	private:
 		static std::unique_ptr<T> _instance;
@@ -31,6 +32,15 @@ namespace TinyEngine::Utils
 		}
 
 		return *_instance.get();
+	}
+
+	template<typename T>
+	void Singleton<T>::ResetInstance()
+	{ 
+		if (_instance)
+		{
+			_instance.reset();
+		}
 	}
 }
 

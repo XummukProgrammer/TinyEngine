@@ -2,5 +2,8 @@
 
 namespace TinyEngine::Render
 {
+	void VisualObject::OnDraw()
+	{ 
 	
+	}
 }

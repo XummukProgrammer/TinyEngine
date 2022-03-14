@@ -5,6 +5,7 @@
 #include <TinyEngine/Level/Entity.hpp>
 #include <TinyEngine/Level/Scene.hpp>
 #include <TinyEngine/Render/Render.hpp>
+#include <TinyEngine/Core/Window.hpp>
 
 namespace TinyEngine::Core
 {
@@ -93,6 +94,19 @@ namespace TinyEngine::Core
 
 	std::string Context::GetIOPropertiesPath() const
 	{
-		return std::string();
+		return IO_PROPERTIES_FILE_PATH;
+	}
+
+	Context::WindowPtr Context::GetWindow() const
+	{
+		return _window;
+	}
+	
+	void Context::InitWindow()
+	{ 
+		WindowInfo windowInfo;
+		windowInfo.LoadFromFile();
+
+		_window = std::make_shared<Window>(windowInfo);
 	}
 }

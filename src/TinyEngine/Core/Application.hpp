@@ -5,13 +5,8 @@
 
 namespace TinyEngine::Core
 {
-	class Window;
-
 	class Application final : public std::enable_shared_from_this<Application>
 	{
-	public:
-		using WindowPtr = std::shared_ptr<Window>;
-
 	public:
 		Application(int argc, char** argv);
 		~Application() = default;
@@ -34,8 +29,6 @@ namespace TinyEngine::Core
 	private:
 		int _argc = 0;
 		char** _argv;
-
-		WindowPtr _window;
 	};
 }
 

@@ -40,24 +40,22 @@ namespace TinyEngine::Core
 
 		auto weakThis = weak_from_this();
 
-		WindowInfo windowInfo;
-		windowInfo.LoadFromFile();
-		_window = std::make_shared<Window>(windowInfo);
-		_window->SetOnUpdateCallback([weakThis]()
+		Context::GetInstance().InitWindow();
+		Context::GetInstance().GetWindow()->SetOnUpdateCallback([weakThis]()
 		{
 			if (auto sharedThis = weakThis.lock())
 			{
 				sharedThis->OnUpdate();
 			}
 		});
-		_window->SetOnDrawCallback([weakThis]()
+		Context::GetInstance().GetWindow()->SetOnDrawCallback([weakThis]()
 		{
 			if (auto sharedThis = weakThis.lock())
 			{
 				sharedThis->OnDraw();
 			}
 		});
-		_window->SetOnEventCallback([weakThis]()
+		Context::GetInstance().GetWindow()->SetOnEventCallback([weakThis]()
 		{
 			if (auto sharedThis = weakThis.lock())
 			{
@@ -77,11 +75,13 @@ namespace TinyEngine::Core
 	{ 
 		Context::GetInstance().OnDeinit();
 		Context::GetInstance().GetIOProperties()->SaveToFile(Context::GetInstance().GetIOPropertiesPath());
+
+		Context::ResetInstance();
 	}
 
 	void Application::OnExecute()
 	{ 
-		_window->OnExecute();
+		Context::GetInstance().GetWindow()->OnExecute();
 	}
 
 	void Application::OnUpdate()
