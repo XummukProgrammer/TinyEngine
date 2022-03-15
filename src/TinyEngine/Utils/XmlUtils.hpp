@@ -7,7 +7,7 @@
 
 namespace TinyEngine::Utils
 {
-	class XmlUtils
+	class XmlUtils final
 	{
 	public:
 		static bool GetAttributeBoolOrDefault(const pugi::xml_node& node, const std::string& id, bool default);

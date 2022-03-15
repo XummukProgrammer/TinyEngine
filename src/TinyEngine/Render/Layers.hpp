@@ -9,7 +9,7 @@ namespace TinyEngine::Render
 {
 	class ILayer;
 
-	class Layers
+	class Layers final
 	{
 	public:
 		using ILayerPtr = std::shared_ptr<ILayer>;

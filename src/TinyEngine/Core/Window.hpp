@@ -16,7 +16,7 @@ namespace sf
 
 namespace TinyEngine::Core
 {
-	struct WindowInfo
+	struct WindowInfo final
 	{
 		unsigned width = 800;
 		unsigned height = 600;
