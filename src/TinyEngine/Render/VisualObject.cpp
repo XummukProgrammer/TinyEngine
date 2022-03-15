@@ -19,9 +19,6 @@ namespace TinyEngine::Render
 
 	void VisualObject::OnDraw()
 	{ 
-		sf::Texture texture;
-		_sprite->setTexture(texture);
-		_sprite->setTextureRect({ 0, 0, 100, 100 });
 		Core::Window::GetInstance().Draw(*_sprite.get());
 	}
 
@@ -58,5 +55,20 @@ namespace TinyEngine::Render
 	float VisualObject::GetRotation() const
 	{
 		return _sprite->getRotation();
+	}
+
+	void VisualObject::SetRect(const sf::IntRect& rectangle)
+	{ 
+		_sprite->setTextureRect(rectangle);
+	}
+
+	const sf::IntRect& VisualObject::GetRect() const
+	{
+		return _sprite->getTextureRect();
+	}
+
+	void VisualObject::SetTexture(const sf::Texture& texture)
+	{ 
+		_sprite->setTexture(texture);
 	}
 }

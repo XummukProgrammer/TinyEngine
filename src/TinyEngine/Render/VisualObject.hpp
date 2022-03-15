@@ -4,6 +4,8 @@
 #include <TinyEngine/Render/IObject.hpp>
 
 #include <SFML/System/Vector2.hpp>
+#include <SFML/Graphics/Rect.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 #include <memory>
 
@@ -39,6 +41,11 @@ namespace TinyEngine::Render
 
 		void SetRotation(float rotation);
 		float GetRotation() const;
+
+		void SetRect(const sf::IntRect& rectangle);
+		const sf::IntRect& GetRect() const;
+
+		void SetTexture(const sf::Texture& texture);
 
 	private:
 		SpritePtr _sprite;

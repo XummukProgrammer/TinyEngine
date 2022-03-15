@@ -1,6 +1,8 @@
 ﻿#include "VisualObjectComponent.hpp"
 
 #include <TinyEngine/Common/Components/TransformComponent.hpp>
+#include <TinyEngine/Common/Components/RectComponent.hpp>
+#include <TinyEngine/Common/Components/Render/TextureComponent.hpp>
 
 #include <TinyEngine/Level/Entity.hpp>
 
@@ -19,6 +21,8 @@ namespace TinyEngine::Common
 	void VisualObjectComponent::OnInit()
 	{ 
 		_weakTransformComponent = GetEntity()->GetComponent<TransformComponent>();
+		_weakRectComponent = GetEntity()->GetComponent<RectComponent>();
+		_weakTextureComponent = GetEntity()->GetComponent<TextureComponent>();
 
 		_objectsLayer->AddObject(_visualObject);
 	}
@@ -36,6 +40,23 @@ namespace TinyEngine::Common
 			_visualObject->SetPosition(transformComponent->GetPosition());
 			_visualObject->SetScale(transformComponent->GetScale());
 			_visualObject->SetRotation(transformComponent->GetRotation());
+		}
+
+		if (auto rectComponent = _weakRectComponent.lock())
+		{
+			_visualObject->SetRect(rectComponent->GetRect());
+		}
+
+		if (auto textureComponent = _weakTextureComponent.lock())
+		{
+			if (auto texture = textureComponent->GetTexture())
+			{
+				_visualObject->SetTexture(*texture.get());
+			}
+			else
+			{
+				_visualObject->SetTexture(sf::Texture());
+			}
 		}
 	}
 

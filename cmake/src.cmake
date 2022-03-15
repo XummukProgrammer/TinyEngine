@@ -30,8 +30,10 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Render/RenderManager.hpp
 	
 	src/TinyEngine/Common/Components/TransformComponent.hpp
-	src/TinyEngine/Common/Components//Render/VisualObjectComponent.hpp
-	src/TinyEngine/Common/Components//Render/ObjectsLayerComponent.hpp
+	src/TinyEngine/Common/Components/RectComponent.hpp
+	src/TinyEngine/Common/Components/Render/VisualObjectComponent.hpp
+	src/TinyEngine/Common/Components/Render/ObjectsLayerComponent.hpp
+	src/TinyEngine/Common/Components/Render/TextureComponent.hpp
 )
 
 set(ENGINE_SOURCES
@@ -65,6 +67,8 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Render/RenderManager.cpp
 	
 	src/TinyEngine/Common/Components/TransformComponent.cpp
-	src/TinyEngine/Common/Components//Render/VisualObjectComponent.cpp
-	src/TinyEngine/Common/Components//Render/ObjectsLayerComponent.cpp
+	src/TinyEngine/Common/Components/RectComponent.cpp
+	src/TinyEngine/Common/Components/Render/VisualObjectComponent.cpp
+	src/TinyEngine/Common/Components/Render/ObjectsLayerComponent.cpp
+	src/TinyEngine/Common/Components/Render/TextureComponent.cpp
 )

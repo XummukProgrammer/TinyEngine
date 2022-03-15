@@ -12,6 +12,8 @@ namespace TinyEngine::Render
 namespace TinyEngine::Common
 {
 	class TransformComponent;
+	class RectComponent;
+	class TextureComponent;
 
 	class VisualObjectComponent final : public Level::Component
 	{
@@ -19,6 +21,8 @@ namespace TinyEngine::Common
 		using ObjectsLayerPtr = std::shared_ptr<Render::ObjectsLayer>;
 		using VisualObjectPtr = std::shared_ptr<Render::VisualObject>;
 		using WeakTransformComponent = std::weak_ptr<TransformComponent>;
+		using WeakRectComponent = std::weak_ptr<RectComponent>;
+		using WeakTextureComponent = std::weak_ptr<TextureComponent>;
 
 	public:
 		VisualObjectComponent();
@@ -39,6 +43,8 @@ namespace TinyEngine::Common
 		ObjectsLayerPtr _objectsLayer;
 		VisualObjectPtr _visualObject;
 		WeakTransformComponent _weakTransformComponent;
+		WeakRectComponent _weakRectComponent;
+		WeakTextureComponent _weakTextureComponent;
 	};
 }
 

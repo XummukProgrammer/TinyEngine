@@ -17,7 +17,9 @@
 #include <TinyEngine/Render/ObjectsLayer.hpp>
 
 #include <TinyEngine/Common/Components/TransformComponent.hpp>
+#include <TinyEngine/Common/Components/RectComponent.hpp>
 #include <TinyEngine/Common/Components/Render/ObjectsLayerComponent.hpp>
 #include <TinyEngine/Common/Components/Render/VisualObjectComponent.hpp>
+#include <TinyEngine/Common/Components/Render/TextureComponent.hpp>
 
 #endif // _TINY_ENGINE_HEADER_
