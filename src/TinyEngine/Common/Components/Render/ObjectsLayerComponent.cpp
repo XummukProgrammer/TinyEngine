@@ -4,21 +4,21 @@
 #include <TinyEngine/Render/Layers.hpp>
 #include <TinyEngine/Render/ObjectsLayer.hpp>
 
-namespace TinyEngine::Render
+namespace TinyEngine::Common::Components::Render
 {
 	ObjectsLayerComponent::ObjectsLayerComponent()
-		: _objectsLayer(std::make_shared<ObjectsLayer>())
+		: _objectsLayer(std::make_shared<TinyEngine::Render::ObjectsLayer>())
 	{ 
 	}
 
 	void ObjectsLayerComponent::OnInit()
 	{ 
-		Render::GetInstance().GetLayers()->AddLayer(_key, _objectsLayer);
+		TinyEngine::Render::Render::GetInstance().GetLayers()->AddLayer(_key, _objectsLayer);
 	}
 
 	void ObjectsLayerComponent::OnDeinit()
 	{
-		Render::GetInstance().GetLayers()->RemoveLayer(_key);
+		TinyEngine::Render::Render::GetInstance().GetLayers()->RemoveLayer(_key);
 		_objectsLayer.reset();
 	}
 

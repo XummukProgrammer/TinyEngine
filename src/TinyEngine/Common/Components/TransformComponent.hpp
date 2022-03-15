@@ -5,9 +5,9 @@
 
 #include <SFML/System/Vector2.hpp>
 
-namespace TinyEngine::Level
+namespace TinyEngine::Common::Components
 {
-	class TransformComponent final : public Component
+	class TransformComponent final : public Level::Component
 	{
 	public:
 		TransformComponent() = default;

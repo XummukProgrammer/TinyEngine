@@ -1,23 +1,24 @@
 ﻿#include "VisualObjectComponent.hpp"
 
+#include <TinyEngine/Common/Components/TransformComponent.hpp>
+
 #include <TinyEngine/Level/Entity.hpp>
-#include <TinyEngine/Level/Components/TransformComponent.hpp>
 
 #include <TinyEngine/Render/Render.hpp>
 #include <TinyEngine/Render/Layers.hpp>
 #include <TinyEngine/Render/ObjectsLayer.hpp>
 #include <TinyEngine/Render/VisualObject.hpp>
 
-namespace TinyEngine::Render
+namespace TinyEngine::Common::Components::Render
 {
 	VisualObjectComponent::VisualObjectComponent()
-		: _visualObject(std::make_shared<VisualObject>())
+		: _visualObject(std::make_shared<TinyEngine::Render::VisualObject>())
 	{ 
 	}
 
 	void VisualObjectComponent::OnInit()
 	{ 
-		_weakTransformComponent = GetEntity()->GetComponent<Level::TransformComponent>();
+		_weakTransformComponent = GetEntity()->GetComponent<TinyEngine::Common::Components::TransformComponent>();
 
 		_objectsLayer->AddObject(_visualObject);
 	}

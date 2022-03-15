@@ -3,7 +3,7 @@
 
 #include <TinyEngine/Level/Component.hpp>
 
-namespace TinyEngine::Level
+namespace TinyEngine::Common::Components
 {
 	class TransformComponent;
 }
@@ -12,13 +12,16 @@ namespace TinyEngine::Render
 {
 	class ObjectsLayer;
 	class VisualObject;
+}
 
+namespace TinyEngine::Common::Components::Render
+{
 	class VisualObjectComponent final : public Level::Component
 	{
 	public:
-		using ObjectsLayerPtr = std::shared_ptr<ObjectsLayer>;
-		using VisualObjectPtr = std::shared_ptr<VisualObject>;
-		using WeakTransformComponent = std::weak_ptr<Level::TransformComponent>;
+		using ObjectsLayerPtr = std::shared_ptr<TinyEngine::Render::ObjectsLayer>;
+		using VisualObjectPtr = std::shared_ptr<TinyEngine::Render::VisualObject>;
+		using WeakTransformComponent = std::weak_ptr<TinyEngine::Common::Components::TransformComponent>;
 
 	public:
 		VisualObjectComponent();

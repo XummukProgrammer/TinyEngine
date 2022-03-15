@@ -10,13 +10,14 @@
 #include <TinyEngine/Level/Component.hpp>
 #include <TinyEngine/Level/Entity.hpp>
 #include <TinyEngine/Level/Scene.hpp>
-#include <TinyEngine/Level/Components/TransformComponent.hpp>
 
 #include <TinyEngine/Render/Render.hpp>
 #include <TinyEngine/Render/Layers.hpp>
 #include <TinyEngine/Render/VisualObject.hpp>
 #include <TinyEngine/Render/ObjectsLayer.hpp>
-#include <TinyEngine/Render/Components/VisualObjectComponent.hpp>
-#include <TinyEngine/Render/Components/ObjectsLayerComponent.hpp>
+
+#include <TinyEngine/Common/Components/TransformComponent.hpp>
+#include <TinyEngine/Common/Components/Render/ObjectsLayerComponent.hpp>
+#include <TinyEngine/Common/Components/Render/VisualObjectComponent.hpp>
 
 #endif // _TINY_ENGINE_HEADER_

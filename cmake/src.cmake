@@ -21,7 +21,6 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Level/Component.hpp
 	src/TinyEngine/Level/Entity.hpp
 	src/TinyEngine/Level/Scene.hpp
-	src/TinyEngine/Level/Components/TransformComponent.hpp
 	
 	src/TinyEngine/Render/IObject.hpp
 	src/TinyEngine/Render/VisualObject.hpp
@@ -29,8 +28,10 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Render/ObjectsLayer.hpp
 	src/TinyEngine/Render/Layers.hpp
 	src/TinyEngine/Render/Render.hpp
-	src/TinyEngine/Render/Components/VisualObjectComponent.hpp
-	src/TinyEngine/Render/Components/ObjectsLayerComponent.hpp
+	
+	src/TinyEngine/Common/Components/TransformComponent.hpp
+	src/TinyEngine/Common/Components//Render/VisualObjectComponent.hpp
+	src/TinyEngine/Common/Components//Render/ObjectsLayerComponent.hpp
 )
 
 set(ENGINE_SOURCES
@@ -55,7 +56,6 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Level/Component.cpp
 	src/TinyEngine/Level/Entity.cpp
 	src/TinyEngine/Level/Scene.cpp
-	src/TinyEngine/Level/Components/TransformComponent.cpp
 	
 	src/TinyEngine/Render/IObject.cpp
 	src/TinyEngine/Render/VisualObject.cpp
@@ -63,6 +63,8 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Render/ObjectsLayer.cpp
 	src/TinyEngine/Render/Layers.cpp
 	src/TinyEngine/Render/Render.cpp
-	src/TinyEngine/Render/Components/VisualObjectComponent.cpp
-	src/TinyEngine/Render/Components/ObjectsLayerComponent.cpp
+	
+	src/TinyEngine/Common/Components/TransformComponent.cpp
+	src/TinyEngine/Common/Components//Render/VisualObjectComponent.cpp
+	src/TinyEngine/Common/Components//Render/ObjectsLayerComponent.cpp
 )

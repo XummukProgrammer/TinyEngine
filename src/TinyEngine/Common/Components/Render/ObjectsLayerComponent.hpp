@@ -8,11 +8,14 @@
 namespace TinyEngine::Render
 {
 	class ObjectsLayer;
+}
 
+namespace TinyEngine::Common::Components::Render
+{
 	class ObjectsLayerComponent final : public Level::Component
 	{
 	public:
-		using ObjectsLayerPtr = std::shared_ptr<ObjectsLayer>;
+		using ObjectsLayerPtr = std::shared_ptr<TinyEngine::Render::ObjectsLayer>;
 
 	public:
 		ObjectsLayerComponent();
