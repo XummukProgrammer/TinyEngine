@@ -13,15 +13,15 @@ namespace TinyEngine::Level
 	class Entity;
 	class Scene;
 
-	class Level final : public Utils::Singleton<Level>
+	class LevelManager final : public Utils::Singleton<LevelManager>
 	{
 	public:
 		using EntityPtr = std::shared_ptr<Entity>;
 		using ScenePtr = std::shared_ptr<Scene>;
 
 	public:
-		Level() = default;
-		~Level() = default;
+		LevelManager() = default;
+		~LevelManager() = default;
 
 	public:
 		void OnPreInit();

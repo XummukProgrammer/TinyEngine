@@ -1,6 +1,6 @@
 ﻿#include "ObjectsLayerComponent.hpp"
 
-#include <TinyEngine/Render/Render.hpp>
+#include <TinyEngine/Render/RenderManager.hpp>
 #include <TinyEngine/Render/Layers.hpp>
 #include <TinyEngine/Render/ObjectsLayer.hpp>
 
@@ -13,12 +13,12 @@ namespace TinyEngine::Common
 
 	void ObjectsLayerComponent::OnInit()
 	{ 
-		Render::Render::GetInstance().GetLayers()->AddLayer(_key, _objectsLayer);
+		Render::RenderManager::GetInstance().GetLayers()->AddLayer(_key, _objectsLayer);
 	}
 
 	void ObjectsLayerComponent::OnDeinit()
 	{
-		Render::Render::GetInstance().GetLayers()->RemoveLayer(_key);
+		Render::RenderManager::GetInstance().GetLayers()->RemoveLayer(_key);
 		_objectsLayer.reset();
 	}
 

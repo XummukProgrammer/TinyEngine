@@ -17,7 +17,7 @@ namespace TinyEngine::Properties
 
 	class IProperty;
 
-	class Properties
+	class PropertiesData
 	{
 	public:
 		using IPropertyPtr = std::shared_ptr<IProperty>;
@@ -27,8 +27,8 @@ namespace TinyEngine::Properties
 		using StringPropertyPtr = std::shared_ptr<Data::StringProperty>;
 
 	public:
-		Properties() = default;
-		virtual ~Properties() = default;
+		PropertiesData() = default;
+		virtual ~PropertiesData() = default;
 
 	public:
 		void SetBoolProperty(std::string_view key, bool value);
@@ -62,11 +62,11 @@ namespace TinyEngine::Properties
 	};
 
 	/// ~~~~~~~~~~~~~~~~~
-	class XmlProperties final : public Properties
+	class XmlPropertiesData final : public PropertiesData
 	{
 	public:
-		XmlProperties() = default;
-		~XmlProperties() = default;
+		XmlPropertiesData() = default;
+		~XmlPropertiesData() = default;
 
 	public:
 		void SaveToFile(const std::string& filePath);

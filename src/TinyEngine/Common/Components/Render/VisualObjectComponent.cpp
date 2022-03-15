@@ -4,7 +4,7 @@
 
 #include <TinyEngine/Level/Entity.hpp>
 
-#include <TinyEngine/Render/Render.hpp>
+#include <TinyEngine/Render/RenderManager.hpp>
 #include <TinyEngine/Render/Layers.hpp>
 #include <TinyEngine/Render/ObjectsLayer.hpp>
 #include <TinyEngine/Render/VisualObject.hpp>

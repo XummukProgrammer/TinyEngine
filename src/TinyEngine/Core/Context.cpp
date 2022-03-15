@@ -1,10 +1,10 @@
 ﻿#include "Context.hpp"
 
-#include <TinyEngine/Properties/Properties.hpp>
-#include <TinyEngine/Level/Level.hpp>
+#include <TinyEngine/Properties/PropertiesData.hpp>
+#include <TinyEngine/Level/LevelManager.hpp>
 #include <TinyEngine/Level/Entity.hpp>
 #include <TinyEngine/Level/Scene.hpp>
-#include <TinyEngine/Render/Render.hpp>
+#include <TinyEngine/Render/RenderManager.hpp>
 #include <TinyEngine/Core/Window.hpp>
 
 namespace TinyEngine::Core
@@ -12,8 +12,8 @@ namespace TinyEngine::Core
 	const std::string IO_PROPERTIES_FILE_PATH = "io_properties.xml";
 
 	Context::Context()
-		: _sessionProperties(std::make_shared<Properties::Properties>())
-		, _IOProperties(std::make_shared<Properties::XmlProperties>())
+		: _sessionProperties(std::make_shared<Properties::PropertiesData>())
+		, _IOProperties(std::make_shared<Properties::XmlPropertiesData>())
 	{ 
 	}
 
@@ -24,8 +24,8 @@ namespace TinyEngine::Core
 			_onPreInitCallback();
 		}
 
-		Level::Level::GetInstance().OnPreInit();
-		Render::Render::GetInstance().OnPreInit();
+		Level::LevelManager::GetInstance().OnPreInit();
+		Render::RenderManager::GetInstance().OnPreInit();
 	}
 
 	void Context::OnInit()
@@ -35,8 +35,8 @@ namespace TinyEngine::Core
 			_onInitCallback();
 		}
 
-		Level::Level::GetInstance().OnInit();
-		Render::Render::GetInstance().OnInit();
+		Level::LevelManager::GetInstance().OnInit();
+		Render::RenderManager::GetInstance().OnInit();
 	}
 
 	void Context::OnDeinit()
@@ -46,8 +46,8 @@ namespace TinyEngine::Core
 			_onDeinitCallback();
 		}
 
-		Level::Level::GetInstance().OnDeinit();
-		Render::Render::GetInstance().OnDeinit();
+		Level::LevelManager::GetInstance().OnDeinit();
+		Render::RenderManager::GetInstance().OnDeinit();
 	}
 
 	void Context::OnUpdate()
@@ -57,8 +57,8 @@ namespace TinyEngine::Core
 			_onUpdateCallback();
 		}
 
-		Level::Level::GetInstance().OnUpdate();
-		Render::Render::GetInstance().OnUpdate();
+		Level::LevelManager::GetInstance().OnUpdate();
+		Render::RenderManager::GetInstance().OnUpdate();
 	}
 
 	void Context::OnDraw()
@@ -68,8 +68,8 @@ namespace TinyEngine::Core
 			_onDrawCallback();
 		}
 
-		Level::Level::GetInstance().OnDraw();
-		Render::Render::GetInstance().OnDraw();
+		Level::LevelManager::GetInstance().OnDraw();
+		Render::RenderManager::GetInstance().OnDraw();
 	}
 
 	void Context::OnEvent()
@@ -79,15 +79,15 @@ namespace TinyEngine::Core
 			_onEventCallback();
 		}
 
-		Level::Level::GetInstance().OnEvent();
+		Level::LevelManager::GetInstance().OnEvent();
 	}
 
-	Context::PropertiesPtr Context::GetSessionProperties() const
+	Context::PropertiesDataPtr Context::GetSessionProperties() const
 	{
 		return _sessionProperties;
 	}
 
-	Context::XmlPropertiesPtr Context::GetIOProperties() const
+	Context::XmlPropertiesDataPtr Context::GetIOProperties() const
 	{
 		return _IOProperties;
 	}

@@ -1,40 +1,40 @@
-﻿#include "Render.hpp"
+﻿#include "RenderManager.hpp"
 
 #include <TinyEngine/Render/Layers.hpp>
 
 namespace TinyEngine::Render
 {
-	Render::Render()
+	RenderManager::RenderManager()
 		: _layers(std::make_shared<Layers>())
 	{ 
 	}
 
-	void Render::OnPreInit()
+	void RenderManager::OnPreInit()
 	{ 
 		_layers->OnPreInit();
 	}
 
-	void Render::OnInit()
+	void RenderManager::OnInit()
 	{ 
 		_layers->OnInit();
 	}
 
-	void Render::OnDeinit()
+	void RenderManager::OnDeinit()
 	{ 
 		_layers->OnDeinit();
 	}
 
-	void Render::OnUpdate()
+	void RenderManager::OnUpdate()
 	{ 
 		_layers->OnUpdate();
 	}
 
-	void Render::OnDraw()
+	void RenderManager::OnDraw()
 	{ 
 		_layers->OnDraw();
 	}
 
-	Render::LayersPtr Render::GetLayers() const
+	RenderManager::LayersPtr RenderManager::GetLayers() const
 	{
 		return _layers;
 	}

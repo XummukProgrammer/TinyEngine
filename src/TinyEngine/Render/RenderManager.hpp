@@ -9,14 +9,14 @@ namespace TinyEngine::Render
 {
 	class Layers;
 
-	class Render final : public Utils::Singleton<Render>
+	class RenderManager final : public Utils::Singleton<RenderManager>
 	{
 	public:
 		using LayersPtr = std::shared_ptr<Layers>;
 
 	public:
-		Render();
-		~Render() = default;
+		RenderManager();
+		~RenderManager() = default;
 
 	public:
 		virtual void OnPreInit();

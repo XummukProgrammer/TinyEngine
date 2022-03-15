@@ -8,8 +8,8 @@
 
 namespace TinyEngine::Properties
 {
-	class Properties;
-	class XmlProperties;
+	class PropertiesData;
+	class XmlPropertiesData;
 }
 
 namespace TinyEngine::Core
@@ -18,8 +18,8 @@ namespace TinyEngine::Core
 	{
 	public:
 		using Ptr = std::shared_ptr<Context>;
-		using PropertiesPtr = std::shared_ptr<Properties::Properties>;
-		using XmlPropertiesPtr = std::shared_ptr<Properties::XmlProperties>;
+		using PropertiesDataPtr = std::shared_ptr<Properties::PropertiesData>;
+		using XmlPropertiesDataPtr = std::shared_ptr<Properties::XmlPropertiesData>;
 		using PreInitCallback = std::function<void()>;
 		using InitCallback = std::function<void()>;
 		using DeinitCallback = std::function<void()>;
@@ -51,14 +51,14 @@ namespace TinyEngine::Core
 		void OnEvent();
 
 	public:
-		PropertiesPtr GetSessionProperties() const;
+		PropertiesDataPtr GetSessionProperties() const;
 		
-		XmlPropertiesPtr GetIOProperties() const;
+		XmlPropertiesDataPtr GetIOProperties() const;
 		std::string GetIOPropertiesPath() const;
 
 	private:
-		PropertiesPtr _sessionProperties;
-		XmlPropertiesPtr _IOProperties;
+		PropertiesDataPtr _sessionProperties;
+		XmlPropertiesDataPtr _IOProperties;
 
 		PreInitCallback _onPreInitCallback;
 		InitCallback _onInitCallback;

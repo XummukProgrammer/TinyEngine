@@ -1,23 +1,23 @@
-﻿#include "Level.hpp"
+﻿#include "LevelManager.hpp"
 
 #include <TinyEngine/Level/Entity.hpp>
 #include <TinyEngine/Level/Scene.hpp>
 
 namespace TinyEngine::Level
 {
-	void Level::OnPreInit()
+	void LevelManager::OnPreInit()
 	{ 
 	}
 
-	void Level::OnInit()
+	void LevelManager::OnInit()
 	{ 
 	}
 
-	void Level::OnDeinit()
+	void LevelManager::OnDeinit()
 	{ 
 	}
 
-	void Level::OnUpdate()
+	void LevelManager::OnUpdate()
 	{
 		TryRemoveScenes();
 		TryUpdateCurrentScene();
@@ -33,42 +33,42 @@ namespace TinyEngine::Level
 		}
 	}
 
-	void Level::OnDraw()
+	void LevelManager::OnDraw()
 	{ 
 
 	}
 
-	void Level::OnEvent()
+	void LevelManager::OnEvent()
 	{ 
 	}
 
-	Level::EntityPtr Level::CreateEntity() const
+	LevelManager::EntityPtr LevelManager::CreateEntity() const
 	{
 		auto entity = std::make_shared<Entity>();
 		return entity;
 	}
 
-	void Level::AddEntity(const EntityPtr& entity)
+	void LevelManager::AddEntity(const EntityPtr& entity)
 	{ 
 		_entities.push_back(entity);
 	}
 
-	void Level::RemoveEntity(const EntityPtr& entity)
+	void LevelManager::RemoveEntity(const EntityPtr& entity)
 	{ 
 		entity->Remove();
 	}
 
-	void Level::RemoveEntities()
+	void LevelManager::RemoveEntities()
 	{ 
 		_isRemovedEntities = true;
 	}
 
-	void Level::AddScene(std::string_view key, const ScenePtr& scene)
+	void LevelManager::AddScene(std::string_view key, const ScenePtr& scene)
 	{ 
 		_scenes[std::string{key}] = scene;
 	}
 
-	void Level::TryUpdateCurrentScene()
+	void LevelManager::TryUpdateCurrentScene()
 	{ 
 		if (!_nextScene)
 		{
@@ -86,7 +86,7 @@ namespace TinyEngine::Level
 		_nextScene.reset();
 	}
 
-	void Level::TryRemoveScenes()
+	void LevelManager::TryRemoveScenes()
 	{ 
 		if (_isRemovedScenes)
 		{
@@ -130,7 +130,7 @@ namespace TinyEngine::Level
 		}
 	}
 
-	void Level::TryRemoveEntities()
+	void LevelManager::TryRemoveEntities()
 	{
 		auto onRemoveEntity = [](const auto& entity)
 		{
@@ -166,17 +166,17 @@ namespace TinyEngine::Level
 		}
 	}
 
-	void Level::SetCurrentScene(const ScenePtr& scene)
+	void LevelManager::SetCurrentScene(const ScenePtr& scene)
 	{ 
 		_nextScene = scene;
 	}
 
-	Level::ScenePtr Level::GetCurrentScene() const
+	LevelManager::ScenePtr LevelManager::GetCurrentScene() const
 	{
 		return _currentScene;
 	}
 
-	Level::ScenePtr Level::GetScene(std::string_view key) const
+	LevelManager::ScenePtr LevelManager::GetScene(std::string_view key) const
 	{
 		auto it = _scenes.find(std::string{key});
 
@@ -188,7 +188,7 @@ namespace TinyEngine::Level
 		return nullptr;
 	}
 
-	void Level::RemoveScenes()
+	void LevelManager::RemoveScenes()
 	{
 		_isRemovedScenes = true;
 	}

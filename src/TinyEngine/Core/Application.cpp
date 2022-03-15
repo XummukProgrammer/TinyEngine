@@ -3,7 +3,7 @@
 #include <TinyEngine/Core/Window.hpp>
 #include <TinyEngine/Core/FileSystem.hpp>
 #include <TinyEngine/Core/Context.hpp>
-#include <TinyEngine/Properties/Properties.hpp>
+#include <TinyEngine/Properties/PropertiesData.hpp>
 #include <TinyEngine/Properties/Data/BoolProperty.hpp>
 #include <TinyEngine/Properties/Data/IntProperty.hpp>
 #include <TinyEngine/Properties/Data/FloatProperty.hpp>

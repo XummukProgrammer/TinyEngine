@@ -10,14 +10,14 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Utils/XmlUtils.hpp
 	src/TinyEngine/Utils/Singleton.hpp
 	
-	src/TinyEngine/Properties/Properties.hpp
+	src/TinyEngine/Properties/PropertiesData.hpp
 	src/TinyEngine/Properties/IProperty.hpp
 	src/TinyEngine/Properties/Data/BoolProperty.hpp
 	src/TinyEngine/Properties/Data/IntProperty.hpp
 	src/TinyEngine/Properties/Data/FloatProperty.hpp
 	src/TinyEngine/Properties/Data/StringProperty.hpp
 	
-	src/TinyEngine/Level/Level.hpp
+	src/TinyEngine/Level/LevelManager.hpp
 	src/TinyEngine/Level/Component.hpp
 	src/TinyEngine/Level/Entity.hpp
 	src/TinyEngine/Level/Scene.hpp
@@ -27,7 +27,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Render/ILayer.hpp
 	src/TinyEngine/Render/ObjectsLayer.hpp
 	src/TinyEngine/Render/Layers.hpp
-	src/TinyEngine/Render/Render.hpp
+	src/TinyEngine/Render/RenderManager.hpp
 	
 	src/TinyEngine/Common/Components/TransformComponent.hpp
 	src/TinyEngine/Common/Components//Render/VisualObjectComponent.hpp
@@ -45,14 +45,14 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Utils/XmlUtils.cpp
 	src/TinyEngine/Utils/Singleton.cpp
 	
-	src/TinyEngine/Properties/Properties.cpp
+	src/TinyEngine/Properties/PropertiesData.cpp
 	src/TinyEngine/Properties/IProperty.cpp
 	src/TinyEngine/Properties/Data/BoolProperty.cpp
 	src/TinyEngine/Properties/Data/IntProperty.cpp
 	src/TinyEngine/Properties/Data/FloatProperty.cpp
 	src/TinyEngine/Properties/Data/StringProperty.cpp
 	
-	src/TinyEngine/Level/Level.cpp
+	src/TinyEngine/Level/LevelManager.cpp
 	src/TinyEngine/Level/Component.cpp
 	src/TinyEngine/Level/Entity.cpp
 	src/TinyEngine/Level/Scene.cpp
@@ -62,7 +62,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Render/ILayer.cpp
 	src/TinyEngine/Render/ObjectsLayer.cpp
 	src/TinyEngine/Render/Layers.cpp
-	src/TinyEngine/Render/Render.cpp
+	src/TinyEngine/Render/RenderManager.cpp
 	
 	src/TinyEngine/Common/Components/TransformComponent.cpp
 	src/TinyEngine/Common/Components//Render/VisualObjectComponent.cpp

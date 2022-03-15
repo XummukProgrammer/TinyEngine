@@ -1,4 +1,4 @@
-﻿#include "Properties.hpp"
+﻿#include "PropertiesData.hpp"
 
 #include <TinyEngine/Properties/Data/BoolProperty.hpp>
 #include <TinyEngine/Properties/Data/IntProperty.hpp>
@@ -16,12 +16,12 @@ namespace TinyEngine::Properties
 {
 	static inline const Core::DirType DIR_TYPE = Core::DirType::Data;
 
-	void Properties::SetProperty(std::string_view key, IPropertyPtr&& property)
+	void PropertiesData::SetProperty(std::string_view key, IPropertyPtr&& property)
 	{ 
 		_properties[std::string{key}] = std::move(property);
 	}
 
-	Properties::IPropertyPtr Properties::GetProperty(std::string_view key) const
+	PropertiesData::IPropertyPtr PropertiesData::GetProperty(std::string_view key) const
 	{
 		auto it = _properties.find(std::string{key});
 
@@ -34,7 +34,7 @@ namespace TinyEngine::Properties
 	}
 
 	/// ~~~~~~~~~~~~~~~~~
-	void Properties::SetBoolProperty(std::string_view key, bool value)
+	void PropertiesData::SetBoolProperty(std::string_view key, bool value)
 	{ 
 		if (auto property = GetBoolProperty(key))
 		{
@@ -47,7 +47,7 @@ namespace TinyEngine::Properties
 		SetProperty(key, std::move(property));
 	}
 
-	bool Properties::GetBoolProperty(std::string_view key, bool default) const
+	bool PropertiesData::GetBoolProperty(std::string_view key, bool default) const
 	{
 		if (auto property = GetBoolProperty(key))
 		{
@@ -57,7 +57,7 @@ namespace TinyEngine::Properties
 		return default;
 	}
 
-	Properties::BoolPropertyPtr Properties::GetBoolProperty(std::string_view key) const
+	PropertiesData::BoolPropertyPtr PropertiesData::GetBoolProperty(std::string_view key) const
 	{
 		if (auto property = GetProperty(key))
 		{
@@ -68,7 +68,7 @@ namespace TinyEngine::Properties
 	}
 
 	/// ~~~~~~~~~~~~~~~~~
-	void Properties::SetIntProperty(std::string_view key, int value)
+	void PropertiesData::SetIntProperty(std::string_view key, int value)
 	{ 
 		if (auto property = GetIntProperty(key))
 		{
@@ -81,7 +81,7 @@ namespace TinyEngine::Properties
 		SetProperty(key, std::move(property));
 	}
 
-	Properties::IntPropertyPtr Properties::GetIntProperty(std::string_view key) const
+	PropertiesData::IntPropertyPtr PropertiesData::GetIntProperty(std::string_view key) const
 	{
 		if (auto property = GetProperty(key))
 		{
@@ -91,7 +91,7 @@ namespace TinyEngine::Properties
 		return nullptr;
 	}
 
-	int Properties::GetIntProperty(std::string_view key, int default) const
+	int PropertiesData::GetIntProperty(std::string_view key, int default) const
 	{
 		if (auto property = GetIntProperty(key))
 		{
@@ -102,7 +102,7 @@ namespace TinyEngine::Properties
 	}
 
 	/// ~~~~~~~~~~~~~~~~~
-	void Properties::SetFloatProperty(std::string_view key, float value)
+	void PropertiesData::SetFloatProperty(std::string_view key, float value)
 	{ 
 		if (auto property = GetFloatProperty(key))
 		{
@@ -115,7 +115,7 @@ namespace TinyEngine::Properties
 		SetProperty(key, std::move(property));
 	}
 
-	float Properties::GetFloatProperty(std::string_view key, float default) const
+	float PropertiesData::GetFloatProperty(std::string_view key, float default) const
 	{
 		if (auto property = GetFloatProperty(key))
 		{
@@ -125,7 +125,7 @@ namespace TinyEngine::Properties
 		return default;
 	}
 
-	Properties::FloatPropertyPtr Properties::GetFloatProperty(std::string_view key) const
+	PropertiesData::FloatPropertyPtr PropertiesData::GetFloatProperty(std::string_view key) const
 	{
 		if (auto property = GetProperty(key))
 		{
@@ -136,7 +136,7 @@ namespace TinyEngine::Properties
 	}
 
 	/// ~~~~~~~~~~~~~~~~~
-	void Properties::SetStringProperty(std::string_view key, std::string_view value)
+	void PropertiesData::SetStringProperty(std::string_view key, std::string_view value)
 	{ 
 		if (auto property = GetStringProperty(key))
 		{
@@ -149,7 +149,7 @@ namespace TinyEngine::Properties
 		SetProperty(key, std::move(property));
 	}
 
-	std::string Properties::GetStringProperty(std::string_view key, const std::string& default) const
+	std::string PropertiesData::GetStringProperty(std::string_view key, const std::string& default) const
 	{
 		if (auto property = GetStringProperty(key))
 		{
@@ -159,7 +159,7 @@ namespace TinyEngine::Properties
 		return default;
 	}
 
-	Properties::StringPropertyPtr Properties::GetStringProperty(std::string_view key) const
+	PropertiesData::StringPropertyPtr PropertiesData::GetStringProperty(std::string_view key) const
 	{
 		if (auto property = GetProperty(key))
 		{
@@ -169,13 +169,13 @@ namespace TinyEngine::Properties
 		return nullptr;
 	}
 
-	const std::map<std::string, Properties::IPropertyPtr>& Properties::GetData() const
+	const std::map<std::string, PropertiesData::IPropertyPtr>& PropertiesData::GetData() const
 	{
 		return _properties;
 	}
 
 	/// ~~~~~~~~~~~~~~~~~
-	std::map<std::string, std::string> Properties::GetAllPropertiesStringValue() const
+	std::map<std::string, std::string> PropertiesData::GetAllPropertiesStringValue() const
 	{
 		std::map<std::string, std::string> properties;
 
@@ -187,7 +187,7 @@ namespace TinyEngine::Properties
 		return properties;
 	}
 
-	void Properties::DebugPrintAllProperties()
+	void PropertiesData::DebugPrintAllProperties()
 	{ 
 		std::string printString;
 		auto&& properties = GetAllPropertiesStringValue();
@@ -201,7 +201,7 @@ namespace TinyEngine::Properties
 	}
 
 	/// ~~~~~~~~~~~~~~~~~
-	void XmlProperties::SaveToFile(const std::string& filePath)
+	void XmlPropertiesData::SaveToFile(const std::string& filePath)
 	{ 
 		pugi::xml_document doc;
 		auto&& rootNode = doc.append_child("root");
@@ -218,7 +218,7 @@ namespace TinyEngine::Properties
 		doc.save_file(path.c_str());
 	}
 
-	void XmlProperties::LoadFromFile(const std::string& filePath)
+	void XmlPropertiesData::LoadFromFile(const std::string& filePath)
 	{
 		auto&& path = Core::FileSystem::GetInstance().BuildPath(DIR_TYPE, filePath);
 
