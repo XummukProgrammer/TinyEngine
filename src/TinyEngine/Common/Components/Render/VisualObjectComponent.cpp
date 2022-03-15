@@ -12,7 +12,7 @@
 namespace TinyEngine::Common
 {
 	VisualObjectComponent::VisualObjectComponent()
-		: _visualObject(std::make_shared<TinyEngine::Render::VisualObject>())
+		: _visualObject(std::make_shared<Render::VisualObject>())
 	{ 
 	}
 

@@ -16,8 +16,8 @@ namespace TinyEngine::Common
 	class VisualObjectComponent final : public Level::Component
 	{
 	public:
-		using ObjectsLayerPtr = std::shared_ptr<TinyEngine::Render::ObjectsLayer>;
-		using VisualObjectPtr = std::shared_ptr<TinyEngine::Render::VisualObject>;
+		using ObjectsLayerPtr = std::shared_ptr<Render::ObjectsLayer>;
+		using VisualObjectPtr = std::shared_ptr<Render::VisualObject>;
 		using WeakTransformComponent = std::weak_ptr<TransformComponent>;
 
 	public:

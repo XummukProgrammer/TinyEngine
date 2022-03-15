@@ -7,18 +7,18 @@
 namespace TinyEngine::Common
 {
 	ObjectsLayerComponent::ObjectsLayerComponent()
-		: _objectsLayer(std::make_shared<TinyEngine::Render::ObjectsLayer>())
+		: _objectsLayer(std::make_shared<Render::ObjectsLayer>())
 	{ 
 	}
 
 	void ObjectsLayerComponent::OnInit()
 	{ 
-		TinyEngine::Render::Render::GetInstance().GetLayers()->AddLayer(_key, _objectsLayer);
+		Render::Render::GetInstance().GetLayers()->AddLayer(_key, _objectsLayer);
 	}
 
 	void ObjectsLayerComponent::OnDeinit()
 	{
-		TinyEngine::Render::Render::GetInstance().GetLayers()->RemoveLayer(_key);
+		Render::Render::GetInstance().GetLayers()->RemoveLayer(_key);
 		_objectsLayer.reset();
 	}
 
