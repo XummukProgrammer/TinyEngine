@@ -96,17 +96,4 @@ namespace TinyEngine::Core
 	{
 		return IO_PROPERTIES_FILE_PATH;
 	}
-
-	Context::WindowPtr Context::GetWindow() const
-	{
-		return _window;
-	}
-	
-	void Context::InitWindow()
-	{ 
-		WindowInfo windowInfo;
-		windowInfo.LoadFromFile();
-
-		_window = std::make_shared<Window>(windowInfo);
-	}
 }

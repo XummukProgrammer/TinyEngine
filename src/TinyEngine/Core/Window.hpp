@@ -1,6 +1,8 @@
 ﻿#ifndef _WINDOW_HEADER_
 #define _WINDOW_HEADER_
 
+#include <TinyEngine/Utils/Singleton.hpp>
+
 #include <SFML/Graphics/Drawable.hpp>
 
 #include <memory>
@@ -25,7 +27,7 @@ namespace TinyEngine::Core
 		void LoadFromFile();
 	};
 
-	class Window final
+	class Window final : public Utils::Singleton<Window>
 	{
 	public:
 		using RenderWindowPtr = std::shared_ptr<sf::RenderWindow>;
@@ -34,17 +36,19 @@ namespace TinyEngine::Core
 		using EventCallback = std::function<void()>;
 
 	public:
-		Window();
-		Window(const WindowInfo& info);
+		Window() = default;
 		~Window() = default;
+
+	public:
+		void OnExecute();
+
+	public:
+		void CreateWindow(const WindowInfo& info);
 
 		void SetOnUpdateCallback(const UpdateCallback& callback) { _onUpdateCallback = callback; }
 		void SetOnDrawCallback(const DrawCallback& callback) { _onDrawCallback = callback; }
 		void SetOnEventCallback(const EventCallback& callback) { _onEventCallback = callback; }
 
-		void OnExecute();
-
-	public:
 		void Draw(const sf::Drawable& drawable);
 
 	private:

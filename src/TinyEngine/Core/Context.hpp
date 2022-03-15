@@ -14,15 +14,12 @@ namespace TinyEngine::Properties
 
 namespace TinyEngine::Core
 {
-	class Window;
-
 	class Context final : public Utils::Singleton<Context>
 	{
 	public:
 		using Ptr = std::shared_ptr<Context>;
 		using PropertiesPtr = std::shared_ptr<Properties::Properties>;
 		using XmlPropertiesPtr = std::shared_ptr<Properties::XmlProperties>;
-		using WindowPtr = std::shared_ptr<Window>;
 		using PreInitCallback = std::function<void()>;
 		using InitCallback = std::function<void()>;
 		using DeinitCallback = std::function<void()>;
@@ -59,13 +56,9 @@ namespace TinyEngine::Core
 		XmlPropertiesPtr GetIOProperties() const;
 		std::string GetIOPropertiesPath() const;
 
-		WindowPtr GetWindow() const;
-		void InitWindow();
-
 	private:
 		PropertiesPtr _sessionProperties;
 		XmlPropertiesPtr _IOProperties;
-		WindowPtr _window;
 
 		PreInitCallback _onPreInitCallback;
 		InitCallback _onInitCallback;

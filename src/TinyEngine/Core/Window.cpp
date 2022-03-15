@@ -12,17 +12,6 @@ namespace TinyEngine::Core
 	static inline const std::string FILE_PATH = "window.xml";
 	static inline const DirType DIR_TYPE = DirType::Configs;
 
-	Window::Window()
-		: Window(WindowInfo())
-	{ }
-
-	Window::Window(const WindowInfo& info)
-	{ 
-		_renderWindow = std::make_shared<sf::RenderWindow>(sf::VideoMode(info.width, info.height), info.title);
-		_renderWindow->setFramerateLimit(info.maxFramerate);
-		_renderWindow->setVerticalSyncEnabled(info.isVerticalSyncEnabled);
-	}
-
 	void Window::OnExecute()
 	{ 
 		while (_renderWindow->isOpen())
@@ -49,6 +38,13 @@ namespace TinyEngine::Core
 			OnDraw();
 			_renderWindow->display();
 		}
+	}
+
+	void Window::CreateWindow(const WindowInfo& info)
+	{ 
+		_renderWindow = std::make_shared<sf::RenderWindow>(sf::VideoMode(info.width, info.height), info.title);
+		_renderWindow->setFramerateLimit(info.maxFramerate);
+		_renderWindow->setVerticalSyncEnabled(info.isVerticalSyncEnabled);
 	}
 
 	void Window::Draw(const sf::Drawable& drawable)

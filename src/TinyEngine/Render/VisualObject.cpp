@@ -22,7 +22,7 @@ namespace TinyEngine::Render
 		sf::Texture texture;
 		_sprite->setTexture(texture);
 		_sprite->setTextureRect({ 0, 0, 100, 100 });
-		Core::Context::GetInstance().GetWindow()->Draw(*_sprite.get());
+		Core::Window::GetInstance().Draw(*_sprite.get());
 	}
 
 	VisualObject::SpritePtr VisualObject::GetSprite() const
