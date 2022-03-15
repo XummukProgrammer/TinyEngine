@@ -1,6 +1,6 @@
 ﻿#include "TransformComponent.hpp"
 
-namespace TinyEngine::Common::Components
+namespace TinyEngine::Common
 {
 	void TransformComponent::SetPosition(const sf::Vector2f& position)
 	{ 

@@ -10,7 +10,7 @@ namespace TinyEngine::Render
 	class ObjectsLayer;
 }
 
-namespace TinyEngine::Common::Components::Render
+namespace TinyEngine::Common
 {
 	class ObjectsLayerComponent final : public Level::Component
 	{

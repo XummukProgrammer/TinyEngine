@@ -4,7 +4,7 @@
 #include <TinyEngine/Render/Layers.hpp>
 #include <TinyEngine/Render/ObjectsLayer.hpp>
 
-namespace TinyEngine::Common::Components::Render
+namespace TinyEngine::Common
 {
 	ObjectsLayerComponent::ObjectsLayerComponent()
 		: _objectsLayer(std::make_shared<TinyEngine::Render::ObjectsLayer>())

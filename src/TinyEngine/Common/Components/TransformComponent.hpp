@@ -5,7 +5,7 @@
 
 #include <SFML/System/Vector2.hpp>
 
-namespace TinyEngine::Common::Components
+namespace TinyEngine::Common
 {
 	class TransformComponent final : public Level::Component
 	{
