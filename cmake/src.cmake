@@ -24,6 +24,7 @@ set(ENGINE_HEADERS
 	
 	src/TinyEngine/Render/IObject.hpp
 	src/TinyEngine/Render/VisualObject.hpp
+	src/TinyEngine/Render/LightObject.hpp
 	src/TinyEngine/Render/ILayer.hpp
 	src/TinyEngine/Render/ObjectsLayer.hpp
 	src/TinyEngine/Render/Layers.hpp
@@ -34,6 +35,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Common/Components/Render/VisualObjectComponent.hpp
 	src/TinyEngine/Common/Components/Render/ObjectsLayerComponent.hpp
 	src/TinyEngine/Common/Components/Render/TextureComponent.hpp
+	src/TinyEngine/Common/Components/Render/LightComponent.hpp
 )
 
 set(ENGINE_SOURCES
@@ -61,6 +63,7 @@ set(ENGINE_SOURCES
 	
 	src/TinyEngine/Render/IObject.cpp
 	src/TinyEngine/Render/VisualObject.cpp
+	src/TinyEngine/Render/LightObject.cpp
 	src/TinyEngine/Render/ILayer.cpp
 	src/TinyEngine/Render/ObjectsLayer.cpp
 	src/TinyEngine/Render/Layers.cpp
@@ -71,4 +74,5 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Common/Components/Render/VisualObjectComponent.cpp
 	src/TinyEngine/Common/Components/Render/ObjectsLayerComponent.cpp
 	src/TinyEngine/Common/Components/Render/TextureComponent.cpp
+	src/TinyEngine/Common/Components/Render/LightComponent.cpp
 )
