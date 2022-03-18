@@ -19,12 +19,12 @@ namespace TinyEngine::Render
 		~RenderManager() = default;
 
 	public:
-		virtual void OnPreInit();
-		virtual void OnInit();
-		virtual void OnDeinit();
+		void OnPreInit();
+		void OnInit();
+		void OnDeinit();
 
-		virtual void OnUpdate();
-		virtual void OnDraw();
+		void OnUpdate();
+		void OnDraw();
 
 	public:
 		LayersPtr GetLayers() const;
