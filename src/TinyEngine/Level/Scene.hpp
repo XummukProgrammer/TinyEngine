@@ -35,7 +35,7 @@ namespace TinyEngine::Level
 		void RemoveEntities();
 
 	protected:
-		virtual void OnLoadEntities() {}
+		virtual void OnLoadEntities();
 		virtual void OnRemoveEntities();
 
 		const std::vector<EntityPtr>& GetEntities() const;
@@ -47,6 +47,7 @@ namespace TinyEngine::Level
 	private:
 		std::vector<EntityPtr> _entities;
 		bool _isRemoved = false;
+		bool _isEntitiesLoaded = false;
 	};
 }
 

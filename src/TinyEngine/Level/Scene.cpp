@@ -18,9 +18,16 @@ namespace TinyEngine::Level
 		OnRemoveEntities();
 	}
 
+	void Scene::OnLoadEntities()
+	{ 
+		_isEntitiesLoaded = true;
+	}
+
 	void Scene::OnRemoveEntities()
 	{ 
 		RemoveEntities();
+
+		_isEntitiesLoaded = false;
 	}
 
 	const std::vector<Scene::EntityPtr>& Scene::GetEntities() const
@@ -63,6 +70,11 @@ namespace TinyEngine::Level
 	{ 
 		LevelManager::GetInstance().AddEntity(entity);
 		_entities.push_back(entity);
+
+		if (_isEntitiesLoaded)
+		{
+			entity->OnInit();
+		}
 	}
 
 	void Scene::RemoveEntity(const EntityPtr& entity)
