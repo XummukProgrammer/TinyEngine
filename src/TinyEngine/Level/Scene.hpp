@@ -29,7 +29,8 @@ namespace TinyEngine::Level
 		void Remove();
 		bool IsRemoved() const;
 
-		EntityPtr CreateAndAddEntity();
+		EntityPtr CreateEntity();
+		void AddEntity(const EntityPtr& entity);
 		void RemoveEntity(const EntityPtr& entity);
 		void RemoveEntities();
 

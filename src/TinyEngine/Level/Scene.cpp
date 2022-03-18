@@ -53,14 +53,16 @@ namespace TinyEngine::Level
 		return _isRemoved;
 	}
 
-	Scene::EntityPtr Scene::CreateAndAddEntity()
+	Scene::EntityPtr Scene::CreateEntity()
 	{
 		auto entity = LevelManager::GetInstance().CreateEntity();
+		return entity;
+	}
 
+	void Scene::AddEntity(const EntityPtr& entity)
+	{ 
 		LevelManager::GetInstance().AddEntity(entity);
 		_entities.push_back(entity);
-
-		return entity;
 	}
 
 	void Scene::RemoveEntity(const EntityPtr& entity)
