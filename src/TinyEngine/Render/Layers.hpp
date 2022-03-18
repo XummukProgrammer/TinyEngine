@@ -19,12 +19,12 @@ namespace TinyEngine::Render
 		virtual ~Layers() = default;
 
 	public:
-		virtual void OnPreInit();
-		virtual void OnInit();
-		virtual void OnDeinit();
+		void OnPreInit();
+		void OnInit();
+		void OnDeinit();
 
-		virtual void OnUpdate();
-		virtual void OnDraw();
+		void OnUpdate();
+		void OnDraw();
 
 	public:
 		void AddLayer(std::string_view key, const ILayerPtr& layer);
