@@ -7,6 +7,7 @@
 #include <map>
 #include <queue>
 #include <memory>
+#include <vector>
 
 namespace TinyEngine
 {
@@ -46,6 +47,8 @@ namespace TinyEngine
 		void Send(TEvent& params);
 
 	private:
+		// Получить идентификаторы всех подписчиков.
+		std::vector<SubscriberIndex> GetSubscribeIndices() const;
 		// Удаление подписчика по его идентификатору, обращается на прямую к хранилищу и удаляет сразу.
 		void ForceDestroySubscriber(SubscriberIndex subscriberIndex);
 		// Удалить всех подписчиков, которые были удалены во время вызова метода Send.
@@ -94,7 +97,9 @@ namespace TinyEngine
 	template<typename TEvent>
 	void Publisher<TEvent>::UnsubscribeAll()
 	{ 
-		for (const auto& [ index, subscriber ] : _subscribers)
+		auto&& indices = GetSubscribeIndices();
+
+		for (auto index : indices)
 		{
 			Unsubscribe(index);
 		}
@@ -121,6 +126,19 @@ namespace TinyEngine
 		DestroySubscribersFromQueue();
 	}
 	
+	template<typename TEvent>
+	std::vector<SubscriberIndex> Publisher<TEvent>::GetSubscribeIndices() const
+	{
+		std::vector<SubscriberIndex> indices;
+
+		for (const auto& [ index, subscriber ] : _subscribers)
+		{
+			indices.push_back(index);
+		}
+
+		return indices;
+	}
+
 	template<typename TEvent>
 	void Publisher<TEvent>::ForceDestroySubscriber(SubscriberIndex subscriberIndex)
 	{ 
