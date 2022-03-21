@@ -11,9 +11,9 @@ namespace TinyEngine
 			GetName(), 
 			GetVersion());
 
-		_window.SetUpdateHandler(std::bind(&Application::OnWindowUpdate, this));
-		_window.SetDrawHandler(std::bind(&Application::OnWindowDraw, this, std::placeholders::_1));
-		_window.SetEventHandler(std::bind(&Application::OnWindowEvent, this, std::placeholders::_1));
+		_window.Update_Subscribe(std::bind(&Application::OnWindowUpdate, this, std::placeholders::_1));
+		_window.Draw_Subscribe(std::bind(&Application::OnWindowDraw, this, std::placeholders::_1));
+		_window.SFEvent_Subscribe(std::bind(&Application::OnWindowEvent, this, std::placeholders::_1));
 		_window.OnAppEntry();
 	}
 
@@ -50,17 +50,17 @@ namespace TinyEngine
 		_window.Exec();
 	}
 
-	void Application::OnWindowUpdate()
+	void Application::OnWindowUpdate(UpdateEventParameters& params)
 	{
 		// При обновлении окна необходимо об этом проинформировать другие поля.
 	}
 
-	void Application::OnWindowDraw(sf::RenderWindow& window)
+	void Application::OnWindowDraw(DrawEventParameters& params)
 	{ 
 		// При отрисовке окна необходимо об этом проинформировать другие поля.
 	}
 
-	void Application::OnWindowEvent(sf::Event& event)
+	void Application::OnWindowEvent(SFEventEventParameters& params)
 	{
 		// При срабатывании события окна необходимо об этом проинформировать другие поля.
 	}

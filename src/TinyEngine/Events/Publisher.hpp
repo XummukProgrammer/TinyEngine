@@ -158,7 +158,7 @@ namespace TinyEngine
 		using eventName ## Subscriber = TinyEngine::Subscriber<eventParametersClass>; \
 		eventName ## Publisher _publisher ## eventName; \
 	public: \
-		TinyEngine::SubscriberIndex eventName ## _ ## Subscribe(eventName ## Subscriber::DefaultHandler handler) \
+		TinyEngine::SubscriberIndex eventName ## _ ## Subscribe(const eventName ## Subscriber::DefaultHandler& handler) \
 		{ return _publisher ## eventName.Subscribe(handler); } \
 		void eventName ## _ ## Unsubscribe(TinyEngine::SubscriberIndex subscriberIndex) \
 		{ _publisher ## eventName.Unsubscribe(subscriberIndex); } \

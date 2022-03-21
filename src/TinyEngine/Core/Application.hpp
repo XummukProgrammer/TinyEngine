@@ -34,9 +34,9 @@ namespace TinyEngine
 		void ExecWindow();
 
 	private:
-		void OnWindowUpdate();
-		void OnWindowDraw(sf::RenderWindow& window);
-		void OnWindowEvent(sf::Event& event);
+		void OnWindowUpdate(UpdateEventParameters& params);
+		void OnWindowDraw(DrawEventParameters& params);
+		void OnWindowEvent(SFEventEventParameters& params);
 
 	private:
 		// Название приложения.

@@ -6,14 +6,47 @@
 #include <string>
 #include <functional>
 
+#include <TinyEngine/Events/Publisher.hpp>
+
 namespace TinyEngine
 {
+	class UpdateEventParameters final : public EventParameters
+	{
+	public:
+		UpdateEventParameters() = default;
+		~UpdateEventParameters() = default;
+	};
+
+	class DrawEventParameters : public EventParameters
+	{
+	public:
+		DrawEventParameters(sf::RenderWindow& window)
+			: window(window)
+		{}
+		~DrawEventParameters() = default;
+
+	public:
+		sf::RenderWindow& window;
+	};
+
+	class SFEventEventParameters final : public EventParameters
+	{
+	public:
+		SFEventEventParameters(sf::Event& event)
+			: event(event)
+		{}
+		~SFEventEventParameters() = default;
+
+	public:
+		sf::Event& event;
+	};
+
 	class Window final
 	{
 	public:
-		using DefaultHandler = std::function<void()>;
-		using DrawHandler = std::function<void(sf::RenderWindow& window)>;
-		using EventHandler = std::function<void(sf::Event& event)>;
+		DECLARE_EVENT(UpdateEventParameters, Update)
+		DECLARE_EVENT(DrawEventParameters, Draw)
+		DECLARE_EVENT(SFEventEventParameters, SFEvent)
 
 	public:
 		Window() = default;
@@ -34,11 +67,6 @@ namespace TinyEngine
 
 		void SetHeight(unsigned height) { _height = height; }
 		unsigned GetHeight() const { return _height; }
-
-	public:
-		void SetUpdateHandler(DefaultHandler handler) { _updateHandler = handler; }
-		void SetDrawHandler(DrawHandler handler) { _drawHandler = handler; }
-		void SetEventHandler(EventHandler handler) { _eventHandler = handler; }
 
 	public:
 		// Создать окно.
@@ -65,13 +93,6 @@ namespace TinyEngine
 
 		// Окно.
 		sf::RenderWindow* _renderWindow = nullptr;
-
-		// Обработчик при обновлении окна.
-		DefaultHandler _updateHandler;
-		// Обработчик при отрисовке окна.
-		DrawHandler _drawHandler;
-		// Обработчик при срабатывании события окна.
-		EventHandler _eventHandler;
 	};
 }
 
