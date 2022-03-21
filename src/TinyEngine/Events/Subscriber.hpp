@@ -5,8 +5,12 @@
 
 namespace TinyEngine
 {
+	// Идентификатор подписчика.
 	using SubscriberIndex = unsigned;
 
+	/*
+		Класс подписывается на событие и вызывает обработчик при отправке события.
+	*/
 	template<typename TEvent>
 	class Subscriber final
 	{
@@ -21,6 +25,7 @@ namespace TinyEngine
 		static Subscriber<TEvent> GetEmpty();
 
 	public:
+		// Произошла отправка события.
 		void OnSend(TEvent& params);
 
 	public:
@@ -31,7 +36,9 @@ namespace TinyEngine
 		SubscriberIndex GetIndex() const { return _index; }
 
 	private:
+		// Обработчик при отправке события.
 		DefaultHandler _sendHandler;
+		// Идентификатор подписка (TODO: Переделать под CounterRef).
 		SubscriberIndex _index;
 	};
 

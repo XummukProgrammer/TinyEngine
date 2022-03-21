@@ -3,6 +3,7 @@
 
 namespace TinyEngine
 {
+	// Класс используется для передачи параметров события.
 	class EventParameters
 	{
 	public:

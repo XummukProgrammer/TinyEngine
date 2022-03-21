@@ -10,6 +10,11 @@
 
 namespace TinyEngine
 {
+	/*
+		Класс отправляет события, а также даёт возможность подписаться на события.
+
+		TEvent - класс для параметров события.
+	*/
 	template<typename TEvent>
 	class Publisher final
 	{
@@ -23,21 +28,38 @@ namespace TinyEngine
 		~Publisher() = default;
 
 	public:
+		// Подписаться на событие.
 		SubscriberIndex Subscribe(const SubscriberHandler& handler);
+		// Отписаться от события по идентификатору подписчика.
 		void Unsubscribe(SubscriberIndex subscriberIndex);
+		// Произвести удаление всех подписок на событие.
 		void UnsubscribeAll();
+		// Проверить есть ли подписчик по его идентификатору.
 		bool HasSubscriber(SubscriberIndex subscriberIndex) const;
 
+		/*
+			Отправить событие. Все подписчики будут оповещены.
+
+			В том случае, если в какой-либо подписке произойдёт удаление другой подписки,
+			то удалённая подписка будет помешена в очередь и будет удалена при завершении метода.
+		*/
 		void Send(TEvent& params);
 
 	private:
+		// Удаление подписчика по его идентификатору, обращается на прямую к хранилищу и удаляет сразу.
 		void ForceDestroySubscriber(SubscriberIndex subscriberIndex);
+		// Удалить всех подписчиков, которые были удалены во время вызова метода Send.
 		void DestroySubscribersFromQueue();
 
 	private:
+		// Хранилище подписчиков.
 		std::map<SubscriberIndex, SubscriberPtr> _subscribers;
+		// Идентификатор последнего подписчика (TODO: Переделать под CounterRef).
 		SubscriberIndex _lastSubscriberIndex = 0;
+		// Запущен ли процесс по отправке события?
 		bool _isSendProcess = false;
+		// Очередь, в которую помещаются подписки, которые нужно удалить после того,
+		// как будет завершён процесс по отправке события.
 		std::queue<SubscriberIndex> _destroySubscribersQueue;
 	};
 
@@ -124,6 +146,12 @@ namespace TinyEngine
 	}
 }
 
+/*
+	Создаёт методы в классе для управление событием.
+	
+	Основные возможности: Подписаться, Отписаться, Удалить все подписки
+	и Отправка события (объявлена как protected, нужно обёртывать в публичный метод).
+*/
 #define DECLARE_EVENT(eventParametersClass, eventName) \
 	private: \
 		using eventName ## Publisher = TinyEngine::Publisher<eventParametersClass>; \
