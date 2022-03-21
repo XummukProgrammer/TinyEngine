@@ -25,6 +25,7 @@ namespace TinyEngine
 	public:
 		SubscriberIndex Subscribe(const SubscriberHandler& handler);
 		void Unsubscribe(SubscriberIndex subscriberIndex);
+		void UnsubscribeAll();
 		bool HasSubscriber(SubscriberIndex subscriberIndex) const;
 
 		void Send(TEvent& params);
@@ -65,6 +66,15 @@ namespace TinyEngine
 		else
 		{
 			ForceDestroySubscriber(subscriberIndex);
+		}
+	}
+
+	template<typename TEvent>
+	void Publisher<TEvent>::UnsubscribeAll()
+	{ 
+		for (const auto& [ index, subscriber ] : _subscribers)
+		{
+			Unsubscribe(index);
 		}
 	}
 
@@ -120,12 +130,14 @@ namespace TinyEngine
 		using eventName ## Subscriber = TinyEngine::Subscriber<eventParametersClass>; \
 		eventName ## Publisher _publisher ## eventName; \
 	public: \
-		TinyEngine::SubscriberIndex Subscribe ## eventName(eventName ## Subscriber::DefaultHandler handler) \
+		TinyEngine::SubscriberIndex eventName ## _ ## Subscribe(eventName ## Subscriber::DefaultHandler handler) \
 		{ return _publisher ## eventName.Subscribe(handler); } \
-		void Unsubscribe ## eventName(TinyEngine::SubscriberIndex subscriberIndex) \
+		void eventName ## _ ## Unsubscribe(TinyEngine::SubscriberIndex subscriberIndex) \
 		{ _publisher ## eventName.Unsubscribe(subscriberIndex); } \
+		void eventName ## _ ## UnsubscribeAll() \
+		{ _publisher ## eventName.UnsubscribeAll(); } \
 	protected: \
-		void On ## eventName(eventParametersClass& params) { _publisher ## eventName.Send(params); } \
+		void eventName ## _ ## Send(eventParametersClass& params) { _publisher ## eventName.Send(params); } \
 	public:
 		
 
