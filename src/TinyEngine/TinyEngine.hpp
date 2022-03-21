@@ -7,6 +7,6 @@
 
 #include <TinyEngine/Events/Publisher.hpp>
 #include <TinyEngine/Events/Subscriber.hpp>
-#include <TinyEngine/Events/Event.hpp>
+#include <TinyEngine/Events/EventParameters.hpp>
 
 #endif // _TINY_ENGINE_HEADER_

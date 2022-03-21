@@ -8,7 +8,7 @@ set(ENGINE_HEADERS
 	
 	src/TinyEngine/Events/Subscriber.hpp
 	src/TinyEngine/Events/Publisher.hpp
-	src/TinyEngine/Events/Event.hpp
+	src/TinyEngine/Events/EventParameters.hpp
 )
 
 set(ENGINE_SOURCES
@@ -20,5 +20,5 @@ set(ENGINE_SOURCES
 	
 	src/TinyEngine/Events/Subscriber.cpp
 	src/TinyEngine/Events/Publisher.cpp
-	src/TinyEngine/Events/Event.cpp
+	src/TinyEngine/Events/EventParameters.cpp
 )

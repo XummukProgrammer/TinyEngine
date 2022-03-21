@@ -11,7 +11,7 @@ namespace TinyEngine
 	class Subscriber final
 	{
 	public:
-		using DefaultHandler = std::function<void(TEvent& event)>;
+		using DefaultHandler = std::function<void(TEvent&)>;
 
 	public:
 		Subscriber() = default;
@@ -21,7 +21,7 @@ namespace TinyEngine
 		static Subscriber<TEvent> GetEmpty();
 
 	public:
-		void OnSend(TEvent& event);
+		void OnSend(TEvent& params);
 
 	public:
 		void SetSendHandler(const DefaultHandler& handler) { _sendHandler = handler; }
@@ -43,11 +43,11 @@ namespace TinyEngine
 	}
 
 	template<typename TEvent>
-	void Subscriber<TEvent>::OnSend(TEvent& event)
+	void Subscriber<TEvent>::OnSend(TEvent& params)
 	{ 
 		if (_sendHandler)
 		{
-			_sendHandler(event);
+			_sendHandler(params);
 		}
 	}
 }

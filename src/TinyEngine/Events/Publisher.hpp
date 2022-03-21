@@ -2,10 +2,11 @@
 #define _PUBLISHER_HEADER_
 
 #include "Subscriber.hpp"
-#include "Event.hpp"
+#include "EventParameters.hpp"
 
 #include <map>
 #include <queue>
+#include <memory>
 
 namespace TinyEngine
 {
@@ -13,7 +14,7 @@ namespace TinyEngine
 	class Publisher final
 	{
 	public:
-		using SubscriberPtr = Subscriber<TEvent>*;
+		using SubscriberPtr = std::unique_ptr<Subscriber<TEvent>>;
 		using SubscriberRef = Subscriber<TEvent>&;
 		using SubscriberHandler = typename Subscriber<TEvent>::DefaultHandler;
 
@@ -22,11 +23,11 @@ namespace TinyEngine
 		~Publisher() = default;
 
 	public:
-		SubscriberRef CreateSubscriber(const SubscriberHandler& handler);
+		SubscriberIndex CreateSubscriber(const SubscriberHandler& handler);
 		void DestroySubscriber(SubscriberIndex subscriberIndex);
 		bool HasSubscriber(SubscriberIndex subscriberIndex) const;
 
-		void SendEvent(TEvent& event);
+		void Send(TEvent& params);
 
 	private:
 		void ForceDestroySubscriber(SubscriberIndex subscriberIndex);
@@ -35,28 +36,29 @@ namespace TinyEngine
 	private:
 		std::map<SubscriberIndex, SubscriberPtr> _subscribers;
 		SubscriberIndex _lastSubscriberIndex = 0;
-		bool _isSendEvent = false;
+		bool _isSendProcess = false;
 		std::queue<SubscriberIndex> _destroySubscribersQueue;
 	};
 
 	template<typename TEvent>
-	typename Publisher<TEvent>::SubscriberRef Publisher<TEvent>::CreateSubscriber(const SubscriberHandler& handler)
+	typename SubscriberIndex Publisher<TEvent>::CreateSubscriber(const SubscriberHandler& handler)
 	{
-		auto subscriber = new Subscriber<TEvent>();
-		subscriber->SetSendHandler(handler);
-		subscriber->SetIndex(_lastSubscriberIndex);
-
-		_subscribers[_lastSubscriberIndex] = subscriber;
-
+		SubscriberIndex index = _lastSubscriberIndex;
 		++_lastSubscriberIndex;
 
-		return *subscriber;
+		auto subscriber = std::make_unique<Subscriber<TEvent>>();
+		subscriber->SetSendHandler(handler);
+		subscriber->SetIndex(index);
+
+		_subscribers[index] = std::move(subscriber);
+
+		return index;
 	}
 
 	template<typename TEvent>
 	void Publisher<TEvent>::DestroySubscriber(SubscriberIndex subscriberIndex)
 	{ 
-		if (_isSendEvent)
+		if (_isSendProcess)
 		{
 			_destroySubscribersQueue.push(subscriberIndex);
 		}
@@ -73,16 +75,16 @@ namespace TinyEngine
 	}
 
 	template<typename TEvent>
-	void Publisher<TEvent>::SendEvent(TEvent& event)
+	void Publisher<TEvent>::Send(TEvent& params)
 	{ 
-		_isSendEvent = true;
+		_isSendProcess = true;
 
 		for (const auto& [ index, subscriber ] : _subscribers)
 		{
-			subscriber->OnSend(event);
+			subscriber->OnSend(params);
 		}
 
-		_isSendEvent = false;
+		_isSendProcess = false;
 
 		DestroySubscribersFromQueue();
 	}
