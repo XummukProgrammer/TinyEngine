@@ -36,8 +36,9 @@ namespace TinyEngine
 	private:
 		void OnWindowUpdated(UpdatedEventParameters& params);
 		void OnWindowDrawed(DrawedEventParameters& params);
-		void OnWindowGuiDrawed(GuiDrawedEventParameters& params);
 		void OnWindowEvented(EventedParameters& params);
+
+		void OnGuiRenderer(GuiRenderedEventParameters& params);
 
 	private:
 		// Название приложения.

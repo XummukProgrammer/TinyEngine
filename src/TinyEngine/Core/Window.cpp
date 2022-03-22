@@ -1,8 +1,5 @@
 ﻿#include "Window.hpp"
 
-#include "imgui.h"
-#include "imgui-SFML.h"
-
 namespace TinyEngine
 {
 	void Window::OnAppEntry()
@@ -12,13 +9,12 @@ namespace TinyEngine
 
 	void Window::OnAppQuit()
 	{ 
-		ImGui::SFML::Shutdown();
+		_gui.OnAppQuit();
 
 		Destroy();
 		
 		UnsubscribeAllUpdated();
 		UnsubscribeAllDrawed();
-		UnsubscribeAllGuiDrawed();
 		UnsubscribeAllEvented();
 	}
 
@@ -28,9 +24,7 @@ namespace TinyEngine
 		_renderWindow->setVerticalSyncEnabled(false);
 		_renderWindow->setFramerateLimit(60);
 
-		ImGui::SFML::Init(*_renderWindow);
-		auto& io = ImGui::GetIO();
-		io.IniFilename = nullptr;
+		_gui.OnWindowCreated(*_renderWindow.get());
 	}
 
 	void Window::Destroy()
@@ -53,7 +47,7 @@ namespace TinyEngine
 			sf::Event event;
 			while (_renderWindow->pollEvent(event))
 			{
-				ImGui::SFML::ProcessEvent(*_renderWindow, event);
+				_gui.OnWindowEvented(*_renderWindow.get(), event);
 
 				// Даём возможность обрабатывать события окно, только если это событие не закрытие окна.
 				if (event.type == sf::Event::Closed)
@@ -66,14 +60,14 @@ namespace TinyEngine
 				}
 			}
 
-			OnUpdate();
+			sf::Time time = deltaClock.restart();
 
-			ImGui::SFML::Update(*_renderWindow, deltaClock.restart());
-			OnGuiDraw();
+			OnUpdate();
+			_gui.OnWindowUpdated(*_renderWindow.get(), time);
 
 			_renderWindow->clear();
 			OnDraw();
-			ImGui::SFML::Render(*_renderWindow);
+			_gui.OnWindowDrawed(*_renderWindow.get());
 			_renderWindow->display();
 		}
 	}
@@ -88,16 +82,6 @@ namespace TinyEngine
 	{ 
 		DrawedEventParameters params(*_renderWindow);
 		OnDrawed(params);
-	}
-
-	void Window::OnGuiDraw()
-	{ 
-		GuiDrawedEventParameters params;
-		OnGuiDrawed(params);
-
-		ImGui::Begin("Hello, world!");
-			ImGui::Button("Look at this pretty button");
-			ImGui::End();
 	}
 
 	void Window::OnEvent(sf::Event& event)

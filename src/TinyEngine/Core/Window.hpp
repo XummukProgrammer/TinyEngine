@@ -3,6 +3,8 @@
 
 #include <TinyEngine/Events/Publisher.hpp>
 
+#include <TinyEngine/Core/Gui.hpp>
+
 #include <SFML/Graphics.hpp>
 
 #include <string>
@@ -45,21 +47,12 @@ namespace TinyEngine
 		sf::Event& event;
 	};
 
-	// Параметры для события "Отрисовка GUI"
-	class GuiDrawedEventParameters final : public EventParameters
-	{
-	public:
-		GuiDrawedEventParameters() = default;
-		~GuiDrawedEventParameters() = default;
-	};
-
 	// Класс работает с окном приложения.
 	class Window final
 	{
 		// Объявляем события окна.
 		DECLARE_EVENT(UpdatedEventParameters, Updated)
 		DECLARE_EVENT(DrawedEventParameters, Drawed)
-		DECLARE_EVENT(GuiDrawedEventParameters, GuiDrawed)
 		DECLARE_EVENT(EventedParameters, Evented)
 
 	public:
@@ -95,10 +88,12 @@ namespace TinyEngine
 		// Запустить окно.
 		void Exec();
 
+		Gui& GetGui() { return _gui; }
+		const Gui& GetConstGui() const { return _gui; }
+
 	private:
 		void OnUpdate();
 		void OnDraw();
-		void OnGuiDraw();
 		void OnEvent(sf::Event& event);
 
 	private:
@@ -111,6 +106,8 @@ namespace TinyEngine
 
 		// Окно.
 		WindowPtr _renderWindow;
+		// Графический интерфейс (На ImGui).
+		Gui _gui;
 	};
 }
 

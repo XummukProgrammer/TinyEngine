@@ -13,8 +13,10 @@ namespace TinyEngine
 
 		_window.SubscribeUpdated(std::bind(&Application::OnWindowUpdated, this, std::placeholders::_1));
 		_window.SubscribeDrawed(std::bind(&Application::OnWindowDrawed, this, std::placeholders::_1));
-		_window.SubscribeGuiDrawed(std::bind(&Application::OnWindowGuiDrawed, this, std::placeholders::_1));
 		_window.SubscribeEvented(std::bind(&Application::OnWindowEvented, this, std::placeholders::_1));
+
+		_window.GetGui().SubscribeRenderer(std::bind(&Application::OnGuiRenderer, this, std::placeholders::_1));
+
 		_window.OnAppEntry();
 	}
 
@@ -61,13 +63,13 @@ namespace TinyEngine
 		// При отрисовке окна необходимо об этом проинформировать другие поля.
 	}
 
-	void Application::OnWindowGuiDrawed(GuiDrawedEventParameters& params)
-	{ 
-		// При отрисовке графического интерфейса необходимо об этом проинформировать другие поля.
-	}
-
 	void Application::OnWindowEvented(EventedParameters& params)
 	{
 		// При срабатывании события окна необходимо об этом проинформировать другие поля.
+	}
+
+	void Application::OnGuiRenderer(GuiRenderedEventParameters& params)
+	{ 
+		// При отрисовке графического интерфейса необходимо об этом проинформировать другие поля.
 	}
 }
