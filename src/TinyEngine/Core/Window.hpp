@@ -45,12 +45,21 @@ namespace TinyEngine
 		sf::Event& event;
 	};
 
+	// Параметры для события "Отрисовка GUI"
+	class GuiDrawedEventParameters final : public EventParameters
+	{
+	public:
+		GuiDrawedEventParameters() = default;
+		~GuiDrawedEventParameters() = default;
+	};
+
 	// Класс работает с окном приложения.
 	class Window final
 	{
 		// Объявляем события окна.
 		DECLARE_EVENT(UpdatedEventParameters, Updated)
 		DECLARE_EVENT(DrawedEventParameters, Drawed)
+		DECLARE_EVENT(GuiDrawedEventParameters, GuiDrawed)
 		DECLARE_EVENT(EventedParameters, Evented)
 
 	public:
@@ -89,6 +98,7 @@ namespace TinyEngine
 	private:
 		void OnUpdate();
 		void OnDraw();
+		void OnGuiDraw();
 		void OnEvent(sf::Event& event);
 
 	private:

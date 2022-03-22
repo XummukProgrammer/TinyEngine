@@ -18,6 +18,7 @@ namespace TinyEngine
 		
 		UnsubscribeAllUpdated();
 		UnsubscribeAllDrawed();
+		UnsubscribeAllGuiDrawed();
 		UnsubscribeAllEvented();
 	}
 
@@ -66,9 +67,7 @@ namespace TinyEngine
 			OnUpdate();
 
 			ImGui::SFML::Update(*_renderWindow, deltaClock.restart());
-			ImGui::Begin("Hello, world!");
-			ImGui::Button("Look at this pretty button");
-			ImGui::End();
+			OnGuiDraw();
 
 			_renderWindow->clear();
 			OnDraw();
@@ -87,6 +86,12 @@ namespace TinyEngine
 	{ 
 		DrawedEventParameters params(*_renderWindow);
 		OnDrawed(params);
+	}
+
+	void Window::OnGuiDraw()
+	{ 
+		GuiDrawedEventParameters params;
+		OnGuiDrawed(params);
 	}
 
 	void Window::OnEvent(sf::Event& event)
