@@ -10,43 +10,47 @@
 
 namespace TinyEngine
 {
-	class UpdateEventParameters final : public EventParameters
+	// Параметры для события "Обновление"
+	class UpdatedEventParameters final : public EventParameters
 	{
 	public:
-		UpdateEventParameters() = default;
-		~UpdateEventParameters() = default;
+		UpdatedEventParameters() = default;
+		~UpdatedEventParameters() = default;
 	};
 
-	class DrawEventParameters : public EventParameters
+	// Параметры для события "Отрисовка"
+	class DrawedEventParameters final : public EventParameters
 	{
 	public:
-		DrawEventParameters(sf::RenderWindow& window)
+		DrawedEventParameters(sf::RenderWindow& window)
 			: window(window)
 		{}
-		~DrawEventParameters() = default;
+		~DrawedEventParameters() = default;
 
 	public:
 		sf::RenderWindow& window;
 	};
 
-	class SFEventEventParameters final : public EventParameters
+	// Параметры для события "Событие"
+	class EventedParameters final : public EventParameters
 	{
 	public:
-		SFEventEventParameters(sf::Event& event)
+		EventedParameters(sf::Event& event)
 			: event(event)
 		{}
-		~SFEventEventParameters() = default;
+		~EventedParameters() = default;
 
 	public:
 		sf::Event& event;
 	};
 
+	// Класс работает с окном приложения.
 	class Window final
 	{
-	public:
-		DECLARE_EVENT(UpdateEventParameters, Update)
-		DECLARE_EVENT(DrawEventParameters, Draw)
-		DECLARE_EVENT(SFEventEventParameters, SFEvent)
+		// Объявляем события окна.
+		DECLARE_EVENT(UpdatedEventParameters, Updated)
+		DECLARE_EVENT(DrawedEventParameters, Drawed)
+		DECLARE_EVENT(EventedParameters, Evented)
 
 	public:
 		Window() = default;

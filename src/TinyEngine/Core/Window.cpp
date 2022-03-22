@@ -10,10 +10,10 @@ namespace TinyEngine
 	void Window::OnAppQuit()
 	{ 
 		Destroy();
-
-		Update_UnsubscribeAll();
-		Draw_UnsubscribeAll();
-		SFEvent_UnsubscribeAll();
+		
+		UnsubscribeAllUpdated();
+		UnsubscribeAllDrawed();
+		UnsubscribeAllEvented();
 	}
 
 	void Window::Create()
@@ -62,19 +62,19 @@ namespace TinyEngine
 
 	void Window::OnUpdate()
 	{ 
-		UpdateEventParameters params;
-		Update_Send(params);
+		UpdatedEventParameters params;
+		OnUpdated(params);
 	}
 
 	void Window::OnDraw()
 	{ 
-		DrawEventParameters params(*_renderWindow);
-		Draw_Send(params);
+		DrawedEventParameters params(*_renderWindow);
+		OnDrawed(params);
 	}
 
 	void Window::OnEvent(sf::Event& event)
 	{ 
-		SFEventEventParameters params(event);
-		SFEvent_Send(params);
+		EventedParameters params(event);
+		OnEvented(params);
 	}
 }
