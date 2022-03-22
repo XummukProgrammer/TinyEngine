@@ -29,6 +29,8 @@ namespace TinyEngine
 		_renderWindow->setFramerateLimit(60);
 
 		ImGui::SFML::Init(*_renderWindow);
+		auto& io = ImGui::GetIO();
+		io.IniFilename = nullptr;
 	}
 
 	void Window::Destroy()
@@ -92,6 +94,10 @@ namespace TinyEngine
 	{ 
 		GuiDrawedEventParameters params;
 		OnGuiDrawed(params);
+
+		ImGui::Begin("Hello, world!");
+			ImGui::Button("Look at this pretty button");
+			ImGui::End();
 	}
 
 	void Window::OnEvent(sf::Event& event)
