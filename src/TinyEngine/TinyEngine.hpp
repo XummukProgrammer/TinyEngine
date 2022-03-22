@@ -10,5 +10,6 @@
 #include <TinyEngine/Events/EventParameters.hpp>
 
 #include <TinyEngine/Data/CounterRef.hpp>
+#include <TinyEngine/Data/EventableValue.hpp>
 
 #endif // _TINY_ENGINE_HEADER_

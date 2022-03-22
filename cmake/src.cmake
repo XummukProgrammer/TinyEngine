@@ -11,6 +11,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Events/EventParameters.hpp
 	
 	src/TinyEngine/Data/CounterRef.hpp
+	src/TinyEngine/Data/EventableValue.hpp
 )
 
 set(ENGINE_SOURCES
@@ -25,4 +26,5 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Events/EventParameters.cpp
 	
 	src/TinyEngine/Data/CounterRef.cpp
+	src/TinyEngine/Data/EventableValue.cpp
 )
