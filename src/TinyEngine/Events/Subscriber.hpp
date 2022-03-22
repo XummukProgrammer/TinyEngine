@@ -1,6 +1,8 @@
 ﻿#ifndef _SUBSCRIBER_HEADER_
 #define _SUBSCRIBER_HEADER_
 
+#include <TinyEngine/Data/CounterRef.hpp>
+
 #include <functional>
 
 namespace TinyEngine
@@ -12,7 +14,7 @@ namespace TinyEngine
 		Класс подписывается на событие и вызывает обработчик при отправке события.
 	*/
 	template<typename TEvent>
-	class Subscriber final
+	class Subscriber final : public CounterRef<Subscriber<TEvent>, SubscriberIndex>
 	{
 	public:
 		using DefaultHandler = std::function<void(TEvent&)>;
@@ -31,15 +33,9 @@ namespace TinyEngine
 	public:
 		void SetSendHandler(const DefaultHandler& handler) { _sendHandler = handler; }
 
-	public:
-		void SetIndex(SubscriberIndex index) { _index = index; }
-		SubscriberIndex GetIndex() const { return _index; }
-
 	private:
 		// Обработчик при отправке события.
 		DefaultHandler _sendHandler;
-		// Идентификатор подписка (TODO: Переделать под CounterRef).
-		SubscriberIndex _index;
 	};
 
 	template<typename TEvent>

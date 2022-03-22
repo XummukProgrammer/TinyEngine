@@ -9,4 +9,6 @@
 #include <TinyEngine/Events/Subscriber.hpp>
 #include <TinyEngine/Events/EventParameters.hpp>
 
+#include <TinyEngine/Data/CounterRef.hpp>
+
 #endif // _TINY_ENGINE_HEADER_

@@ -57,8 +57,6 @@ namespace TinyEngine
 	private:
 		// Хранилище подписчиков.
 		std::map<SubscriberIndex, SubscriberPtr> _subscribers;
-		// Идентификатор последнего подписчика (TODO: Переделать под CounterRef).
-		SubscriberIndex _lastSubscriberIndex = 0;
 		// Запущен ли процесс по отправке события?
 		bool _isSendProcess = false;
 		// Очередь, в которую помещаются подписки, которые нужно удалить после того,
@@ -69,12 +67,10 @@ namespace TinyEngine
 	template<typename TEvent>
 	typename SubscriberIndex Publisher<TEvent>::Subscribe(const SubscriberHandler& handler)
 	{
-		SubscriberIndex index = _lastSubscriberIndex;
-		++_lastSubscriberIndex;
-
 		auto subscriber = std::make_unique<Subscriber<TEvent>>();
 		subscriber->SetSendHandler(handler);
-		subscriber->SetIndex(index);
+
+		SubscriberIndex index = subscriber->GetThisCounter();
 
 		_subscribers[index] = std::move(subscriber);
 

@@ -9,6 +9,8 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Events/Subscriber.hpp
 	src/TinyEngine/Events/Publisher.hpp
 	src/TinyEngine/Events/EventParameters.hpp
+	
+	src/TinyEngine/Data/CounterRef.hpp
 )
 
 set(ENGINE_SOURCES
@@ -21,4 +23,6 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Events/Subscriber.cpp
 	src/TinyEngine/Events/Publisher.cpp
 	src/TinyEngine/Events/EventParameters.cpp
+	
+	src/TinyEngine/Data/CounterRef.cpp
 )
