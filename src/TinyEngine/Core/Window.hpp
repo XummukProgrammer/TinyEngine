@@ -1,12 +1,13 @@
 ﻿#ifndef _WINDOW_HEADER_
 #define _WINDOW_HEADER_
 
+#include <TinyEngine/Events/Publisher.hpp>
+
 #include <SFML/Graphics.hpp>
 
 #include <string>
 #include <functional>
-
-#include <TinyEngine/Events/Publisher.hpp>
+#include <memory>
 
 namespace TinyEngine
 {
@@ -53,6 +54,9 @@ namespace TinyEngine
 		DECLARE_EVENT(EventedParameters, Evented)
 
 	public:
+		using WindowPtr = std::unique_ptr<sf::RenderWindow>;
+
+	public:
 		Window() = default;
 		~Window() = default;
 
@@ -96,7 +100,7 @@ namespace TinyEngine
 		unsigned _height = 600;
 
 		// Окно.
-		sf::RenderWindow* _renderWindow = nullptr;
+		WindowPtr _renderWindow;
 	};
 }
 

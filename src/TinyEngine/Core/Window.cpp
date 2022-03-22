@@ -23,7 +23,7 @@ namespace TinyEngine
 
 	void Window::Create()
 	{ 
-		_renderWindow = new sf::RenderWindow(sf::VideoMode(_width, _height), _title);
+		_renderWindow = std::make_unique<sf::RenderWindow>(sf::VideoMode(_width, _height), _title);
 		_renderWindow->setVerticalSyncEnabled(false);
 		_renderWindow->setFramerateLimit(60);
 
@@ -32,7 +32,7 @@ namespace TinyEngine
 
 	void Window::Destroy()
 	{ 
-		delete _renderWindow;
+		_renderWindow.reset();
 	}
 
 	void Window::Exec()
