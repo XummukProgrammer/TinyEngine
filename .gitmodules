@@ -7,3 +7,9 @@
 [submodule "deps/Candle"]
 	path = deps/Candle
 	url = https://github.com/MiguelMJ/Candle.git
+[submodule "deps/imgui"]
+	path = deps/imgui
+	url = https://github.com/ocornut/imgui.git
+[submodule "deps/imgui-sfml"]
+	path = deps/imgui-sfml
+	url = https://github.com/eliasdaler/imgui-sfml.git

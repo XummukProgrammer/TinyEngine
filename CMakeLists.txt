@@ -19,6 +19,10 @@ set_target_properties(fmt PROPERTIES FOLDER "deps")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/Candle" "${CMAKE_CURRENT_BINARY_DIR}/deps/Candle")
 set_target_properties(Candle-s PROPERTIES FOLDER "deps")
 
+set(IMGUI_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui")
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui-sfml" "${CMAKE_CURRENT_BINARY_DIR}/deps/imgui-sfml")
+set_target_properties(ImGui-SFML PROPERTIES FOLDER "deps")
+
 include(cmake/src.cmake)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/src" FILES ${ENGINE_HEADERS} ${ENGINE_SOURCES})
 add_library(TinyEngine ${ENGINE_HEADERS} ${ENGINE_SOURCES})
@@ -34,4 +38,5 @@ target_link_libraries(TinyEngine PUBLIC
 	pugixml-static
 	fmt
 	Candle-s
+	ImGui-SFML
 )
