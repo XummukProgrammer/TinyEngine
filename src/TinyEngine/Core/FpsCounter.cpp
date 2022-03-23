@@ -1,24 +1,33 @@
 ﻿#include "FpsCounter.hpp"
 
+#include <TinyEngine/Core/Core.hpp>
+
 namespace TinyEngine
 {
-	void FpsCounter::OnWindowUpdate(float deltaTime)
-	{
-		if (_timerFpsCounter <= 0.f)
-		{
-			// Таймер истёк, получаем актуальное кол-во Fps.
-			_lastFpsCounter = static_cast<unsigned>(1.f / deltaTime);
-			_timerFpsCounter = _delayFpsCounter;
-		}
-		else
-		{
-			// Продолжаем отнимать значение таймера.
-			_timerFpsCounter -= deltaTime;
+	FpsCounter::FpsCounter()
+	{ 
+		_timer.SubscribeExpired(std::bind(&FpsCounter::OnExpired, this, std::placeholders::_1));
 
-			if (_timerFpsCounter < 0.f)
-			{
-				_timerFpsCounter = 0.f;
-			}
-		}
+		StartTimer();
+	}
+
+	void FpsCounter::OnWindowUpdate()
+	{
+		_timer.OnWindowUpdate();
+	}
+
+	void FpsCounter::StartTimer()
+	{ 
+		_timer.SetTime(1.f);
+		_timer.Start();
+	}
+
+	void FpsCounter::OnExpired(TimerExpiredEventParameters& params)
+	{ 
+		const float deltaTime = Core::GetApplication().GetConstWindow().GetDeltaTime();
+
+		_lastFpsCounter = static_cast<unsigned>(1.f / deltaTime);
+
+		StartTimer();
 	}
 }

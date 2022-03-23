@@ -1,30 +1,37 @@
 ﻿#ifndef _FPS_COUNTER_HEADER_
 #define _FPS_COUNTER_HEADER_
 
+#include <TinyEngine/Core/Timer.hpp>
+
 namespace TinyEngine
 {
 	// Класс работает с счётчиком FPS, обновляя его используя deltaTime раз в секунду.
 	class FpsCounter final
 	{
 	public:
-		FpsCounter() = default;
+		FpsCounter();
 		~FpsCounter() = default;
 
 	public:
 		// Окно обновилось.
-		void OnWindowUpdate(float deltaTime);
+		void OnWindowUpdate();
 
 	public:
 		// Получить счётчик Fps.
 		unsigned GetFpsCounter() const { return _lastFpsCounter; }
 
 	private:
-		// Последнее значения счётчика FPS.
+		// Запустить таймер.
+		void StartTimer();
+
+	private:
+		void OnExpired(TimerExpiredEventParameters& params);
+
+	private:
+		// Последнее значения счётчика Fps.
 		unsigned _lastFpsCounter = 0;
-		// Сколько осталось времени до обновления счётчика Fps.
-		float _timerFpsCounter = 0.f;
-		// Задержка перед обновлением счётчика Fps.
-		const float _delayFpsCounter = 1.f;
+		// Таймер для обновления значения счётчика Fps.
+		Timer _timer;
 	};
 }
 

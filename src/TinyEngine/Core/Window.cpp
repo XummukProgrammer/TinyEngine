@@ -75,7 +75,7 @@ namespace TinyEngine
 		UpdatedEventParameters params;
 		OnUpdated(params);
 
-		_fpsCounter.OnWindowUpdate(GetDeltaTime());
+		_fpsCounter.OnWindowUpdate();
 
 		_gui.OnWindowUpdated(*_renderWindow.get(), _deltaTime);
 	}

@@ -4,6 +4,8 @@
 #include <TinyEngine/Core/Core.hpp>
 #include <TinyEngine/Core/Application.hpp>
 #include <TinyEngine/Core/Window.hpp>
+#include <TinyEngine/Core/FpsCounter.hpp>
+#include <TinyEngine/Core/Timer.hpp>
 
 #include <TinyEngine/Events/Publisher.hpp>
 #include <TinyEngine/Events/Subscriber.hpp>
