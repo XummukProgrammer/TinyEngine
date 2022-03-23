@@ -17,4 +17,8 @@
 #include <TinyEngine/Gui/GuiView.hpp>
 #include <TinyEngine/Gui/GuiControllers.hpp>
 
+#include <TinyEngine/Gui/Debug/GuiDebugController.hpp>
+#include <TinyEngine/Gui/Debug/GuiDebugModel.hpp>
+#include <TinyEngine/Gui/Debug/GuiDebugView.hpp>
+
 #endif // _TINY_ENGINE_HEADER_

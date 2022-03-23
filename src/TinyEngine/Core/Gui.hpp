@@ -27,6 +27,7 @@ namespace TinyEngine
 		~Gui() = default;
 
 	public:
+		void OnAppEntry();
 		void OnAppQuit();
 
 		void OnWindowCreated(sf::RenderWindow& renderWindow);

@@ -2,8 +2,13 @@
 
 namespace TinyEngine
 {
-	GuiModel::GuiModel()
-	{
+	void GuiModel::OnInit()
+	{ 
 		isEnabled.SetValue(true);
+	}
+
+	void GuiModel::OnDeinit()
+	{ 
+		isEnabled.UnsubscribeAllValueChanged();
 	}
 }

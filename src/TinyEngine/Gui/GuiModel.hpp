@@ -3,13 +3,19 @@
 
 #include <TinyEngine/Data/EventableValue.hpp>
 
+#include "imgui.h"
+
 namespace TinyEngine
 {
 	class GuiModel
 	{
 	public:
-		GuiModel();
+		GuiModel() = default;
 		virtual ~GuiModel() = default;
+
+	public:
+		virtual void OnInit();
+		virtual void OnDeinit();
 
 	public:
 		BoolEventableValue isEnabled;

@@ -12,7 +12,7 @@ namespace TinyEngine
 		virtual ~GuiView() = default;
 
 	public:
-		virtual void OnGuiRenderer(GuiModel& model) = 0;
+		virtual void OnGuiRenderer(const GuiModel& model) = 0;
 	};
 }
 

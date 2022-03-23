@@ -18,6 +18,10 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Gui/GuiModel.hpp
 	src/TinyEngine/Gui/GuiView.hpp
 	src/TinyEngine/Gui/GuiControllers.hpp
+	
+	src/TinyEngine/Gui/Debug/GuiDebugController.hpp
+	src/TinyEngine/Gui/Debug/GuiDebugModel.hpp
+	src/TinyEngine/Gui/Debug/GuiDebugView.hpp
 )
 
 set(ENGINE_SOURCES
@@ -39,4 +43,8 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Gui/GuiModel.cpp
 	src/TinyEngine/Gui/GuiView.cpp
 	src/TinyEngine/Gui/GuiControllers.cpp
+	
+	src/TinyEngine/Gui/Debug/GuiDebugController.cpp
+	src/TinyEngine/Gui/Debug/GuiDebugModel.cpp
+	src/TinyEngine/Gui/Debug/GuiDebugView.cpp
 )

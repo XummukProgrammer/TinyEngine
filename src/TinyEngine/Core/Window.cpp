@@ -5,6 +5,8 @@ namespace TinyEngine
 	void Window::OnAppEntry()
 	{ 
 		Create();
+
+		_gui.OnAppEntry();
 	}
 
 	void Window::OnAppQuit()

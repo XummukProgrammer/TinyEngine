@@ -18,6 +18,9 @@ namespace TinyEngine
 		~GuiControllers() = default;
 
 	public:
+		void OnAppEntry();
+		void OnAppQuit();
+
 		void OnGuiRenderer();
 
 	public:

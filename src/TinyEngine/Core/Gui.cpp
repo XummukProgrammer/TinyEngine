@@ -5,11 +5,18 @@
 
 namespace TinyEngine
 {
+	void Gui::OnAppEntry()
+	{ 
+		_guiControllers.OnAppEntry();
+	}
+
 	void Gui::OnAppQuit()
 	{
 		ImGui::SFML::Shutdown();
 
 		UnsubscribeAllRenderer();
+
+		_guiControllers.OnAppQuit();
 	}
 
 	void Gui::OnWindowCreated(sf::RenderWindow& renderWindow)
