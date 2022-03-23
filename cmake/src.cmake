@@ -6,6 +6,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Application.hpp
 	src/TinyEngine/Core/Window.hpp
 	src/TinyEngine/Core/Gui.hpp
+	src/TinyEngine/Core/FpsCounter.hpp
 	
 	src/TinyEngine/Events/Subscriber.hpp
 	src/TinyEngine/Events/Publisher.hpp
@@ -31,6 +32,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Application.cpp
 	src/TinyEngine/Core/Window.cpp
 	src/TinyEngine/Core/Gui.cpp
+	src/TinyEngine/Core/FpsCounter.cpp
 	
 	src/TinyEngine/Events/Subscriber.cpp
 	src/TinyEngine/Events/Publisher.cpp

@@ -19,7 +19,7 @@ namespace TinyEngine
 		// Получить версию приложения.
 		std::string GetAppVersion() const;
 		// Получить счётчик FPS.
-		unsigned GetFPSCounter() const;
+		unsigned GetFpsCounter() const;
 	};
 }
 

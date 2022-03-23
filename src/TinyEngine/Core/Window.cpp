@@ -75,7 +75,7 @@ namespace TinyEngine
 		UpdatedEventParameters params;
 		OnUpdated(params);
 
-		UpdateFPSCounter();
+		_fpsCounter.OnWindowUpdate(GetDeltaTime());
 
 		_gui.OnWindowUpdated(*_renderWindow.get(), _deltaTime);
 	}
@@ -92,25 +92,5 @@ namespace TinyEngine
 	{ 
 		EventedParameters params(event);
 		OnEvented(params);
-	}
-
-	void Window::UpdateFPSCounter()
-	{ 
-		float deltaTime = GetDeltaTime();
-
-		if (_timerFPSCounter <= 0.f)
-		{
-			_lastFPSCounter = static_cast<unsigned>(1.f / deltaTime);
-			_timerFPSCounter = _delayFPSCounter;
-		}
-		else
-		{
-			_timerFPSCounter -= deltaTime;
-
-			if (_timerFPSCounter < 0.f)
-			{
-				_timerFPSCounter = 0.f;
-			}
-		}
 	}
 }

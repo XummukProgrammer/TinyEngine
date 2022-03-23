@@ -4,6 +4,7 @@
 #include <TinyEngine/Events/Publisher.hpp>
 
 #include <TinyEngine/Core/Gui.hpp>
+#include <TinyEngine/Core/FpsCounter.hpp>
 
 #include <SFML/Graphics.hpp>
 
@@ -94,16 +95,13 @@ namespace TinyEngine
 
 		// Получить прошедшее время.
 		float GetDeltaTime() const { return _deltaTime.asSeconds(); }
-		// Получить счётчик FPS.
-		unsigned GetFPSCounter() const { return _lastFPSCounter; }
+		// Получить счётчик Fps.
+		unsigned GetFpsCounter() const { return _fpsCounter.GetFpsCounter(); }
 
 	private:
 		void OnUpdate();
 		void OnDraw();
 		void OnEvent(sf::Event& event);
-
-	private:
-		void UpdateFPSCounter();
 
 	private:
 		// Заголовок окна.
@@ -123,12 +121,8 @@ namespace TinyEngine
 		// Прошедшее время.
 		sf::Time _deltaTime;
 
-		// Последнее значения счётчика FPS.
-		unsigned _lastFPSCounter = 0;
-		// Сколько осталось времени до обновления счётчика FPS.
-		float _timerFPSCounter = 0.f;
-		// Задержка перед обновлением счётчика FPS.
-		const float _delayFPSCounter = 1.f;
+		// Счётчик Fps.
+		FpsCounter _fpsCounter;
 	};
 }
 
