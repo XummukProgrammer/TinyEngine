@@ -24,6 +24,8 @@ namespace TinyEngine
 	{ 
 		ImGui::SFML::Update(renderWindow, time);
 
+		_guiControllers.OnGuiRenderer();
+
 		GuiRenderedEventParameters params;
 		OnRenderer(params);
 	}

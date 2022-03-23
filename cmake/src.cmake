@@ -13,6 +13,11 @@ set(ENGINE_HEADERS
 	
 	src/TinyEngine/Data/CounterRef.hpp
 	src/TinyEngine/Data/EventableValue.hpp
+	
+	src/TinyEngine/Gui/GuiController.hpp
+	src/TinyEngine/Gui/GuiModel.hpp
+	src/TinyEngine/Gui/GuiView.hpp
+	src/TinyEngine/Gui/GuiControllers.hpp
 )
 
 set(ENGINE_SOURCES
@@ -29,4 +34,9 @@ set(ENGINE_SOURCES
 	
 	src/TinyEngine/Data/CounterRef.cpp
 	src/TinyEngine/Data/EventableValue.cpp
+	
+	src/TinyEngine/Gui/GuiController.cpp
+	src/TinyEngine/Gui/GuiModel.cpp
+	src/TinyEngine/Gui/GuiView.cpp
+	src/TinyEngine/Gui/GuiControllers.cpp
 )

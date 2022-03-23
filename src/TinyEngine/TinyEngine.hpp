@@ -12,4 +12,9 @@
 #include <TinyEngine/Data/CounterRef.hpp>
 #include <TinyEngine/Data/EventableValue.hpp>
 
+#include <TinyEngine/Gui/GuiController.hpp>
+#include <TinyEngine/Gui/GuiModel.hpp>
+#include <TinyEngine/Gui/GuiView.hpp>
+#include <TinyEngine/Gui/GuiControllers.hpp>
+
 #endif // _TINY_ENGINE_HEADER_

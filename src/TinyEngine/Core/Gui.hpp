@@ -3,6 +3,8 @@
 
 #include <TinyEngine/Events/Publisher.hpp>
 
+#include <TinyEngine/Gui/GuiControllers.hpp>
+
 #include <SFML/Graphics.hpp>
 
 namespace TinyEngine
@@ -31,6 +33,13 @@ namespace TinyEngine
 		void OnWindowUpdated(sf::RenderWindow& renderWindow, const sf::Time& time);
 		void OnWindowDrawed(sf::RenderWindow& renderWindow);
 		void OnWindowEvented(sf::RenderWindow& renderWindow, sf::Event& event);
+
+	public:
+		GuiControllers& GetControllers() { return _guiControllers; }
+		const GuiControllers& GetConstControllers() const { return _guiControllers; }
+
+	private:
+		GuiControllers _guiControllers;
 	};
 }
 
