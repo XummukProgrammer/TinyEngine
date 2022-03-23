@@ -14,8 +14,12 @@ namespace TinyEngine
 		~GuiDebugModel() = default;
 
 	public:
+		// Получить название приложения.
 		std::string GetAppName() const;
+		// Получить версию приложения.
 		std::string GetAppVersion() const;
+		// Получить счётчик FPS.
+		unsigned GetFPSCounter() const;
 	};
 }
 

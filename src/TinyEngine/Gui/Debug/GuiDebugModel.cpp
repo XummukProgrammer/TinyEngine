@@ -13,4 +13,9 @@ namespace TinyEngine
 	{
 		return Core::GetApplication().GetVersion();
 	}
+
+	unsigned GuiDebugModel::GetFPSCounter() const
+	{
+		return Core::GetApplication().GetWindow().GetFPSCounter();
+	}
 }

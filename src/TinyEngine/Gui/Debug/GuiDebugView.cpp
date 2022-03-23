@@ -13,6 +13,7 @@ namespace TinyEngine
 		ImGui::Begin("Debug");
 		ImGui::Text(fmt::format("App name: {}", debugModel.GetAppName()).c_str());
 		ImGui::Text(fmt::format("App version: {}", debugModel.GetAppVersion()).c_str());
+		ImGui::Text(fmt::format("FPS: {}", debugModel.GetFPSCounter()).c_str());
 		ImGui::End();
 	}
 }

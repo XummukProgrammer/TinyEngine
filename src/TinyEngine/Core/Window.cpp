@@ -42,8 +42,6 @@ namespace TinyEngine
 			return;
 		}
 
-		sf::Clock deltaClock;
-
 		while (_renderWindow->isOpen())
 		{
 			sf::Event event;
@@ -62,14 +60,12 @@ namespace TinyEngine
 				}
 			}
 
-			sf::Time time = deltaClock.restart();
+			_deltaTime = _clock.restart();
 
 			OnUpdate();
-			_gui.OnWindowUpdated(*_renderWindow.get(), time);
 
 			_renderWindow->clear();
 			OnDraw();
-			_gui.OnWindowDrawed(*_renderWindow.get());
 			_renderWindow->display();
 		}
 	}
@@ -78,17 +74,43 @@ namespace TinyEngine
 	{ 
 		UpdatedEventParameters params;
 		OnUpdated(params);
+
+		UpdateFPSCounter();
+
+		_gui.OnWindowUpdated(*_renderWindow.get(), _deltaTime);
 	}
 
 	void Window::OnDraw()
 	{ 
 		DrawedEventParameters params(*_renderWindow);
 		OnDrawed(params);
+
+		_gui.OnWindowDrawed(*_renderWindow.get());
 	}
 
 	void Window::OnEvent(sf::Event& event)
 	{ 
 		EventedParameters params(event);
 		OnEvented(params);
+	}
+
+	void Window::UpdateFPSCounter()
+	{ 
+		float deltaTime = GetDeltaTime();
+
+		if (_timerFPSCounter <= 0.f)
+		{
+			_lastFPSCounter = static_cast<unsigned>(1.f / deltaTime);
+			_timerFPSCounter = _delayFPSCounter;
+		}
+		else
+		{
+			_timerFPSCounter -= deltaTime;
+
+			if (_timerFPSCounter < 0.f)
+			{
+				_timerFPSCounter = 0.f;
+			}
+		}
 	}
 }
