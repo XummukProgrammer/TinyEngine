@@ -24,6 +24,12 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Gui/Debug/GuiDebugController.hpp
 	src/TinyEngine/Gui/Debug/GuiDebugModel.hpp
 	src/TinyEngine/Gui/Debug/GuiDebugView.hpp
+	
+	src/TinyEngine/Assets/Assets.hpp
+	src/TinyEngine/Assets/AllAssets.hpp
+	src/TinyEngine/Assets/IAsset.hpp
+	src/TinyEngine/Assets/AssetParameters.hpp
+	src/TinyEngine/Assets/TextureAssets.hpp
 )
 
 set(ENGINE_SOURCES
@@ -51,4 +57,10 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Gui/Debug/GuiDebugController.cpp
 	src/TinyEngine/Gui/Debug/GuiDebugModel.cpp
 	src/TinyEngine/Gui/Debug/GuiDebugView.cpp
+	
+	src/TinyEngine/Assets/Assets.cpp
+	src/TinyEngine/Assets/AllAssets.cpp
+	src/TinyEngine/Assets/IAsset.cpp
+	src/TinyEngine/Assets/AssetParameters.cpp
+	src/TinyEngine/Assets/TextureAssets.cpp
 )

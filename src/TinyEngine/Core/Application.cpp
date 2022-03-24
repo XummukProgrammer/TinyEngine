@@ -11,6 +11,8 @@ namespace TinyEngine
 			GetName(), 
 			GetVersion());
 
+		_allAssets.OnAppEntry();
+
 		_window.SubscribeUpdated(std::bind(&Application::OnWindowUpdated, this, std::placeholders::_1));
 		_window.SubscribeDrawed(std::bind(&Application::OnWindowDrawed, this, std::placeholders::_1));
 		_window.SubscribeEvented(std::bind(&Application::OnWindowEvented, this, std::placeholders::_1));
@@ -29,6 +31,8 @@ namespace TinyEngine
 		fmt::print("[Application] Quit\n");
 
 		_window.OnAppQuit();
+
+		_allAssets.OnAppQuit();
 	}
 
 	void Application::SetName(std::string_view name)

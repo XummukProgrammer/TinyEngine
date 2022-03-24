@@ -23,4 +23,10 @@
 #include <TinyEngine/Gui/Debug/GuiDebugModel.hpp>
 #include <TinyEngine/Gui/Debug/GuiDebugView.hpp>
 
+#include <TinyEngine/Assets/Assets.hpp>
+#include <TinyEngine/Assets/AllAssets.hpp>
+#include <TinyEngine/Assets/IAsset.hpp>
+#include <TinyEngine/Assets/AssetParameters.hpp>
+#include <TinyEngine/Assets/TextureAssets.hpp>
+
 #endif // _TINY_ENGINE_HEADER_

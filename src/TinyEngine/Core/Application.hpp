@@ -2,6 +2,7 @@
 #define _APPLICATION_HEADER_
 
 #include "Window.hpp"
+#include <TinyEngine/Assets/AllAssets.hpp>
 
 #include <string>
 
@@ -29,6 +30,9 @@ namespace TinyEngine
 		Window& GetWindow() { return _window; }
 		const Window& GetConstWindow() const { return _window; }
 
+		AllAssets& GetAllAssets() { return _allAssets; }
+		const AllAssets& GetConstAllAssets() const { return _allAssets; }
+
 	public:
 		// Запустить окно (Перехватывает управления у класса Application).
 		void ExecWindow();
@@ -48,6 +52,9 @@ namespace TinyEngine
 
 		// Окно приложения.
 		Window _window;
+
+		// Все ассеты.
+		AllAssets _allAssets;
 	};
 }
 
