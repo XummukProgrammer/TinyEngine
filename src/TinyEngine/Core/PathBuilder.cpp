@@ -8,6 +8,13 @@
 
 namespace TinyEngine
 {
+    std::string PathBuilder::FilePathToDir(std::string_view path) const
+    {
+        auto fsPath = std::filesystem::path(path);
+        std::string newPath = fsPath.remove_filename().generic_string();
+        return newPath;
+    }
+
     std::string PathBuilder::GetExecuteFilePath() const
     {
         if (_executeFilePath.empty() && (Core::GetApplication().GetConsoleArgumentCount() > 0))
@@ -26,8 +33,7 @@ namespace TinyEngine
 
             if (!executeFilePath.empty())
             {
-                auto path = std::filesystem::path(executeFilePath);
-                _executeFileDir = path.remove_filename().generic_string(); 
+                _executeFileDir = FilePathToDir(executeFilePath); 
             }           
         }
 

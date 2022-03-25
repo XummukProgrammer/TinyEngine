@@ -21,6 +21,9 @@ namespace TinyEngine
 		~PathBuilder() = default;
 
 	public:
+		// Путь до файла преобразовать до папки, в котором находится файл.
+		std::string FilePathToDir(std::string_view path) const;
+
 		// Получить путь до .exe файла.
 		std::string GetExecuteFilePath() const;
 		// Получить папку, в которой находится .exe файл.
