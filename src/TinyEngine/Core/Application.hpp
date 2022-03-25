@@ -3,6 +3,7 @@
 
 #include "Window.hpp"
 #include <TinyEngine/Assets/AllAssets.hpp>
+#include <TinyEngine/Core/PathBuilder.hpp>
 
 #include <string>
 
@@ -39,6 +40,9 @@ namespace TinyEngine
 		AllAssets& GetAllAssets() { return _allAssets; }
 		const AllAssets& GetConstAllAssets() const { return _allAssets; }
 
+		PathBuilder& GetPathBuilder() { return _pathBuilder; }
+		const PathBuilder& GetConstPathBuilder() const { return _pathBuilder; }
+
 	public:
 		// Запустить окно (Перехватывает управления у класса Application).
 		void ExecWindow();
@@ -66,6 +70,9 @@ namespace TinyEngine
 		int _consoleArgumentCount = 0;
 		// Аргументы командной строки.
 		char** _consoleArguments;
+
+		// Создатель путей в приложении.
+		PathBuilder _pathBuilder;
 	};
 }
 

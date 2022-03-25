@@ -20,6 +20,8 @@ namespace TinyEngine
 		_window.GetGui().SubscribeRenderer(std::bind(&Application::OnGuiRenderer, this, std::placeholders::_1));
 
 		_window.OnAppEntry();
+
+		_pathBuilder.GetExecuteFileDir();
 	}
 
 	void Application::OnQuit()

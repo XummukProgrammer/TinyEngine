@@ -6,6 +6,7 @@
 #include <TinyEngine/Core/Window.hpp>
 #include <TinyEngine/Core/FpsCounter.hpp>
 #include <TinyEngine/Core/Timer.hpp>
+#include <TinyEngine/Core/PathBuilder.hpp>
 
 #include <TinyEngine/Events/Publisher.hpp>
 #include <TinyEngine/Events/Subscriber.hpp>
