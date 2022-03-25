@@ -47,6 +47,9 @@ namespace TinyEngine
 	public:
 		void OnAppEntry() override;
 		void OnAppQuit() override;
+
+	public:
+		void LoadFromFile(std::string_view filePath) override;
 	};
 }
 

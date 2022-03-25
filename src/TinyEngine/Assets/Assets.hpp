@@ -22,8 +22,9 @@ namespace TinyEngine
 		virtual void OnAppQuit() {}
 
 	public:
-		void AddAsset(std::string_view key, const TParams& params);
+		virtual void LoadFromFile(std::string_view filePath) = 0;
 
+		void AddAsset(std::string_view key, const TParams& params);
 		void DestroyAssets();
 
 	private:
