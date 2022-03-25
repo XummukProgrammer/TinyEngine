@@ -20,6 +20,8 @@ namespace TinyEngine
 		_window.GetGui().SubscribeRenderer(std::bind(&Application::OnGuiRenderer, this, std::placeholders::_1));
 
 		_window.OnAppEntry();
+
+		_render.OnAppEntry();
 	}
 
 	void Application::OnQuit()
@@ -31,7 +33,7 @@ namespace TinyEngine
 		fmt::print("[Application] Quit\n");
 
 		_window.OnAppQuit();
-
+		_render.OnAppQuit();
 		_allAssets.OnAppQuit();
 	}
 
@@ -60,11 +62,13 @@ namespace TinyEngine
 	void Application::OnWindowUpdated(UpdatedEventParameters& params)
 	{
 		// При обновлении окна необходимо об этом проинформировать другие поля.
+		_render.OnWindowUpdated();
 	}
 
 	void Application::OnWindowDrawed(DrawedEventParameters& params)
 	{ 
 		// При отрисовке окна необходимо об этом проинформировать другие поля.
+		_render.OnWindowDrawed();
 	}
 
 	void Application::OnWindowEvented(EventedParameters& params)

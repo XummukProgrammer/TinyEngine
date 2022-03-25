@@ -4,6 +4,7 @@
 #include "Window.hpp"
 #include <TinyEngine/Assets/AllAssets.hpp>
 #include <TinyEngine/Core/PathBuilder.hpp>
+#include <TinyEngine/Render/Render.hpp>
 
 #include <string>
 
@@ -43,6 +44,9 @@ namespace TinyEngine
 		PathBuilder& GetPathBuilder() { return _pathBuilder; }
 		const PathBuilder& GetConstPathBuilder() const { return _pathBuilder; }
 
+		Render& GetRender() { return _render; }
+		const Render& GetRender() const { return _render; }
+
 	public:
 		// Запустить окно (Перехватывает управления у класса Application).
 		void ExecWindow();
@@ -73,6 +77,9 @@ namespace TinyEngine
 
 		// Создатель путей в приложении.
 		PathBuilder _pathBuilder;
+
+		// Отрисовка объектов.
+		Render _render;
 	};
 }
 

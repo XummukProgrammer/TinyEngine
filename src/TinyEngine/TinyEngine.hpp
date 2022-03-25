@@ -30,4 +30,10 @@
 #include <TinyEngine/Assets/AssetParameters.hpp>
 #include <TinyEngine/Assets/TextureAssets.hpp>
 
+#include <TinyEngine/Render/Render.hpp>
+#include <TinyEngine/Render/ILayout.hpp>
+#include <TinyEngine/Render/IObject.hpp>
+#include <TinyEngine/Render/ObjectsLayout.hpp>
+#include <TinyEngine/Render/VisualObject.hpp>
+
 #endif // _TINY_ENGINE_HEADER_

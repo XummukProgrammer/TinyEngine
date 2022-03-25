@@ -31,6 +31,12 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Assets/IAsset.hpp
 	src/TinyEngine/Assets/AssetParameters.hpp
 	src/TinyEngine/Assets/TextureAssets.hpp
+	
+	src/TinyEngine/Render/Render.hpp
+	src/TinyEngine/Render/ILayout.hpp
+	src/TinyEngine/Render/IObject.hpp
+	src/TinyEngine/Render/ObjectsLayout.hpp
+	src/TinyEngine/Render/VisualObject.hpp
 )
 
 set(ENGINE_SOURCES
@@ -65,4 +71,10 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Assets/IAsset.cpp
 	src/TinyEngine/Assets/AssetParameters.cpp
 	src/TinyEngine/Assets/TextureAssets.cpp
+	
+	src/TinyEngine/Render/Render.cpp
+	src/TinyEngine/Render/ILayout.cpp
+	src/TinyEngine/Render/IObject.cpp
+	src/TinyEngine/Render/ObjectsLayout.cpp
+	src/TinyEngine/Render/VisualObject.cpp
 )
