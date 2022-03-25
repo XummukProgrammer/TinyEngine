@@ -21,6 +21,12 @@ namespace TinyEngine
 		void OnQuit();
 
 	public:
+		void SetConsoleArgumentCount(int argc) { _consoleArgumentCount = argc; }
+		int GetConsoleArgumentCount() const { return _consoleArgumentCount; }
+
+		void SetConsoleArguments(char** argv) { _consoleArguments = argv; }
+		char** GetConsoleArguments() const { return _consoleArguments; }
+
 		void SetName(std::string_view name);
 		const std::string& GetName() const { return _name; }
 
@@ -55,6 +61,11 @@ namespace TinyEngine
 
 		// Все ассеты.
 		AllAssets _allAssets;
+
+		// Кол-во аргументов командной строки.
+		int _consoleArgumentCount = 0;
+		// Аргументы командной строки.
+		char** _consoleArguments;
 	};
 }
 
