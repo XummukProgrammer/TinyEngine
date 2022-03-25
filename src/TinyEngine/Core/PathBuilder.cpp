@@ -2,36 +2,87 @@
 
 #include <TinyEngine/Core/Core.hpp>
 
+#include <fmt/format.h>
+
 #include <filesystem>
 
 namespace TinyEngine
 {
     std::string PathBuilder::GetExecuteFilePath() const
     {
-        if (Core::GetApplication().GetConsoleArgumentCount() > 0)
+        if (_executeFilePath.empty() && (Core::GetApplication().GetConsoleArgumentCount() > 0))
         {
-            static std::string executeFilePath = std::string{Core::GetApplication().GetConsoleArguments()[0]};
-            return executeFilePath;
+            _executeFilePath = std::string{Core::GetApplication().GetConsoleArguments()[0]};
         }
 
-        return "";
+        return _executeFilePath;
     }
 
     std::string PathBuilder::GetExecuteFileDir() const
     {
-        static std::string executeFileDir;
-
-        if (executeFileDir.empty())
+        if (_executeFileDir.empty())
         {
             const auto& executeFilePath = GetExecuteFilePath();
 
             if (!executeFilePath.empty())
             {
                 auto path = std::filesystem::path(executeFilePath);
-                executeFileDir = path.remove_filename().generic_string(); 
+                _executeFileDir = path.remove_filename().generic_string(); 
             }           
         }
 
-        return executeFileDir;
+        return _executeFileDir;
+    }
+
+    std::string PathBuilder::GetRootDir() const
+    {
+        if (_rootDir.empty())
+        {
+            const auto& executeFileDir = GetExecuteFileDir();
+
+            if (!executeFileDir.empty())
+            {
+                _rootDir = fmt::format("{}../", executeFileDir);
+            }
+        }
+
+        return _rootDir;
+    }
+
+    std::string PathBuilder::GetBinDir() const
+    {
+        return GetExecuteFileDir();
+    }
+
+    std::string PathBuilder::GetAssetsDir() const
+    {
+        if (_assetsDir.empty())
+        {
+            const auto& rootDir = GetRootDir();
+
+            if (!rootDir.empty())
+            {
+                _assetsDir = fmt::format("{}assets/", rootDir);
+            }
+        }
+
+        return _assetsDir;
+    }
+
+    std::string PathBuilder::GetDirFromType(DirType dirType) const
+    {
+        switch (dirType)
+        {
+            case DirType::Root: return GetRootDir();
+            case DirType::Bin: return GetBinDir();
+            case DirType::Assets: return GetAssetsDir();
+        }
+
+        return "";
+    }
+
+    std::string PathBuilder::BuildPath(DirType dirType, std::string_view path) const
+    {
+        return fmt::format("{}{}", GetDirFromType(dirType), path);
     }
 }
