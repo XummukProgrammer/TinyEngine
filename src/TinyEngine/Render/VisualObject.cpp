@@ -6,10 +6,6 @@
 
 namespace TinyEngine
 {
-	void VisualObject::OnWindowUpdated()
-	{
-	}
-
 	void VisualObject::OnWindowDrawed()
 	{ 
 		Core::GetApplication().GetWindow().DrawObject(_sprite);
