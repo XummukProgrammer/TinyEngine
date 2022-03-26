@@ -10,6 +10,7 @@ namespace TinyEngine
 
 	void Render::OnAppQuit()
 	{
+		RemoveLayouts();
 	}
 
 	void Render::OnWindowUpdated()
@@ -41,6 +42,16 @@ namespace TinyEngine
 		{
 			_layouts.erase(it);
 		}
+	}
+
+	void Render::RemoveLayouts()
+	{ 
+		std::for_each(_layouts.begin(), _layouts.end(), [](ILayout* layout)
+		{
+			layout->RemoveObjects();
+		});
+
+		_layouts.clear();
 	}
 
 	size_t Render::GetObjectsCount() const

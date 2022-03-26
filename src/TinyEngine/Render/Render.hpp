@@ -31,6 +31,8 @@ namespace TinyEngine
 		void AddLayout(ILayout* layout);
 		// Удалить слой.
 		void RemoveLayout(const ILayout* layout);
+		// Удалить все слои.
+		void RemoveLayouts();
 		// Получить кол-во слоёв.
 		size_t GetLayoutsCount() const { return _layouts.size(); }
 

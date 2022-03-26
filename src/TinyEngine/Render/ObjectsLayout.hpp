@@ -28,6 +28,8 @@ namespace TinyEngine
 		void AddObject(IObject* object);
 		// Удалить объект.
 		void RemoveObject(const IObject* object);
+		// Удалить все объекты.
+		void RemoveObjects() override { _objects.clear(); }
 		// Получить кол-во объектов.
 		size_t GetObjectsCount() const override { return _objects.size(); }
 

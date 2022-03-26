@@ -16,6 +16,8 @@ namespace TinyEngine
 		// Окно рисуется.
 		virtual void OnWindowDrawed() {}
 		
+		// Удалить все объекты.
+		virtual void RemoveObjects() {}
 		// Получить кол-во объектов.
 		virtual size_t GetObjectsCount() const { return 0; }
 	};
