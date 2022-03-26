@@ -42,4 +42,16 @@ namespace TinyEngine
 			_layouts.erase(it);
 		}
 	}
+
+	size_t Render::GetObjectsCount() const
+	{
+		size_t count = 0;
+
+		std::for_each(_layouts.begin(), _layouts.end(), [&count](ILayout* layout)
+		{
+			count += layout->GetObjectsCount();
+		});
+
+		return count;
+	}
 }

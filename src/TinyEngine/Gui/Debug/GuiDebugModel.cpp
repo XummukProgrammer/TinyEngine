@@ -23,4 +23,9 @@ namespace TinyEngine
 	{
 		return Core::GetApplication().GetRender().GetLayoutsCount();
 	}
+
+	size_t GuiDebugModel::GetObjectsCount() const
+	{
+		return Core::GetApplication().GetRender().GetObjectsCount();
+	}
 }

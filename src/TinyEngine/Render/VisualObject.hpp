@@ -7,6 +7,7 @@
 
 namespace TinyEngine
 {
+	// Визуальный объект (Спрайт).
 	class VisualObject final : public IObject
 	{
 	public:
@@ -14,10 +15,13 @@ namespace TinyEngine
 		~VisualObject() = default;
 
 	public:
+		// Окно обновляется.
 		void OnWindowUpdated() override;
+		// Окно рисуется.
 		void OnWindowDrawed() override;
 
 	private:
+		// Спрайт.
 		sf::Sprite _sprite;
 	};
 }

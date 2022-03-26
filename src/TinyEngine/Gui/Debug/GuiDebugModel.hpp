@@ -22,6 +22,8 @@ namespace TinyEngine
 		unsigned GetFpsCounter() const;
 		// Получить кол-во слоёв.
 		size_t GetLayoutsCount() const;
+		// Получить общее кол-во объектов.
+		size_t GetObjectsCount() const;
 	};
 }
 

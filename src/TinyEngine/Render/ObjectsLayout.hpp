@@ -10,6 +10,7 @@
 
 namespace TinyEngine
 {
+	// Слой состоящий из базовых объектов.
 	class ObjectsLayout final : public ILayout
 	{
 	public:
@@ -17,14 +18,21 @@ namespace TinyEngine
 		~ObjectsLayout() = default;
 
 	public:
+		// Окно обновляется.
 		void OnWindowUpdated() override;
+		// Окно рисуется.
 		void OnWindowDrawed() override;
 
 	public:
+		// Добавить объект.
 		void AddObject(IObject* object);
+		// Удалить объект.
 		void RemoveObject(const IObject* object);
+		// Получить кол-во объектов.
+		size_t GetObjectsCount() const override { return _objects.size(); }
 
 	private:
+		// Объекты.
 		std::vector<IObject*> _objects;
 	};
 }

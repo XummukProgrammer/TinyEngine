@@ -3,6 +3,7 @@
 
 namespace TinyEngine
 {
+	// Объект.
 	class IObject
 	{
 	public:
@@ -10,7 +11,9 @@ namespace TinyEngine
 		virtual ~IObject() = default;
 
 	public:
+		// Окно обновляется.
 		virtual void OnWindowUpdated() {}
+		// Окно рисуется.
 		virtual void OnWindowDrawed() {}
 	};
 }

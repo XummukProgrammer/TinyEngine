@@ -15,6 +15,7 @@ namespace TinyEngine
 		ImGui::Text(fmt::format("App version: {}", debugModel.GetAppVersion()).c_str());
 		ImGui::Text(fmt::format("Fps: {}", debugModel.GetFpsCounter()).c_str());
 		ImGui::Text(fmt::format("Layouts count: {}", debugModel.GetLayoutsCount()).c_str());
+		ImGui::Text(fmt::format("Objects count: {}", debugModel.GetObjectsCount()).c_str());
 		ImGui::End();
 	}
 }

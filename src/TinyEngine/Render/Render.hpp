@@ -8,6 +8,7 @@
 
 namespace TinyEngine
 {
+	// Класс для отрисовки.
 	class Render final
 	{
 	public:
@@ -15,10 +16,14 @@ namespace TinyEngine
 		~Render() = default;
 
 	public:
+		// Приложение запускается.
 		void OnAppEntry();
+		// Приложение закрывается.
 		void OnAppQuit();
 
+		// Окно обновляется.
 		void OnWindowUpdated();
+		// Окно рисуется.
 		void OnWindowDrawed();
 
 	public:
@@ -29,7 +34,11 @@ namespace TinyEngine
 		// Получить кол-во слоёв.
 		size_t GetLayoutsCount() const { return _layouts.size(); }
 
+		// Получить общее кол-во объектов.
+		size_t GetObjectsCount() const;
+
 	private:
+		// Слои.
 		std::vector<ILayout*> _layouts;
 	};
 }
