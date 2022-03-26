@@ -15,8 +15,6 @@ namespace TinyEngine
 		~RadialLightObject() = default;
 
 	public:
-		// Окно обновляется.
-		void OnWindowUpdated() override;
 		// Окно рисуется.
 		void OnWindowDrawed() override;
 
