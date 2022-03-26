@@ -22,6 +22,9 @@ namespace TinyEngine
 		_window.OnAppEntry();
 
 		_render.OnAppEntry();
+
+		EntriedEventParameters params;
+		OnEntried(params);
 	}
 
 	void Application::OnQuit()
@@ -35,6 +38,12 @@ namespace TinyEngine
 		_window.OnAppQuit();
 		_render.OnAppQuit();
 		_allAssets.OnAppQuit();
+
+		QuitedEventParameters params;
+		OnQuited(params);
+
+		UnsubscribeAllEntried();
+		UnsubscribeAllQuited();
 	}
 
 	void Application::SetName(std::string_view name)

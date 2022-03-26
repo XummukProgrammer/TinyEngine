@@ -6,12 +6,31 @@
 #include <TinyEngine/Core/PathBuilder.hpp>
 #include <TinyEngine/Render/Render.hpp>
 
+#include <TinyEngine/Events/Publisher.hpp>
+
 #include <string>
 
 namespace TinyEngine
 {
+	class EntriedEventParameters final : public EventParameters
+	{
+	public:
+		EntriedEventParameters() = default;
+		~EntriedEventParameters() = default;
+	};
+
+	class QuitedEventParameters final : public EventParameters
+	{
+	public:
+		QuitedEventParameters() = default;
+		~QuitedEventParameters() = default;
+	};
+
 	class Application final
 	{
+		DECLARE_EVENT(EntriedEventParameters, Entried)
+		DECLARE_EVENT(QuitedEventParameters, Quited)
+
 	public:
 		Application() = default;
 		~Application() = default;
