@@ -70,6 +70,11 @@ namespace TinyEngine
 		}
 	}
 
+	void Window::DrawObject(sf::Drawable& drawable)
+	{ 
+		_renderWindow->draw(drawable);
+	}
+
 	void Window::OnUpdate()
 	{ 
 		UpdatedEventParameters params;

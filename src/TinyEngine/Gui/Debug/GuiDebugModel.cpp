@@ -18,4 +18,9 @@ namespace TinyEngine
 	{
 		return Core::GetApplication().GetWindow().GetFpsCounter();
 	}
+
+	size_t GuiDebugModel::GetLayoutsCount() const
+	{
+		return Core::GetApplication().GetRender().GetLayoutsCount();
+	}
 }

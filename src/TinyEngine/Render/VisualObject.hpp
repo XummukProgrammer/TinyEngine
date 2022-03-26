@@ -3,6 +3,8 @@
 
 #include <TinyEngine/Render/IObject.hpp>
 
+#include <SFML/Graphics.hpp>
+
 namespace TinyEngine
 {
 	class VisualObject final : public IObject
@@ -14,6 +16,9 @@ namespace TinyEngine
 	public:
 		void OnWindowUpdated() override;
 		void OnWindowDrawed() override;
+
+	private:
+		sf::Sprite _sprite;
 	};
 }
 

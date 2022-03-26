@@ -84,8 +84,6 @@ namespace TinyEngine
 		void Create();
 		// Уничтожить окно.
 		void Destroy();
-
-	public:
 		// Запустить окно.
 		void Exec();
 
@@ -97,6 +95,10 @@ namespace TinyEngine
 		float GetDeltaTime() const { return _deltaTime.asSeconds(); }
 		// Получить счётчик Fps.
 		unsigned GetFpsCounter() const { return _fpsCounter.GetFpsCounter(); }
+
+	public:
+		// Отрисовать объект.
+		void DrawObject(sf::Drawable& drawable);
 
 	private:
 		void OnUpdate();

@@ -20,6 +20,8 @@ namespace TinyEngine
 		std::string GetAppVersion() const;
 		// Получить счётчик FPS.
 		unsigned GetFpsCounter() const;
+		// Получить кол-во слоёв.
+		size_t GetLayoutsCount() const;
 	};
 }
 
