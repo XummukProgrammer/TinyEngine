@@ -35,5 +35,6 @@
 #include <TinyEngine/Render/IObject.hpp>
 #include <TinyEngine/Render/ObjectsLayout.hpp>
 #include <TinyEngine/Render/VisualObject.hpp>
+#include <TinyEngine/Render/RadialLightObject.hpp>
 
 #endif // _TINY_ENGINE_HEADER_

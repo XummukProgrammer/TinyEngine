@@ -37,6 +37,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Render/IObject.hpp
 	src/TinyEngine/Render/ObjectsLayout.hpp
 	src/TinyEngine/Render/VisualObject.hpp
+	src/TinyEngine/Render/RadialLightObject.hpp
 )
 
 set(ENGINE_SOURCES
@@ -77,4 +78,5 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Render/IObject.cpp
 	src/TinyEngine/Render/ObjectsLayout.cpp
 	src/TinyEngine/Render/VisualObject.cpp
+	src/TinyEngine/Render/RadialLightObject.cpp
 )

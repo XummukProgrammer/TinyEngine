@@ -18,6 +18,7 @@ set_target_properties(fmt PROPERTIES FOLDER "deps")
 
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/Candle" "${CMAKE_CURRENT_BINARY_DIR}/deps/Candle")
 set_target_properties(Candle-s PROPERTIES FOLDER "deps")
+target_compile_definitions(Candle-s PUBLIC -DRADIAL_LIGHT_FIX)
 
 set(IMGUI_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui-sfml" "${CMAKE_CURRENT_BINARY_DIR}/deps/imgui-sfml")

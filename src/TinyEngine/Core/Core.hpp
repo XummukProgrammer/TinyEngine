@@ -12,14 +12,14 @@ namespace TinyEngine
 		~Core() = default;
 
 	public:
-		static Application& GetApplication() { return s_application; }
+		static Application& GetApplication() { return *s_application; }
 
 	public:
 		// Запустить игровой движок.
 		void Exec();
 
 	private:
-		static Application s_application;
+		static Application* s_application;
 	};
 }
 

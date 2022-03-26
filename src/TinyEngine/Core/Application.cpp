@@ -12,7 +12,7 @@ namespace TinyEngine
 			GetVersion());
 
 		_allAssets.OnAppEntry();
-
+		
 		_window.SubscribeUpdated(std::bind(&Application::OnWindowUpdated, this, std::placeholders::_1));
 		_window.SubscribeDrawed(std::bind(&Application::OnWindowDrawed, this, std::placeholders::_1));
 		_window.SubscribeEvented(std::bind(&Application::OnWindowEvented, this, std::placeholders::_1));

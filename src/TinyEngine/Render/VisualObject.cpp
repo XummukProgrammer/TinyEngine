@@ -21,6 +21,7 @@ namespace TinyEngine
 
 		if (!textureAssets.HasAsset(assetId))
 		{
+			_sprite.setTexture(sf::Texture());
 			return;
 		}
 		
