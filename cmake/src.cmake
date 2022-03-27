@@ -38,6 +38,11 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Render/ObjectsLayout.hpp
 	src/TinyEngine/Render/VisualObject.hpp
 	src/TinyEngine/Render/RadialLightObject.hpp
+	
+	src/TinyEngine/ActionsQueue/ActionsQueue.hpp
+	src/TinyEngine/ActionsQueue/IAction.hpp
+	src/TinyEngine/ActionsQueue/CustomAction.hpp
+	src/TinyEngine/ActionsQueue/SequenceActions.hpp
 )
 
 set(ENGINE_SOURCES
@@ -79,4 +84,9 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Render/ObjectsLayout.cpp
 	src/TinyEngine/Render/VisualObject.cpp
 	src/TinyEngine/Render/RadialLightObject.cpp
+	
+	src/TinyEngine/ActionsQueue/ActionsQueue.cpp
+	src/TinyEngine/ActionsQueue/IAction.cpp
+	src/TinyEngine/ActionsQueue/CustomAction.cpp
+	src/TinyEngine/ActionsQueue/SequenceActions.cpp
 )

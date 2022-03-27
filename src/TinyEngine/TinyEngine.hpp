@@ -37,4 +37,9 @@
 #include <TinyEngine/Render/VisualObject.hpp>
 #include <TinyEngine/Render/RadialLightObject.hpp>
 
+#include <TinyEngine/ActionsQueue/ActionsQueue.hpp>
+#include <TinyEngine/ActionsQueue/IAction.hpp>
+#include <TinyEngine/ActionsQueue/CustomAction.hpp>
+#include <TinyEngine/ActionsQueue/SequenceActions.hpp>
+
 #endif // _TINY_ENGINE_HEADER_

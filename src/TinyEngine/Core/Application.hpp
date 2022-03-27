@@ -5,6 +5,7 @@
 #include <TinyEngine/Assets/AllAssets.hpp>
 #include <TinyEngine/Core/PathBuilder.hpp>
 #include <TinyEngine/Render/Render.hpp>
+#include <TinyEngine/ActionsQueue/ActionsQueue.hpp>
 
 #include <TinyEngine/Events/Publisher.hpp>
 
@@ -66,6 +67,9 @@ namespace TinyEngine
 		Render& GetRender() { return _render; }
 		const Render& GetRender() const { return _render; }
 
+		ActionsQueue& GetActionsQeueue() { return _actionsQueue; }
+		const ActionsQueue& GetConstActionsQueue() const { return _actionsQueue; }
+
 	public:
 		// Запустить окно (Перехватывает управления у класса Application).
 		void ExecWindow();
@@ -99,6 +103,9 @@ namespace TinyEngine
 
 		// Отрисовка объектов.
 		Render _render;
+
+		// Очередь экшенов.
+		ActionsQueue _actionsQueue;
 	};
 }
 
