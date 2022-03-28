@@ -14,4 +14,9 @@ namespace TinyEngine
 			_onExecuteCallback();
 		}
 	}
+
+	bool CustomAction::IsExecuted() const
+	{
+		return _isExecutedCallback ? _isExecutedCallback() : true;
+	}
 }

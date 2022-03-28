@@ -20,14 +20,16 @@ namespace TinyEngine
 	public:
 		bool IsExecute() const override;
 		void OnExecute() override;
-		bool IsExecuted() const override { return true; }
+		bool IsExecuted() const override;
 
 	public:
 		void SetIsExecuteCallback(const ConditionCallback& callback) { _isExecuteCallback = callback; }
 		void SetOnExecuteCallback(const DefaultCallback& callback) { _onExecuteCallback = callback; }
+		void SetExecutedCallback(const ConditionCallback& callback) { _isExecutedCallback = callback; }
 
 	private:
 		ConditionCallback _isExecuteCallback;
+		ConditionCallback _isExecutedCallback;
 		DefaultCallback _onExecuteCallback;
 	};
 }
