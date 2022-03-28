@@ -9,6 +9,8 @@
 
 #include <TinyEngine/Events/Publisher.hpp>
 
+#include <TinyEngine/Data/Singleton.hpp>
+
 #include <string>
 
 namespace TinyEngine
@@ -27,7 +29,7 @@ namespace TinyEngine
 		~QuitedEventParameters() = default;
 	};
 
-	class Application final
+	class Application final : public Singleton<Application>
 	{
 		DECLARE_EVENT(EntriedEventParameters, Entried)
 		DECLARE_EVENT(QuitedEventParameters, Quited)

@@ -1,6 +1,6 @@
 ﻿#include "TextureAssets.hpp"
 
-#include <TinyEngine/Core/Core.hpp>
+#include <TinyEngine/Core/Application.hpp>
 
 #include <fmt/format.h>
 #include <pugixml.hpp>
@@ -17,7 +17,7 @@ namespace TinyEngine
 
 	void TextureAssets::OnAppEntry()
 	{
-		auto&& filePath = Core::GetApplication().GetConstPathBuilder().BuildPath(PathBuilder::DirType::Assets, "textures.xml");
+		auto&& filePath = Application::GetInstance().GetConstPathBuilder().BuildPath(PathBuilder::DirType::Assets, "textures.xml");
 		LoadFromFile(filePath);
 	}
 
@@ -35,7 +35,7 @@ namespace TinyEngine
 			return;
 		}
 
-		auto fileDir = Core::GetApplication().GetConstPathBuilder().FilePathToDir(filePath);
+		auto fileDir = Application::GetInstance().GetConstPathBuilder().FilePathToDir(filePath);
 		auto rootNode = doc.child("root");
 
 		for (auto textureNode = rootNode.first_child(); textureNode; textureNode = textureNode.next_sibling())

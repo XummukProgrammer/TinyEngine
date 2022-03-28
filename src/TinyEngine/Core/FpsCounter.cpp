@@ -1,6 +1,6 @@
 ﻿#include "FpsCounter.hpp"
 
-#include <TinyEngine/Core/Core.hpp>
+#include <TinyEngine/Core/Application.hpp>
 
 namespace TinyEngine
 {
@@ -24,7 +24,7 @@ namespace TinyEngine
 
 	void FpsCounter::OnExpired(TimerExpiredEventParameters& params)
 	{ 
-		const float deltaTime = Core::GetApplication().GetConstWindow().GetDeltaTime();
+		const float deltaTime = Application::GetInstance().GetConstWindow().GetDeltaTime();
 
 		_lastFpsCounter = static_cast<unsigned>(1.f / deltaTime);
 

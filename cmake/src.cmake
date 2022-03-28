@@ -16,6 +16,7 @@ set(ENGINE_HEADERS
 	
 	src/TinyEngine/Data/CounterRef.hpp
 	src/TinyEngine/Data/EventableValue.hpp
+	src/TinyEngine/Data/Singleton.hpp
 	
 	src/TinyEngine/Gui/GuiController.hpp
 	src/TinyEngine/Gui/GuiModel.hpp
@@ -63,6 +64,7 @@ set(ENGINE_SOURCES
 	
 	src/TinyEngine/Data/CounterRef.cpp
 	src/TinyEngine/Data/EventableValue.cpp
+	src/TinyEngine/Data/Singleton.cpp
 	
 	src/TinyEngine/Gui/GuiController.cpp
 	src/TinyEngine/Gui/GuiModel.cpp

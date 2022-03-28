@@ -1,6 +1,6 @@
 ﻿#include "Timer.hpp"
 
-#include <TinyEngine/Core/Core.hpp>
+#include <TinyEngine/Core/Application.hpp>
 
 namespace TinyEngine
 {
@@ -22,7 +22,7 @@ namespace TinyEngine
 			return;
 		}
 
-		const float deltaTime = Core::GetApplication().GetConstWindow().GetDeltaTime();
+		const float deltaTime = Application::GetInstance().GetConstWindow().GetDeltaTime();
 
 		_time -= deltaTime;
 	}

@@ -1,6 +1,6 @@
 ﻿#include "PathBuilder.hpp"
 
-#include <TinyEngine/Core/Core.hpp>
+#include <TinyEngine/Core/Application.hpp>
 
 #include <fmt/format.h>
 
@@ -17,9 +17,9 @@ namespace TinyEngine
 
     std::string PathBuilder::GetExecuteFilePath() const
     {
-        if (_executeFilePath.empty() && (Core::GetApplication().GetConsoleArgumentCount() > 0))
+        if (_executeFilePath.empty() && (Application::GetInstance().GetConsoleArgumentCount() > 0))
         {
-            _executeFilePath = std::string{Core::GetApplication().GetConsoleArguments()[0]};
+            _executeFilePath = std::string{Application::GetInstance().GetConsoleArguments()[0]};
         }
 
         return _executeFilePath;

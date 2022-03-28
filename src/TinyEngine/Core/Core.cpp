@@ -1,15 +1,19 @@
 ﻿#include "Core.hpp"
 
+#include <TinyEngine/Core/Application.hpp>
+
 namespace TinyEngine
 {
-	Application* Core::s_application = new Application();
-
 	void Core::Exec()
 	{
-		// Последовательный запуск методов, формирующие конвейер приложения.
-		s_application->OnEntry();
-		s_application->ExecWindow();
-		s_application->OnQuit();
-		delete s_application;
+		{
+			// Последовательный запуск методов, формирующие конвейер приложения.
+			auto& application = Application::GetInstance();
+			application.OnEntry();
+			application.ExecWindow();
+			application.OnQuit();
+		}
+
+		Application::ResetInstance();
 	}
 }

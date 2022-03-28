@@ -1,19 +1,17 @@
 ﻿#include "VisualObject.hpp"
 
-#include <TinyEngine/Core/Core.hpp>
-
-#include <TinyEngine/Core/Core.hpp>
+#include <TinyEngine/Core/Application.hpp>
 
 namespace TinyEngine
 {
 	void VisualObject::OnWindowDrawed()
 	{ 
-		Core::GetApplication().GetWindow().DrawObject(_sprite);
+		Application::GetInstance().GetWindow().DrawObject(_sprite);
 	}
 
 	void VisualObject::SetTexture(std::string_view assetId)
 	{ 
-		const auto& textureAssets = Core::GetApplication().GetAllAssets().GetConstTextureAssets();
+		const auto& textureAssets = Application::GetInstance().GetAllAssets().GetConstTextureAssets();
 
 		if (!textureAssets.HasAsset(assetId))
 		{

@@ -1,11 +1,11 @@
 ﻿#include "RadialLightObject.hpp"
 
-#include <TinyEngine/Core/Core.hpp>
+#include <TinyEngine/Core/Application.hpp>
 
 namespace TinyEngine
 {
 	void RadialLightObject::OnWindowDrawed()
 	{
-		Core::GetApplication().GetWindow().DrawObject(_radialLight);
+		Application::GetInstance().GetWindow().DrawObject(_radialLight);
 	}
 }
