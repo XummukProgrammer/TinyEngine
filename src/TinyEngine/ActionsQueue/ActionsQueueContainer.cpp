@@ -1,7 +1,5 @@
 ﻿#include "ActionsQueueContainer.hpp"
 
-#include <TinyEngine/ActionsQueue/SequenceActions.hpp>
-
 namespace TinyEngine
 {
 	void ActionsQueueContainer::OnWindowUpdated()
@@ -37,9 +35,9 @@ namespace TinyEngine
 		{
 			actionsIds.push_back(action->GetId());
 
-			if (auto sequenceActions = dynamic_cast<SequenceActions*>(action.get()))
+			if (auto containerAction = dynamic_cast<ActionsQueueContainer*>(action.get()))
 			{
-				auto&& sequenceActionsIds = sequenceActions->GetActionsIds();
+				auto&& sequenceActionsIds = containerAction->GetActionsIds();
 				actionsIds.insert(actionsIds.end(), sequenceActionsIds.begin(), sequenceActionsIds.end());
 			}
 		}
