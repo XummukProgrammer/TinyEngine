@@ -28,4 +28,9 @@ namespace TinyEngine
 	{
 		return Core::GetApplication().GetRender().GetObjectsCount();
 	}
+
+	std::vector<std::string> GuiDebugModel::GetActionsIds() const
+	{
+		return Core::GetApplication().GetConstActionsQueue().GetActionsIds();
+	}
 }

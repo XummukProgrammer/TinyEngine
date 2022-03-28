@@ -4,6 +4,7 @@
 #include <TinyEngine/ActionsQueue/IAction.hpp>
 
 #include <functional>
+#include <fmt/format.h>
 
 namespace TinyEngine
 {
@@ -23,11 +24,16 @@ namespace TinyEngine
 		bool IsExecuted() const override;
 
 	public:
+		void SetId(std::string_view id) override { _id = fmt::format("Action_{}", id); }
+		std::string GetId() const override { return _id; }
+
+	public:
 		void SetIsExecuteCallback(const ConditionCallback& callback) { _isExecuteCallback = callback; }
 		void SetOnExecuteCallback(const DefaultCallback& callback) { _onExecuteCallback = callback; }
 		void SetExecutedCallback(const ConditionCallback& callback) { _isExecutedCallback = callback; }
 
 	private:
+		std::string _id;
 		ConditionCallback _isExecuteCallback;
 		ConditionCallback _isExecutedCallback;
 		DefaultCallback _onExecuteCallback;

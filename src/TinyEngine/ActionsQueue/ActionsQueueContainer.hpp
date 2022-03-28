@@ -3,8 +3,9 @@
 
 #include <TinyEngine/ActionsQueue/IAction.hpp>
 
-#include <queue>
 #include <memory>
+#include <vector>
+#include <string>
 
 namespace TinyEngine
 {
@@ -22,12 +23,13 @@ namespace TinyEngine
 
 	public:
 		void AddAction(IActionPtr&& action);
+		std::vector<std::string> GetActionsIds() const;
 
 		bool IsEmpty() const { return _actionsQueue.empty(); }
 
 	private:
 		// Очередь экшенов.
-		std::queue<IActionPtr> _actionsQueue;
+		std::vector<IActionPtr> _actionsQueue;
 	};
 }
 

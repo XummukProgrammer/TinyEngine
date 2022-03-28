@@ -4,6 +4,7 @@
 #include <TinyEngine/Gui/GuiModel.hpp>
 
 #include <string>
+#include <vector>
 
 namespace TinyEngine
 {
@@ -24,6 +25,8 @@ namespace TinyEngine
 		size_t GetLayoutsCount() const;
 		// Получить общее кол-во объектов.
 		size_t GetObjectsCount() const;
+		// Получить активные экшены в очереди.
+		std::vector<std::string> GetActionsIds() const;
 	};
 }
 
