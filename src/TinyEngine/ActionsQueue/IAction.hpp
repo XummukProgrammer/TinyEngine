@@ -12,6 +12,7 @@ namespace TinyEngine
 	public:
 		virtual bool IsExecute() const = 0;
 		virtual void OnExecute() = 0;
+		virtual bool IsExecuted() const = 0;
 	};
 }
 

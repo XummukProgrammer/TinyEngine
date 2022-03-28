@@ -15,7 +15,10 @@ namespace TinyEngine
 		{
 			front->OnExecute();
 
-			_actionsQueue.pop();
+			if (front->IsExecuted())
+			{
+				_actionsQueue.pop();
+			}
 		}
 	}
 
