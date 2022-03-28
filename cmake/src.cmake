@@ -43,6 +43,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/ActionsQueue/IAction.hpp
 	src/TinyEngine/ActionsQueue/CustomAction.hpp
 	src/TinyEngine/ActionsQueue/SequenceActions.hpp
+	src/TinyEngine/ActionsQueue/ActionsQueueContainer.hpp
 )
 
 set(ENGINE_SOURCES
@@ -89,4 +90,5 @@ set(ENGINE_SOURCES
 	src/TinyEngine/ActionsQueue/IAction.cpp
 	src/TinyEngine/ActionsQueue/CustomAction.cpp
 	src/TinyEngine/ActionsQueue/SequenceActions.cpp
+	src/TinyEngine/ActionsQueue/ActionsQueueContainer.cpp
 )

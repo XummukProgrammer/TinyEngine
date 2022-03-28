@@ -41,5 +41,6 @@
 #include <TinyEngine/ActionsQueue/IAction.hpp>
 #include <TinyEngine/ActionsQueue/CustomAction.hpp>
 #include <TinyEngine/ActionsQueue/SequenceActions.hpp>
+#include <TinyEngine/ActionsQueue/ActionsQueueContainer.hpp>
 
 #endif // _TINY_ENGINE_HEADER_
