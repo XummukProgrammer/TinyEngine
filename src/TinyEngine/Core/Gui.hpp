@@ -41,6 +41,9 @@ namespace TinyEngine
 
 	private:
 		GuiControllers _guiControllers;
+
+	private:
+		bool _isOpenDockingWindow = true;
 	};
 }
 
