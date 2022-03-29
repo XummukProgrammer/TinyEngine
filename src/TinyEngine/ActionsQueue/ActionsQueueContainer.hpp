@@ -2,9 +2,9 @@
 #define _ACTIONS_QUEUE_CONTAINER_HEADER_
 
 #include <TinyEngine/ActionsQueue/IAction.hpp>
+#include <TinyEngine/Data/Queue.hpp>
 
 #include <memory>
-#include <vector>
 #include <string>
 
 namespace TinyEngine
@@ -25,11 +25,11 @@ namespace TinyEngine
 		void AddAction(IActionPtr&& action);
 		std::vector<std::string> GetActionsIds() const;
 
-		bool IsEmpty() const { return _actionsQueue.empty(); }
+		bool IsEmpty() const { return _actionsQueue.IsEmpty(); }
 
 	private:
 		// Очередь экшенов.
-		std::vector<IActionPtr> _actionsQueue;
+		Queue<IActionPtr> _actionsQueue;
 	};
 }
 

@@ -4,12 +4,12 @@ namespace TinyEngine
 {
 	void ActionsQueueContainer::OnWindowUpdated()
 	{ 
-		if (_actionsQueue.empty())
+		if (_actionsQueue.IsEmpty())
 		{
 			return;
 		}
 
-		auto& front = _actionsQueue.front();
+		const auto& front = _actionsQueue.Front();
 
 		if (front->IsExecute())
 		{
@@ -17,21 +17,21 @@ namespace TinyEngine
 
 			if (front->IsExecuted())
 			{
-				_actionsQueue.erase(_actionsQueue.begin());
+				_actionsQueue.Pop();
 			}
 		}
 	}
 
 	void ActionsQueueContainer::AddAction(IActionPtr&& action)
 	{ 
-		_actionsQueue.push_back(std::move(action));
+		_actionsQueue.Push(std::move(action));
 	}
 
 	std::vector<std::string> ActionsQueueContainer::GetActionsIds() const
 	{
 		std::vector<std::string> actionsIds;
 
-		for (const auto& action : _actionsQueue)
+		for (const auto& action : _actionsQueue.ToVector())
 		{
 			actionsIds.push_back(action->GetId());
 
