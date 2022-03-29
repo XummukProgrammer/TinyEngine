@@ -7,6 +7,8 @@ namespace TinyEngine
 		Create();
 
 		_gui.OnAppEntry();
+
+		_fpsCounter.StartTimer();
 	}
 
 	void Window::OnAppQuit()
@@ -79,8 +81,6 @@ namespace TinyEngine
 	{ 
 		UpdatedEventParameters params;
 		OnUpdated(params);
-
-		_fpsCounter.OnWindowUpdate();
 
 		_gui.OnWindowUpdated(*_renderWindow.get(), _deltaTime);
 	}

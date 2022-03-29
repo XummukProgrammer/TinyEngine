@@ -14,6 +14,11 @@ namespace TinyEngine
 		return Application::GetInstance().GetVersion();
 	}
 
+	float GuiDebugModel::GetDeltaTime() const
+	{
+		return Application::GetInstance().GetConstWindow().GetDeltaTime();
+	}
+
 	unsigned GuiDebugModel::GetFpsCounter() const
 	{
 		return Application::GetInstance().GetWindow().GetFpsCounter();

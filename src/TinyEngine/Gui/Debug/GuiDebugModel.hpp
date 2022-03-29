@@ -19,6 +19,8 @@ namespace TinyEngine
 		std::string GetAppName() const;
 		// Получить версию приложения.
 		std::string GetAppVersion() const;
+		// Получить Delta Time.
+		float GetDeltaTime() const;
 		// Получить счётчик FPS.
 		unsigned GetFpsCounter() const;
 		// Получить кол-во слоёв.

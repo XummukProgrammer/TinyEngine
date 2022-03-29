@@ -16,6 +16,7 @@ namespace TinyEngine
 		ImGui::Text("App:");
 		ImGui::Text(fmt::format("Name: {}", debugModel.GetAppName()).c_str());
 		ImGui::Text(fmt::format("Version: {}", debugModel.GetAppVersion()).c_str());
+		ImGui::Text(fmt::format("Delta time: {}", debugModel.GetDeltaTime()).c_str());
 		ImGui::Text(fmt::format("Fps: {}", debugModel.GetFpsCounter()).c_str());
 		ImGui::NewLine();
 

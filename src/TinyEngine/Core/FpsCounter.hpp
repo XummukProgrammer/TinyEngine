@@ -9,18 +9,13 @@ namespace TinyEngine
 	class FpsCounter final
 	{
 	public:
-		FpsCounter();
+		FpsCounter() = default;
 		~FpsCounter() = default;
-
-	public:
-		// Окно обновилось.
-		void OnWindowUpdate();
 
 	public:
 		// Получить счётчик Fps.
 		unsigned GetFpsCounter() const { return _lastFpsCounter; }
 
-	private:
 		// Запустить таймер.
 		void StartTimer();
 
@@ -30,8 +25,6 @@ namespace TinyEngine
 	private:
 		// Последнее значения счётчика Fps.
 		unsigned _lastFpsCounter = 0;
-		// Таймер для обновления значения счётчика Fps.
-		Timer _timer;
 	};
 }
 

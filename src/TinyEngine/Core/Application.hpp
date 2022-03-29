@@ -6,6 +6,7 @@
 #include <TinyEngine/Core/PathBuilder.hpp>
 #include <TinyEngine/Render/Render.hpp>
 #include <TinyEngine/ActionsQueue/ActionsQueue.hpp>
+#include <TinyEngine/Core/Timers.hpp>
 
 #include <TinyEngine/Events/Publisher.hpp>
 
@@ -72,6 +73,9 @@ namespace TinyEngine
 		ActionsQueue& GetActionsQeueue() { return _actionsQueue; }
 		const ActionsQueue& GetConstActionsQueue() const { return _actionsQueue; }
 
+		Timers& GetTimers() { return _timers; }
+		const Timers& GetConstTimers() const { return _timers; }
+
 	public:
 		// Запустить окно (Перехватывает управления у класса Application).
 		void ExecWindow();
@@ -108,6 +112,9 @@ namespace TinyEngine
 
 		// Очередь экшенов.
 		ActionsQueue _actionsQueue;
+
+		// Таймеры.
+		Timers _timers;
 	};
 }
 

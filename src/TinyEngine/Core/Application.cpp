@@ -71,6 +71,7 @@ namespace TinyEngine
 	void Application::OnWindowUpdated(UpdatedEventParameters& params)
 	{
 		// При обновлении окна необходимо об этом проинформировать другие поля.
+		_timers.OnWindowUpdate();
 		_actionsQueue.OnWindowUpdated();
 		_render.OnWindowUpdated();
 	}

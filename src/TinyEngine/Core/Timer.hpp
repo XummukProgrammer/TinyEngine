@@ -23,15 +23,17 @@ namespace TinyEngine
 	public:
 		void OnWindowUpdate();
 
-	public:
-		void SetTime(float time) { _time = time; }
-		float GetTime() const { return _time; }
-
 		bool IsStarted() const { return _isStarted; }
-		bool IsExpired() const { return GetTime() <= 0.f; }
+		bool IsExpired() const { return _time <= 0.f; }
 		
+		void SetIsLooped(bool isLooped) { _isLooped = isLooped; }
+		bool IsLooped() const { return _isLooped; }
+
+		void SetMaxTime(float maxTime) { _maxTime = maxTime; }
+		float GetMaxTime() const { return _maxTime; }
+
 	public:
-		void Start() { _isStarted = true; }
+		void Start();
 		void Stop() { _isStarted = false; }
 
 	private:
@@ -40,8 +42,12 @@ namespace TinyEngine
 	private:
 		// Текущее время таймера.
 		float _time = 0.f;
+		// Максимальное время (Будет установлено при запуске таймера).
+		float _maxTime = 0.f;
 		// Запущен ли таймер?
 		bool _isStarted = false;
+		// Зациклен ли таймер?
+		bool _isLooped = false;
 	};
 }
 

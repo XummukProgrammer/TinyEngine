@@ -8,6 +8,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Gui.hpp
 	src/TinyEngine/Core/FpsCounter.hpp
 	src/TinyEngine/Core/Timer.hpp
+	src/TinyEngine/Core/Timers.hpp
 	src/TinyEngine/Core/PathBuilder.hpp
 	
 	src/TinyEngine/Events/Subscriber.hpp
@@ -56,6 +57,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Gui.cpp
 	src/TinyEngine/Core/FpsCounter.cpp
 	src/TinyEngine/Core/Timer.cpp
+	src/TinyEngine/Core/Timers.cpp
 	src/TinyEngine/Core/PathBuilder.cpp
 	
 	src/TinyEngine/Events/Subscriber.cpp

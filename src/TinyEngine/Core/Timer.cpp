@@ -27,6 +27,12 @@ namespace TinyEngine
 		_time -= deltaTime;
 	}
 
+	void Timer::Start()
+	{ 
+		_isStarted = true;
+		_time = _maxTime;
+	}
+
 	void Timer::_OnExpired()
 	{
 		Stop();
