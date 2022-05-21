@@ -1,6 +1,8 @@
 ﻿#ifndef _TINY_ENGINE_INTERFACE_WINDOW_HEADER_
 #define _TINY_ENGINE_INTERFACE_WINDOW_HEADER_
 
+#include <TinyEngine/Events/Events.hpp>
+
 #include <string>
 
 namespace te
@@ -8,6 +10,17 @@ namespace te
 
 class IWindow
 {
+public:
+	class CUpdateEvent final : public CEvent
+	{
+	public:
+		CUpdateEvent() = default;
+		~CUpdateEvent() = default;
+	};
+
+public:
+	using CUpdateSender = CSender<CUpdateEvent>;
+
 public:
 	IWindow() = default;
 	virtual ~IWindow() = default;
@@ -23,6 +36,23 @@ public:
 
 	virtual void exec() = 0;
 	virtual void close() = 0;
+
+	virtual void destroy()
+	{
+		_updateSender.removeAllListeners();
+	}
+
+public:
+	CUpdateSender& getUpdateSender() { return _updateSender; }
+
+protected:
+	void onUpdate()
+	{
+		_updateSender.send(CUpdateEvent());
+	}
+
+private:
+	CUpdateSender _updateSender;
 };
 
 }

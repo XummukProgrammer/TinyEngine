@@ -12,7 +12,7 @@ template<typename TEvent>
 class CListener final
 {
 public:
-	static_assert(std::is_base_of_v<TEvent, CEvent>);
+	static_assert(std::is_base_of_v<CEvent, TEvent>);
 
 public:
 	using SendedCallback = std::function<void(const TEvent&)>;

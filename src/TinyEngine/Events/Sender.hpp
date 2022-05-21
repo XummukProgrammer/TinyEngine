@@ -13,7 +13,7 @@ template<typename TEvent>
 class CSender final
 {
 public:
-	static_assert(std::is_base_of_v<TEvent, CEvent>);
+	static_assert(std::is_base_of_v<CEvent, TEvent>);
 
 public:
 	using CListenerBase = CListener<TEvent>;

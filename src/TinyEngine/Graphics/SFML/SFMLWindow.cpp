@@ -23,6 +23,7 @@ void CSFMLWindow::exec()
 		}
 
 		_renderWindow.clear();
+		onUpdate();
 		_renderWindow.display();
 	}
 }
