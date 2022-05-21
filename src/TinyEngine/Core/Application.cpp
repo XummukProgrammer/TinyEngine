@@ -4,9 +4,13 @@
 namespace te
 {
 
+CApplication::CApplication(IWindowRef windowRef)
+	: _windowRef(windowRef)
+{}
+
 void CApplication::exec()
 { 
-	_context.windowRef.get().exec();
+	_windowRef.get().exec();
 }
 
 }

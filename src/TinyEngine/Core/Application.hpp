@@ -14,26 +14,14 @@ public:
 	using IWindowRef = std::reference_wrapper<IWindow>;
 
 public:
-	struct CContext
-	{
-		IWindowRef windowRef;
-
-		CContext(IWindowRef windowRef)
-			: windowRef(windowRef)
-		{}
-	};
-
-public:
-	CApplication(IWindowRef windowRef)
-		: _context(windowRef)
-	{}
+	CApplication(IWindowRef windowRef);
 	~CApplication() = default;
 
 public:
 	void exec();
 
 private:
-	CContext _context;
+	IWindowRef _windowRef;
 };
 
 }

@@ -1,5 +1,6 @@
 ﻿#include "SFMLWindow.hpp"
-#include <iostream>
+
+#include <SFML/Graphics.hpp>
 
 namespace te
 {
