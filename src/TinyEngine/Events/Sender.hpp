@@ -3,7 +3,7 @@
 
 #include "Listener.hpp"
 
-#include <memory>
+#include <functional>
 #include <list>
 
 namespace te
@@ -14,8 +14,8 @@ class CSender final
 {
 public:
 	using CListenerBase = CListener<TEvent>;
-	using CListenerPtr = std::unique_ptr<CListenerBase>;
-	using CListenerList = std::list<CListenerPtr>;
+	using CListenerRef = std::reference_wrapper<CListenerBase>;
+	using CListenerList = std::list<CListenerRef>;
 
 public:
 
@@ -24,7 +24,7 @@ public:
 	~CSender() = default;
 
 public:
-	void addListener(const typename CListenerBase::SendedCallback& callback);
+	void addListener(const CListenerRef& listenerRef);
 
 	void send(const TEvent& event);
 
@@ -33,17 +33,23 @@ private:
 };
 
 template<typename TEvent>
-void CSender<TEvent>::addListener(const typename CListenerBase::SendedCallback& callback)
+void CSender<TEvent>::addListener(const CListenerRef& listenerRef)
 { 
-	auto listener = std::make_unique<CListenerBase>(callback);
-	_listenerList.push_back(std::move(listener));
+	_listenerList.push_back(listenerRef);
 }
 
 template<typename TEvent>
 void CSender<TEvent>::send(const TEvent& event)
 { 
-	for (const auto& listener : _listenerList) {
-		listener->onSended(event);
+	for (auto it = _listenerList.begin(); it != _listenerList.end();) {
+		auto& listener = it->get();
+
+		if (!listener.isDestroyed()) {
+			listener.onSended(event);
+			++it;
+		} else {
+			it = _listenerList.erase(it);
+		}
 	}
 }
 

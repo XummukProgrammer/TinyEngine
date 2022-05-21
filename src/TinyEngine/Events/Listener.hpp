@@ -13,10 +13,15 @@ public:
 	using SendedCallback = std::function<void(const TEvent&)>;
 
 public:
-	CListener(const SendedCallback& callback);
+	CListener() = default;
 	~CListener() = default;
 
 public:
+	void setOnSenderCallback(const SendedCallback& callback);
+
+	void destroy();
+	bool isDestroyed() const;
+
 	void onSended(const TEvent& event);
 
 private:
@@ -24,9 +29,22 @@ private:
 };
 
 template<typename TEvent>
-CListener<TEvent>::CListener(const SendedCallback& callback)
-	: _onSendedCallback(callback)
-{}
+void CListener<TEvent>::setOnSenderCallback(const SendedCallback& callback)
+{ 
+	_onSendedCallback = callback;
+}
+
+template<typename TEvent>
+void CListener<TEvent>::destroy()
+{ 
+	_onSendedCallback = nullptr;
+}
+
+template<typename TEvent>
+bool CListener<TEvent>::isDestroyed() const
+{
+	return _onSendedCallback == nullptr;
+}
 
 template<typename TEvent>
 void CListener<TEvent>::onSended(const TEvent& event)
