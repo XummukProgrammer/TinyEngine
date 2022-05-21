@@ -1,6 +1,8 @@
 ﻿#ifndef _TINY_ENGINE_LISTENER_HEADER_
 #define _TINY_ENGINE_LISTENER_HEADER_
 
+#include "Event.hpp"
+
 #include <functional>
 
 namespace te
@@ -9,6 +11,9 @@ namespace te
 template<typename TEvent>
 class CListener final
 {
+public:
+	static_assert(std::is_base_of_v<TEvent, CEvent>);
+
 public:
 	using SendedCallback = std::function<void(const TEvent&)>;
 

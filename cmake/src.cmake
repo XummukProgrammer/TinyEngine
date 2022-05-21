@@ -21,8 +21,4 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Application.cpp
 	
 	src/TinyEngine/Graphics/SFML/SFMLWindow.cpp
-	
-	src/TinyEngine/Events/Event.cpp
-	src/TinyEngine/Events/Listener.cpp
-	src/TinyEngine/Events/Sender.cpp
 )
