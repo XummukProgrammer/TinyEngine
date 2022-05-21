@@ -5,33 +5,24 @@ namespace te
 {
 
 CSFMLWindow::CSFMLWindow(const CData& data)
-	: _data(data)
-{}
-
-void CSFMLWindow::create()
-{ 
-	_renderWindowPtr = std::make_unique<sf::RenderWindow>(sf::VideoMode(_data.width, _data.height), _data.title);
-}
-
-void CSFMLWindow::destroy()
-{ 
-	_renderWindowPtr.reset();
+	: _renderWindow(sf::VideoMode(data.width, data.height), data.title)
+{
+	_renderWindow.setFramerateLimit(data.maxFramerate);
+	_renderWindow.setVerticalSyncEnabled(false);
 }
 
 void CSFMLWindow::exec()
 { 
-	auto& renderWindowRef = *_renderWindowPtr.get();
-
-	while (renderWindowRef.isOpen()) {
+	while (_renderWindow.isOpen()) {
 		sf::Event event;
-		while (renderWindowRef.pollEvent(event)) {
+		while (_renderWindow.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
-				renderWindowRef.close();
+				_renderWindow.close();
 			}
 		}
 
-		renderWindowRef.clear();
-		renderWindowRef.display();
+		_renderWindow.clear();
+		_renderWindow.display();
 	}
 }
 

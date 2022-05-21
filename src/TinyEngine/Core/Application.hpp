@@ -33,10 +33,6 @@ public:
 	void exec();
 
 private:
-	void init();
-	void deinit();
-
-private:
 	CContext _context;
 };
 
