@@ -23,5 +23,4 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Application.cpp
 	
 	src/TinyEngine/Graphics/SFML/SFMLWindow.cpp
-	src/TinyEngine/Graphics/SFML/SFMLPoint.cpp
 )
