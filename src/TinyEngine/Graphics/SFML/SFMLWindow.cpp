@@ -55,6 +55,7 @@ void CSFMLWindow::exec()
 		onUpdate(_time.asSeconds());
 
 		_renderWindow.clear();
+		onDraw();
 		_renderWindow.display();
 	}
 }

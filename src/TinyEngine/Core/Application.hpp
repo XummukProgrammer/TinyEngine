@@ -14,6 +14,7 @@ class CApplication final
 public:
 	using IWindowRef = std::reference_wrapper<IWindow>;
 	using CWindowUpdateListener = CListener<IWindow::CUpdateEvent>;
+	using CWindowDrawListener = CListener<IWindow::CDrawEvent>;
 
 public:
 	CApplication(IWindowRef windowRef);
@@ -28,10 +29,12 @@ private:
 
 private:
 	void onUpdate(const IWindow::CUpdateEvent& updateEvent);
+	void onDraw(const IWindow::CDrawEvent& drawEvent);
 
 private:
 	IWindowRef _windowRef;
 	CWindowUpdateListener _windowUpdateListener;
+	CWindowDrawListener _windowDrawListener;
 };
 
 }

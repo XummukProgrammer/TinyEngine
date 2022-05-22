@@ -26,8 +26,16 @@ public:
 		float _deltaTime = 0.f;
 	};
 
+	class CDrawEvent final : public CEvent
+	{
+	public:
+		CDrawEvent() = default;
+		~CDrawEvent() = default;
+	};
+
 public:
 	using CUpdateSender = CSender<CUpdateEvent>;
+	using CDrawSender = CSender<CDrawEvent>;
 
 public:
 	IWindow() = default;
@@ -53,10 +61,12 @@ public:
 	virtual void destroy()
 	{
 		_updateSender.removeAllListeners();
+		_drawSender.removeAllListeners();
 	}
 
 public:
 	CUpdateSender& getUpdateSender() { return _updateSender; }
+	CDrawSender& getDrawSender() { return _drawSender; }
 
 protected:
 	void onUpdate(float deltaTime)
@@ -64,8 +74,15 @@ protected:
 		_updateSender.send(CUpdateEvent(deltaTime));
 	}
 
+	void onDraw()
+	{
+		_drawSender.send(CDrawEvent());
+	}
+
 private:
 	CUpdateSender _updateSender;
+	CDrawSender _drawSender;
+	
 };
 
 }

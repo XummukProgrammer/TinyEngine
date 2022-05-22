@@ -19,8 +19,13 @@ void CApplication::exec()
 
 void CApplication::init()
 { 
+	auto& window = _windowRef.get();
+
 	_windowUpdateListener.setOnSenderCallback(std::bind(&CApplication::onUpdate, this, std::placeholders::_1));
-	_windowRef.get().getUpdateSender().addListener(_windowUpdateListener);
+	window.getUpdateSender().addListener(_windowUpdateListener);
+
+	_windowDrawListener.setOnSenderCallback(std::bind(&CApplication::onDraw, this, std::placeholders::_1));
+	window.getDrawSender().addListener(_windowDrawListener);
 }
 
 void CApplication::destroy()
@@ -29,6 +34,10 @@ void CApplication::destroy()
 }
 
 void CApplication::onUpdate(const IWindow::CUpdateEvent& updateEvent)
+{
+}
+
+void CApplication::onDraw(const IWindow::CDrawEvent& drawEvent)
 {
 }
 
