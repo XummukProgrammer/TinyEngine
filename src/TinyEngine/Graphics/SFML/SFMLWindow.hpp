@@ -30,8 +30,13 @@ public:
 
 public:
 	void setTitle(const std::string& title) override { _renderWindow.setTitle(title); }
-	void setPosition(int x, int y) override { _renderWindow.setPosition({ x, y }); }
-	void setSize(unsigned x, unsigned y) override { _renderWindow.setSize({ x, y }); }
+	
+	void setPosition(IPointIntRef pointRef) override;
+	void getPosition(IPointIntRef pointRef) const override;
+
+	void setSize(IPointUnsignedRef pointRef) override;
+	void getSize(IPointUnsignedRef pointRef) const override;
+
 	void setActive(bool isActive) override { _renderWindow.setActive(isActive); }
 	void setVisible(bool isVisible) override { _renderWindow.setVisible(isVisible); }
 

@@ -2,6 +2,7 @@
 #define _TINY_ENGINE_INTERFACE_WINDOW_HEADER_
 
 #include <TinyEngine/Events/Events.hpp>
+#include <TinyEngine/Graphics/IPoint.hpp>
 
 #include <string>
 
@@ -34,8 +35,13 @@ public:
 
 public:
 	virtual void setTitle(const std::string& title) = 0;
-	virtual void setPosition(int x, int y) = 0;
-	virtual void setSize(unsigned x, unsigned y) = 0;
+
+	virtual void setPosition(IPointIntRef pointRef) = 0;
+	virtual void getPosition(IPointIntRef pointRef) const = 0;
+	
+	virtual void setSize(IPointUnsignedRef pointRef) = 0;
+	virtual void getSize(IPointUnsignedRef pointRef) const = 0;
+
 	virtual void setActive(bool isActive) = 0;
 	virtual void setVisible(bool isVisible) = 0;
 
