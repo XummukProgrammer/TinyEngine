@@ -1,6 +1,8 @@
 ﻿#ifndef _TINY_ENGINE_APPLICATION_HEADER_
 #define _TINY_ENGINE_APPLICATION_HEADER_
 
+#include "Paths.hpp"
+
 #include <TinyEngine/Events/Events.hpp>
 #include <TinyEngine/Graphics/Graphics.hpp>
 
@@ -17,10 +19,12 @@ public:
 	using CWindowDrawListener = CListener<IWindow::CDrawEvent>;
 
 public:
-	CApplication(IWindowRef windowRef);
+	CApplication(int argc, char* argv[], IWindowRef windowRef);
 	~CApplication() = default;
 
 public:
+	CPaths& getPaths() { return _paths; }
+
 	void exec();
 
 private:
@@ -35,6 +39,8 @@ private:
 	IWindowRef _windowRef;
 	CWindowUpdateListener _windowUpdateListener;
 	CWindowDrawListener _windowDrawListener;
+
+	CPaths _paths;
 };
 
 }

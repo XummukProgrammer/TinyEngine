@@ -4,6 +4,7 @@ set(ENGINE_HEADERS
 	
 	src/TinyEngine/Core/Core.hpp
 	src/TinyEngine/Core/Application.hpp
+	src/TinyEngine/Core/Paths.hpp
 	
 	src/TinyEngine/Graphics/Graphics.hpp
 	src/TinyEngine/Graphics/IWindow.hpp
@@ -21,6 +22,7 @@ set(ENGINE_HEADERS
 
 set(ENGINE_SOURCES
 	src/TinyEngine/Core/Application.cpp
+	src/TinyEngine/Core/Paths.cpp
 	
 	src/TinyEngine/Graphics/SFML/SFMLWindow.cpp
 )

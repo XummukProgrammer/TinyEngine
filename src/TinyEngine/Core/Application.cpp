@@ -4,8 +4,9 @@
 namespace TE
 {
 
-CApplication::CApplication(IWindowRef windowRef)
-	: _windowRef(windowRef)
+CApplication::CApplication(int argc, char* argv[], IWindowRef windowRef)
+	: _paths(argc, argv)
+	, _windowRef(windowRef)
 {
 	init();
 }
