@@ -14,7 +14,11 @@ CSFMLWindow::CSFMLWindow(const CData& data)
 
 void CSFMLWindow::exec()
 { 
+	_clock.restart();
+
 	while (_renderWindow.isOpen()) {
+		_time = _clock.restart();
+
 		sf::Event event;
 		while (_renderWindow.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
@@ -22,8 +26,9 @@ void CSFMLWindow::exec()
 			}
 		}
 
+		onUpdate(_time.asSeconds());
+
 		_renderWindow.clear();
-		onUpdate();
 		_renderWindow.display();
 	}
 }

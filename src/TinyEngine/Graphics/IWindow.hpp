@@ -14,8 +14,15 @@ public:
 	class CUpdateEvent final : public CEvent
 	{
 	public:
-		CUpdateEvent() = default;
+		CUpdateEvent(float deltaTime)
+			: _deltaTime(deltaTime)
+		{}
 		~CUpdateEvent() = default;
+
+		float getDeltaTime() const { return _deltaTime; }
+
+	private:
+		float _deltaTime = 0.f;
 	};
 
 public:
@@ -46,9 +53,9 @@ public:
 	CUpdateSender& getUpdateSender() { return _updateSender; }
 
 protected:
-	void onUpdate()
+	void onUpdate(float deltaTime)
 	{
-		_updateSender.send(CUpdateEvent());
+		_updateSender.send(CUpdateEvent(deltaTime));
 	}
 
 private:

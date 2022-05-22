@@ -42,6 +42,8 @@ public:
 
 private:
 	CRenderWindow _renderWindow;
+	sf::Clock _clock;
+	sf::Time _time;
 };
 
 }
