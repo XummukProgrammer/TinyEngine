@@ -1,0 +1,9 @@
+﻿#ifndef _TINY_ENGINE_ASSERT_HEADER_
+#define _TINY_ENGINE_ASSERT_HEADER_
+
+namespace TE
+{
+
+}
+
+#endif // _TINY_ENGINE_ASSERT_HEADER_

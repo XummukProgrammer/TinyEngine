@@ -5,6 +5,7 @@
 
 #include <TinyEngine/Events/Events.hpp>
 #include <TinyEngine/Graphics/Graphics.hpp>
+#include <TinyEngine/Debug/Log.hpp>
 
 #include <functional>
 
@@ -24,6 +25,7 @@ public:
 
 public:
 	CPaths& getPaths() { return _paths; }
+	CLog& getLog() { return _log; }
 
 	void exec();
 
@@ -41,6 +43,7 @@ private:
 	CWindowDrawListener _windowDrawListener;
 
 	CPaths _paths;
+	CLog _log;
 };
 
 }

@@ -18,6 +18,11 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Events/Event.hpp
 	src/TinyEngine/Events/Listener.hpp
 	src/TinyEngine/Events/Sender.hpp
+	
+	src/TinyEngine/Debug/Debug.hpp
+	src/TinyEngine/Debug/Log.hpp
+	src/TinyEngine/Debug/Assert.hpp
+	src/TinyEngine/Debug/DebugMessage.hpp
 )
 
 set(ENGINE_SOURCES
@@ -25,4 +30,8 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Paths.cpp
 	
 	src/TinyEngine/Graphics/SFML/SFMLWindow.cpp
+	
+	src/TinyEngine/Debug/Log.cpp
+	src/TinyEngine/Debug/Assert.cpp
+	src/TinyEngine/Debug/DebugMessage.cpp
 )

@@ -31,6 +31,8 @@ void CApplication::init()
 
 void CApplication::destroy()
 { 
+	_log.dumpAllLogMessages(_paths);
+
 	_windowRef.get().destroy();
 }
 
