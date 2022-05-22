@@ -7,7 +7,7 @@
 
 #include <functional>
 
-namespace te
+namespace TE
 {
 
 class CSFMLWindow final : public IWindow

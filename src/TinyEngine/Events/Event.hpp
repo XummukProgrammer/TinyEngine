@@ -1,7 +1,7 @@
 ﻿#ifndef _TINY_ENGINE_EVENT_HEADER_
 #define _TINY_ENGINE_EVENT_HEADER_
 
-namespace te
+namespace TE
 {
 
 class CEvent

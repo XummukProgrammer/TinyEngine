@@ -6,7 +6,7 @@
 #include <functional>
 #include <list>
 
-namespace te
+namespace TE
 {
 
 template<typename TEvent>

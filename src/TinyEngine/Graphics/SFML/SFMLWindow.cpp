@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-namespace te
+namespace TE
 {
 
 CSFMLWindow::CSFMLWindow(const CData& data)

@@ -1,7 +1,7 @@
 ﻿#include "Application.hpp"
 #include <TinyEngine/Graphics/Graphics.hpp>
 
-namespace te
+namespace TE
 {
 
 CApplication::CApplication(IWindowRef windowRef)

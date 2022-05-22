@@ -6,7 +6,7 @@
 
 #include <string>
 
-namespace te
+namespace TE
 {
 
 class IWindow

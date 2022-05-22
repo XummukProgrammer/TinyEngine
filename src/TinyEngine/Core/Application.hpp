@@ -6,7 +6,7 @@
 
 #include <functional>
 
-namespace te
+namespace TE
 {
 
 class CApplication final

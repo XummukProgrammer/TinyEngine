@@ -5,7 +5,7 @@
 
 #include <SFML/System/Vector2.hpp>
 
-namespace te
+namespace TE
 {
 
 template<typename T>
