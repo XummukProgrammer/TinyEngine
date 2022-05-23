@@ -14,6 +14,8 @@ CApplication::CApplication(int argc, char* argv[], IWindowRef windowRef)
 
 void CApplication::exec()
 { 
+	_debugAdapter.sendInfoMessage("[CApplication] exec");
+
 	_windowRef.get().exec();
 
 	destroy();
@@ -21,6 +23,8 @@ void CApplication::exec()
 
 void CApplication::init()
 { 
+	_debugAdapter.sendInfoMessage("[CApplication] init");
+
 	auto& window = _windowRef.get();
 
 	_windowUpdateListener.setOnSenderCallback(std::bind(&CApplication::onUpdate, this, std::placeholders::_1));
@@ -32,6 +36,8 @@ void CApplication::init()
 
 void CApplication::destroy()
 { 
+	_debugAdapter.sendInfoMessage("[CApplication] destroy");
+
 	_log.dumpAllLogMessages(_paths);
 
 	_windowRef.get().destroy();
