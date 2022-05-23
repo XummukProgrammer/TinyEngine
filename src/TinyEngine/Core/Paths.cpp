@@ -40,7 +40,11 @@ void CPaths::createPath(Type type)
 
 void CPaths::checkAllPaths()
 { 
-	createPath(Type::Logs);
+	for (const auto& [key, path] : _paths) {
+		if (key != Type::Exec) {
+			createPath(key);
+		}
+	}
 }
 
 void CPaths::setExecPath(int argc, char* argv[])
