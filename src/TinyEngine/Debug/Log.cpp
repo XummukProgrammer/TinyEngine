@@ -1,26 +1,31 @@
 ﻿#include "Log.hpp"
 
 #include <pugixml.hpp>
+#include <fmt/format.h>
+
+#include <iostream>
 
 namespace TE
 {
 
-void CLog::setFileName(Type type, const std::string& fileName)
+void CLog::setFileName(CDebugMessage::Type type, const std::string& fileName)
 { 
     _fileNames[type] = fileName;
 }
 
-const std::string& CLog::getFileName(Type type) const
+const std::string& CLog::getFileName(CDebugMessage::Type type) const
 {
     return _fileNames.at(type);
 }
 
-void CLog::addLogMessage(Type type, const std::string& message)
+void CLog::addLogMessage(const CDebugMessage& debugMessage)
 { 
-    _messages[type].push_back(message);
+    _messages[debugMessage.getType()].push_back(debugMessage);
+
+    printLogMessageToConsole(debugMessage);
 }
 
-void CLog::dumpLogMessages(const CPaths& paths, Type type) const
+void CLog::dumpLogMessages(const CPaths& paths, CDebugMessage::Type type) const
 { 
     const auto& fileName = getFileName(type);
     auto&& path = paths.buildPath(CPaths::Type::Logs, fileName);
@@ -38,7 +43,7 @@ void CLog::dumpLogMessages(const CPaths& paths, Type type) const
     for (const auto& message : listMessages) {
         auto messageNode = messagesNode.append_child("message");
         auto messageAttribute = messageNode.append_attribute("text");
-        messageAttribute.set_value(message.c_str());
+        messageAttribute.set_value(message.getMessage().c_str());
     }
 
     doc.save_file(path.c_str());
@@ -46,9 +51,16 @@ void CLog::dumpLogMessages(const CPaths& paths, Type type) const
 
 void CLog::dumpAllLogMessages(const CPaths& paths) const
 { 
-    dumpLogMessages(paths, Type::Info);
-    dumpLogMessages(paths, Type::Error);
-    dumpLogMessages(paths, Type::Critical);
+    dumpLogMessages(paths, CDebugMessage::Type::Info);
+    dumpLogMessages(paths, CDebugMessage::Type::Error);
+    dumpLogMessages(paths, CDebugMessage::Type::Critical);
+}
+
+void CLog::printLogMessageToConsole(const CDebugMessage& debugMessage)
+{
+    fmt::print("[{}] {}\n", 
+        CDebugMessage::typeToString(debugMessage.getType()), 
+        debugMessage.getMessage());   
 }
 
 }
