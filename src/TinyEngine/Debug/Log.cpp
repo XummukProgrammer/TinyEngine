@@ -51,9 +51,9 @@ void CLog::dumpLogMessages(const CPaths& paths, CDebugMessage::Type type) const
 
 void CLog::dumpAllLogMessages(const CPaths& paths) const
 { 
-    dumpLogMessages(paths, CDebugMessage::Type::Info);
-    dumpLogMessages(paths, CDebugMessage::Type::Error);
-    dumpLogMessages(paths, CDebugMessage::Type::Critical);
+    for (const auto& [type, messages] : _messages) {
+        dumpLogMessages(paths, type);
+    }
 }
 
 void CLog::printLogMessageToConsole(const CDebugMessage& debugMessage)

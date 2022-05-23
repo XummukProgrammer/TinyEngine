@@ -7,6 +7,7 @@ namespace TE
 CApplication::CApplication(int argc, char* argv[], IWindowRef windowRef)
 	: _paths(argc, argv)
 	, _windowRef(windowRef)
+	, _debugAdapter(_paths, _log)
 {
 	init();
 }

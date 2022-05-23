@@ -13,7 +13,9 @@ public:
 	{
 		Info,
 		Error,
-		Critical
+		Critical,
+		Assert,
+		Verify
 	};
 	
 public:

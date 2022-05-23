@@ -5,7 +5,7 @@
 
 #include <TinyEngine/Events/Events.hpp>
 #include <TinyEngine/Graphics/Graphics.hpp>
-#include <TinyEngine/Debug/Log.hpp>
+#include <TinyEngine/Debug/Debug.hpp>
 
 #include <functional>
 
@@ -26,6 +26,7 @@ public:
 public:
 	CPaths& getPaths() { return _paths; }
 	CLog& getLog() { return _log; }
+	CDebugAdapter& getDebugAdapter() { return _debugAdapter; }
 
 	void exec();
 
@@ -44,6 +45,7 @@ private:
 
 	CPaths _paths;
 	CLog _log;
+	CDebugAdapter _debugAdapter;
 };
 
 }

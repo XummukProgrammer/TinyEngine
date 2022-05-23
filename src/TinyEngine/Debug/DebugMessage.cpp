@@ -27,6 +27,8 @@ std::string CDebugMessage::typeToString(Type type)
 		table[Type::Info] = "Info";
 		table[Type::Error] = "Error";
 		table[Type::Critical] = "Critical";
+		table[Type::Assert] = "Assert";
+		table[Type::Verify] = "Verify";
 	}
 
 	auto it = table.find(type);
