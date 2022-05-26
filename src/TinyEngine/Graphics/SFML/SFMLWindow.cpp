@@ -36,28 +36,26 @@ CSFMLWindow::CData CSFMLWindow::LoadDataFromFile(CPaths& paths, CPaths::Type pat
 	return windowData;
 }
 
-void CSFMLWindow::setPosition(IPointIntRef pointRef)
+void CSFMLWindow::setPosition(IPointInt* pointPtr)
 { 
-	auto& point = pointRef.get();
-	_renderWindow.setPosition({ point.getX(), point.getY() });
+	_renderWindow.setPosition({ pointPtr->getX(), pointPtr->getY() });
 }
 
-void CSFMLWindow::getPosition(IPointIntRef pointRef) const
+void CSFMLWindow::getPosition(IPointInt* pointPtr) const
 { 
 	auto&& position = _renderWindow.getPosition();
-	pointRef.get().setPoint(position.x, position.y);
+	pointPtr->setPoint(position.x, position.y);
 }
 
-void CSFMLWindow::setSize(IPointUnsignedRef pointRef)
+void CSFMLWindow::setSize(IPointUnsigned* pointPtr)
 { 
-	auto& point = pointRef.get();
-	_renderWindow.setSize({ point.getX(), point.getY() });
+	_renderWindow.setSize({ pointPtr->getX(), pointPtr->getY() });
 }
 
-void CSFMLWindow::getSize(IPointUnsignedRef pointRef) const
+void CSFMLWindow::getSize(IPointUnsigned* pointPtr) const
 { 
 	auto&& size = _renderWindow.getSize();
-	pointRef.get().setPoint(size.x, size.y);
+	pointPtr->setPoint(size.x, size.y);
 }
 
 void CSFMLWindow::exec()

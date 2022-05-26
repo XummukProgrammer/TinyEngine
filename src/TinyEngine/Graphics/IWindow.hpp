@@ -44,11 +44,11 @@ public:
 public:
 	virtual void setTitle(const std::string& title) = 0;
 
-	virtual void setPosition(IPointIntRef pointRef) = 0;
-	virtual void getPosition(IPointIntRef pointRef) const = 0;
+	virtual void setPosition(IPointInt* pointPtr) = 0;
+	virtual void getPosition(IPointInt* pointPtr) const = 0;
 	
-	virtual void setSize(IPointUnsignedRef pointRef) = 0;
-	virtual void getSize(IPointUnsignedRef pointRef) const = 0;
+	virtual void setSize(IPointUnsigned* pointPtr) = 0;
+	virtual void getSize(IPointUnsigned* pointPtr) const = 0;
 
 	virtual void setActive(bool isActive) = 0;
 	virtual void setVisible(bool isVisible) = 0;

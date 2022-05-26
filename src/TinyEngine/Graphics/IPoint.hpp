@@ -31,10 +31,6 @@ using IPointInt = IPoint<int>;
 using IPointFloat = IPoint<float>;
 using IPointUnsigned = IPoint<unsigned int>;
 
-using IPointIntRef = std::reference_wrapper<IPointInt>;
-using IPointFloatRef = std::reference_wrapper<IPointFloat>;
-using IPointUnsignedRef = std::reference_wrapper<IPointUnsigned>;
-
 }
 
 #endif // _TINY_ENGINE_INTERFACE_POINT_HEADER_
