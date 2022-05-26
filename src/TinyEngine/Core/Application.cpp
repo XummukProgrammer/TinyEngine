@@ -4,34 +4,37 @@
 namespace TE
 {
 
-CApplication::CApplication(int argc, char* argv[], IWindowRef windowRef)
+CApplication::CApplication(int argc, char* argv[])
 	: _paths(argc, argv)
-	, _windowRef(windowRef)
 	, _debugAdapter(_paths, _log)
 {
-	init();
 }
 
 void CApplication::exec()
 { 
+	init();
+
 	_debugAdapter.sendInfoMessage("[CApplication] exec");
 
-	_windowRef.get().exec();
+	_windowPtr->exec();
 
 	destroy();
+}
+
+void CApplication::setWindow(IWindowPtr window)
+{ 
+	_windowPtr = std::move(window);
 }
 
 void CApplication::init()
 { 
 	_debugAdapter.sendInfoMessage("[CApplication] init");
 
-	auto& window = _windowRef.get();
-
 	_windowUpdateListener.setOnSenderCallback(std::bind(&CApplication::onUpdate, this, std::placeholders::_1));
-	window.getUpdateSender().addListener(_windowUpdateListener);
+	_windowPtr->getUpdateSender().addListener(_windowUpdateListener);
 
 	_windowDrawListener.setOnSenderCallback(std::bind(&CApplication::onDraw, this, std::placeholders::_1));
-	window.getDrawSender().addListener(_windowDrawListener);
+	_windowPtr->getDrawSender().addListener(_windowDrawListener);
 }
 
 void CApplication::destroy()
@@ -40,7 +43,8 @@ void CApplication::destroy()
 
 	_log.dumpAllLogMessages(_paths);
 
-	_windowRef.get().destroy();
+	_windowPtr->destroy();
+	_windowPtr.reset();
 }
 
 void CApplication::onUpdate(const IWindow::CUpdateEvent& updateEvent)

@@ -2,6 +2,7 @@
 #define _TINY_ENGINE_SFML_WINDOW_HEADER_
 
 #include <TinyEngine/Graphics/IWindow.hpp>
+#include <TinyEngine/Core/Paths.hpp>
 
 #include <SFML/Graphics.hpp>
 
@@ -27,6 +28,9 @@ public:
 public:
 	CSFMLWindow(const CData& data);
 	~CSFMLWindow() = default;
+
+public:
+	static CData LoadDataFromFile(CPaths& paths, CPaths::Type pathType, const std::string& path);
 
 public:
 	void setTitle(const std::string& title) override { _renderWindow.setTitle(title); }

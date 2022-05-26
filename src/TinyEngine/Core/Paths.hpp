@@ -13,7 +13,8 @@ public:
 	enum class Type
 	{
 		Exec,
-		Logs
+		Logs,
+		Configs
 	};
 
 public:

@@ -8,6 +8,7 @@
 #include <TinyEngine/Debug/Debug.hpp>
 
 #include <functional>
+#include <memory>
 
 namespace TE
 {
@@ -15,18 +16,20 @@ namespace TE
 class CApplication final
 {
 public:
-	using IWindowRef = std::reference_wrapper<IWindow>;
+	using IWindowPtr = std::unique_ptr<IWindow>;
 	using CWindowUpdateListener = CListener<IWindow::CUpdateEvent>;
 	using CWindowDrawListener = CListener<IWindow::CDrawEvent>;
 
 public:
-	CApplication(int argc, char* argv[], IWindowRef windowRef);
+	CApplication(int argc, char* argv[]);
 	~CApplication() = default;
 
 public:
 	CPaths& getPaths() { return _paths; }
 	CLog& getLog() { return _log; }
 	CDebugAdapter& getDebugAdapter() { return _debugAdapter; }
+
+	void setWindow(IWindowPtr window);
 
 	void exec();
 
@@ -39,7 +42,7 @@ private:
 	void onDraw(const IWindow::CDrawEvent& drawEvent);
 
 private:
-	IWindowRef _windowRef;
+	IWindowPtr _windowPtr;
 	CWindowUpdateListener _windowUpdateListener;
 	CWindowDrawListener _windowDrawListener;
 
