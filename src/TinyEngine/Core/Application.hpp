@@ -43,8 +43,8 @@ private:
 
 private:
 	IWindowPtr _windowPtr;
-	CWindowUpdateListener _windowUpdateListener;
-	CWindowDrawListener _windowDrawListener;
+	CWindowUpdateListener::CPtr _windowUpdateListenerPtr;
+	CWindowDrawListener::CPtr _windowDrawListenerPtr;
 
 	CPaths _paths;
 	CLog _log;

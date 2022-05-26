@@ -5,6 +5,7 @@
 
 #include <functional>
 #include <list>
+#include <memory>
 
 namespace TE
 {
@@ -17,79 +18,46 @@ public:
 
 public:
 	using CListenerBase = CListener<TEvent>;
-	using CListenerRef = std::reference_wrapper<CListenerBase>;
-	using CListenerList = std::list<CListenerRef>;
+	using CListenerWeakPtr = std::weak_ptr<CListenerBase>;
+	using CListenerList = std::list<CListenerWeakPtr>;
 
 public:
 	CSender() = default;
 	~CSender() = default;
 
 public:
-	void addListener(const CListenerRef& listenerRef);
-	void removeListener(const CListenerRef& listenerRef);
-	void removeAllListeners();
+	void addListener(const CListenerWeakPtr& listenerWeakPtr);
+	void clearListeners();
 
 	void send(const TEvent& event);
 
 private:
-	void clearRemoveListeners();
-
-private:
 	CListenerList _listenerList;
-	bool _isDestroyProtectionActive = false;
 };
 
 template<typename TEvent>
-void CSender<TEvent>::addListener(const CListenerRef& listenerRef)
+void CSender<TEvent>::addListener(const CListenerWeakPtr& listenerWeakPtr)
 { 
-	_listenerList.push_back(listenerRef);
+	_listenerList.push_back(listenerWeakPtr);
 }
 
 template<typename TEvent>
-void CSender<TEvent>::removeListener(const CListenerRef& listenerRef)
-{ 
-	listenerRef.get().destroy();
-
-	clearRemoveListeners();
-}
-
-template<typename TEvent>
-void CSender<TEvent>::removeAllListeners()
-{ 
-	for (auto& listenerRef : _listenerList) {
-		listenerRef.get().destroy();
-	}
-
-	clearRemoveListeners();
-}
-
-template<typename TEvent>
-void CSender<TEvent>::clearRemoveListeners()
-{ 
-	if (!_isDestroyProtectionActive) {
-		_listenerList.remove_if([](const CListenerRef& ref) {
-			return ref.get().isDestroyed();
-		});
-	}
+void CSender<TEvent>::clearListeners()
+{
+	_listenerList.clear();
 }
 
 template<typename TEvent>
 void CSender<TEvent>::send(const TEvent& event)
 { 
-	_isDestroyProtectionActive = true;
-
 	for (auto it = _listenerList.begin(); it != _listenerList.end();) {
-		auto& listener = it->get();
-
-		if (!listener.isDestroyed()) {
-			listener.onSended(event);
+		if (auto sharedListenerPtr = it->lock()) {
+			sharedListenerPtr->onSended(event);
 			++it;
 		} else {
 			it = _listenerList.erase(it);
 		}
 	}
-
-	_isDestroyProtectionActive = false;
 }
 
 }

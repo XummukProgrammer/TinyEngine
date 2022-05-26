@@ -30,11 +30,11 @@ void CApplication::init()
 { 
 	_debugAdapter.sendInfoMessage("[CApplication] init");
 
-	_windowUpdateListener.setOnSenderCallback(std::bind(&CApplication::onUpdate, this, std::placeholders::_1));
-	_windowPtr->getUpdateSender().addListener(_windowUpdateListener);
+	_windowUpdateListenerPtr = CWindowUpdateListener::create(std::bind(&CApplication::onUpdate, this, std::placeholders::_1));
+	_windowPtr->getUpdateSender().addListener(_windowUpdateListenerPtr);
 
-	_windowDrawListener.setOnSenderCallback(std::bind(&CApplication::onDraw, this, std::placeholders::_1));
-	_windowPtr->getDrawSender().addListener(_windowDrawListener);
+	_windowDrawListenerPtr = CWindowDrawListener::create(std::bind(&CApplication::onDraw, this, std::placeholders::_1));
+	_windowPtr->getDrawSender().addListener(_windowDrawListenerPtr);
 }
 
 void CApplication::destroy()
@@ -42,6 +42,9 @@ void CApplication::destroy()
 	_debugAdapter.sendInfoMessage("[CApplication] destroy");
 
 	_log.dumpAllLogMessages(_paths);
+
+	_windowUpdateListenerPtr.reset();
+	_windowDrawListenerPtr.reset();
 
 	_windowPtr->destroy();
 	_windowPtr.reset();

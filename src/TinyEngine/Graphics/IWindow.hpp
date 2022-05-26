@@ -60,8 +60,8 @@ public:
 
 	virtual void destroy()
 	{
-		_updateSender.removeAllListeners();
-		_drawSender.removeAllListeners();
+		_updateSender.clearListeners();
+		_drawSender.clearListeners();
 	}
 
 public:

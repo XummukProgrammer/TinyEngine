@@ -4,6 +4,7 @@
 #include "Event.hpp"
 
 #include <functional>
+#include <memory>
 
 namespace TE
 {
@@ -15,17 +16,15 @@ public:
 	static_assert(std::is_base_of_v<CEvent, TEvent>);
 
 public:
+	using CPtr = std::shared_ptr<CListener>;
 	using SendedCallback = std::function<void(const TEvent&)>;
 
 public:
-	CListener() = default;
-	~CListener() = default;
+	static CPtr create(const SendedCallback& callback);
 
 public:
-	void setOnSenderCallback(const SendedCallback& callback);
-
-	void destroy();
-	bool isDestroyed() const;
+	CListener(const SendedCallback& callback);
+	~CListener() = default;
 
 	void onSended(const TEvent& event);
 
@@ -34,21 +33,15 @@ private:
 };
 
 template<typename TEvent>
-void CListener<TEvent>::setOnSenderCallback(const SendedCallback& callback)
-{ 
-	_onSendedCallback = callback;
-}
-
-template<typename TEvent>
-void CListener<TEvent>::destroy()
-{ 
-	_onSendedCallback = nullptr;
-}
-
-template<typename TEvent>
-bool CListener<TEvent>::isDestroyed() const
+typename CListener<TEvent>::CPtr CListener<TEvent>::create(const SendedCallback& callback)
 {
-	return _onSendedCallback == nullptr;
+	return std::make_shared<CListener<TEvent>>(callback);
+}
+
+template<typename TEvent>
+CListener<TEvent>::CListener(const SendedCallback& callback)
+	: _onSendedCallback(callback)
+{ 
 }
 
 template<typename TEvent>
