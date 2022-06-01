@@ -16,7 +16,8 @@ private:
 	{
 		Int,
 		Float,
-		String
+		String,
+		Properties
 	};
 	
 	struct CPropertyData
@@ -43,11 +44,16 @@ public:
 	void setStringProperty(const std::string& id, const std::string& value);
 	std::string getStringProperty(const std::string& id, const std::string& defValue = "") const;
 
+	void createProperties(const std::string& id);
+	CProperties* getProperties(const std::string& id) const;
+
 	bool hasProperty(const std::string& id) const;
 
 	bool isIntProperty(const std::string& id) const;
 	bool isFloatProperty(const std::string& id) const;
 	bool isStringProperty(const std::string& id) const;
+
+	bool removeProperty(const std::string& id);
 
 private:
 	void setProperty(const std::string& id, PropertyType type, std::any value);

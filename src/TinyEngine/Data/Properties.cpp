@@ -42,6 +42,19 @@ std::string CProperties::getStringProperty(const std::string & id, const std::st
 	return defValue;
 }
 
+void CProperties::createProperties(const std::string& id)
+{ 
+	setProperty(id, PropertyType::Properties, new CProperties);
+}
+
+CProperties* CProperties::getProperties(const std::string& id) const
+{
+	if (auto ptr = getProperty(id, PropertyType::Properties)) {
+		return std::any_cast<CProperties*>(ptr->value);
+	}
+	return nullptr;
+}
+
 bool CProperties::hasProperty(const std::string& id) const
 {
 	return _propertiesMap.find(id) != _propertiesMap.end();
@@ -89,6 +102,21 @@ CProperties::CPropertyData* CProperties::getProperty(const std::string& id, Prop
 		}
 	}
 	return nullptr;
+}
+
+bool CProperties::removeProperty(const std::string& id)
+{ 
+	auto it = _propertiesMap.find(id);
+	if (it != _propertiesMap.end()) {
+		auto& ptr = it->second;
+		if (ptr->type == PropertyType::Properties) {
+			auto* propertiesValue = std::any_cast<CProperties*>(ptr->value);
+			delete propertiesValue;
+		}
+		_propertiesMap.erase(it);
+		return true;
+	}
+	return false;
 }
 
 }
