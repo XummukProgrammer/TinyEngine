@@ -24,6 +24,9 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Debug/Assert.hpp
 	src/TinyEngine/Debug/DebugMessage.hpp
 	src/TinyEngine/Debug/DebugAdapter.hpp
+	
+	src/TinyEngine/Data/Data.hpp
+	src/TinyEngine/Data/Properties.hpp
 )
 
 set(ENGINE_SOURCES
@@ -36,4 +39,6 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Debug/Assert.cpp
 	src/TinyEngine/Debug/DebugMessage.cpp
 	src/TinyEngine/Debug/DebugAdapter.cpp
+	
+	src/TinyEngine/Data/Properties.cpp
 )
