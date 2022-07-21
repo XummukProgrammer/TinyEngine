@@ -7,9 +7,6 @@ set(CMAKE_CXX_STANDARD 17)
 set(SFML_STATIC_LIBRARIES TRUE)
 find_package(SFML COMPONENTS audio graphics main network system window REQUIRED)
 
-set(TGUI_STATIC_LIBRARIES TRUE)
-find_package(TGUI REQUIRED)
-
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/pugixml" "${CMAKE_CURRENT_BINARY_DIR}/deps/pugixml")
 set_target_properties(pugixml-static PROPERTIES FOLDER "deps")
 
@@ -35,7 +32,6 @@ target_link_libraries(TinyEngine PUBLIC
 	sfml-network
 	sfml-system
 	sfml-window
-	tgui
 	pugixml-static
 	fmt
 	Candle-s
