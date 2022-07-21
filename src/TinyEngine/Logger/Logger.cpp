@@ -16,34 +16,53 @@ namespace TinyEngine
 		for (const auto& loggerMessage : loggerMessages)
 		{
 			auto messageNode = rootNode.append_child("message");
+			messageNode.append_attribute("type").set_value(loggerMessage->type.c_str());
 			messageNode.append_attribute("time").set_value(loggerMessage->time.c_str());
-			messageNode.append_attribute("receiver").set_value(loggerMessage->receiver.c_str());
+			messageNode.append_attribute("sender").set_value(loggerMessage->sender.c_str());
 			messageNode.append_attribute("message").set_value(loggerMessage->message.c_str());
+
+			if (!loggerMessage->stacktrace.empty())
+			{
+				auto stacktraceNode = messageNode.append_child("stacktrace");
+
+				for (const auto& stacktraceMessage : loggerMessage->stacktrace)
+				{
+					auto stacktraceMessageNode = stacktraceNode.append_child("message");
+					stacktraceMessageNode.append_attribute("text").set_value(stacktraceMessage.c_str());
+				}
+			}
 		}
 
 		doc.save_file(fileName.data());
 	}
 
-	void Logger::MessagePrintToConsole(std::string_view receiver, std::string_view message)
+	void Logger::MessagePrintToConsole(std::string_view type, std::string_view sender, std::string_view message, bool isShowStacktrace)
 	{
-		auto loggerMessage = AddMessage(receiver, message);
+		auto loggerMessage = AddMessage(type, sender, message, isShowStacktrace);
 
-		fmt::print("[{}] [{}] {}", loggerMessage->time, loggerMessage->receiver, loggerMessage->message);
-	}
+		fmt::print("[{}][{}] [{}] {}\n", loggerMessage->type, loggerMessage->time, loggerMessage->sender, loggerMessage->message);
 
-	void Logger::DumpToFile(std::string_view fileName, IDumpFormat* dumpFormat)
-	{
-		if (!dumpFormat)
+		if (isShowStacktrace && !loggerMessage->stacktrace.empty())
 		{
-			return;
-		}
+			fmt::print("Stacktrace:\n");
 
-		dumpFormat->DumpToFile(fileName, _messages);
+			for (const auto& stacktraceMessage : loggerMessage->stacktrace)
+			{
+				fmt::print("    {}", stacktraceMessage);
+			}
+		}
 	}
 
-	LoggerMessage::Ptr Logger::AddMessage(std::string_view receiver, std::string_view message)
+	void Logger::DumpToFile(std::string_view fileName, IDumpFormat& dumpFormat)
 	{
-		auto loggerMessage = LoggerMessage::Create("", receiver, message);
+		dumpFormat.DumpToFile(fileName, _messages);
+	}
+
+	LoggerMessage::Ptr Logger::AddMessage(std::string_view type, std::string_view sender, std::string_view message, bool isShowStacktrace)
+	{
+		std::string time;
+		std::list<std::string> stacktrace;
+		auto loggerMessage = LoggerMessage::Create(type, time, sender, message, stacktrace);
 		_messages.push_back(loggerMessage);
 		return loggerMessage;
 	}
