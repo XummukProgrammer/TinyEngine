@@ -4,4 +4,5 @@ set(ENGINE_HEADERS
 )
 
 set(ENGINE_SOURCES
+	src/TinyEngine/TinyEngine.cpp
 )
