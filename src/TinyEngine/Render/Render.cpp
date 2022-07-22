@@ -8,10 +8,14 @@ namespace TinyEngine
 {
 	Render render;
 
-	Render& Render::CreateSfmlWindow(const RenderWindowSettings& windowSettings)
+	Render& Render::CreateSfmlWindow(const RenderWindowSettings& windowSettings, InitSfmlWindowCallback initCallback)
 	{
 		TINY_ENGINE_INFO("Use Sfml Window");
 		CreateWindow(std::make_shared<SfmlRenderWindow>(), windowSettings);
+		if (initCallback)
+		{
+			initCallback(static_cast<SfmlRenderWindow*>(_renderWindowPtr.get()));
+		}
 		return *this;
 	}
 
@@ -22,7 +26,7 @@ namespace TinyEngine
 		while (!_renderWindowPtr->IsClosed())
 		{
 			_renderWindowPtr->ExtractEvents();
-			_renderWindowPtr->Update();
+			_renderWindowPtr->Update(0.f);
 			_renderWindowPtr->Display();
 		}
 

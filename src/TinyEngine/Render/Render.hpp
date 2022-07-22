@@ -3,10 +3,12 @@
 
 #include <string>
 #include <memory>
+#include <functional>
 
 namespace TinyEngine
 {
 	class IRenderWindow;
+	class SfmlRenderWindow;
 
 	struct RenderWindowSettings
 	{
@@ -24,7 +26,6 @@ namespace TinyEngine
 
 	public:
 		virtual void Update(float deltaTime) = 0;
-		virtual void Draw(const IRenderWindow* window) const = 0;
 	};
 
 	class IRenderWindow
@@ -41,10 +42,10 @@ namespace TinyEngine
 		virtual bool IsClosed() const = 0;
 		virtual void Clear() = 0;
 		virtual void ExtractEvents() = 0;
-		virtual void Update() = 0;
+		virtual void Update(float deltaTime) = 0;
 		virtual void AddRenderObject(IRenderObjectPtr object) = 0;
 		virtual void RemoveRenderObject(IRenderObjectPtr object) = 0;
-		virtual bool HasRenderObject(IRenderObjectPtr object) = 0;
+		virtual bool HasRenderObject(IRenderObjectPtr object) const = 0;
 		virtual void Draw(IRenderObject* object) const = 0;
 		virtual void Display() = 0;
 	};
@@ -53,13 +54,14 @@ namespace TinyEngine
 	{
 	public:
 		using IRenderWindowPtr = std::shared_ptr<IRenderWindow>;
+		using InitSfmlWindowCallback = std::function<void(SfmlRenderWindow*)>;
 
 	public:
 		Render() = default;
 		~Render() = default;
 
 	public:
-		Render& CreateSfmlWindow(const RenderWindowSettings& windowSettings);
+		Render& CreateSfmlWindow(const RenderWindowSettings& windowSettings, InitSfmlWindowCallback initCallback = {});
 
 		Render& Execute();
 		Render& Destroy();
