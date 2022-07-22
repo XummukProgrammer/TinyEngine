@@ -1,5 +1,6 @@
 ﻿#include "Debug.hpp"
 
+#include <TinyEngine/Core/Application.hpp>
 #include <TinyEngine/Logger/Logger.hpp>
 
 namespace TinyEngine
@@ -14,7 +15,7 @@ namespace TinyEngine
 
 			if (debugOperation.IsLoggerDumpToFile())
 			{
-				logger.DumpToFile("dump.xml", DumpXmlFormat());
+				application.LoggerDumpToFile();
 			}
 
 			if (debugOperation.IsStopProgram())
