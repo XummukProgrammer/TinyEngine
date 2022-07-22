@@ -3,11 +3,15 @@
 #include <fmt/format.h>
 #include <pugixml.hpp>
 
+#include <boost/stacktrace.hpp>
+
+#include <iostream>
+
 namespace TinyEngine
 {
 	Logger logger;
 
-	void IDumpXmlFormat::DumpToFile(std::string_view fileName, const LoggerMessages& loggerMessages)
+	void DumpXmlFormat::DumpToFile(std::string_view fileName, const LoggerMessages& loggerMessages)
 	{
 		pugi::xml_document doc;
 
@@ -24,12 +28,7 @@ namespace TinyEngine
 			if (!loggerMessage->stacktrace.empty())
 			{
 				auto stacktraceNode = messageNode.append_child("stacktrace");
-
-				for (const auto& stacktraceMessage : loggerMessage->stacktrace)
-				{
-					auto stacktraceMessageNode = stacktraceNode.append_child("message");
-					stacktraceMessageNode.append_attribute("text").set_value(stacktraceMessage.c_str());
-				}
+				stacktraceNode.text().set(loggerMessage->stacktrace.c_str());
 			}
 		}
 
@@ -44,12 +43,7 @@ namespace TinyEngine
 
 		if (isShowStacktrace && !loggerMessage->stacktrace.empty())
 		{
-			fmt::print("Stacktrace:\n");
-
-			for (const auto& stacktraceMessage : loggerMessage->stacktrace)
-			{
-				fmt::print("    {}", stacktraceMessage);
-			}
+			fmt::print("\nStacktrace:\n{}\n", loggerMessage->stacktrace);
 		}
 	}
 
@@ -61,9 +55,21 @@ namespace TinyEngine
 	LoggerMessage::Ptr Logger::AddMessage(std::string_view type, std::string_view sender, std::string_view message, bool isShowStacktrace)
 	{
 		std::string time;
-		std::list<std::string> stacktrace;
+		std::string stacktrace;
+
+		if (isShowStacktrace)
+		{
+			stacktrace = std::move(ExtractStacktrace());
+		}
+
 		auto loggerMessage = LoggerMessage::Create(type, time, sender, message, stacktrace);
 		_messages.push_back(loggerMessage);
 		return loggerMessage;
+	}
+
+	std::string Logger::ExtractStacktrace() const
+	{
+		const auto stacktraceString = boost::stacktrace::to_string(boost::stacktrace::stacktrace());
+		return stacktraceString;
 	}
 }

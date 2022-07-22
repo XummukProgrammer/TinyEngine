@@ -15,13 +15,13 @@ namespace TinyEngine
 		std::string time;
 		std::string sender;
 		std::string message;
-		std::list<std::string> stacktrace;
+		std::string stacktrace;
 
-		LoggerMessage(std::string_view type, std::string_view time, std::string_view sender, std::string_view message, const std::list<std::string>& stacktrace)
+		LoggerMessage(std::string_view type, std::string_view time, std::string_view sender, std::string_view message, std::string_view stacktrace)
 			: type(type), time(time), sender(sender), message(message), stacktrace(stacktrace)
 		{}
 
-		static Ptr Create(std::string_view type, std::string_view time, std::string_view sender, std::string_view message, const std::list<std::string>& stacktrace) 
+		static Ptr Create(std::string_view type, std::string_view time, std::string_view sender, std::string_view message, std::string_view stacktrace) 
 		{ 
 			return std::make_shared<LoggerMessage>(type, time, sender, message, stacktrace);
 		}
@@ -39,11 +39,11 @@ namespace TinyEngine
 		virtual void DumpToFile(std::string_view fileName, const LoggerMessages& loggerMessages) = 0;
 	};
 
-	class IDumpXmlFormat final : public IDumpFormat
+	class DumpXmlFormat final : public IDumpFormat
 	{
 	public:
-		IDumpXmlFormat() = default;
-		~IDumpXmlFormat() = default;
+		DumpXmlFormat() = default;
+		~DumpXmlFormat() = default;
 
 	public:
 		void DumpToFile(std::string_view fileName, const LoggerMessages& loggerMessages) override;
@@ -62,6 +62,7 @@ namespace TinyEngine
 
 	private:
 		LoggerMessage::Ptr AddMessage(std::string_view type, std::string_view sender, std::string_view message, bool isShowStacktrace);
+		std::string ExtractStacktrace() const;
 
 	private:
 		LoggerMessages _messages;
