@@ -72,5 +72,6 @@ namespace TinyEngine
 }
 
 #define TINY_ENGINE_PRINT_TO_CONSOLE(type, message, isShowStacktrace) TinyEngine::logger.MessagePrintToConsole(type, __FUNCTION__, message, isShowStacktrace)
+#define TINY_ENGINE_INFO(message) TINY_ENGINE_PRINT_TO_CONSOLE("info", message, false)
 
 #endif // _LOGGER_HEADER_

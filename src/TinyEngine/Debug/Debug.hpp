@@ -109,8 +109,8 @@ namespace TinyEngine
 	extern Debug debug;
 }
 
-#define TINY_ENGINE_ASSERT(message, condition) TinyEngine::debug.OperationProcess(__FUNCTION__, TinyEngine::DebugAssertOperation(message, condition))
+#define TINY_ENGINE_ASSERT(condition, message) TinyEngine::debug.OperationProcess(__FUNCTION__, TinyEngine::DebugAssertOperation(message, condition))
 #define TINY_ENGINE_VERIFY(ptr, message) !TinyEngine::debug.OperationProcess(__FUNCTION__, TinyEngine::DebugVerifyOperation(message, (ptr)))
-#define TINY_ENGINE_CRITICAL(message, condition) TinyEngine::debug.OperationProcess(__FUNCTION__, TinyEngine::DebugCriticalOperation(message, condition))
+#define TINY_ENGINE_CRITICAL(condition, message) TinyEngine::debug.OperationProcess(__FUNCTION__, TinyEngine::DebugCriticalOperation(message, condition))
 
 #endif // _DEBUG_HEADER_

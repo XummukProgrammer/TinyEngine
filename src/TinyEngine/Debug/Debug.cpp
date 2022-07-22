@@ -14,7 +14,7 @@ namespace TinyEngine
 
 			if (debugOperation.IsLoggerDumpToFile())
 			{
-				// TODO: Impl
+				logger.DumpToFile("dump.xml", DumpXmlFormat());
 			}
 
 			if (debugOperation.IsStopProgram())
