@@ -48,6 +48,22 @@ namespace TinyEngine
 		virtual ~IRenderObject() = default;
 
 	public:
+		virtual void SetPosition(const PointF& position) = 0;
+		virtual PointF GetPosition() const = 0;
+
+		virtual void SetScale(const PointF& factors) = 0;
+		virtual PointF GetScale() const = 0;
+
+		virtual void SetRotation(float rotation) = 0;
+		virtual float GetRotation() const = 0;
+
+		virtual void SetTexture(std::string_view assetId) = 0;
+		virtual void SetTextureRect(const Rect& rectangle) = 0;
+
+		virtual bool IsPointIntersects(const PointF& point) const = 0;
+		virtual bool IsRectIntersects(const RectF& rectangle) const = 0;
+
+	public:
 		virtual void Update(float deltaTime) = 0;
 	};
 
@@ -58,7 +74,7 @@ namespace TinyEngine
 		~IRenderObjectBuilder() = default;
 
 	public:
-		virtual IRenderObjectBuilder& SetTexture(std::string_view filePath) = 0;
+		virtual IRenderObjectBuilder& SetTexture(std::string_view assetId) = 0;
 		virtual IRenderObjectBuilder& SetTextureRect(const Rect& rectangle) = 0;
 		virtual IRenderObjectBuilder& SetPosition(const PointF& position) = 0;
 		virtual IRenderObjectBuilder& SetScale(const PointF& factors) = 0;

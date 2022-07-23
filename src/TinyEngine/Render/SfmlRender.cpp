@@ -6,9 +6,60 @@ namespace TinyEngine
 	{
 	}
 
-	IRenderObjectBuilder& SfmlRenderObjectBuilder::SetTexture(std::string_view filePath)
+	void SfmlRenderObject::SetPosition(const PointF& position)
 	{
-		_textureFilePath = filePath;
+		_sprite.setPosition(SfmlRenderUtils::PointToSfVector(position));
+	}
+
+	PointF SfmlRenderObject::GetPosition() const
+	{
+		return SfmlRenderUtils::SfVectorToPoint(_sprite.getPosition());
+	}
+
+	void SfmlRenderObject::SetScale(const PointF& factors)
+	{
+		_sprite.setScale(SfmlRenderUtils::PointToSfVector(factors));
+	}
+
+	PointF SfmlRenderObject::GetScale() const
+	{
+		return SfmlRenderUtils::SfVectorToPoint(_sprite.getScale());
+	}
+
+	void SfmlRenderObject::SetRotation(float rotation)
+	{
+		_sprite.setRotation(rotation);
+	}
+
+	float SfmlRenderObject::GetRotation() const
+	{
+		return _sprite.getRotation();
+	}
+
+	void SfmlRenderObject::SetTexture(std::string_view filePath)
+	{
+		// TODO: Get from Asset Manager
+		_sprite.setTexture(sf::Texture());
+	}
+
+	void SfmlRenderObject::SetTextureRect(const Rect& rectangle)
+	{
+		_sprite.setTextureRect(SfmlRenderUtils::RectToSfRect(rectangle));
+	}
+
+	bool SfmlRenderObject::IsPointIntersects(const PointF& point) const
+	{
+		return _sprite.getGlobalBounds().contains(SfmlRenderUtils::PointToSfVector(point));
+	}
+
+	bool SfmlRenderObject::IsRectIntersects(const RectF& rectangle) const
+	{
+		return _sprite.getGlobalBounds().intersects(SfmlRenderUtils::RectToSfRect(rectangle));
+	}
+
+	IRenderObjectBuilder& SfmlRenderObjectBuilder::SetTexture(std::string_view assetId)
+	{
+		_textureAssetId = assetId;
 		return *this;
 	}
 
@@ -39,13 +90,12 @@ namespace TinyEngine
 	IRenderObjectBuilder& SfmlRenderObjectBuilder::Create()
 	{
 		_object = std::make_shared<SfmlRenderObject>();
-		auto& sprite = _object->GetSprite();
-		sprite.setTexture(sf::Texture()); // TODO: Get from Asset Manager
-		sprite.setTextureRect(SfmlRenderUtils::RectToSfRect(_rectangle));
-		sprite.setPosition(SfmlRenderUtils::PointToSfVector(_position));
-		sprite.setScale(SfmlRenderUtils::PointToSfVector(_factors));
-		sprite.setRotation(_rotation);
-		
+		_object->SetTexture(_textureAssetId);
+		_object->SetTextureRect(_rectangle);
+		_object->SetPosition(_position);
+		_object->SetScale(_factors);
+		_object->SetRotation(_rotation);
+
 		return *this;
 	}
 
