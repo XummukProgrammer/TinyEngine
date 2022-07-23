@@ -15,7 +15,23 @@ namespace TinyEngine
 		return *this;
 	}
 
-	IRenderObjectPtr Render::AddRenderObject(const IRenderObjectBuilder& builder)
+	void RenderLayer::Update(float deltaTime)
+	{
+		for (const auto& object : _objects)
+		{
+			object->Update(deltaTime);
+		}
+	}
+
+	void RenderLayer::Draw(IRenderWindowPtr renderWindowPtr)
+	{
+		for (const auto& object : _objects)
+		{
+			renderWindowPtr->Draw(object.get());
+		}
+	}
+
+	IRenderObjectPtr RenderLayer::AddRenderObject(const IRenderObjectBuilder& builder)
 	{
 		TINY_ENGINE_INFO("Added new render object");
 		auto object = builder.GetPtr();
@@ -23,7 +39,7 @@ namespace TinyEngine
 		return object;
 	}
 
-	void Render::RemoveRenderObject(IRenderObjectPtr object)
+	void RenderLayer::RemoveRenderObject(IRenderObjectPtr object)
 	{
 		TINY_ENGINE_INFO("Remove render object");
 		const auto it = GetConstObjectIterator(object);
@@ -33,9 +49,71 @@ namespace TinyEngine
 		}
 	}
 
-	bool Render::HasRenderObject(IRenderObjectPtr object) const
+	bool RenderLayer::HasRenderObject(IRenderObjectPtr object) const
 	{
 		return GetConstObjectIterator(object) != _objects.end();
+	}
+
+	RenderLayer::ObjectsList::const_iterator RenderLayer::GetConstObjectIterator(IRenderObjectPtr object) const
+	{
+		return std::find(_objects.begin(), _objects.end(), object);
+	}
+
+	void RenderLayers::CreateLayer(int layerId)
+	{
+		TINY_ENGINE_INFO("Create layer: " + std::to_string(layerId));
+		_layers[layerId] = std::make_shared<RenderLayer>();
+	}
+
+	RenderLayerPtr RenderLayers::GetLayer(int layerId) const
+	{
+		auto it = _layers.find(layerId);
+		if (it != _layers.end())
+		{
+			return it->second;
+		}
+		return nullptr;
+	}
+
+	RenderLayerPtr RenderLayers::GetOrCreateLayer(int layerId)
+	{
+		if (auto layer = GetLayer(layerId))
+		{
+			return layer;
+		}
+		CreateLayer(layerId);
+		return GetLayer(layerId);
+	}
+
+	void RenderLayers::RemoveLayer(int layerId)
+	{
+		TINY_ENGINE_INFO("Remove layer: " + std::to_string(layerId));
+		auto it = _layers.find(layerId);
+		if (it != _layers.end())
+		{
+			_layers.erase(it);
+		}
+	}
+
+	bool RenderLayers::HasLayer(int layerId) const
+	{
+		return _layers.find(layerId) != _layers.end();
+	}
+
+	void RenderLayers::Update(float deltaTime)
+	{
+		for (const auto& [ layerId, layer ] : _layers)
+		{
+			layer->Update(deltaTime);
+		}
+	}
+
+	void RenderLayers::Draw(IRenderWindowPtr renderWindowPtr)
+	{
+		for (const auto& [ layerId, layer ] : _layers)
+		{
+			layer->Draw(renderWindowPtr);
+		}
 	}
 
 	Render& Render::Execute()
@@ -65,28 +143,17 @@ namespace TinyEngine
 
 	void Render::UpdateObjects(float deltaTime)
 	{
-		for (const auto& object : _objects)
-		{
-			object->Update(deltaTime);
-		}
+		_renderLayers.Update(deltaTime);
 	}
 
 	void Render::DrawObjects()
 	{
-		for (const auto& object : _objects)
-		{
-			_renderWindowPtr->Draw(object.get());
-		}
+		_renderLayers.Draw(_renderWindowPtr);
 	}
 
 	void Render::CreateWindow(IRenderWindowPtr window, const RenderWindowSettings& windowSettings)
 	{
 		_renderWindowPtr = window;
 		_renderWindowPtr->Create(windowSettings);
-	}
-
-	Render::ObjectsList::const_iterator Render::GetConstObjectIterator(IRenderObjectPtr object) const
-	{
-		return std::find(_objects.begin(), _objects.end(), object);
 	}
 }

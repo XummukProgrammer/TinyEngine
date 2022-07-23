@@ -3,6 +3,7 @@
 
 #include <string>
 #include <list>
+#include <map>
 #include <memory>
 
 namespace TinyEngine
@@ -10,8 +11,11 @@ namespace TinyEngine
 	class IRenderWindow;
 	class SfmlRenderWindow;
 	class IRenderObject;
+	class RenderLayer;
 
 	using IRenderObjectPtr = std::shared_ptr<IRenderObject>;
+	using IRenderWindowPtr = std::shared_ptr<IRenderWindow>;
+	using RenderLayerPtr = std::shared_ptr<RenderLayer>;
 
 	struct RenderWindowSettings
 	{
@@ -98,12 +102,54 @@ namespace TinyEngine
 		virtual void Display() = 0;
 	};
 
-	class Render final
+	class RenderLayer final
 	{
 	public:
-		using IRenderWindowPtr = std::shared_ptr<IRenderWindow>;
 		using ObjectsList = std::list<IRenderObjectPtr>;
 
+	public:
+		RenderLayer() = default;
+		~RenderLayer() = default;
+
+	public:
+		void Update(float deltaTime);
+		void Draw(IRenderWindowPtr renderWindowPtr);
+
+	public:
+		IRenderObjectPtr AddRenderObject(const IRenderObjectBuilder& builder);
+		void RemoveRenderObject(IRenderObjectPtr object);
+		bool HasRenderObject(IRenderObjectPtr object) const;
+
+	private:
+		ObjectsList::const_iterator GetConstObjectIterator(IRenderObjectPtr object) const;
+
+	private:
+		ObjectsList _objects;
+	};
+
+	class RenderLayers final
+	{
+	public:
+		RenderLayers() = default;
+		~RenderLayers() = default;
+
+	public:
+		void Update(float deltaTime);
+		void Draw(IRenderWindowPtr renderWindowPtr);
+
+	public:
+		void CreateLayer(int layerId);
+		RenderLayerPtr GetLayer(int layerId) const;
+		RenderLayerPtr GetOrCreateLayer(int layerId);
+		void RemoveLayer(int layerId);
+		bool HasLayer(int layerId) const;
+
+	private:
+		std::map<int, RenderLayerPtr> _layers;
+	};
+
+	class Render final
+	{
 	public:
 		Render() = default;
 		~Render() = default;
@@ -111,12 +157,9 @@ namespace TinyEngine
 	public:
 		Render& CreateSfmlWindow(const RenderWindowSettings& windowSettings);
 
-		IRenderObjectPtr AddRenderObject(const IRenderObjectBuilder& builder);
-		void RemoveRenderObject(IRenderObjectPtr object);
-		bool HasRenderObject(IRenderObjectPtr object) const;
-
 		Render& Execute();
 		Render& Destroy();
+		RenderLayers& GetLayers() { return _renderLayers; }
 
 	private:
 		void UpdateObjects(float deltaTime);
@@ -124,11 +167,9 @@ namespace TinyEngine
 
 		void CreateWindow(IRenderWindowPtr window, const RenderWindowSettings& windowSettings);
 
-		ObjectsList::const_iterator GetConstObjectIterator(IRenderObjectPtr object) const;
-
 	private:
 		IRenderWindowPtr _renderWindowPtr;
-		ObjectsList _objects;
+		RenderLayers _renderLayers;
 	};
 
 	extern Render render;
