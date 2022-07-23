@@ -98,19 +98,11 @@ namespace TinyEngine
 		bool IsClosed() const override;
 		void Clear() override;
 		void ExtractEvents() override;
-		void Update(float deltaTime) override;
-		IRenderObjectPtr AddRenderObject(const IRenderObjectBuilder& builder) override;
-		void RemoveRenderObject(IRenderObjectPtr object) override;
-		bool HasRenderObject(IRenderObjectPtr object) const override;
 		void Draw(IRenderObject* object) const override;
 		void Display() override;
 
 	private:
-		ObjectsList::const_iterator GetConstObjectIterator(SfmlRenderObjectPtr object) const;
-
-	private:
-		std::unique_ptr<sf::RenderWindow> _windowPtr; 
-		ObjectsList _objects;
+		std::unique_ptr<sf::RenderWindow> _windowPtr;
 	};
 }
 

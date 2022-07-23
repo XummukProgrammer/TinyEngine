@@ -133,35 +133,6 @@ namespace TinyEngine
 		}
 	}
 
-	void SfmlRenderWindow::Update(float deltaTime)
-	{
-		for (const auto& object : _objects)
-		{
-			object->Update(deltaTime);
-		}
-	}
-
-	IRenderObjectPtr SfmlRenderWindow::AddRenderObject(const IRenderObjectBuilder& builder)
-	{
-		auto object = std::dynamic_pointer_cast<SfmlRenderObject>(builder.GetPtr());
-		_objects.push_back(object);
-		return object;
-	}
-
-	void SfmlRenderWindow::RemoveRenderObject(IRenderObjectPtr object)
-	{
-		const auto it = GetConstObjectIterator(std::dynamic_pointer_cast<SfmlRenderObject>(object));
-		if (it != _objects.end())
-		{
-			_objects.erase(it);
-		}
-	}
-
-	bool SfmlRenderWindow::HasRenderObject(IRenderObjectPtr object) const
-	{
-		return GetConstObjectIterator(std::dynamic_pointer_cast<SfmlRenderObject>(object)) != _objects.end();
-	}
-
 	void SfmlRenderWindow::Draw(IRenderObject* object) const
 	{
 		const auto& sprite = static_cast<SfmlRenderObject*>(object)->GetConstSprite();
@@ -170,16 +141,6 @@ namespace TinyEngine
 
 	void SfmlRenderWindow::Display()
 	{
-		for (const auto& object : _objects)
-		{
-			Draw(object.get());
-		}
-
 		_windowPtr->display();
-	}
-
-	SfmlRenderWindow::ObjectsList::const_iterator SfmlRenderWindow::GetConstObjectIterator(SfmlRenderObjectPtr object) const
-	{
-		return std::find(_objects.begin(), _objects.end(), object);
 	}
 }

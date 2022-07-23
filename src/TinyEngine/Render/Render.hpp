@@ -2,8 +2,8 @@
 #define _INTERFACE_RENDER_HEADER_
 
 #include <string>
+#include <list>
 #include <memory>
-#include <functional>
 
 namespace TinyEngine
 {
@@ -94,10 +94,6 @@ namespace TinyEngine
 		virtual bool IsClosed() const = 0;
 		virtual void Clear() = 0;
 		virtual void ExtractEvents() = 0;
-		virtual void Update(float deltaTime) = 0;
-		virtual IRenderObjectPtr AddRenderObject(const IRenderObjectBuilder& builder) = 0;
-		virtual void RemoveRenderObject(IRenderObjectPtr object) = 0;
-		virtual bool HasRenderObject(IRenderObjectPtr object) const = 0;
 		virtual void Draw(IRenderObject* object) const = 0;
 		virtual void Display() = 0;
 	};
@@ -106,23 +102,33 @@ namespace TinyEngine
 	{
 	public:
 		using IRenderWindowPtr = std::shared_ptr<IRenderWindow>;
-		using InitSfmlWindowCallback = std::function<void(SfmlRenderWindow*)>;
+		using ObjectsList = std::list<IRenderObjectPtr>;
 
 	public:
 		Render() = default;
 		~Render() = default;
 
 	public:
-		Render& CreateSfmlWindow(const RenderWindowSettings& windowSettings, InitSfmlWindowCallback initCallback = {});
+		Render& CreateSfmlWindow(const RenderWindowSettings& windowSettings);
+
+		IRenderObjectPtr AddRenderObject(const IRenderObjectBuilder& builder);
+		void RemoveRenderObject(IRenderObjectPtr object);
+		bool HasRenderObject(IRenderObjectPtr object) const;
 
 		Render& Execute();
 		Render& Destroy();
 
 	private:
+		void UpdateObjects(float deltaTime);
+		void DrawObjects();
+
 		void CreateWindow(IRenderWindowPtr window, const RenderWindowSettings& windowSettings);
+
+		ObjectsList::const_iterator GetConstObjectIterator(IRenderObjectPtr object) const;
 
 	private:
 		IRenderWindowPtr _renderWindowPtr;
+		ObjectsList _objects;
 	};
 
 	extern Render render;
