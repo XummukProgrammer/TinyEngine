@@ -16,14 +16,19 @@ namespace TinyEngine
 
 	void Application::Execute()
 	{
+		TINY_ENGINE_INFO("Execute engine");
+
 		render.Execute();
 		render.Destroy();
+
+		TINY_ENGINE_INFO("Shutdown engine");
 
 		LoggerDumpToFile();
 	}
 
 	void Application::LoggerDumpToFile()
 	{
+		TINY_ENGINE_INFO("Dump logger messages");
 		logger.DumpToFile(GetLogsDir() + "dump.xml", DumpXmlFormat());
 	}
 }

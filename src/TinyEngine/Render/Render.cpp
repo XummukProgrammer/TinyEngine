@@ -15,8 +15,9 @@ namespace TinyEngine
 		return *this;
 	}
 
-	IRenderObjectPtr Render::AddRenderObject(const IRenderObjectBuilder & builder)
+	IRenderObjectPtr Render::AddRenderObject(const IRenderObjectBuilder& builder)
 	{
+		TINY_ENGINE_INFO("Added new render object");
 		auto object = builder.GetPtr();
 		_objects.push_back(object);
 		return object;
@@ -24,6 +25,7 @@ namespace TinyEngine
 
 	void Render::RemoveRenderObject(IRenderObjectPtr object)
 	{
+		TINY_ENGINE_INFO("Remove render object");
 		const auto it = GetConstObjectIterator(object);
 		if (it != _objects.end())
 		{
@@ -54,6 +56,8 @@ namespace TinyEngine
 
 	Render& Render::Destroy()
 	{
+		TINY_ENGINE_INFO("Destroy");
+
 		_renderWindowPtr.reset();
 
 		return *this;
