@@ -9,6 +9,9 @@ namespace TinyEngine
 {
 	class IRenderWindow;
 	class SfmlRenderWindow;
+	class IRenderObject;
+
+	using IRenderObjectPtr = std::shared_ptr<IRenderObject>;
 
 	struct RenderWindowSettings
 	{
@@ -16,6 +19,26 @@ namespace TinyEngine
 		int width;
 		int height;
 		int maxFramerate;
+	};
+
+	struct Point
+	{
+		int x, y;
+	};
+
+	struct PointF
+	{
+		float x, y;
+	};
+
+	struct Rect
+	{
+		int x, y, w, h;
+	};
+
+	struct RectF
+	{
+		float x, y, w, h;
 	};
 
 	class IRenderObject
@@ -28,11 +51,24 @@ namespace TinyEngine
 		virtual void Update(float deltaTime) = 0;
 	};
 
-	class IRenderWindow
+	class IRenderObjectBuilder
 	{
 	public:
-		using IRenderObjectPtr = std::shared_ptr<IRenderObject>;
+		IRenderObjectBuilder() = default;
+		~IRenderObjectBuilder() = default;
 
+	public:
+		virtual IRenderObjectBuilder& SetTexture(std::string_view filePath) = 0;
+		virtual IRenderObjectBuilder& SetTextureRect(const Rect& rectangle) = 0;
+		virtual IRenderObjectBuilder& SetPosition(const PointF& position) = 0;
+		virtual IRenderObjectBuilder& SetScale(const PointF& factors) = 0;
+		virtual IRenderObjectBuilder& SetRotation(float rotation) = 0;
+		virtual IRenderObjectBuilder& Create() = 0;
+		virtual IRenderObjectPtr GetPtr() const = 0;
+	};
+
+	class IRenderWindow
+	{
 	public:
 		IRenderWindow() = default;
 		virtual ~IRenderWindow() = default;
@@ -43,7 +79,7 @@ namespace TinyEngine
 		virtual void Clear() = 0;
 		virtual void ExtractEvents() = 0;
 		virtual void Update(float deltaTime) = 0;
-		virtual void AddRenderObject(IRenderObjectPtr object) = 0;
+		virtual IRenderObjectPtr AddRenderObject(const IRenderObjectBuilder& builder) = 0;
 		virtual void RemoveRenderObject(IRenderObjectPtr object) = 0;
 		virtual bool HasRenderObject(IRenderObjectPtr object) const = 0;
 		virtual void Draw(IRenderObject* object) const = 0;

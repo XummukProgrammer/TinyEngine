@@ -14,6 +14,16 @@ namespace TinyEngine
 
 	using SfmlRenderObjectPtr = std::shared_ptr<SfmlRenderObject>;
 
+	class SfmlRenderUtils
+	{
+	public:
+		static sf::Vector2i PointToSfVector(const Point& point) { return { point.x, point.y }; }
+		static sf::Vector2f PointToSfVector(const PointF& point) { return { point.x, point.y }; }
+
+		static sf::IntRect RectToSfRect(const Rect& rectangle) { return { rectangle.x, rectangle.y, rectangle.w, rectangle.h }; }
+		static sf::FloatRect RectToSfRect(const RectF& rectangle) { return { rectangle.x, rectangle.y, rectangle.w, rectangle.h }; }
+	};
+
 	class SfmlRenderObject final : public IRenderObject
 	{
 	public:
@@ -31,22 +41,27 @@ namespace TinyEngine
 		sf::Sprite _sprite;
 	};
 
-	class SfmlRenderObjectBuilder final
+	class SfmlRenderObjectBuilder final : public IRenderObjectBuilder
 	{
 	public:
 		SfmlRenderObjectBuilder() = default;
 		~SfmlRenderObjectBuilder() = default;
 
 	public:
-		SfmlRenderObjectBuilder& Create();
-		SfmlRenderObjectBuilder& SetTexture(const sf::Texture& texture);
-		SfmlRenderObjectBuilder& SetTextureRect(const sf::IntRect& rectangle);
-		SfmlRenderObjectBuilder& SetPosition(const sf::Vector2f& position);
-		SfmlRenderObjectBuilder& SetScale(const sf::Vector2f& factors);
-		SfmlRenderObjectBuilder& SetRotation(float rotation);
-		SfmlRenderObjectPtr GetPtr() const;
+		IRenderObjectBuilder& SetTexture(std::string_view filePath) override;
+		IRenderObjectBuilder& SetTextureRect(const Rect& rectangle) override;
+		IRenderObjectBuilder& SetPosition(const PointF& position) override;
+		IRenderObjectBuilder& SetScale(const PointF& factors) override;
+		IRenderObjectBuilder& SetRotation(float rotation) override;
+		IRenderObjectBuilder& Create() override;
+		IRenderObjectPtr GetPtr() const override;
 
 	private:
+		std::string _textureFilePath;
+		Rect _rectangle { 0, 0, 32, 32 };
+		PointF _position { 0, 0 };
+		PointF _factors { 1.f, 1.f };
+		float _rotation = 0;
 		SfmlRenderObjectPtr _object;
 	};
 
@@ -65,7 +80,7 @@ namespace TinyEngine
 		void Clear() override;
 		void ExtractEvents() override;
 		void Update(float deltaTime) override;
-		void AddRenderObject(IRenderObjectPtr object) override;
+		IRenderObjectPtr AddRenderObject(const IRenderObjectBuilder& builder) override;
 		void RemoveRenderObject(IRenderObjectPtr object) override;
 		bool HasRenderObject(IRenderObjectPtr object) const override;
 		void Draw(IRenderObject* object) const override;

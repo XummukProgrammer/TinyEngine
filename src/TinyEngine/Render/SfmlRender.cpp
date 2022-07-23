@@ -6,43 +6,50 @@ namespace TinyEngine
 	{
 	}
 
-	SfmlRenderObjectBuilder& SfmlRenderObjectBuilder::Create()
+	IRenderObjectBuilder& SfmlRenderObjectBuilder::SetTexture(std::string_view filePath)
+	{
+		_textureFilePath = filePath;
+		return *this;
+	}
+
+	IRenderObjectBuilder& SfmlRenderObjectBuilder::SetTextureRect(const Rect& rectangle)
+	{
+		_rectangle = rectangle;
+		return *this;
+	}
+
+	IRenderObjectBuilder& SfmlRenderObjectBuilder::SetPosition(const PointF& position)
+	{
+		_position = position;
+		return *this;
+	}
+
+	IRenderObjectBuilder& SfmlRenderObjectBuilder::SetScale(const PointF& factors)
+	{
+		_factors = factors;
+		return *this;
+	}
+
+	IRenderObjectBuilder& SfmlRenderObjectBuilder::SetRotation(float rotation)
+	{
+		_rotation = rotation;
+		return *this;
+	}
+
+	IRenderObjectBuilder& SfmlRenderObjectBuilder::Create()
 	{
 		_object = std::make_shared<SfmlRenderObject>();
+		auto& sprite = _object->GetSprite();
+		sprite.setTexture(sf::Texture()); // TODO: Get from Asset Manager
+		sprite.setTextureRect(SfmlRenderUtils::RectToSfRect(_rectangle));
+		sprite.setPosition(SfmlRenderUtils::PointToSfVector(_position));
+		sprite.setScale(SfmlRenderUtils::PointToSfVector(_factors));
+		sprite.setRotation(_rotation);
+		
 		return *this;
 	}
 
-	SfmlRenderObjectBuilder& SfmlRenderObjectBuilder::SetTexture(const sf::Texture& texture)
-	{
-		_object->GetSprite().setTexture(texture);
-		return *this;
-	}
-
-	SfmlRenderObjectBuilder& SfmlRenderObjectBuilder::SetTextureRect(const sf::IntRect& rectangle)
-	{
-		_object->GetSprite().setTextureRect(rectangle);
-		return *this;
-	}
-
-	SfmlRenderObjectBuilder& SfmlRenderObjectBuilder::SetPosition(const sf::Vector2f& position)
-	{
-		_object->GetSprite().setPosition(position);
-		return *this;
-	}
-
-	SfmlRenderObjectBuilder& SfmlRenderObjectBuilder::SetScale(const sf::Vector2f& factors)
-	{
-		_object->GetSprite().setScale(factors);
-		return *this;
-	}
-
-	SfmlRenderObjectBuilder& SfmlRenderObjectBuilder::SetRotation(float rotation)
-	{
-		_object->GetSprite().setRotation(rotation);
-		return *this;
-	}
-
-	SfmlRenderObjectPtr SfmlRenderObjectBuilder::GetPtr() const
+	IRenderObjectPtr SfmlRenderObjectBuilder::GetPtr() const
 	{
 		return _object;
 	}
@@ -84,10 +91,11 @@ namespace TinyEngine
 		}
 	}
 
-	void SfmlRenderWindow::AddRenderObject(IRenderObjectPtr object)
+	IRenderObjectPtr SfmlRenderWindow::AddRenderObject(const IRenderObjectBuilder& builder)
 	{
-		auto castedObject = std::dynamic_pointer_cast<SfmlRenderObject>(object);
-		_objects.push_back(std::move(castedObject));
+		auto object = std::dynamic_pointer_cast<SfmlRenderObject>(builder.GetPtr());
+		_objects.push_back(object);
+		return object;
 	}
 
 	void SfmlRenderWindow::RemoveRenderObject(IRenderObjectPtr object)
