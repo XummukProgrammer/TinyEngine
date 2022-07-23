@@ -1,8 +1,8 @@
 ﻿#ifndef _APPLICATION_HEADER_
 #define _APPLICATION_HEADER_
 
-#include <TinyEngine/Debug/Debug.hpp>
-#include <TinyEngine/Logger/Logger.hpp>
+#include <TinyEngine/Core/Debug/Debug.hpp>
+#include <TinyEngine/Core/Logger/Logger.hpp>
 #include <TinyEngine/Render/Render.hpp>
 
 #include <TinyEngine/Render/SfmlRender.hpp>

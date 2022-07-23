@@ -1,7 +1,7 @@
 ﻿#include "Render.hpp"
 
-#include <TinyEngine/Logger/Logger.hpp>
-#include <TinyEngine/Debug/Debug.hpp>
+#include <TinyEngine/Core/Logger/Logger.hpp>
+#include <TinyEngine/Core/Debug/Debug.hpp>
 #include <TinyEngine/Render/SfmlRender.hpp>
 
 namespace TinyEngine

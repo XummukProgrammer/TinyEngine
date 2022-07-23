@@ -1,7 +1,7 @@
 ﻿#include "Debug.hpp"
 
 #include <TinyEngine/Core/Application.hpp>
-#include <TinyEngine/Logger/Logger.hpp>
+#include <TinyEngine/Core/Logger/Logger.hpp>
 
 namespace TinyEngine
 {
