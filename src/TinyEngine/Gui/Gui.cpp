@@ -1,5 +1,7 @@
 ﻿#include "Gui.hpp"
 
+#include <TinyEngine/Gui/Widgets/GuiWindowWidget.hpp>
+
 #include "imgui.h"
 #include "imgui_internal.h"
 
@@ -33,7 +35,7 @@ namespace TinyEngine
 
 	void Gui::Draw(float deltaTime, IRenderWindowPtr renderWindowPtr)
 	{
-		_container.Draw(deltaTime, renderWindowPtr);
+		_mainWindowPtr->Draw(deltaTime, renderWindowPtr);
 	}
 
 	void Gui::Display(IRenderWindowPtr renderWindowPtr)
@@ -50,6 +52,16 @@ namespace TinyEngine
 		{
 			_delegatePtr->Shutdown(renderWindowPtr);
 		}
+	}
+
+	void Gui::SetMainWindow(GuiMainWindowWidgetPtr mainWindowPtr)
+	{
+		_mainWindowPtr = mainWindowPtr;
+	}
+
+	GuiMainWindowWidgetPtr Gui::GetMainWindow() const
+	{
+		return _mainWindowPtr;
 	}
 
 	void Gui::SettingsIO()

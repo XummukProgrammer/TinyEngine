@@ -8,7 +8,7 @@
 
 namespace TinyEngine
 {
-	class GuiWindowWidget : public GuiWidget
+	class GuiWindowWidget : public GuiWidget, public GuiWidgetContainer
 	{
 	public:
 		using Ptr = std::shared_ptr<GuiWindowWidget>;
@@ -24,10 +24,6 @@ namespace TinyEngine
 		void Draw(float deltaTime, IRenderWindowPtr renderWindowPtr) override;
 
 	public:
-		GuiWidgetContainer& GetContainer() { return _container; }
-		const GuiWidgetContainer& GetConstContainer() const { return _container; }
-
-	public:
 		void SetName(std::string_view name) { _name = name; }
 		const std::string& GetName() const { return _name; }
 
@@ -37,7 +33,6 @@ namespace TinyEngine
 
 	private:
 		std::string _name;
-		GuiWidgetContainer _container;
 	};
 
 	class GuiMainWindowWidget final : public GuiWindowWidget

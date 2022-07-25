@@ -13,7 +13,7 @@ namespace TinyEngine
 	{
 		BeginWindow();
 
-		_container.EachWidgets([deltaTime, renderWindowPtr](std::string_view id, GuiWidgetContainer::GuiWidgetPtr widgetPtr)
+		EachWidgets([deltaTime, renderWindowPtr](std::string_view id, GuiWidgetContainer::GuiWidgetPtr widgetPtr)
 		{
 			widgetPtr->Draw(deltaTime, renderWindowPtr);
 		});

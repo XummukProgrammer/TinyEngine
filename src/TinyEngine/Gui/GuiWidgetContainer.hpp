@@ -13,7 +13,7 @@ namespace TinyEngine
 
 	using IRenderWindowPtr = std::shared_ptr<IRenderWindow>;
 
-	class GuiWidgetContainer final
+	class GuiWidgetContainer
 	{
 	public:
 		using GuiWidgetPtr = std::shared_ptr<GuiWidget>;
@@ -21,7 +21,7 @@ namespace TinyEngine
 
 	public:
 		GuiWidgetContainer() = default;
-		~GuiWidgetContainer() = default;
+		virtual ~GuiWidgetContainer() = default;
 
 	public:
 		void Draw(float deltaTime, IRenderWindowPtr renderWindowPtr);

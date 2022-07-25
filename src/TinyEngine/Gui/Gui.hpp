@@ -1,7 +1,6 @@
 ﻿#ifndef _GUI_HEADER_
 #define _GUI_HEADER_
 
-#include <TinyEngine/Gui/GuiWidgetContainer.hpp>
 #include <TinyEngine/Data/Singleton.hpp>
 
 #include <memory>
@@ -9,8 +8,12 @@
 namespace TinyEngine
 {
 	class GuiDelegate;
+	class IRenderWindow;
+	class GuiMainWindowWidget;
 
 	using GuiDelegatePtr = std::shared_ptr<GuiDelegate>;
+	using IRenderWindowPtr = std::shared_ptr<IRenderWindow>;
+	using GuiMainWindowWidgetPtr = std::shared_ptr<GuiMainWindowWidget>;
 
 	class GuiDelegate
 	{
@@ -43,15 +46,15 @@ namespace TinyEngine
 	public:
 		void SetDelegate(GuiDelegatePtr delegatePtr) { _delegatePtr = delegatePtr; }
 
-		void SettingsIO();
+		void SetMainWindow(GuiMainWindowWidgetPtr mainWindowPtr);
+		GuiMainWindowWidgetPtr GetMainWindow() const;
 
-	public:
-		GuiWidgetContainer& GetContainer() { return _container; }
-		const GuiWidgetContainer& GetConstContainer() { return _container; }
+	private:
+		void SettingsIO();
 
 	private:
 		GuiDelegatePtr _delegatePtr;
-		GuiWidgetContainer _container;
+		GuiMainWindowWidgetPtr _mainWindowPtr;
 	};
 }
 
