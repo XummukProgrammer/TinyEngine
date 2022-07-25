@@ -27,10 +27,11 @@ namespace TinyEngine
 		GuiWidgetContainer& GetContainer() { return _container; }
 		const GuiWidgetContainer& GetConstContainer() const { return _container; }
 
-	private:
+	public:
 		void SetName(std::string_view name) { _name = name; }
 		const std::string& GetName() const { return _name; }
 
+	private:
 		std::string _name;
 		GuiWidgetContainer _container;
 	};
