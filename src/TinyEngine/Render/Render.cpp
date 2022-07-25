@@ -30,12 +30,10 @@ namespace TinyEngine
 		}
 	}
 
-	IRenderObjectPtr RenderLayer::AddRenderObject(const IRenderObjectBuilder& builder)
+	void RenderLayer::AddRenderObject(IRenderObjectPtr object)
 	{
 		TINY_ENGINE_INFO("Added new render object");
-		auto object = builder.GetPtr();
 		_objects.push_back(object);
-		return object;
 	}
 
 	void RenderLayer::RemoveRenderObject(IRenderObjectPtr object)
@@ -184,5 +182,41 @@ namespace TinyEngine
 		auto& gui = Gui::GetInstance();
 		gui.SetDelegate(_renderWindowPtr->CreateDelegate());
 		gui.Init(_renderWindowPtr);
+	}
+
+	RenderObjectBuilder& RenderObjectBuilder::SetTexture(std::string_view assetId)
+	{
+		_textureAssetId = assetId;
+		return *this;
+	}
+
+	RenderObjectBuilder& RenderObjectBuilder::SetTextureRect(const Rect& rectangle)
+	{
+		_rectangle = rectangle;
+		return *this;
+	}
+
+	RenderObjectBuilder& RenderObjectBuilder::SetPosition(const PointF& position)
+	{
+		_position = position;
+		return *this;
+	}
+
+	RenderObjectBuilder& RenderObjectBuilder::SetScale(const PointF& factors)
+	{
+		_factors = factors;
+		return *this;
+	}
+
+	RenderObjectBuilder& RenderObjectBuilder::SetRotation(float rotation)
+	{
+		_rotation = rotation;
+		return *this;
+	}
+
+	RenderObjectBuilder& RenderObjectBuilder::SetToLayer(int layerId)
+	{
+		Render::GetInstance().GetLayers().GetOrCreateLayer(layerId)->AddRenderObject(GetPtr());
+		return *this;
 	}
 }

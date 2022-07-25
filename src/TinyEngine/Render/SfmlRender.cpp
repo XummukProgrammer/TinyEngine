@@ -59,37 +59,7 @@ namespace TinyEngine
 		return _sprite.getGlobalBounds().intersects(SfmlRenderUtils::RectToSfRect(rectangle));
 	}
 
-	IRenderObjectBuilder& SfmlRenderObjectBuilder::SetTexture(std::string_view assetId)
-	{
-		_textureAssetId = assetId;
-		return *this;
-	}
-
-	IRenderObjectBuilder& SfmlRenderObjectBuilder::SetTextureRect(const Rect& rectangle)
-	{
-		_rectangle = rectangle;
-		return *this;
-	}
-
-	IRenderObjectBuilder& SfmlRenderObjectBuilder::SetPosition(const PointF& position)
-	{
-		_position = position;
-		return *this;
-	}
-
-	IRenderObjectBuilder& SfmlRenderObjectBuilder::SetScale(const PointF& factors)
-	{
-		_factors = factors;
-		return *this;
-	}
-
-	IRenderObjectBuilder& SfmlRenderObjectBuilder::SetRotation(float rotation)
-	{
-		_rotation = rotation;
-		return *this;
-	}
-
-	IRenderObjectBuilder& SfmlRenderObjectBuilder::Create()
+	RenderObjectBuilder& SfmlRenderObjectBuilder::Create()
 	{
 		_object = std::make_shared<SfmlRenderObject>();
 		_object->SetTexture(_textureAssetId);

@@ -60,27 +60,17 @@ namespace TinyEngine
 		sf::Sprite _sprite;
 	};
 
-	class SfmlRenderObjectBuilder final : public IRenderObjectBuilder
+	class SfmlRenderObjectBuilder final : public RenderObjectBuilder
 	{
 	public:
 		SfmlRenderObjectBuilder() = default;
 		~SfmlRenderObjectBuilder() = default;
 
 	public:
-		IRenderObjectBuilder& SetTexture(std::string_view assetId) override;
-		IRenderObjectBuilder& SetTextureRect(const Rect& rectangle) override;
-		IRenderObjectBuilder& SetPosition(const PointF& position) override;
-		IRenderObjectBuilder& SetScale(const PointF& factors) override;
-		IRenderObjectBuilder& SetRotation(float rotation) override;
-		IRenderObjectBuilder& Create() override;
+		RenderObjectBuilder& Create() override;
 		IRenderObjectPtr GetPtr() const override;
 
 	private:
-		std::string _textureAssetId;
-		Rect _rectangle { 0, 0, 32, 32 };
-		PointF _position { 0, 0 };
-		PointF _factors { 1.f, 1.f };
-		float _rotation = 0;
 		SfmlRenderObjectPtr _object;
 	};
 

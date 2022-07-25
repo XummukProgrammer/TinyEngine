@@ -75,20 +75,28 @@ namespace TinyEngine
 		virtual void Update(float deltaTime) = 0;
 	};
 
-	class IRenderObjectBuilder
+	class RenderObjectBuilder
 	{
 	public:
-		IRenderObjectBuilder() = default;
-		~IRenderObjectBuilder() = default;
+		RenderObjectBuilder() = default;
+		~RenderObjectBuilder() = default;
 
 	public:
-		virtual IRenderObjectBuilder& SetTexture(std::string_view assetId) = 0;
-		virtual IRenderObjectBuilder& SetTextureRect(const Rect& rectangle) = 0;
-		virtual IRenderObjectBuilder& SetPosition(const PointF& position) = 0;
-		virtual IRenderObjectBuilder& SetScale(const PointF& factors) = 0;
-		virtual IRenderObjectBuilder& SetRotation(float rotation) = 0;
-		virtual IRenderObjectBuilder& Create() = 0;
+		RenderObjectBuilder& SetTexture(std::string_view assetId);
+		RenderObjectBuilder& SetTextureRect(const Rect& rectangle);
+		RenderObjectBuilder& SetPosition(const PointF& position);
+		RenderObjectBuilder& SetScale(const PointF& factors);
+		RenderObjectBuilder& SetRotation(float rotation);
+		virtual RenderObjectBuilder& Create() = 0;
 		virtual IRenderObjectPtr GetPtr() const = 0;
+		RenderObjectBuilder& SetToLayer(int layerId);
+
+	protected:
+		std::string _textureAssetId;
+		Rect _rectangle { 0, 0, 32, 32 };
+		PointF _position { 0, 0 };
+		PointF _factors { 1.f, 1.f };
+		float _rotation = 0;
 	};
 
 	class IRenderWindow
@@ -138,7 +146,7 @@ namespace TinyEngine
 		void Draw(IRenderWindowPtr renderWindowPtr);
 
 	public:
-		IRenderObjectPtr AddRenderObject(const IRenderObjectBuilder& builder);
+		void AddRenderObject(IRenderObjectPtr object);
 		void RemoveRenderObject(IRenderObjectPtr object);
 		bool HasRenderObject(IRenderObjectPtr object) const;
 
