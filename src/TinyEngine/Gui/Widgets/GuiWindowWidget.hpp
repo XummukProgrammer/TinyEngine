@@ -8,14 +8,14 @@
 
 namespace TinyEngine
 {
-	class GuiWindowWidget final : public GuiWidget
+	class GuiWindowWidget : public GuiWidget
 	{
 	public:
 		using Ptr = std::shared_ptr<GuiWindowWidget>;
 
 	public:
 		GuiWindowWidget() = default;
-		~GuiWindowWidget() = default;
+		virtual ~GuiWindowWidget() = default;
 
 	public:
 		static Ptr Create(std::string_view name);
@@ -31,9 +31,30 @@ namespace TinyEngine
 		void SetName(std::string_view name) { _name = name; }
 		const std::string& GetName() const { return _name; }
 
+	protected:
+		virtual void BeginWindow();
+		virtual void EndWindow();
+
 	private:
 		std::string _name;
 		GuiWidgetContainer _container;
+	};
+
+	class GuiMainWindowWidget final : public GuiWindowWidget
+	{
+	public:
+		using Ptr = std::shared_ptr<GuiWindowWidget>;
+
+	public:
+		GuiMainWindowWidget() = default;
+		~GuiMainWindowWidget() = default;
+
+	public:
+		static Ptr Create(std::string_view name);
+
+	protected:
+		void BeginWindow() override;
+		void EndWindow() override;
 	};
 }
 
