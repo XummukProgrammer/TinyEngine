@@ -8,5 +8,6 @@
 #include <TinyEngine/Gui/Gui.hpp>
 #include <TinyEngine/Gui/Widgets/GuiLabelWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiWindowWidget.hpp>
+#include <TinyEngine/Gui/Widgets/GuiMenuBarWidget.hpp>
 
 #endif // _TINY_ENGINE_HEADER_

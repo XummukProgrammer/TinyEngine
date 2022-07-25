@@ -108,6 +108,7 @@ namespace TinyEngine
 		virtual void ExtractEvents() = 0;
 		virtual void Draw(IRenderObject* object) const = 0;
 		virtual void Display() = 0;
+		virtual void Close() = 0;
 
 		virtual void ResetClock() = 0;
 		virtual void UpdateClock() = 0;
@@ -181,6 +182,9 @@ namespace TinyEngine
 		Render& Execute();
 		Render& Destroy();
 		RenderLayers& GetLayers() { return _renderLayers; }
+
+	public:
+		void Close();
 
 	private:
 		void Update(float deltaTime);

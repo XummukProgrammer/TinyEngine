@@ -149,6 +149,11 @@ namespace TinyEngine
 		return *this;
 	}
 
+	void Render::Close()
+	{
+		_renderWindowPtr->Close();
+	}
+
 	void Render::Update(float deltaTime)
 	{
 		_renderLayers.Update(deltaTime);

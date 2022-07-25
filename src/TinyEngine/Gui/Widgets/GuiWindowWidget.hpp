@@ -43,7 +43,7 @@ namespace TinyEngine
 	class GuiMainWindowWidget final : public GuiWindowWidget
 	{
 	public:
-		using Ptr = std::shared_ptr<GuiWindowWidget>;
+		using Ptr = std::shared_ptr<GuiMainWindowWidget>;
 
 	public:
 		GuiMainWindowWidget() = default;

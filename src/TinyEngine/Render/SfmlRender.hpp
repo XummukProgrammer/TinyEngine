@@ -101,6 +101,7 @@ namespace TinyEngine
 		void ExtractEvents() override;
 		void Draw(IRenderObject* object) const override;
 		void Display() override;
+		void Close() override;
 
 		void ResetClock() override;
 		void UpdateClock() override;

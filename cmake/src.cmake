@@ -12,6 +12,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Gui/GuiWidgetContainer.hpp
 	src/TinyEngine/Gui/Widgets/GuiLabelWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiWindowWidget.hpp
+	src/TinyEngine/Gui/Widgets/GuiMenuBarWidget.hpp
 	src/TinyEngine/Data/Singleton.hpp
 )
 
@@ -27,5 +28,6 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Gui/GuiWidgetContainer.cpp
 	src/TinyEngine/Gui/Widgets/GuiLabelWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiWindowWidget.cpp
+	src/TinyEngine/Gui/Widgets/GuiMenuBarWidget.cpp
 	src/TinyEngine/Data/Singleton.cpp
 )

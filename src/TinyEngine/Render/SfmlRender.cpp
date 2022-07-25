@@ -134,7 +134,7 @@ namespace TinyEngine
 		{
 			if (_event.type == sf::Event::Closed)
 			{
-				_windowPtr->close();
+				Close();
 			}
 			else
 			{
@@ -152,6 +152,11 @@ namespace TinyEngine
 	void SfmlRenderWindow::Display()
 	{
 		_windowPtr->display();
+	}
+
+	void SfmlRenderWindow::Close()
+	{
+		_windowPtr->close();
 	}
 
 	void SfmlRenderWindow::ResetClock()
