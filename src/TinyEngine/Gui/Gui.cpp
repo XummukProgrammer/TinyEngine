@@ -1,5 +1,8 @@
 ﻿#include "Gui.hpp"
 
+#include "imgui.h"
+#include "imgui_internal.h"
+
 namespace TinyEngine
 {
 	void Gui::Init(IRenderWindowPtr renderWindowPtr)
@@ -8,6 +11,8 @@ namespace TinyEngine
 		{
 			_delegatePtr->Init(renderWindowPtr);
 		}
+
+		SettingsIO();
 	}
 
 	void Gui::EventReceived(IRenderWindowPtr renderWindowPtr)
@@ -45,5 +50,11 @@ namespace TinyEngine
 		{
 			_delegatePtr->Shutdown(renderWindowPtr);
 		}
+	}
+
+	void Gui::SettingsIO()
+	{
+		auto& io = ImGui::GetIO();
+		io.IniFilename = nullptr;
 	}
 }

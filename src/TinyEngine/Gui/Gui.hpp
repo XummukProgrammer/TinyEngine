@@ -43,6 +43,8 @@ namespace TinyEngine
 	public:
 		void SetDelegate(GuiDelegatePtr delegatePtr) { _delegatePtr = delegatePtr; }
 
+		void SettingsIO();
+
 	public:
 		GuiWidgetContainer& GetContainer() { return _container; }
 		const GuiWidgetContainer& GetConstContainer() { return _container; }
