@@ -5,17 +5,15 @@
 
 namespace TinyEngine
 {
-	Debug debug;
-
 	bool Debug::OperationProcess(std::string_view sender, IDebugOperation& debugOperation)
 	{
 		if (debugOperation.IsActive())
 		{
-			logger.MessagePrintToConsole(debugOperation.GetLoggerMessageType(), sender, debugOperation.GetMessage(), debugOperation.IsShowStacktrace());
+			Logger::GetInstance().MessagePrintToConsole(debugOperation.GetLoggerMessageType(), sender, debugOperation.GetMessage(), debugOperation.IsShowStacktrace());
 
 			if (debugOperation.IsLoggerDumpToFile())
 			{
-				application.LoggerDumpToFile();
+				Application::GetInstance().LoggerDumpToFile();
 			}
 
 			if (debugOperation.IsStopProgram())

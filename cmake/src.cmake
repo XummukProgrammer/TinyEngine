@@ -6,6 +6,13 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Debug/Debug.hpp
 	src/TinyEngine/Render/Render.hpp
 	src/TinyEngine/Render/SfmlRender.hpp
+	src/TinyEngine/Gui/Gui.hpp
+	src/TinyEngine/Gui/SfmlGuiDelegate.hpp
+	src/TinyEngine/Gui/GuiWidget.hpp
+	src/TinyEngine/Gui/GuiWidgetContainer.hpp
+	src/TinyEngine/Gui/Widgets/GuiLabelWidget.hpp
+	src/TinyEngine/Gui/Widgets/GuiWindowWidget.hpp
+	src/TinyEngine/Data/Singleton.hpp
 )
 
 set(ENGINE_SOURCES
@@ -14,4 +21,11 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Debug/Debug.cpp
 	src/TinyEngine/Render/Render.cpp
 	src/TinyEngine/Render/SfmlRender.cpp
+	src/TinyEngine/Gui/Gui.cpp
+	src/TinyEngine/Gui/SfmlGuiDelegate.cpp
+	src/TinyEngine/Gui/GuiWidget.cpp
+	src/TinyEngine/Gui/GuiWidgetContainer.cpp
+	src/TinyEngine/Gui/Widgets/GuiLabelWidget.cpp
+	src/TinyEngine/Gui/Widgets/GuiWindowWidget.cpp
+	src/TinyEngine/Data/Singleton.cpp
 )

@@ -1,6 +1,8 @@
 ﻿#ifndef _LOGGER_HEADER_
 #define _LOGGER_HEADER_
 
+#include <TinyEngine/Data/Singleton.hpp>
+
 #include <list>
 #include <memory>
 #include <string>
@@ -49,7 +51,7 @@ namespace TinyEngine
 		void DumpToFile(std::string_view fileName, const LoggerMessages& loggerMessages) override;
 	};
 
-	class Logger final
+	class Logger final : public Singleton<Logger>
 	{
 	public:
 		Logger() = default;
@@ -67,11 +69,9 @@ namespace TinyEngine
 	private:
 		LoggerMessages _messages;
 	};
-
-	extern Logger logger;
 }
 
-#define TINY_ENGINE_PRINT_TO_CONSOLE(type, message, isShowStacktrace) TinyEngine::logger.MessagePrintToConsole(type, __FUNCTION__, message, isShowStacktrace)
+#define TINY_ENGINE_PRINT_TO_CONSOLE(type, message, isShowStacktrace) TinyEngine::Logger::GetInstance().MessagePrintToConsole(type, __FUNCTION__, message, isShowStacktrace)
 #define TINY_ENGINE_INFO(message) TINY_ENGINE_PRINT_TO_CONSOLE("info", message, false)
 
 #endif // _LOGGER_HEADER_

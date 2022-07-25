@@ -3,11 +3,10 @@
 #include <TinyEngine/Core/Logger/Logger.hpp>
 #include <TinyEngine/Core/Debug/Debug.hpp>
 #include <TinyEngine/Render/SfmlRender.hpp>
+#include <TinyEngine/Gui/Gui.hpp>
 
 namespace TinyEngine
 {
-	Render render;
-
 	Render& Render::CreateSfmlWindow(const RenderWindowSettings& windowSettings)
 	{
 		TINY_ENGINE_INFO("Use Sfml Window");
@@ -120,14 +119,23 @@ namespace TinyEngine
 	{
 		TINY_ENGINE_ASSERT(_renderWindowPtr.get(), "Render Window not inited");
 
+		_renderWindowPtr->ResetClock();
+
 		while (!_renderWindowPtr->IsClosed())
 		{
+			_renderWindowPtr->UpdateClock();
+			const float deltaTime = _renderWindowPtr->GetDeltaTime();
+
 			_renderWindowPtr->ExtractEvents();
-			UpdateObjects(0.f);
+
+			Update(deltaTime);
+
 			_renderWindowPtr->Clear();
-			DrawObjects();
+			Draw(_renderWindowPtr);
 			_renderWindowPtr->Display();
 		}
+
+		Gui::GetInstance().Shutdown(_renderWindowPtr);
 
 		return *this;
 	}
@@ -141,19 +149,29 @@ namespace TinyEngine
 		return *this;
 	}
 
-	void Render::UpdateObjects(float deltaTime)
+	void Render::Update(float deltaTime)
 	{
 		_renderLayers.Update(deltaTime);
+
+		auto& gui = Gui::GetInstance();
+		gui.Update(deltaTime, _renderWindowPtr);
+		gui.Draw(deltaTime, _renderWindowPtr);
 	}
 
-	void Render::DrawObjects()
+	void Render::Draw(IRenderWindowPtr window)
 	{
-		_renderLayers.Draw(_renderWindowPtr);
+		_renderLayers.Draw(window);
+
+		Gui::GetInstance().Display(_renderWindowPtr);
 	}
 
 	void Render::CreateWindow(IRenderWindowPtr window, const RenderWindowSettings& windowSettings)
 	{
 		_renderWindowPtr = window;
 		_renderWindowPtr->Create(windowSettings);
+
+		auto& gui = Gui::GetInstance();
+		gui.SetDelegate(_renderWindowPtr->CreateDelegate());
+		gui.Init(_renderWindowPtr);
 	}
 }

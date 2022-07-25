@@ -6,8 +6,6 @@
 
 namespace TinyEngine
 {
-	Application application;
-
 	void Application::SetExecutePath(std::string_view executePath)
 	{
 		_executePath = executePath;
@@ -18,6 +16,7 @@ namespace TinyEngine
 	{
 		TINY_ENGINE_INFO("Execute engine");
 
+		auto& render = GetRender();
 		render.Execute();
 		render.Destroy();
 
@@ -29,6 +28,6 @@ namespace TinyEngine
 	void Application::LoggerDumpToFile()
 	{
 		TINY_ENGINE_INFO("Dump logger messages");
-		logger.DumpToFile(GetLogsDir() + "dump.xml", DumpXmlFormat());
+		GetLogger().DumpToFile(GetLogsDir() + "dump.xml", DumpXmlFormat());
 	}
 }

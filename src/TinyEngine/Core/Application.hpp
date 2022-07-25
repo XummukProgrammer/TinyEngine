@@ -4,12 +4,14 @@
 #include <TinyEngine/Core/Debug/Debug.hpp>
 #include <TinyEngine/Core/Logger/Logger.hpp>
 #include <TinyEngine/Render/Render.hpp>
+#include <TinyEngine/Gui/Gui.hpp>
+#include <TinyEngine/Data/Singleton.hpp>
 
 #include <TinyEngine/Render/SfmlRender.hpp>
 
 namespace TinyEngine
 {
-	class Application final
+	class Application final : public Singleton<Application>
 	{
 	public:
 		Application() = default;
@@ -27,16 +29,15 @@ namespace TinyEngine
 		void LoggerDumpToFile();
 
 	public:
-		Debug& GetDebug() { return debug; }
-		Logger& GetLogger() { return logger; }
-		Render& GetRender() { return render; }
+		Debug& GetDebug() { return Debug::GetInstance(); }
+		Logger& GetLogger() { return Logger::GetInstance(); }
+		Render& GetRender() { return Render::GetInstance(); }
+		Gui& GetGui() { return Gui::GetInstance(); }
 
 	private:
 		std::string _executePath;
 		std::string _executeDir;
 	};
-
-	extern Application application;
 }
 
 #endif // _APPLICATION_HEADER_

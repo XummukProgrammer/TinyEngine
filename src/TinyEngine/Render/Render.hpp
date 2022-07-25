@@ -1,6 +1,9 @@
 ﻿#ifndef _INTERFACE_RENDER_HEADER_
 #define _INTERFACE_RENDER_HEADER_
 
+#include <TinyEngine/Gui/Gui.hpp>
+#include <TinyEngine/Data/Singleton.hpp>
+
 #include <string>
 #include <list>
 #include <map>
@@ -95,11 +98,16 @@ namespace TinyEngine
 
 	public:
 		virtual void Create(const RenderWindowSettings& windowSettings) = 0;
+		virtual GuiDelegatePtr CreateDelegate() const = 0;
 		virtual bool IsClosed() const = 0;
 		virtual void Clear() = 0;
 		virtual void ExtractEvents() = 0;
 		virtual void Draw(IRenderObject* object) const = 0;
 		virtual void Display() = 0;
+
+		virtual void ResetClock() = 0;
+		virtual void UpdateClock() = 0;
+		virtual float GetDeltaTime() const = 0;
 	};
 
 	class RenderLayer final
@@ -148,7 +156,7 @@ namespace TinyEngine
 		std::map<int, RenderLayerPtr> _layers;
 	};
 
-	class Render final
+	class Render final : public Singleton<Render>
 	{
 	public:
 		Render() = default;
@@ -162,8 +170,8 @@ namespace TinyEngine
 		RenderLayers& GetLayers() { return _renderLayers; }
 
 	private:
-		void UpdateObjects(float deltaTime);
-		void DrawObjects();
+		void Update(float deltaTime);
+		void Draw(IRenderWindowPtr window);
 
 		void CreateWindow(IRenderWindowPtr window, const RenderWindowSettings& windowSettings);
 
@@ -171,8 +179,6 @@ namespace TinyEngine
 		IRenderWindowPtr _renderWindowPtr;
 		RenderLayers _renderLayers;
 	};
-
-	extern Render render;
 };
 
 #endif // _INTERFACE_RENDER_HEADER_

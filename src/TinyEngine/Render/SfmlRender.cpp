@@ -1,5 +1,7 @@
 ﻿#include "SfmlRender.hpp"
 
+#include <TinyEngine/Gui/SfmlGuiDelegate.hpp>
+
 namespace TinyEngine
 {
 	void SfmlRenderObject::Update(float deltaTime)
@@ -111,6 +113,11 @@ namespace TinyEngine
 		_windowPtr->setVerticalSyncEnabled(false);
 	}
 
+	GuiDelegatePtr SfmlRenderWindow::CreateDelegate() const
+	{
+		return std::make_shared<SfmlGuiDelegate>();
+	}
+
 	bool SfmlRenderWindow::IsClosed() const
 	{
 		return !_windowPtr->isOpen();
@@ -142,5 +149,15 @@ namespace TinyEngine
 	void SfmlRenderWindow::Display()
 	{
 		_windowPtr->display();
+	}
+
+	void SfmlRenderWindow::ResetClock()
+	{
+		_clock.restart();
+	}
+
+	void SfmlRenderWindow::UpdateClock()
+	{
+		_deltaTime = _clock.restart();
 	}
 }

@@ -1,0 +1,24 @@
+﻿#include "GuiWidgetContainer.hpp"
+
+#include <TinyEngine/Gui/GuiWidget.hpp>
+
+namespace TinyEngine
+{
+	void GuiWidgetContainer::Draw(float deltaTime, IRenderWindowPtr renderWindowPtr)
+	{
+		for (const auto& [ id, widget ] : _widgets)
+		{
+			widget->Draw(deltaTime, renderWindowPtr);
+		}
+	}
+
+	void GuiWidgetContainer::AddWidget(std::string_view id, GuiWidgetPtr widget)
+	{
+		_widgets[std::string{id}] = widget;
+	}
+
+	bool GuiWidgetContainer::HasWidget(std::string_view id) const
+	{
+		return _widgets.find(std::string{id}) != _widgets.end();
+	}
+}

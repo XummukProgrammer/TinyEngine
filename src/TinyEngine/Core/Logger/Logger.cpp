@@ -9,8 +9,6 @@
 
 namespace TinyEngine
 {
-	Logger logger;
-
 	void DumpXmlFormat::DumpToFile(std::string_view fileName, const LoggerMessages& loggerMessages)
 	{
 		pugi::xml_document doc;
