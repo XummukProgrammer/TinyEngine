@@ -20,7 +20,7 @@ namespace TinyEngine
 
 	public:
 		virtual void Init(IRenderWindowPtr renderWindowPtr) = 0;
-		virtual void ExtractEvents(IRenderWindowPtr renderWindowPtr) = 0;
+		virtual void EventReceived(IRenderWindowPtr renderWindowPtr) = 0;
 		virtual void Update(float deltaTime, IRenderWindowPtr renderWindowPtr) = 0;
 		virtual void Display(IRenderWindowPtr renderWindowPtr) = 0;
 		virtual void Shutdown(IRenderWindowPtr renderWindowPtr) = 0;
@@ -34,7 +34,7 @@ namespace TinyEngine
 
 	public:
 		void Init(IRenderWindowPtr renderWindowPtr);
-		void ExtractEvents(IRenderWindowPtr renderWindowPtr);
+		void EventReceived(IRenderWindowPtr renderWindowPtr);
 		void Update(float deltaTime, IRenderWindowPtr renderWindowPtr);
 		void Draw(float deltaTime, IRenderWindowPtr renderWindowPtr);
 		void Display(IRenderWindowPtr renderWindowPtr);

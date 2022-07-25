@@ -13,7 +13,7 @@ namespace TinyEngine
 
 	public:
 		void Init(IRenderWindowPtr renderWindowPtr) override;
-		void ExtractEvents(IRenderWindowPtr renderWindowPtr) override;
+		void EventReceived(IRenderWindowPtr renderWindowPtr) override;
 		void Update(float deltaTime, IRenderWindowPtr renderWindowPtr) override;
 		void Display(IRenderWindowPtr renderWindowPtr) override;
 		void Shutdown(IRenderWindowPtr renderWindowPtr) override;

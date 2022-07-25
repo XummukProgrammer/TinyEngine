@@ -10,11 +10,11 @@ namespace TinyEngine
 		}
 	}
 
-	void Gui::ExtractEvents(IRenderWindowPtr renderWindowPtr)
+	void Gui::EventReceived(IRenderWindowPtr renderWindowPtr)
 	{
 		if (_delegatePtr)
 		{
-			_delegatePtr->ExtractEvents(renderWindowPtr);
+			_delegatePtr->EventReceived(renderWindowPtr);
 		}
 	}
 

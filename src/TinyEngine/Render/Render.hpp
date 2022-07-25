@@ -8,6 +8,7 @@
 #include <list>
 #include <map>
 #include <memory>
+#include <functional>
 
 namespace TinyEngine
 {
@@ -93,6 +94,9 @@ namespace TinyEngine
 	class IRenderWindow
 	{
 	public:
+		using EventReceivedCallback = std::function<void()>;
+
+	public:
 		IRenderWindow() = default;
 		virtual ~IRenderWindow() = default;
 
@@ -108,6 +112,15 @@ namespace TinyEngine
 		virtual void ResetClock() = 0;
 		virtual void UpdateClock() = 0;
 		virtual float GetDeltaTime() const = 0;
+
+	public:
+		void SetOnEventReceived(const EventReceivedCallback& callback) { _onEventReceived = callback; }
+
+	protected:
+		void OnEventReceived() { if (_onEventReceived) _onEventReceived(); }
+
+	private:
+		EventReceivedCallback _onEventReceived;
 	};
 
 	class RenderLayer final
@@ -172,6 +185,8 @@ namespace TinyEngine
 	private:
 		void Update(float deltaTime);
 		void Draw(IRenderWindowPtr window);
+
+		void OnEventReceived();
 
 		void CreateWindow(IRenderWindowPtr window, const RenderWindowSettings& windowSettings);
 

@@ -137,6 +137,10 @@ namespace TinyEngine
 			{
 				_windowPtr->close();
 			}
+			else
+			{
+				OnEventReceived();
+			}
 		}
 	}
 

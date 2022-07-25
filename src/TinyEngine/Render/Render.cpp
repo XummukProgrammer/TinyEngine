@@ -165,10 +165,16 @@ namespace TinyEngine
 		Gui::GetInstance().Display(_renderWindowPtr);
 	}
 
+	void Render::OnEventReceived()
+	{
+		Gui::GetInstance().EventReceived(_renderWindowPtr);
+	}
+
 	void Render::CreateWindow(IRenderWindowPtr window, const RenderWindowSettings& windowSettings)
 	{
 		_renderWindowPtr = window;
 		_renderWindowPtr->Create(windowSettings);
+		_renderWindowPtr->SetOnEventReceived(std::bind(&Render::OnEventReceived, this));
 
 		auto& gui = Gui::GetInstance();
 		gui.SetDelegate(_renderWindowPtr->CreateDelegate());

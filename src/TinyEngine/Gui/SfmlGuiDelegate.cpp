@@ -13,7 +13,7 @@ namespace TinyEngine
 		ImGui::SFML::Init(renderWindow);
 	}
 
-	void SfmlGuiDelegate::ExtractEvents(IRenderWindowPtr renderWindowPtr)
+	void SfmlGuiDelegate::EventReceived(IRenderWindowPtr renderWindowPtr)
 	{
 		auto window = static_cast<SfmlRenderWindow*>(renderWindowPtr.get());
 		auto& renderWindow = *window->GetRenderWindow();
