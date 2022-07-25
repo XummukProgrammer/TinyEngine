@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <string>
 #include <memory>
+#include <functional>
 
 namespace TinyEngine
 {
@@ -16,6 +17,7 @@ namespace TinyEngine
 	{
 	public:
 		using GuiWidgetPtr = std::shared_ptr<GuiWidget>;
+		using EachWidgetsCallback = std::function<void(std::string_view id, GuiWidgetPtr)>;
 
 	public:
 		GuiWidgetContainer() = default;
@@ -28,6 +30,8 @@ namespace TinyEngine
 		void AddWidget(std::string_view id, GuiWidgetPtr widget);
 		template<typename T> std::shared_ptr<T> GetWidget(std::string_view id) const;
 		bool HasWidget(std::string_view id) const;
+
+		void EachWidgets(EachWidgetsCallback callback);
 
 	private:
 		std::unordered_map<std::string, GuiWidgetPtr> _widgets;

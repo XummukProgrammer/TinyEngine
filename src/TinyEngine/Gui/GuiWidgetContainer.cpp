@@ -21,4 +21,17 @@ namespace TinyEngine
 	{
 		return _widgets.find(std::string{id}) != _widgets.end();
 	}
+
+	void GuiWidgetContainer::EachWidgets(EachWidgetsCallback callback)
+	{
+		if (!callback)
+		{
+			return;
+		}
+
+		for (const auto& [ id, widget ] : _widgets)
+		{
+			callback(id, widget);
+		}
+	}
 }

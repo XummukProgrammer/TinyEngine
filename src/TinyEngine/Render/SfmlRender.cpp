@@ -130,10 +130,9 @@ namespace TinyEngine
 
 	void SfmlRenderWindow::ExtractEvents()
 	{
-		sf::Event event;
-		while (_windowPtr->pollEvent(event))
+		while (_windowPtr->pollEvent(_event))
 		{
-			if (event.type == sf::Event::Closed)
+			if (_event.type == sf::Event::Closed)
 			{
 				_windowPtr->close();
 			}

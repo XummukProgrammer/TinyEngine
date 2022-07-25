@@ -45,7 +45,7 @@ namespace TinyEngine
 
 	public:
 		GuiWidgetContainer& GetContainer() { return _container; }
-		GuiWidgetContainer& GetConstContainer() { return _container; }
+		const GuiWidgetContainer& GetConstContainer() { return _container; }
 
 	private:
 		GuiDelegatePtr _delegatePtr;
