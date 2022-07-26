@@ -31,16 +31,22 @@ namespace TinyEngine
 		ImGui::EndChild();
 	}
 
-	GuiMainWindowWidget::Ptr GuiMainWindowWidget::Create(std::string_view name)
+	GuiMainWindowWidget::Ptr GuiMainWindowWidget::Create()
 	{
 		auto widget = std::make_shared<GuiMainWindowWidget>();
-		widget->SetName(name);
+		widget->SetMenuBar(GuiMenuBarWidget::Create());
 		return widget;
+	}
+
+	void GuiMainWindowWidget::SetMenuBar(GuiMenuBarWidget::Ptr menuBarPtr)
+	{
+		_menuBarPtr = menuBarPtr;
+		AddWidget("menuBar", _menuBarPtr);
 	}
 
 	void GuiMainWindowWidget::BeginWindow()
 	{
-		ImGui::Begin(GetName().c_str(), false, ImGuiWindowFlags_MenuBar);
+		ImGui::Begin("MainWindow", false, ImGuiWindowFlags_MenuBar);
 	}
 
 	void GuiMainWindowWidget::EndWindow()

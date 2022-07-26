@@ -30,4 +30,9 @@ namespace TinyEngine
 		TINY_ENGINE_INFO("Dump logger messages");
 		GetLogger().DumpToFile(GetLogsDir() + "dump.xml", DumpXmlFormat());
 	}
+
+	void Application::Close()
+	{
+		GetRender().Close();
+	}
 }

@@ -3,6 +3,7 @@
 
 #include <TinyEngine/Gui/GuiWidget.hpp>
 #include <TinyEngine/Gui/GuiWidgetContainer.hpp>
+#include <TinyEngine/Gui/Widgets/GuiMenuBarWidget.hpp>
 
 #include <string>
 
@@ -45,11 +46,18 @@ namespace TinyEngine
 		~GuiMainWindowWidget() = default;
 
 	public:
-		static Ptr Create(std::string_view name);
+		static Ptr Create();
+
+	public:
+		void SetMenuBar(GuiMenuBarWidget::Ptr menuBarPtr);
+		GuiMenuBarWidget::Ptr GetMenuBar() const { return _menuBarPtr; }
 
 	protected:
 		void BeginWindow() override;
 		void EndWindow() override;
+
+	private:
+		GuiMenuBarWidget::Ptr _menuBarPtr;
 	};
 }
 

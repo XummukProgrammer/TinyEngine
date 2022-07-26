@@ -26,7 +26,9 @@ namespace TinyEngine
 		std::string GetLogsDir() const { return GetRootDir() + "_logs/"; }
 
 		void Execute();
+
 		void LoggerDumpToFile();
+		void Close();
 
 	public:
 		Debug& GetDebug() { return Debug::GetInstance(); }

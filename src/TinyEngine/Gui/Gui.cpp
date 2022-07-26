@@ -15,6 +15,8 @@ namespace TinyEngine
 		}
 
 		SettingsIO();
+
+		SetMainWindow(GuiMainWindowWidget::Create());
 	}
 
 	void Gui::EventReceived(IRenderWindowPtr renderWindowPtr)
