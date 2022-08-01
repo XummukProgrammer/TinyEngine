@@ -71,6 +71,7 @@ namespace TinyEngine
 
 #define TINY_ENGINE_SER_BEGIN public: void SerializationProcess(TinyEngine::IArchive* archive) override { const bool isSave = static_cast<TinyEngine::OutputArchive*>(archive);
 #define TINY_ENGINE_SER_END } private:
-#define TINY_ENGINE_SER_FIELD(field) if (isSave) { TinyEngine::SerializationVisitor<decltype(field)>::Save(static_cast<TinyEngine::OutputArchive*>(archive), #field, &field); } else { TinyEngine::SerializationVisitor<decltype(field)>::Load(static_cast<TinyEngine::InputArchive*>(archive), #field, &field); }
+#define TINY_ENGINE_SER_FIELD_TMP(field, method, cls, type) TinyEngine::SerializationVisitor<type>::method(static_cast<cls*>(archive), #field, &field);
+#define TINY_ENGINE_SER_FIELD(field) if (isSave) { TINY_ENGINE_SER_FIELD_TMP(field, Save, TinyEngine::OutputArchive, decltype(field)) } else { TINY_ENGINE_SER_FIELD_TMP(field, Load, TinyEngine::InputArchive, decltype(field)) }
 
 #endif // _SERIALIAZTION_VISITOR_HEADER_
