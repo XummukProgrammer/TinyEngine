@@ -11,8 +11,21 @@ namespace TinyEngine
 	class SerializationVisitor
 	{
 	public:
-		static void Save(OutputArchive* archive, std::string_view id, T* data) {}
-		static void Load(InputArchive* archive, std::string_view id, T* data) {}
+		static void Save(OutputArchive* archive, std::string_view id, T* data) 
+		{
+			if (std::is_base_of_v<ISerializable, T>)
+			{
+				SerializationVisitor<ISerializable>::Save(archive, id, data);
+			}
+		}
+
+		static void Load(InputArchive* archive, std::string_view id, T* data) 
+		{
+			if (std::is_base_of_v<ISerializable, T>)
+			{
+				SerializationVisitor<ISerializable>::Load(archive, id, data);
+			}
+		}
 	};
 
 	template<>
@@ -29,6 +42,29 @@ namespace TinyEngine
 		{
 			archive->ToVariable(id);
 			*data = archive->GetInt();
+		}
+	};
+
+	template<>
+	class SerializationVisitor<ISerializable>
+	{
+	public:
+		static void Save(OutputArchive* archive, std::string_view id, ISerializable* data) 
+		{
+			if (archive->ToSection(id))
+			{
+				data->SerializationProcess(archive);
+				archive->EndSection();
+			}
+		}
+
+		static void Load(InputArchive* archive, std::string_view id, ISerializable* data) 
+		{
+			if (archive->ToSection(id))
+			{
+				data->SerializationProcess(archive);
+				archive->EndSection();
+			}
 		}
 	};
 }
