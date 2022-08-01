@@ -14,8 +14,7 @@ namespace TinyEngine
 		virtual ~ISerializable() = default;
 
 	public:
-		virtual void SaveToArchive(IArchive& archive) = 0;
-		virtual void LoadFromArchive(IArchive& archive) = 0;
+		virtual void SerializationProcess(IArchive* archive) = 0;
 	};
 
 	class IArchive
