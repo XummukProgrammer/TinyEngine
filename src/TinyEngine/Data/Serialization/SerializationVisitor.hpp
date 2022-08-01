@@ -46,6 +46,40 @@ namespace TinyEngine
 	};
 
 	template<>
+	class SerializationVisitor<float>
+	{
+	public:
+		static void Save(OutputArchive* archive, std::string_view id, float* data) 
+		{
+			archive->ToVariable(id);
+			archive->SetFloat(*data);
+		}
+
+		static void Load(InputArchive* archive, std::string_view id, float* data) 
+		{
+			archive->ToVariable(id);
+			*data = archive->GetFloat();
+		}
+	};
+
+	template<>
+	class SerializationVisitor<std::string>
+	{
+	public:
+		static void Save(OutputArchive* archive, std::string_view id, std::string* data) 
+		{
+			archive->ToVariable(id);
+			archive->SetString(*data);
+		}
+
+		static void Load(InputArchive* archive, std::string_view id, std::string* data) 
+		{
+			archive->ToVariable(id);
+			*data = archive->GetString();
+		}
+	};
+
+	template<>
 	class SerializationVisitor<ISerializable>
 	{
 	public:
@@ -69,7 +103,7 @@ namespace TinyEngine
 	};
 }
 
-#define TINY_ENGINE_SER_BEGIN public: void SerializationProcess(TinyEngine::IArchive* archive) override { const bool isSave = static_cast<TinyEngine::OutputArchive*>(archive);
+#define TINY_ENGINE_SER_BEGIN public: void SerializationProcess(TinyEngine::IArchive* archive) override { const bool isSave = dynamic_cast<TinyEngine::OutputArchive*>(archive);
 #define TINY_ENGINE_SER_END } private:
 #define TINY_ENGINE_SER_FIELD_TMP(field, method, cls, type) TinyEngine::SerializationVisitor<type>::method(static_cast<cls*>(archive), #field, &field);
 #define TINY_ENGINE_SER_FIELD(field) if (isSave) { TINY_ENGINE_SER_FIELD_TMP(field, Save, TinyEngine::OutputArchive, decltype(field)) } else { TINY_ENGINE_SER_FIELD_TMP(field, Load, TinyEngine::InputArchive, decltype(field)) }
