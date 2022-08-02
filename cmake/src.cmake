@@ -17,6 +17,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Data/Serialization/Serialization.hpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.hpp
 	src/TinyEngine/Data/Serialization/XmlArchive.hpp
+	src/TinyEngine/Data/Factory/Factory.hpp
 )
 
 set(ENGINE_SOURCES
@@ -36,4 +37,5 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Data/Serialization/Serialization.cpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.cpp
 	src/TinyEngine/Data/Serialization/XmlArchive.cpp
+	src/TinyEngine/Data/Factory/Factory.cpp
 )

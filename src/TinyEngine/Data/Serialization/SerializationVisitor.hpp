@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <memory>
 
 namespace TinyEngine
 {
@@ -203,9 +204,57 @@ namespace TinyEngine
 			}
 		}
 	};
+
+	template<typename T>
+	class SerializationVisitor<std::shared_ptr<T>>
+	{
+	public:
+		static void Save(OutputArchive* archive, std::string_view id, std::shared_ptr<T>* data) 
+		{
+			if (archive->ToSection(id))
+			{
+				if (archive->ToItem("pointer"))
+				{
+					auto rawPointer = data->get();
+
+					std::string type = rawPointer->GetName();
+					SerializationVisitor<std::string>::Save(archive, "type", &type);
+
+					SerializationVisitor<T>::Save(archive, "object", rawPointer);
+
+					archive->EndItem();
+				}
+
+				archive->EndSection();
+			}
+		}
+
+		static void Load(InputArchive* archive, std::string_view id, std::shared_ptr<T>* data) 
+		{
+			if (archive->ToSection(id))
+			{
+				if (archive->ToItem("pointer"))
+				{
+					std::string type;
+					SerializationVisitor<std::string>::Load(archive, "type", &type);
+
+					if (*data = Factory::GetInstance().Create<T>(type))
+					{
+						SerializationVisitor<ISerializable>::Load(archive, "object", data->get());
+					}
+
+					archive->EndItem();
+				}
+
+				archive->EndSection();
+			}
+		}
+	};
 }
 
-#define TINY_ENGINE_SER_BEGIN public: void SerializationProcess(TinyEngine::IArchive* archive) override { const bool isSave = dynamic_cast<TinyEngine::OutputArchive*>(archive);
+#define TINY_ENGINE_SER_BEGIN(cls) \
+	TINY_ENGINE_META(cls) \
+	public: void SerializationProcess(TinyEngine::IArchive* archive) override { const bool isSave = dynamic_cast<TinyEngine::OutputArchive*>(archive);
 #define TINY_ENGINE_SER_END } private:
 #define TINY_ENGINE_SER_FIELD_TMP(field, method, cls, type) TinyEngine::SerializationVisitor<type>::method(static_cast<cls*>(archive), #field, &field);
 #define TINY_ENGINE_SER_FIELD(field) if (isSave) { TINY_ENGINE_SER_FIELD_TMP(field, Save, TinyEngine::OutputArchive, decltype(field)) } else { TINY_ENGINE_SER_FIELD_TMP(field, Load, TinyEngine::InputArchive, decltype(field)) }

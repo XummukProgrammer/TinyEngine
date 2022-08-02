@@ -5,7 +5,7 @@
 #include <TinyEngine/Core/Logger/Logger.hpp>
 #include <TinyEngine/Render/Render.hpp>
 #include <TinyEngine/Gui/Gui.hpp>
-#include <TinyEngine/Data/Singleton.hpp>
+#include <TinyEngine/Data/Factory/Factory.hpp>
 
 #include <TinyEngine/Render/SfmlRender.hpp>
 
@@ -35,6 +35,7 @@ namespace TinyEngine
 		Logger& GetLogger() { return Logger::GetInstance(); }
 		Render& GetRender() { return Render::GetInstance(); }
 		Gui& GetGui() { return Gui::GetInstance(); }
+		Factory& GetFactory() { return Factory::GetInstance(); }
 
 	private:
 		std::string _executePath;

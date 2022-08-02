@@ -1,6 +1,8 @@
 ﻿#ifndef _SERIALIAZTION_HEADER_
 #define _SERIALIAZTION_HEADER_
 
+#include <TinyEngine/Data/Factory/Factory.hpp>
+
 #include <string>
 #include <memory>
 
@@ -8,7 +10,7 @@ namespace TinyEngine
 {
 	class IArchive;
 
-	class ISerializable
+	class ISerializable : public TinyEngine::IMetaInfo
 	{
 	public:
 		ISerializable() = default;
