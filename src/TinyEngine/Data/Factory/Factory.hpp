@@ -70,4 +70,19 @@ namespace TinyEngine
 		static std::string GetMetaName() { return #cls; } \
 	private:
 
+#define TINY_ENGINE_FACTORY_REGISTER(cls) \
+	void FactoryRegisterFunction_##cls(); \
+	struct FactoryRegisterClass_##cls \
+	{ \
+		FactoryRegisterClass_##cls() \
+		{ \
+			FactoryRegisterFunction_##cls(); \
+		} \
+	}; \
+	FactoryRegisterClass_##cls _factoryRegisterClass_##cls; \
+	void FactoryRegisterFunction_##cls() \
+	{ \
+		TinyEngine::Factory::GetInstance().Register<cls>(); \
+	}
+
 #endif // _FACTORY_HEADER_
