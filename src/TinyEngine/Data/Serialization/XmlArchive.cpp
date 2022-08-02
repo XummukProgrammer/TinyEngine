@@ -103,6 +103,26 @@ namespace TinyEngine
 		_data.lastAttribute.set_value(value.data());
 	}
 
+	bool XmlOutputArchive::ToItem(std::string_view id)
+	{
+		return ToSection(id);
+	}
+
+	void XmlOutputArchive::EndItem()
+	{
+		EndSection();
+	}
+
+	bool XmlOutputArchive::ToArray(std::string_view id)
+	{
+		return ToSection(id);
+	}
+
+	void XmlOutputArchive::EndArray()
+	{
+		EndSection();
+	}
+
 	bool XmlInputArchive::ToSection(std::string_view id)
 	{
 		pugi::xml_node node;
@@ -210,5 +230,46 @@ namespace TinyEngine
 		}
 
 		return _data.lastAttribute.as_string();
+	}
+
+	bool XmlInputArchive::ToItem(std::string_view id)
+	{
+		return ToSection(id);
+	}
+
+	void XmlInputArchive::EndItem()
+	{
+		EndSection();
+	}
+
+	bool XmlInputArchive::ToArray(std::string_view id)
+	{
+		return ToSection(id);
+	}
+
+	void XmlInputArchive::EndArray()
+	{
+		EndSection();
+	}
+
+	bool XmlInputArchive::ToNextItem(std::string_view id)
+	{
+		if (_data.poolSections.empty())
+		{
+			return false;
+		}
+
+		auto currNode = _data.poolSections.top();
+		auto newNode = currNode.next_sibling(id.data());
+
+		if (!newNode)
+		{
+			return false;
+		}
+
+		_data.poolSections.pop();
+		_data.poolSections.push(newNode);
+
+		return true;
 	}
 }

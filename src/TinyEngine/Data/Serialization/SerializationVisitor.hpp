@@ -4,6 +4,8 @@
 #include <TinyEngine/Data/Serialization/Serialization.hpp>
 
 #include <string>
+#include <vector>
+#include <map>
 
 namespace TinyEngine
 {
@@ -98,6 +100,106 @@ namespace TinyEngine
 			{
 				data->SerializationProcess(archive);
 				archive->EndSection();
+			}
+		}
+	};
+
+	template<typename T>
+	class SerializationVisitor<std::vector<T>>
+	{
+	public:
+		static void Save(OutputArchive* archive, std::string_view id, std::vector<T>* data) 
+		{
+			if (archive->ToArray(id))
+			{
+				auto& dataRef = *data;
+
+				for (auto& dataElement : dataRef)
+				{
+					if (archive->ToItem("element"))
+					{
+						SerializationVisitor<T>::Save(archive, "value", &dataElement);
+
+						archive->EndItem();
+					}
+				}
+
+				archive->EndArray();
+			}
+		}
+
+		static void Load(InputArchive* archive, std::string_view id, std::vector<T>* data) 
+		{
+			if (archive->ToArray(id))
+			{
+				if (archive->ToItem("element"))
+				{
+					auto& dataRef = *data;
+
+					do
+					{
+						T value;
+						SerializationVisitor<T>::Load(archive, "value", &value);
+						dataRef.push_back(value);
+					}
+					while (archive->ToNextItem("element"));
+
+					archive->EndItem();
+				}
+
+				archive->EndArray();
+			}
+		}
+	};
+
+	template<typename K, typename V>
+	class SerializationVisitor<std::map<K, V>>
+	{
+	public:
+		static void Save(OutputArchive* archive, std::string_view id, std::map<K, V>* data) 
+		{
+			if (archive->ToArray(id))
+			{
+				auto& dataRef = *data;
+
+				for (auto& [ dataKey, dataElement ] : dataRef)
+				{
+					if (archive->ToItem("pair"))
+					{
+						auto key = dataKey;
+						SerializationVisitor<K>::Save(archive, "key", &key);
+						SerializationVisitor<V>::Save(archive, "value", &dataElement);
+
+						archive->EndItem();
+					}
+				}
+
+				archive->EndArray();
+			}
+		}
+
+		static void Load(InputArchive* archive, std::string_view id, std::map<K, V>* data) 
+		{
+			if (archive->ToArray(id))
+			{
+				if (archive->ToItem("pair"))
+				{
+					auto& dataRef = *data;
+
+					do
+					{
+						K key;
+						V value;
+						SerializationVisitor<K>::Load(archive, "key", &key);
+						SerializationVisitor<V>::Load(archive, "value", &value);
+						dataRef[key] = value;
+					}
+					while (archive->ToNextItem("pair"));
+
+					archive->EndItem();
+				}
+
+				archive->EndArray();
 			}
 		}
 	};

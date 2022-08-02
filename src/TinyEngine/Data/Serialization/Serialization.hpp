@@ -2,6 +2,7 @@
 #define _SERIALIAZTION_HEADER_
 
 #include <string>
+#include <memory>
 
 namespace TinyEngine
 {
@@ -32,6 +33,12 @@ namespace TinyEngine
 
 		virtual bool ToVariable(std::string_view id) = 0;
 		virtual bool HasVariable(std::string_view id) const = 0;
+
+		virtual bool ToItem(std::string_view id) = 0;
+		virtual void EndItem() = 0;
+
+		virtual bool ToArray(std::string_view id) = 0;
+		virtual void EndArray() = 0;
 	};
 
 	class BaseArchive : public IArchive
@@ -76,6 +83,27 @@ namespace TinyEngine
 		virtual int GetInt() const = 0;
 		virtual float GetFloat() const = 0;
 		virtual std::string GetString() const = 0;
+
+		virtual bool ToNextItem(std::string_view id) = 0;
+	};
+
+	class SerializationUtils
+	{
+	public:
+		enum class ArchiveFormat
+		{
+			Xml
+		};
+
+	public:
+		static void SaveRoot(OutputArchive* archive, ISerializable* serializable);
+		static void LoadRoot(InputArchive* archive, ISerializable* serializable);
+
+		static void SaveRootToFile(ArchiveFormat format, std::string_view path, ISerializable* serializable);
+		static void LoadRootFromFile(ArchiveFormat format, std::string_view path, ISerializable* serializable);
+
+		static std::unique_ptr<OutputArchive> CreateOutputArchive(ArchiveFormat format);
+		static std::unique_ptr<InputArchive> CreateInputArchive(ArchiveFormat format);
 	};
 }
 

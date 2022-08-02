@@ -6,6 +6,7 @@
 #include <pugixml.hpp>
 
 #include <stack>
+#include <vector>
 
 namespace TinyEngine
 {
@@ -38,6 +39,12 @@ namespace TinyEngine
 		void SetFloat(float value) override;
 		void SetString(std::string_view value) override;
 
+		bool ToItem(std::string_view id) override;
+		void EndItem() override;
+
+		bool ToArray(std::string_view id) override;
+		void EndArray() override;
+
 	private:
 		XmlDataArchive _data;
 	};
@@ -51,7 +58,7 @@ namespace TinyEngine
 	public:
 		bool ToSection(std::string_view id) override;
 		bool HasSection(std::string_view id) const override;
-		void EndSection() override;;
+		void EndSection() override;
 
 		bool ToVariable(std::string_view id) override;
 		bool HasVariable(std::string_view id) const override;
@@ -62,6 +69,14 @@ namespace TinyEngine
 		int GetInt() const override;
 		float GetFloat() const override;
 		std::string GetString() const override;
+
+		bool ToItem(std::string_view id) override;
+		void EndItem() override;
+
+		bool ToArray(std::string_view id) override;
+		void EndArray() override;
+
+		bool ToNextItem(std::string_view id) override;
 
 	private:
 		XmlDataArchive _data;
