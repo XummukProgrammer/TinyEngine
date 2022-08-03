@@ -21,8 +21,14 @@ namespace TinyEngine
 	using IRenderWindowPtr = std::shared_ptr<IRenderWindow>;
 	using RenderLayerPtr = std::shared_ptr<RenderLayer>;
 
+	enum class RenderType
+	{
+		Sfml
+	};
+
 	struct RenderWindowSettings
 	{
+		RenderType renderType;
 		std::string title;
 		int width;
 		int height;

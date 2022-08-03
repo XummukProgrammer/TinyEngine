@@ -13,11 +13,32 @@
 
 namespace TinyEngine
 {
+	class ApplicationDelegate
+	{
+	public:
+		ApplicationDelegate() = default;
+		virtual ~ApplicationDelegate() = default;
+
+	public:
+		virtual void OnInit() {}
+		virtual void OnDeinit() {}
+
+		// TODO:
+		//virtual void OnUpdate(float deltaTime) {}
+		//virtual void OnDraw(IRenderWindowPtr renderWindowPtr) {}
+	};
+
 	class Application final : public Singleton<Application>
 	{
 	public:
+		using ApplicationDelegatePtr = std::unique_ptr<ApplicationDelegate>;
+
+	public:
 		Application() = default;
 		~Application() = default;
+
+	public:
+		Application& Init(int argc, char* argv[], const RenderWindowSettings& windowSettings, ApplicationDelegatePtr&& delegate);
 
 	public:
 		void Execute();
@@ -33,6 +54,15 @@ namespace TinyEngine
 		Factory& GetFactory() { return Factory::GetInstance(); }
 		Assets& GetAssets() { return Assets::GetInstance(); }
 		FileSystem& GetFileSystem() { return FileSystem::GetInstance(); }
+
+	private:
+		void OnInit();
+		void OnDeinit();
+
+		void OnProcess();
+
+	private:
+		ApplicationDelegatePtr _delegate;
 	};
 }
 
