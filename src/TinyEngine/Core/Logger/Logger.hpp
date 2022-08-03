@@ -3,52 +3,73 @@
 
 #include <TinyEngine/Data/Singleton.hpp>
 
-#include <list>
-#include <memory>
-#include <string>
+#include <TinyEngine/Data/Serialization/SerializationVisitor.hpp>
 
 namespace TinyEngine
 {
-	struct LoggerMessage
+	class LoggerStacktrace final : public ISerializable
 	{
-		using Ptr = std::shared_ptr<LoggerMessage>;
-
-		std::string type;
-		std::string time;
-		std::string sender;
-		std::string message;
-		std::string stacktrace;
-
-		LoggerMessage(std::string_view type, std::string_view time, std::string_view sender, std::string_view message, std::string_view stacktrace)
-			: type(type), time(time), sender(sender), message(message), stacktrace(stacktrace)
-		{}
-
-		static Ptr Create(std::string_view type, std::string_view time, std::string_view sender, std::string_view message, std::string_view stacktrace) 
-		{ 
-			return std::make_shared<LoggerMessage>(type, time, sender, message, stacktrace);
+		TINY_ENGINE_SER_BEGIN(LoggerStacktrace)
+		{
+			TINY_ENGINE_SER_FIELD(_stacktrace)
 		}
+		TINY_ENGINE_SER_END
+
+	public:
+		LoggerStacktrace() = default;
+		~LoggerStacktrace() = default;
+
+	public:
+		void Init(std::string_view stacktrace);
+
+	private:
+		std::string _stacktrace;
 	};
 
-	using LoggerMessages = std::list<LoggerMessage::Ptr>;
-
-	class IDumpFormat
+	class LoggerMessage final : public ISerializable
 	{
-	public:
-		IDumpFormat() = default;
-		virtual ~IDumpFormat() = default;
+		TINY_ENGINE_SER_BEGIN(LoggerMessage)
+		{
+			TINY_ENGINE_SER_FIELD(_type)
+			TINY_ENGINE_SER_FIELD(_time)
+			TINY_ENGINE_SER_FIELD(_sender)
+			TINY_ENGINE_SER_FIELD(_message)
+			TINY_ENGINE_SER_FIELD(_stacktrace)
+		}
+		TINY_ENGINE_SER_END
 
 	public:
-		virtual void DumpToFile(std::string_view fileName, const LoggerMessages& loggerMessages) = 0;
+		LoggerMessage() = default;
+		~LoggerMessage() = default;
+
+	public:
+		void Init(std::string_view type, std::string_view time, std::string_view sender, std::string_view message, std::string_view stacktrace);
+
+	private:
+		std::string _type;
+		std::string _time;
+		std::string _sender;
+		std::string _message;
+		LoggerStacktrace _stacktrace;
 	};
 
-	class DumpXmlFormat final : public IDumpFormat
+	class LoggerMessages final : public ISerializable
 	{
-	public:
-		DumpXmlFormat() = default;
-		~DumpXmlFormat() = default;
+		TINY_ENGINE_SER_BEGIN(LoggerMessages)
+		{
+			TINY_ENGINE_SER_FIELD(_messages)
+		}
+		TINY_ENGINE_SER_END
 
 	public:
-		void DumpToFile(std::string_view fileName, const LoggerMessages& loggerMessages) override;
+		LoggerMessages() = default;
+		~LoggerMessages() = default;
+
+	public:
+		void AddMessage(const LoggerMessage& message);
+
+	private:
+		std::vector<LoggerMessage> _messages;
 	};
 
 	class Logger final : public Singleton<Logger>
@@ -56,22 +77,18 @@ namespace TinyEngine
 	public:
 		Logger() = default;
 		~Logger() = default;
-
+	
 	public:
-		void MessagePrintToConsole(std::string_view type, std::string_view sender, std::string_view message, bool isShowStacktrace);
+		void SaveToFile();
 
-		void DumpToFile(std::string_view fileName, IDumpFormat& dumpFormat);
-
-	private:
-		LoggerMessage::Ptr AddMessage(std::string_view type, std::string_view sender, std::string_view message, bool isShowStacktrace);
-		std::string ExtractStacktrace() const;
+		void PrintMessage(std::string_view type, std::string_view sender, std::string_view message, bool isShowStacktrace);
 
 	private:
 		LoggerMessages _messages;
 	};
 }
 
-#define TINY_ENGINE_PRINT_TO_CONSOLE(type, message, isShowStacktrace) TinyEngine::Logger::GetInstance().MessagePrintToConsole(type, __FUNCTION__, message, isShowStacktrace)
-#define TINY_ENGINE_INFO(message) TINY_ENGINE_PRINT_TO_CONSOLE("info", message, false)
+#define TINY_ENGINE_PRINT_MESSAGE(type, message, isShowStacktrace) TinyEngine::Logger::GetInstance().PrintMessage(type, __FUNCTION__, message, isShowStacktrace)
+#define TINY_ENGINE_PRINT_INFO(message) TINY_ENGINE_PRINT_MESSAGE("info", message, false)
 
 #endif // _LOGGER_HEADER_

@@ -1,73 +1,51 @@
 ﻿#include "Logger.hpp"
 
-#include <fmt/format.h>
-#include <pugixml.hpp>
-
 #include <boost/stacktrace.hpp>
 
-#include <iostream>
+#include <fmt/format.h>
 
 namespace TinyEngine
 {
-	void DumpXmlFormat::DumpToFile(std::string_view fileName, const LoggerMessages& loggerMessages)
+	void LoggerMessage::Init(std::string_view type, std::string_view time, std::string_view sender, std::string_view message, std::string_view stacktrace)
 	{
-		pugi::xml_document doc;
-
-		auto rootNode = doc.append_child("root");
-
-		for (const auto& loggerMessage : loggerMessages)
-		{
-			auto messageNode = rootNode.append_child("message");
-			messageNode.append_attribute("type").set_value(loggerMessage->type.c_str());
-			messageNode.append_attribute("time").set_value(loggerMessage->time.c_str());
-			messageNode.append_attribute("sender").set_value(loggerMessage->sender.c_str());
-			messageNode.append_attribute("message").set_value(loggerMessage->message.c_str());
-
-			if (!loggerMessage->stacktrace.empty())
-			{
-				auto stacktraceNode = messageNode.append_child("stacktrace");
-				stacktraceNode.text().set(loggerMessage->stacktrace.c_str());
-			}
-		}
-
-		doc.save_file(fileName.data());
+		_type = type;
+		_time = time;
+		_sender = sender;
+		_message = message;
+		_stacktrace.Init(stacktrace);
 	}
 
-	void Logger::MessagePrintToConsole(std::string_view type, std::string_view sender, std::string_view message, bool isShowStacktrace)
+	void LoggerStacktrace::Init(std::string_view stacktrace)
 	{
-		auto loggerMessage = AddMessage(type, sender, message, isShowStacktrace);
-
-		fmt::print("[{}][{}] [{}] {}\n", loggerMessage->type, loggerMessage->time, loggerMessage->sender, loggerMessage->message);
-
-		if (isShowStacktrace && !loggerMessage->stacktrace.empty())
-		{
-			fmt::print("\nStacktrace:\n{}\n", loggerMessage->stacktrace);
-		}
+		_stacktrace = stacktrace;
 	}
 
-	void Logger::DumpToFile(std::string_view fileName, IDumpFormat& dumpFormat)
+	void LoggerMessages::AddMessage(const LoggerMessage& message)
 	{
-		dumpFormat.DumpToFile(fileName, _messages);
+		_messages.push_back(message);
 	}
 
-	LoggerMessage::Ptr Logger::AddMessage(std::string_view type, std::string_view sender, std::string_view message, bool isShowStacktrace)
+	void Logger::SaveToFile()
 	{
-		std::string time;
+		SerializationUtils::SaveRootToFile(SerializationUtils::ArchiveFormat::Xml, "../_logs/logs.xml", &_messages);
+	}
+
+	void Logger::PrintMessage(std::string_view type, std::string_view sender, std::string_view message, bool isShowStacktrace)
+	{
+		const std::string time = "12.12.2099 23:59:59";
 		std::string stacktrace;
+
+		fmt::print("[{}][{}][{}] {}\n", type, time, sender, message);
 
 		if (isShowStacktrace)
 		{
-			stacktrace = std::move(ExtractStacktrace());
+			stacktrace = boost::stacktrace::to_string(boost::stacktrace::stacktrace());
+			fmt::print("\n\nStacktrace:\n{}\n\n", stacktrace);
 		}
 
-		auto loggerMessage = LoggerMessage::Create(type, time, sender, message, stacktrace);
-		_messages.push_back(loggerMessage);
-		return loggerMessage;
-	}
+		LoggerMessage loggerMessage;
+		loggerMessage.Init(type, time, sender, message, stacktrace);
 
-	std::string Logger::ExtractStacktrace() const
-	{
-		const auto stacktraceString = boost::stacktrace::to_string(boost::stacktrace::stacktrace());
-		return stacktraceString;
+		_messages.AddMessage(loggerMessage);
 	}
 }

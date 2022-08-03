@@ -28,7 +28,7 @@ namespace TinyEngine
 
 		void Execute();
 
-		void LoggerDumpToFile();
+		void LoggerSaveToFile();
 		void Close();
 
 	public:

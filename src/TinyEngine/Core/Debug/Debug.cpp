@@ -9,11 +9,11 @@ namespace TinyEngine
 	{
 		if (debugOperation.IsActive())
 		{
-			Logger::GetInstance().MessagePrintToConsole(debugOperation.GetLoggerMessageType(), sender, debugOperation.GetMessage(), debugOperation.IsShowStacktrace());
+			Logger::GetInstance().PrintMessage(debugOperation.GetLoggerMessageType(), sender, debugOperation.GetMessage(), debugOperation.IsShowStacktrace());
 
 			if (debugOperation.IsLoggerDumpToFile())
 			{
-				Application::GetInstance().LoggerDumpToFile();
+				Application::GetInstance().LoggerSaveToFile();
 			}
 
 			if (debugOperation.IsStopProgram())

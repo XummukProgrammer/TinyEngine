@@ -17,7 +17,7 @@ namespace TinyEngine
 
 	void Application::Execute()
 	{
-		TINY_ENGINE_INFO("Execute engine");
+		TINY_ENGINE_PRINT_INFO("Execute engine");
 
 		auto& factory = GetFactory();
 		factory.Register<AssetHolder>();
@@ -30,15 +30,15 @@ namespace TinyEngine
 		render.Execute();
 		render.Destroy();
 
-		TINY_ENGINE_INFO("Shutdown engine");
+		TINY_ENGINE_PRINT_INFO("Shutdown engine");
 
-		LoggerDumpToFile();
+		LoggerSaveToFile();
 	}
 
-	void Application::LoggerDumpToFile()
+	void Application::LoggerSaveToFile()
 	{
-		TINY_ENGINE_INFO("Dump logger messages");
-		GetLogger().DumpToFile(GetLogsDir() + "dump.xml", DumpXmlFormat());
+		TINY_ENGINE_PRINT_INFO("Logger save to file");
+		GetLogger().SaveToFile();
 	}
 
 	void Application::Close()

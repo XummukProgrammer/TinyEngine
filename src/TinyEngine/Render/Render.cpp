@@ -9,7 +9,7 @@ namespace TinyEngine
 {
 	Render& Render::CreateSfmlWindow(const RenderWindowSettings& windowSettings)
 	{
-		TINY_ENGINE_INFO("Use Sfml Window");
+		TINY_ENGINE_PRINT_INFO("Use Sfml Window");
 		CreateWindow(std::make_shared<SfmlRenderWindow>(), windowSettings);
 		return *this;
 	}
@@ -32,13 +32,13 @@ namespace TinyEngine
 
 	void RenderLayer::AddRenderObject(IRenderObjectPtr object)
 	{
-		TINY_ENGINE_INFO("Added new render object");
+		TINY_ENGINE_PRINT_INFO("Added new render object");
 		_objects.push_back(object);
 	}
 
 	void RenderLayer::RemoveRenderObject(IRenderObjectPtr object)
 	{
-		TINY_ENGINE_INFO("Remove render object");
+		TINY_ENGINE_PRINT_INFO("Remove render object");
 		const auto it = GetConstObjectIterator(object);
 		if (it != _objects.end())
 		{
@@ -58,7 +58,7 @@ namespace TinyEngine
 
 	void RenderLayers::CreateLayer(int layerId)
 	{
-		TINY_ENGINE_INFO("Create layer: " + std::to_string(layerId));
+		TINY_ENGINE_PRINT_INFO("Create layer: " + std::to_string(layerId));
 		_layers[layerId] = std::make_shared<RenderLayer>();
 	}
 
@@ -84,7 +84,7 @@ namespace TinyEngine
 
 	void RenderLayers::RemoveLayer(int layerId)
 	{
-		TINY_ENGINE_INFO("Remove layer: " + std::to_string(layerId));
+		TINY_ENGINE_PRINT_INFO("Remove layer: " + std::to_string(layerId));
 		auto it = _layers.find(layerId);
 		if (it != _layers.end())
 		{
@@ -140,7 +140,7 @@ namespace TinyEngine
 
 	Render& Render::Destroy()
 	{
-		TINY_ENGINE_INFO("Destroy");
+		TINY_ENGINE_PRINT_INFO("Destroy");
 
 		_renderWindowPtr.reset();
 
