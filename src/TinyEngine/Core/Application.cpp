@@ -5,16 +5,8 @@
 #include <TinyEngine/Core/Assets/AssetLoader.hpp>
 #include <TinyEngine/Core/Assets/AssetTexture.hpp>
 
-#include <filesystem>
-
 namespace TinyEngine
 {
-	void Application::SetExecutePath(std::string_view executePath)
-	{
-		_executePath = executePath;
-		_executeDir = std::filesystem::path(_executePath).remove_filename().generic_string();
-	}
-
 	void Application::Execute()
 	{
 		TINY_ENGINE_PRINT_INFO("Execute engine");

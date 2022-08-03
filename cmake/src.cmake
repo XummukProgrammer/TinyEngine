@@ -4,6 +4,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Application.hpp
 	src/TinyEngine/Core/Logger.hpp
 	src/TinyEngine/Core/Debug.hpp
+	src/TinyEngine/Core/FileSystem.hpp
 	src/TinyEngine/Render/Render.hpp
 	src/TinyEngine/Render/SfmlRender.hpp
 	src/TinyEngine/Gui/Gui.hpp
@@ -29,6 +30,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Application.cpp
 	src/TinyEngine/Core/Logger.cpp
 	src/TinyEngine/Core/Debug.cpp
+	src/TinyEngine/Core/FileSystem.cpp
 	src/TinyEngine/Render/Render.cpp
 	src/TinyEngine/Render/SfmlRender.cpp
 	src/TinyEngine/Gui/Gui.cpp

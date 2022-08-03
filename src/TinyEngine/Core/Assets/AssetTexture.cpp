@@ -6,7 +6,7 @@ namespace TinyEngine
 {
 	void AssetSfmlTexture::OnLoad()
 	{
-		const std::string path = Application::GetInstance().GetAssetsDir() + GetPath();
+		const std::string path = FileSystem::GetInstance().BuildPath(FileSystem::DirType::Assets, GetPath());
 
 		_texture.loadFromFile(path);
 		_texture.setRepeated(IsRepeated());

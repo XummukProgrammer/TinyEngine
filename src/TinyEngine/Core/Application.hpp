@@ -7,6 +7,7 @@
 #include <TinyEngine/Gui/Gui.hpp>
 #include <TinyEngine/Data/Factory.hpp>
 #include <TinyEngine/Core/Assets/Assets.hpp>
+#include <TinyEngine/Core/FileSystem.hpp>
 
 #include <TinyEngine/Render/SfmlRender.hpp>
 
@@ -19,13 +20,6 @@ namespace TinyEngine
 		~Application() = default;
 
 	public:
-		void SetExecutePath(std::string_view executePath);
-		const std::string& GetExecutePath() const { return _executePath; }
-		const std::string& GetExecuteDir() const { return _executeDir; }
-		std::string GetRootDir() const { return _executeDir + "../"; }
-		std::string GetAssetsDir() const { return GetRootDir() + "assets/"; }
-		std::string GetLogsDir() const { return GetRootDir() + "_logs/"; }
-
 		void Execute();
 
 		void LoggerSaveToFile();
@@ -38,10 +32,7 @@ namespace TinyEngine
 		Gui& GetGui() { return Gui::GetInstance(); }
 		Factory& GetFactory() { return Factory::GetInstance(); }
 		Assets& GetAssets() { return Assets::GetInstance(); }
-
-	private:
-		std::string _executePath;
-		std::string _executeDir;
+		FileSystem& GetFileSystem() { return FileSystem::GetInstance(); }
 	};
 }
 
