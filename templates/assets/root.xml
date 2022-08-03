@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<root _id="root">
+	<_assets>
+		<element>
+			<value>
+				<pointer type="AssetLoader">
+					<object _id="pack_1" _path="packs/pack1.xml" />
+				</pointer>
+			</value>
+		</element>
+	</_assets>
+</root>

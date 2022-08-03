@@ -32,6 +32,23 @@ namespace TinyEngine
 	};
 
 	template<>
+	class SerializationVisitor<bool>
+	{
+	public:
+		static void Save(OutputArchive* archive, std::string_view id, bool* data) 
+		{
+			archive->ToVariable(id);
+			archive->SetBool(*data);
+		}
+
+		static void Load(InputArchive* archive, std::string_view id, bool* data) 
+		{
+			archive->ToVariable(id);
+			*data = archive->GetBool();
+		}
+	};
+
+	template<>
 	class SerializationVisitor<int>
 	{
 	public:
@@ -242,7 +259,7 @@ namespace TinyEngine
 					{
 						auto rawPointer = data->get();
 						
-						SerializationVisitor<ISerializable>::Load(archive, "object", (ISerializable*)rawPointer);
+						SerializationVisitor<ISerializable>::Load(archive, "object", rawPointer);
 					}
 
 					archive->EndItem();

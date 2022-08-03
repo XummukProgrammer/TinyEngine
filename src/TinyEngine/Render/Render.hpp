@@ -49,6 +49,11 @@ namespace TinyEngine
 		float x, y, w, h;
 	};
 
+	struct Texture
+	{
+		void* data;	
+	};
+
 	class IRenderObject
 	{
 	public:

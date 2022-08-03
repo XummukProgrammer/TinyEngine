@@ -22,6 +22,7 @@ namespace TinyEngine
 		auto& factory = GetFactory();
 		factory.Register<AssetHolder>();
 		factory.Register<AssetLoader>();
+		factory.Register<AssetSfmlTexture>();
 
 		GetAssets().LoadFromFile();
 
