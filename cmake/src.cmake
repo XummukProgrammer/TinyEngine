@@ -2,8 +2,8 @@
 set(ENGINE_HEADERS
 	src/TinyEngine/TinyEngine.hpp
 	src/TinyEngine/Core/Application.hpp
-	src/TinyEngine/Core/Logger/Logger.hpp
-	src/TinyEngine/Core/Debug/Debug.hpp
+	src/TinyEngine/Core/Logger.hpp
+	src/TinyEngine/Core/Debug.hpp
 	src/TinyEngine/Render/Render.hpp
 	src/TinyEngine/Render/SfmlRender.hpp
 	src/TinyEngine/Gui/Gui.hpp
@@ -17,7 +17,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Data/Serialization/Serialization.hpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.hpp
 	src/TinyEngine/Data/Serialization/XmlArchive.hpp
-	src/TinyEngine/Data/Factory/Factory.hpp
+	src/TinyEngine/Data/Factory.hpp
 	src/TinyEngine/Core/Assets/Asset.hpp
 	src/TinyEngine/Core/Assets/AssetHolder.hpp
 	src/TinyEngine/Core/Assets/AssetLoader.hpp
@@ -27,8 +27,8 @@ set(ENGINE_HEADERS
 
 set(ENGINE_SOURCES
 	src/TinyEngine/Core/Application.cpp
-	src/TinyEngine/Core/Logger/Logger.cpp
-	src/TinyEngine/Core/Debug/Debug.cpp
+	src/TinyEngine/Core/Logger.cpp
+	src/TinyEngine/Core/Debug.cpp
 	src/TinyEngine/Render/Render.cpp
 	src/TinyEngine/Render/SfmlRender.cpp
 	src/TinyEngine/Gui/Gui.cpp
@@ -42,7 +42,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Data/Serialization/Serialization.cpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.cpp
 	src/TinyEngine/Data/Serialization/XmlArchive.cpp
-	src/TinyEngine/Data/Factory/Factory.cpp
+	src/TinyEngine/Data/Factory.cpp
 	src/TinyEngine/Core/Assets/Asset.cpp
 	src/TinyEngine/Core/Assets/AssetHolder.cpp
 	src/TinyEngine/Core/Assets/AssetLoader.cpp

@@ -2,8 +2,8 @@
 #define _TINY_ENGINE_HEADER_
 
 #include <TinyEngine/Core/Application.hpp>
-#include <TinyEngine/Core/Logger/Logger.hpp>
-#include <TinyEngine/Core/Debug/Debug.hpp>
+#include <TinyEngine/Core/Logger.hpp>
+#include <TinyEngine/Core/Debug.hpp>
 #include <TinyEngine/Render/Render.hpp>
 #include <TinyEngine/Gui/Gui.hpp>
 #include <TinyEngine/Gui/Widgets/GuiLabelWidget.hpp>

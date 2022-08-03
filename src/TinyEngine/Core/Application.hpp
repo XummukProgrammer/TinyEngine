@@ -1,11 +1,11 @@
 ﻿#ifndef _APPLICATION_HEADER_
 #define _APPLICATION_HEADER_
 
-#include <TinyEngine/Core/Debug/Debug.hpp>
-#include <TinyEngine/Core/Logger/Logger.hpp>
+#include <TinyEngine/Core/Debug.hpp>
+#include <TinyEngine/Core/Logger.hpp>
 #include <TinyEngine/Render/Render.hpp>
 #include <TinyEngine/Gui/Gui.hpp>
-#include <TinyEngine/Data/Factory/Factory.hpp>
+#include <TinyEngine/Data/Factory.hpp>
 #include <TinyEngine/Core/Assets/Assets.hpp>
 
 #include <TinyEngine/Render/SfmlRender.hpp>

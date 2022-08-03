@@ -1,7 +1,7 @@
 ﻿#ifndef _SERIALIAZTION_HEADER_
 #define _SERIALIAZTION_HEADER_
 
-#include <TinyEngine/Data/Factory/Factory.hpp>
+#include <TinyEngine/Data/Factory.hpp>
 
 #include <string>
 #include <memory>
