@@ -5,6 +5,8 @@
 
 #include <string>
 #include <map>
+#include <list>
+#include <string>
 #include <functional>
 #include <memory>
 
@@ -38,6 +40,9 @@ namespace TinyEngine
 		template<typename T>
 		std::shared_ptr<T> Create(std::string_view id) const;
 
+		template<typename T>
+		std::list<std::string> GetInheritorTypes() const;
+
 	private:
 		std::map<std::string, CreateCallback> _createCallbacks;
 	};
@@ -61,6 +66,25 @@ namespace TinyEngine
 		}
 
 		return nullptr;
+	}
+
+	template<typename T>
+	std::list<std::string> Factory::GetInheritorTypes() const
+	{
+		std::list<std::string> types;
+
+		for (const auto& [ id, callback ] : _createCallbacks)
+		{
+			if (auto object = callback())
+			{
+				if (std::dynamic_pointer_cast<T>(object))
+				{
+					types.push_back(id);
+				}
+			}
+		}
+
+		return types;
 	}
 }
 

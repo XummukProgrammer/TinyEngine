@@ -20,7 +20,6 @@ namespace TinyEngine
 		TINY_ENGINE_INFO("Execute engine");
 
 		auto& factory = GetFactory();
-		factory.Register<Asset>();
 		factory.Register<AssetHolder>();
 		factory.Register<AssetLoader>();
 
