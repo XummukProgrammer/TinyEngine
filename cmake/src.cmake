@@ -18,6 +18,11 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Data/Serialization/SerializationVisitor.hpp
 	src/TinyEngine/Data/Serialization/XmlArchive.hpp
 	src/TinyEngine/Data/Factory/Factory.hpp
+	src/TinyEngine/Core/Assets/Asset.hpp
+	src/TinyEngine/Core/Assets/AssetHolder.hpp
+	src/TinyEngine/Core/Assets/AssetLoader.hpp
+	src/TinyEngine/Core/Assets/AssetTexture.hpp
+	src/TinyEngine/Core/Assets/Assets.hpp
 )
 
 set(ENGINE_SOURCES
@@ -38,4 +43,9 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Data/Serialization/SerializationVisitor.cpp
 	src/TinyEngine/Data/Serialization/XmlArchive.cpp
 	src/TinyEngine/Data/Factory/Factory.cpp
+	src/TinyEngine/Core/Assets/Asset.cpp
+	src/TinyEngine/Core/Assets/AssetHolder.cpp
+	src/TinyEngine/Core/Assets/AssetLoader.cpp
+	src/TinyEngine/Core/Assets/AssetTexture.cpp
+	src/TinyEngine/Core/Assets/Assets.cpp
 )

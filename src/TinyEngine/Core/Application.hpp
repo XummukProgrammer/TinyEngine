@@ -6,6 +6,7 @@
 #include <TinyEngine/Render/Render.hpp>
 #include <TinyEngine/Gui/Gui.hpp>
 #include <TinyEngine/Data/Factory/Factory.hpp>
+#include <TinyEngine/Core/Assets/Assets.hpp>
 
 #include <TinyEngine/Render/SfmlRender.hpp>
 
@@ -36,6 +37,7 @@ namespace TinyEngine
 		Render& GetRender() { return Render::GetInstance(); }
 		Gui& GetGui() { return Gui::GetInstance(); }
 		Factory& GetFactory() { return Factory::GetInstance(); }
+		Assets& GetAssets() { return Assets::GetInstance(); }
 
 	private:
 		std::string _executePath;

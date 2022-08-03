@@ -2,6 +2,9 @@
 
 #include <TinyEngine/Render/Render.hpp>
 
+#include <TinyEngine/Core/Assets/AssetLoader.hpp>
+#include <TinyEngine/Core/Assets/AssetTexture.hpp>
+
 #include <filesystem>
 
 namespace TinyEngine
@@ -15,6 +18,13 @@ namespace TinyEngine
 	void Application::Execute()
 	{
 		TINY_ENGINE_INFO("Execute engine");
+
+		auto& factory = GetFactory();
+		factory.Register<Asset>();
+		factory.Register<AssetHolder>();
+		factory.Register<AssetLoader>();
+
+		GetAssets().LoadFromFile();
 
 		auto& render = GetRender();
 		render.Execute();

@@ -240,7 +240,9 @@ namespace TinyEngine
 
 					if (*data = Factory::GetInstance().Create<T>(type))
 					{
-						SerializationVisitor<ISerializable>::Load(archive, "object", data->get());
+						auto rawPointer = data->get();
+						
+						SerializationVisitor<ISerializable>::Load(archive, "object", (ISerializable*)rawPointer);
 					}
 
 					archive->EndItem();
@@ -255,6 +257,11 @@ namespace TinyEngine
 #define TINY_ENGINE_SER_BEGIN(cls) \
 	TINY_ENGINE_META(cls) \
 	public: void SerializationProcess(TinyEngine::IArchive* archive) override { const bool isSave = dynamic_cast<TinyEngine::OutputArchive*>(archive);
+#define TINY_ENGINE_SER_BEGIN_DERIVED(cls, parent) \
+	TINY_ENGINE_META(cls) \
+	public: void SerializationProcess(TinyEngine::IArchive* archive) override { \
+	parent::SerializationProcess(archive); \
+	const bool isSave = dynamic_cast<TinyEngine::OutputArchive*>(archive);
 #define TINY_ENGINE_SER_END } private:
 #define TINY_ENGINE_SER_FIELD_TMP(field, method, cls, type) TinyEngine::SerializationVisitor<type>::method(static_cast<cls*>(archive), #field, &field);
 #define TINY_ENGINE_SER_FIELD(field) if (isSave) { TINY_ENGINE_SER_FIELD_TMP(field, Save, TinyEngine::OutputArchive, decltype(field)) } else { TINY_ENGINE_SER_FIELD_TMP(field, Load, TinyEngine::InputArchive, decltype(field)) }
