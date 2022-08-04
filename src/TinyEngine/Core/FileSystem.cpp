@@ -19,13 +19,13 @@ namespace TinyEngine
 	{
 		switch(type)
 		{
-			case TinyEngine::FileSystem::DirType::Execute:
+			case TinyEngine::DirType::Execute:
 				return GetExecuteDir();
-			case TinyEngine::FileSystem::DirType::Root:
+			case TinyEngine::DirType::Root:
 				return GetRootDir();
-			case TinyEngine::FileSystem::DirType::Assets:
+			case TinyEngine::DirType::Assets:
 				return GetAssetsDir();
-			case TinyEngine::FileSystem::DirType::Logs:
+			case TinyEngine::DirType::Logs:
 				return GetLogsDir();
 		}
 

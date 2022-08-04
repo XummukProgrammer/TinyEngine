@@ -1,6 +1,8 @@
 ﻿#ifndef _GUI_WIDGET_CONTAINER_HEADER_
 #define _GUI_WIDGET_CONTAINER_HEADER_
 
+#include <TinyEngine/Core/Forwards.hpp>
+
 #include <unordered_map>
 #include <string>
 #include <memory>
@@ -8,33 +10,27 @@
 
 namespace TinyEngine
 {
-	class IRenderWindow;
-	class GuiWidget;
-
-	using IRenderWindowPtr = std::shared_ptr<IRenderWindow>;
-
 	class GuiWidgetContainer
 	{
 	public:
-		using GuiWidgetPtr = std::shared_ptr<GuiWidget>;
-		using EachWidgetsCallback = std::function<void(std::string_view id, GuiWidgetPtr)>;
+		using EachWidgetsCallback = std::function<void(std::string_view id, GuiWidgetSharedPtr)>;
 
 	public:
 		GuiWidgetContainer() = default;
 		virtual ~GuiWidgetContainer() = default;
 
 	public:
-		void Draw(float deltaTime, IRenderWindowPtr renderWindowPtr);
+		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr);
 
 	public:
-		void AddWidget(std::string_view id, GuiWidgetPtr widget);
+		void AddWidget(std::string_view id, GuiWidgetSharedPtr widget);
 		template<typename T> std::shared_ptr<T> GetWidget(std::string_view id) const;
 		bool HasWidget(std::string_view id) const;
 
 		void EachWidgets(EachWidgetsCallback callback);
 
 	private:
-		std::unordered_map<std::string, GuiWidgetPtr> _widgets;
+		std::unordered_map<std::string, GuiWidgetSharedPtr> _widgets;
 	};
 
 	template<typename T>

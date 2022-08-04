@@ -88,7 +88,7 @@ namespace TinyEngine
 	};
 }
 
-#define TINY_ENGINE_PRINT_MESSAGE(type, message, isShowStacktrace) TinyEngine::Logger::GetInstance().PrintMessage(type, __FUNCTION__, message, isShowStacktrace)
+#define TINY_ENGINE_PRINT_MESSAGE(type, message, isShowStacktrace) TinyEngine::Logger::GetInstance()->PrintMessage(type, __FUNCTION__, message, isShowStacktrace)
 #define TINY_ENGINE_PRINT_INFO(message) TINY_ENGINE_PRINT_MESSAGE("info", message, false)
 
 #endif // _LOGGER_HEADER_

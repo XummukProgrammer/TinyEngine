@@ -12,8 +12,6 @@ namespace TinyEngine
 	class GuiMenuBarWidget final : public GuiWidget
 	{
 	public:
-		using Ptr = std::shared_ptr<GuiMenuBarWidget>;
-
 		struct Item
 		{
 			std::string name;
@@ -31,10 +29,10 @@ namespace TinyEngine
 		~GuiMenuBarWidget() = default;
 
 	public:
-		static Ptr Create();
+		static GuiMenuBarWidgetSharedPtr Create();
 
 	public:
-		void Draw(float deltaTime, IRenderWindowPtr renderWindowPtr) override;
+		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
 
 	public:
 		void AddMenu(const Menu& menu);

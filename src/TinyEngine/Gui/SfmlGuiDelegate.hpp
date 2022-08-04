@@ -12,11 +12,11 @@ namespace TinyEngine
 		~SfmlGuiDelegate() = default;
 
 	public:
-		void Init(IRenderWindowPtr renderWindowPtr) override;
-		void EventReceived(IRenderWindowPtr renderWindowPtr) override;
-		void Update(float deltaTime, IRenderWindowPtr renderWindowPtr) override;
-		void Display(IRenderWindowPtr renderWindowPtr) override;
-		void Shutdown(IRenderWindowPtr renderWindowPtr) override;
+		void Init(IRenderWindowSharedPtr renderWindowPtr) override;
+		void EventReceived(IRenderWindowSharedPtr renderWindowPtr) override;
+		void Update(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
+		void Display(IRenderWindowSharedPtr renderWindowPtr) override;
+		void Shutdown(IRenderWindowSharedPtr renderWindowPtr) override;
 	};
 }
 

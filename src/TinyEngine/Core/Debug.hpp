@@ -109,8 +109,8 @@ namespace TinyEngine
 	};
 }
 
-#define TINY_ENGINE_ASSERT(condition, message) TinyEngine::Debug::GetInstance().OperationProcess(__FUNCTION__, TinyEngine::DebugAssertOperation(message, condition))
-#define TINY_ENGINE_VERIFY(ptr, message) !TinyEngine::Debug::GetInstance().OperationProcess(__FUNCTION__, TinyEngine::DebugVerifyOperation(message, (ptr)))
-#define TINY_ENGINE_CRITICAL(condition, message) TinyEngine::Debug::GetInstance().OperationProcess(__FUNCTION__, TinyEngine::DebugCriticalOperation(message, condition))
+#define TINY_ENGINE_ASSERT(condition, message) TinyEngine::Debug::GetInstance()->OperationProcess(__FUNCTION__, TinyEngine::DebugAssertOperation(message, condition))
+#define TINY_ENGINE_VERIFY(ptr, message) !TinyEngine::Debug::GetInstance()->OperationProcess(__FUNCTION__, TinyEngine::DebugVerifyOperation(message, (ptr)))
+#define TINY_ENGINE_CRITICAL(condition, message) TinyEngine::Debug::GetInstance()->OperationProcess(__FUNCTION__, TinyEngine::DebugCriticalOperation(message, condition))
 
 #endif // _DEBUG_HEADER_

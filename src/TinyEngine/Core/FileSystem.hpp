@@ -2,6 +2,7 @@
 #define _FILE_SYSTEM_HEADER_
 
 #include <TinyEngine/Data/Singleton.hpp>
+#include <TinyEngine/Core/Constants.hpp>
 
 #include <string>
 
@@ -9,15 +10,6 @@ namespace TinyEngine
 {
 	class FileSystem final : public Singleton<FileSystem>
 	{
-	public:
-		enum class DirType
-		{
-			Execute,
-			Root,
-			Assets,
-			Logs
-		};
-
 	public:
 		FileSystem() = default;
 		~FileSystem() = default;

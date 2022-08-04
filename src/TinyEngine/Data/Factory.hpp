@@ -1,6 +1,7 @@
 ﻿#ifndef _FACTORY_HEADER_
 #define _FACTORY_HEADER_
 
+#include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Data/Singleton.hpp>
 
 #include <string>
@@ -26,8 +27,7 @@ namespace TinyEngine
 	class Factory : public Singleton<Factory>
 	{
 	public:
-		using IMetaInfoPtr = std::shared_ptr<IMetaInfo>;
-		using CreateCallback = std::function<IMetaInfoPtr()>;
+		using CreateCallback = std::function<IMetaInfoSharedPtr()>;
 
 	public:
 		Factory() = default;

@@ -1,6 +1,7 @@
 ﻿#ifndef _SERIALIAZTION_VISITOR_HEADER_
 #define _SERIALIAZTION_VISITOR_HEADER_
 
+#include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Data/Serialization/Serialization.hpp>
 
 #include <string>
@@ -14,7 +15,7 @@ namespace TinyEngine
 	class SerializationVisitor
 	{
 	public:
-		static void Save(OutputArchive* archive, std::string_view id, T* data) 
+		static void Save(OutputArchivePtr archive, std::string_view id, T* data) 
 		{
 			if (std::is_base_of_v<ISerializable, T>)
 			{
@@ -22,7 +23,7 @@ namespace TinyEngine
 			}
 		}
 
-		static void Load(InputArchive* archive, std::string_view id, T* data) 
+		static void Load(InputArchivePtr archive, std::string_view id, T* data) 
 		{
 			if (std::is_base_of_v<ISerializable, T>)
 			{
@@ -35,13 +36,13 @@ namespace TinyEngine
 	class SerializationVisitor<bool>
 	{
 	public:
-		static void Save(OutputArchive* archive, std::string_view id, bool* data) 
+		static void Save(OutputArchivePtr archive, std::string_view id, bool* data) 
 		{
 			archive->ToVariable(id);
 			archive->SetBool(*data);
 		}
 
-		static void Load(InputArchive* archive, std::string_view id, bool* data) 
+		static void Load(InputArchivePtr archive, std::string_view id, bool* data) 
 		{
 			archive->ToVariable(id);
 			*data = archive->GetBool();
@@ -52,13 +53,13 @@ namespace TinyEngine
 	class SerializationVisitor<int>
 	{
 	public:
-		static void Save(OutputArchive* archive, std::string_view id, int* data) 
+		static void Save(OutputArchivePtr archive, std::string_view id, int* data) 
 		{
 			archive->ToVariable(id);
 			archive->SetInt(*data);
 		}
 
-		static void Load(InputArchive* archive, std::string_view id, int* data) 
+		static void Load(InputArchivePtr archive, std::string_view id, int* data) 
 		{
 			archive->ToVariable(id);
 			*data = archive->GetInt();
@@ -69,13 +70,13 @@ namespace TinyEngine
 	class SerializationVisitor<float>
 	{
 	public:
-		static void Save(OutputArchive* archive, std::string_view id, float* data) 
+		static void Save(OutputArchivePtr archive, std::string_view id, float* data) 
 		{
 			archive->ToVariable(id);
 			archive->SetFloat(*data);
 		}
 
-		static void Load(InputArchive* archive, std::string_view id, float* data) 
+		static void Load(InputArchivePtr archive, std::string_view id, float* data) 
 		{
 			archive->ToVariable(id);
 			*data = archive->GetFloat();
@@ -86,13 +87,13 @@ namespace TinyEngine
 	class SerializationVisitor<std::string>
 	{
 	public:
-		static void Save(OutputArchive* archive, std::string_view id, std::string* data) 
+		static void Save(OutputArchivePtr archive, std::string_view id, std::string* data) 
 		{
 			archive->ToVariable(id);
 			archive->SetString(*data);
 		}
 
-		static void Load(InputArchive* archive, std::string_view id, std::string* data) 
+		static void Load(InputArchivePtr archive, std::string_view id, std::string* data) 
 		{
 			archive->ToVariable(id);
 			*data = archive->GetString();
@@ -103,7 +104,7 @@ namespace TinyEngine
 	class SerializationVisitor<ISerializable>
 	{
 	public:
-		static void Save(OutputArchive* archive, std::string_view id, ISerializable* data) 
+		static void Save(OutputArchivePtr archive, std::string_view id, ISerializablePtr data) 
 		{
 			if (archive->ToSection(id))
 			{
@@ -112,7 +113,7 @@ namespace TinyEngine
 			}
 		}
 
-		static void Load(InputArchive* archive, std::string_view id, ISerializable* data) 
+		static void Load(InputArchivePtr archive, std::string_view id, ISerializablePtr data) 
 		{
 			if (archive->ToSection(id))
 			{
@@ -126,7 +127,7 @@ namespace TinyEngine
 	class SerializationVisitor<std::vector<T>>
 	{
 	public:
-		static void Save(OutputArchive* archive, std::string_view id, std::vector<T>* data) 
+		static void Save(OutputArchivePtr archive, std::string_view id, std::vector<T>* data) 
 		{
 			if (archive->ToArray(id))
 			{
@@ -146,7 +147,7 @@ namespace TinyEngine
 			}
 		}
 
-		static void Load(InputArchive* archive, std::string_view id, std::vector<T>* data) 
+		static void Load(InputArchivePtr archive, std::string_view id, std::vector<T>* data) 
 		{
 			if (archive->ToArray(id))
 			{
@@ -174,7 +175,7 @@ namespace TinyEngine
 	class SerializationVisitor<std::map<K, V>>
 	{
 	public:
-		static void Save(OutputArchive* archive, std::string_view id, std::map<K, V>* data) 
+		static void Save(OutputArchivePtr archive, std::string_view id, std::map<K, V>* data) 
 		{
 			if (archive->ToArray(id))
 			{
@@ -196,7 +197,7 @@ namespace TinyEngine
 			}
 		}
 
-		static void Load(InputArchive* archive, std::string_view id, std::map<K, V>* data) 
+		static void Load(InputArchivePtr archive, std::string_view id, std::map<K, V>* data) 
 		{
 			if (archive->ToArray(id))
 			{
@@ -226,7 +227,7 @@ namespace TinyEngine
 	class SerializationVisitor<std::shared_ptr<T>>
 	{
 	public:
-		static void Save(OutputArchive* archive, std::string_view id, std::shared_ptr<T>* data) 
+		static void Save(OutputArchivePtr archive, std::string_view id, std::shared_ptr<T>* data) 
 		{
 			if (archive->ToSection(id))
 			{
@@ -246,7 +247,7 @@ namespace TinyEngine
 			}
 		}
 
-		static void Load(InputArchive* archive, std::string_view id, std::shared_ptr<T>* data) 
+		static void Load(InputArchivePtr archive, std::string_view id, std::shared_ptr<T>* data) 
 		{
 			if (archive->ToSection(id))
 			{
@@ -255,7 +256,7 @@ namespace TinyEngine
 					std::string type;
 					SerializationVisitor<std::string>::Load(archive, "type", &type);
 
-					if (*data = Factory::GetInstance().Create<T>(type))
+					if (*data = Factory::GetInstance()->Create<T>(type))
 					{
 						auto rawPointer = data->get();
 						
@@ -273,12 +274,12 @@ namespace TinyEngine
 
 #define TINY_ENGINE_SER_BEGIN(cls) \
 	TINY_ENGINE_META(cls) \
-	public: void SerializationProcess(TinyEngine::IArchive* archive) override { const bool isSave = dynamic_cast<TinyEngine::OutputArchive*>(archive);
+	public: void SerializationProcess(TinyEngine::IArchivePtr archive) override { const bool isSave = dynamic_cast<TinyEngine::OutputArchivePtr>(archive);
 #define TINY_ENGINE_SER_BEGIN_DERIVED(cls, parent) \
 	TINY_ENGINE_META(cls) \
-	public: void SerializationProcess(TinyEngine::IArchive* archive) override { \
+	public: void SerializationProcess(TinyEngine::IArchivePtr archive) override { \
 	parent::SerializationProcess(archive); \
-	const bool isSave = dynamic_cast<TinyEngine::OutputArchive*>(archive);
+	const bool isSave = dynamic_cast<TinyEngine::OutputArchivePtr>(archive);
 #define TINY_ENGINE_SER_END } private:
 #define TINY_ENGINE_SER_FIELD_TMP(field, method, cls, type) TinyEngine::SerializationVisitor<type>::method(static_cast<cls*>(archive), #field, &field);
 #define TINY_ENGINE_SER_FIELD(field) if (isSave) { TINY_ENGINE_SER_FIELD_TMP(field, Save, TinyEngine::OutputArchive, decltype(field)) } else { TINY_ENGINE_SER_FIELD_TMP(field, Load, TinyEngine::InputArchive, decltype(field)) }

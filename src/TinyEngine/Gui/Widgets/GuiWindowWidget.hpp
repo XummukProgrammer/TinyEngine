@@ -12,17 +12,14 @@ namespace TinyEngine
 	class GuiWindowWidget : public GuiWidget, public GuiWidgetContainer
 	{
 	public:
-		using Ptr = std::shared_ptr<GuiWindowWidget>;
-
-	public:
 		GuiWindowWidget() = default;
 		virtual ~GuiWindowWidget() = default;
 
 	public:
-		static Ptr Create(std::string_view name);
+		static GuiWindowWidgetSharedPtr Create(std::string_view name);
 
 	public:
-		void Draw(float deltaTime, IRenderWindowPtr renderWindowPtr) override;
+		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
 
 	public:
 		void SetName(std::string_view name) { _name = name; }
@@ -39,25 +36,22 @@ namespace TinyEngine
 	class GuiMainWindowWidget final : public GuiWindowWidget
 	{
 	public:
-		using Ptr = std::shared_ptr<GuiMainWindowWidget>;
-
-	public:
 		GuiMainWindowWidget() = default;
 		~GuiMainWindowWidget() = default;
 
 	public:
-		static Ptr Create();
+		static GuiMainWindowWidgetSharedPtr Create();
 
 	public:
-		void SetMenuBar(GuiMenuBarWidget::Ptr menuBarPtr);
-		GuiMenuBarWidget::Ptr GetMenuBar() const { return _menuBarPtr; }
+		void SetMenuBar(GuiMenuBarWidgetSharedPtr menuBarPtr);
+		GuiMenuBarWidgetSharedPtr GetMenuBar() const { return _menuBarPtr; }
 
 	protected:
 		void BeginWindow() override;
 		void EndWindow() override;
 
 	private:
-		GuiMenuBarWidget::Ptr _menuBarPtr;
+		GuiMenuBarWidgetSharedPtr _menuBarPtr;
 	};
 }
 

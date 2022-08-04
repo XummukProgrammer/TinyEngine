@@ -1,6 +1,7 @@
 ﻿#ifndef _GUI_LABEL_WIDGET_HEADER_
 #define _GUI_LABEL_WIDGET_HEADER_
 
+#include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Gui/GuiWidget.hpp>
 
 #include <string>
@@ -12,19 +13,16 @@ namespace TinyEngine
 	class GuiLabelWidget final : public GuiWidget
 	{
 	public:
-		using Ptr = std::shared_ptr<GuiLabelWidget>;
-
-	public:
 		GuiLabelWidget() = default;
 		~GuiLabelWidget() = default;
 
 	public:
-		static Ptr Create(std::string_view text);
-		static Ptr Create(std::string_view text, const ImVec4& color);
-		static Ptr Create(std::string_view text, bool isDisabled);
+		static GuiLabelWidgetSharedPtr Create(std::string_view text);
+		static GuiLabelWidgetSharedPtr Create(std::string_view text, const ImVec4& color);
+		static GuiLabelWidgetSharedPtr Create(std::string_view text, bool isDisabled);
 
 	public:
-		void Draw(float deltaTime, IRenderWindowPtr renderWindowPtr) override;
+		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
 
 	public:
 		// Взаимозаменяем с SetColor.

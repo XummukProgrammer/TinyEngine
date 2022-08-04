@@ -2,18 +2,18 @@
 
 namespace TinyEngine
 {
-	GuiWindowWidget::Ptr GuiWindowWidget::Create(std::string_view name)
+	GuiWindowWidgetSharedPtr GuiWindowWidget::Create(std::string_view name)
 	{
 		auto widget = std::make_shared<GuiWindowWidget>();
 		widget->SetName(name);
 		return widget;
 	}
 
-	void GuiWindowWidget::Draw(float deltaTime, IRenderWindowPtr renderWindowPtr)
+	void GuiWindowWidget::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
 	{
 		BeginWindow();
 
-		EachWidgets([deltaTime, renderWindowPtr](std::string_view id, GuiWidgetContainer::GuiWidgetPtr widgetPtr)
+		EachWidgets([deltaTime, renderWindowPtr](std::string_view id, GuiWidgetSharedPtr widgetPtr)
 		{
 			widgetPtr->Draw(deltaTime, renderWindowPtr);
 		});
@@ -31,14 +31,14 @@ namespace TinyEngine
 		ImGui::End();
 	}
 
-	GuiMainWindowWidget::Ptr GuiMainWindowWidget::Create()
+	GuiMainWindowWidgetSharedPtr GuiMainWindowWidget::Create()
 	{
 		auto widget = std::make_shared<GuiMainWindowWidget>();
 		widget->SetMenuBar(GuiMenuBarWidget::Create());
 		return widget;
 	}
 
-	void GuiMainWindowWidget::SetMenuBar(GuiMenuBarWidget::Ptr menuBarPtr)
+	void GuiMainWindowWidget::SetMenuBar(GuiMenuBarWidgetSharedPtr menuBarPtr)
 	{
 		_menuBarPtr = menuBarPtr;
 		AddWidget("menuBar", _menuBarPtr);

@@ -10,10 +10,6 @@
 
 namespace TinyEngine
 {
-	class SfmlRenderObject;
-
-	using SfmlRenderObjectPtr = std::shared_ptr<SfmlRenderObject>;
-
 	class SfmlRenderUtils
 	{
 	public:
@@ -68,10 +64,10 @@ namespace TinyEngine
 
 	public:
 		RenderObjectBuilder& Create() override;
-		IRenderObjectPtr GetPtr() const override;
+		IRenderObjectSharedPtr GetPtr() const override;
 
 	private:
-		SfmlRenderObjectPtr _object;
+		SfmlRenderObjectSharedPtr _object;
 	};
 
 	class SfmlRenderWindow final : public IRenderWindow
@@ -85,7 +81,7 @@ namespace TinyEngine
 
 	public:
 		void Create(const RenderWindowSettings& windowSettings) override;
-		GuiDelegatePtr CreateDelegate() const override;
+		GuiDelegateUniquePtr CreateDelegate() const override;
 		bool IsClosed() const override;
 		void Clear() override;
 		void ExtractEvents() override;

@@ -27,7 +27,7 @@ namespace TinyEngine
 
 	void Logger::SaveToFile()
 	{
-		SerializationUtils::SaveRootToFile(SerializationUtils::ArchiveFormat::Xml, "../_logs/logs.xml", &_messages);
+		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, "../_logs/logs.xml", &_messages);
 	}
 
 	void Logger::PrintMessage(std::string_view type, std::string_view sender, std::string_view message, bool isShowStacktrace)

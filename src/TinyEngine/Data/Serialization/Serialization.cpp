@@ -6,17 +6,17 @@
 
 namespace TinyEngine
 {
-	void SerializationUtils::SaveRoot(OutputArchive* archive, ISerializable* serializable)
+	void SerializationUtils::SaveRoot(OutputArchivePtr archive, ISerializablePtr serializable)
 	{
 		TinyEngine::SerializationVisitor<TinyEngine::ISerializable>::Save(archive, "root", serializable);
 	}
 
-	void SerializationUtils::LoadRoot(InputArchive* archive, ISerializable* serializable)
+	void SerializationUtils::LoadRoot(InputArchivePtr archive, ISerializablePtr serializable)
 	{
 		TinyEngine::SerializationVisitor<TinyEngine::ISerializable>::Load(archive, "root", serializable);
 	}
 
-	void SerializationUtils::SaveRootToFile(ArchiveFormat format, std::string_view path, ISerializable* serializable)
+	void SerializationUtils::SaveRootToFile(ArchiveFormat format, std::string_view path, ISerializablePtr serializable)
 	{
 		if (auto archive = CreateOutputArchive(format))
 		{
@@ -26,7 +26,7 @@ namespace TinyEngine
 		}
 	}
 
-	void SerializationUtils::LoadRootFromFile(ArchiveFormat format, std::string_view path, ISerializable* serializable)
+	void SerializationUtils::LoadRootFromFile(ArchiveFormat format, std::string_view path, ISerializablePtr serializable)
 	{
 		if (auto archive = CreateInputArchive(format))
 		{
@@ -36,7 +36,7 @@ namespace TinyEngine
 		}
 	}
 
-	std::unique_ptr<OutputArchive> SerializationUtils::CreateOutputArchive(ArchiveFormat format)
+	OutputArchiveUniquePtr SerializationUtils::CreateOutputArchive(ArchiveFormat format)
 	{
 		switch (format)
 		{
@@ -46,7 +46,7 @@ namespace TinyEngine
 		return nullptr;
 	}
 
-	std::unique_ptr<InputArchive> SerializationUtils::CreateInputArchive(ArchiveFormat format)
+	InputArchiveUniquePtr SerializationUtils::CreateInputArchive(ArchiveFormat format)
 	{
 		switch (format)
 		{

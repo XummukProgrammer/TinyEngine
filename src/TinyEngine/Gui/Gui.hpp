@@ -1,20 +1,13 @@
 ﻿#ifndef _GUI_HEADER_
 #define _GUI_HEADER_
 
+#include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Data/Singleton.hpp>
 
 #include <memory>
 
 namespace TinyEngine
 {
-	class GuiDelegate;
-	class IRenderWindow;
-	class GuiMainWindowWidget;
-
-	using GuiDelegatePtr = std::shared_ptr<GuiDelegate>;
-	using IRenderWindowPtr = std::shared_ptr<IRenderWindow>;
-	using GuiMainWindowWidgetPtr = std::shared_ptr<GuiMainWindowWidget>;
-
 	class GuiDelegate
 	{
 	public:
@@ -22,11 +15,11 @@ namespace TinyEngine
 		virtual ~GuiDelegate() = default;
 
 	public:
-		virtual void Init(IRenderWindowPtr renderWindowPtr) = 0;
-		virtual void EventReceived(IRenderWindowPtr renderWindowPtr) = 0;
-		virtual void Update(float deltaTime, IRenderWindowPtr renderWindowPtr) = 0;
-		virtual void Display(IRenderWindowPtr renderWindowPtr) = 0;
-		virtual void Shutdown(IRenderWindowPtr renderWindowPtr) = 0;
+		virtual void Init(IRenderWindowSharedPtr renderWindowPtr) = 0;
+		virtual void EventReceived(IRenderWindowSharedPtr renderWindowPtr) = 0;
+		virtual void Update(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) = 0;
+		virtual void Display(IRenderWindowSharedPtr renderWindowPtr) = 0;
+		virtual void Shutdown(IRenderWindowSharedPtr renderWindowPtr) = 0;
 	};
 
 	class Gui final : public Singleton<Gui>
@@ -36,25 +29,25 @@ namespace TinyEngine
 		~Gui() = default;
 
 	public:
-		void Init(IRenderWindowPtr renderWindowPtr);
-		void EventReceived(IRenderWindowPtr renderWindowPtr);
-		void Update(float deltaTime, IRenderWindowPtr renderWindowPtr);
-		void Draw(float deltaTime, IRenderWindowPtr renderWindowPtr);
-		void Display(IRenderWindowPtr renderWindowPtr);
-		void Shutdown(IRenderWindowPtr renderWindowPtr);
+		void Init(IRenderWindowSharedPtr renderWindowPtr);
+		void EventReceived(IRenderWindowSharedPtr renderWindowPtr);
+		void Update(float deltaTime, IRenderWindowSharedPtr renderWindowPtr);
+		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr);
+		void Display(IRenderWindowSharedPtr renderWindowPtr);
+		void Shutdown(IRenderWindowSharedPtr renderWindowPtr);
 
 	public:
-		void SetDelegate(GuiDelegatePtr delegatePtr) { _delegatePtr = delegatePtr; }
+		void SetDelegate(GuiDelegateUniquePtr&& delegatePtr) { _delegatePtr = std::move(delegatePtr); }
 
-		void SetMainWindow(GuiMainWindowWidgetPtr mainWindowPtr);
-		GuiMainWindowWidgetPtr GetMainWindow() const;
+		void SetMainWindow(GuiMainWindowWidgetSharedPtr mainWindowPtr);
+		GuiMainWindowWidgetSharedPtr GetMainWindow() const;
 
 	private:
 		void SettingsIO();
 
 	private:
-		GuiDelegatePtr _delegatePtr;
-		GuiMainWindowWidgetPtr _mainWindowPtr;
+		GuiDelegateUniquePtr _delegatePtr;
+		GuiMainWindowWidgetSharedPtr _mainWindowPtr;
 	};
 }
 

@@ -1,7 +1,8 @@
 ﻿#ifndef _INTERFACE_RENDER_HEADER_
 #define _INTERFACE_RENDER_HEADER_
 
-#include <TinyEngine/Gui/Gui.hpp>
+#include <TinyEngine/Core/Forwards.hpp>
+#include <TinyEngine/Core/Constants.hpp>
 #include <TinyEngine/Data/Singleton.hpp>
 
 #include <string>
@@ -12,20 +13,6 @@
 
 namespace TinyEngine
 {
-	class IRenderWindow;
-	class SfmlRenderWindow;
-	class IRenderObject;
-	class RenderLayer;
-
-	using IRenderObjectPtr = std::shared_ptr<IRenderObject>;
-	using IRenderWindowPtr = std::shared_ptr<IRenderWindow>;
-	using RenderLayerPtr = std::shared_ptr<RenderLayer>;
-
-	enum class RenderType
-	{
-		Sfml
-	};
-
 	struct RenderWindowSettings
 	{
 		RenderType renderType;
@@ -99,7 +86,7 @@ namespace TinyEngine
 		RenderObjectBuilder& SetScale(const PointF& factors);
 		RenderObjectBuilder& SetRotation(float rotation);
 		virtual RenderObjectBuilder& Create() = 0;
-		virtual IRenderObjectPtr GetPtr() const = 0;
+		virtual IRenderObjectSharedPtr GetPtr() const = 0;
 		RenderObjectBuilder& SetToLayer(int layerId);
 
 	protected:
@@ -121,7 +108,7 @@ namespace TinyEngine
 
 	public:
 		virtual void Create(const RenderWindowSettings& windowSettings) = 0;
-		virtual GuiDelegatePtr CreateDelegate() const = 0;
+		virtual GuiDelegateUniquePtr CreateDelegate() const = 0;
 		virtual bool IsClosed() const = 0;
 		virtual void Clear() = 0;
 		virtual void ExtractEvents() = 0;
@@ -146,7 +133,7 @@ namespace TinyEngine
 	class RenderLayer final
 	{
 	public:
-		using ObjectsList = std::list<IRenderObjectPtr>;
+		using ObjectsList = std::list<IRenderObjectSharedPtr>;
 
 	public:
 		RenderLayer() = default;
@@ -154,15 +141,15 @@ namespace TinyEngine
 
 	public:
 		void Update(float deltaTime);
-		void Draw(IRenderWindowPtr renderWindowPtr);
+		void Draw(IRenderWindowSharedPtr renderWindowPtr);
 
 	public:
-		void AddRenderObject(IRenderObjectPtr object);
-		void RemoveRenderObject(IRenderObjectPtr object);
-		bool HasRenderObject(IRenderObjectPtr object) const;
+		void AddRenderObject(IRenderObjectSharedPtr object);
+		void RemoveRenderObject(IRenderObjectSharedPtr object);
+		bool HasRenderObject(IRenderObjectSharedPtr object) const;
 
 	private:
-		ObjectsList::const_iterator GetConstObjectIterator(IRenderObjectPtr object) const;
+		ObjectsList::const_iterator GetConstObjectIterator(IRenderObjectSharedPtr object) const;
 
 	private:
 		ObjectsList _objects;
@@ -176,17 +163,17 @@ namespace TinyEngine
 
 	public:
 		void Update(float deltaTime);
-		void Draw(IRenderWindowPtr renderWindowPtr);
+		void Draw(IRenderWindowSharedPtr renderWindowPtr);
 
 	public:
 		void CreateLayer(int layerId);
-		RenderLayerPtr GetLayer(int layerId) const;
-		RenderLayerPtr GetOrCreateLayer(int layerId);
+		RenderLayerSharedPtr GetLayer(int layerId) const;
+		RenderLayerSharedPtr GetOrCreateLayer(int layerId);
 		void RemoveLayer(int layerId);
 		bool HasLayer(int layerId) const;
 
 	private:
-		std::map<int, RenderLayerPtr> _layers;
+		std::map<int, RenderLayerSharedPtr> _layers;
 	};
 
 	class Render final : public Singleton<Render>
@@ -207,14 +194,14 @@ namespace TinyEngine
 
 	private:
 		void Update(float deltaTime);
-		void Draw(IRenderWindowPtr window);
+		void Draw(IRenderWindowSharedPtr window);
 
 		void OnEventReceived();
 
-		void CreateWindow(IRenderWindowPtr window, const RenderWindowSettings& windowSettings);
+		void CreateWindow(IRenderWindowSharedPtr window, const RenderWindowSettings& windowSettings);
 
 	private:
-		IRenderWindowPtr _renderWindowPtr;
+		IRenderWindowSharedPtr _renderWindowPtr;
 		RenderLayers _renderLayers;
 	};
 };

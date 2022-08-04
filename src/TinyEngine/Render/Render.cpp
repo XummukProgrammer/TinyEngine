@@ -22,7 +22,7 @@ namespace TinyEngine
 		}
 	}
 
-	void RenderLayer::Draw(IRenderWindowPtr renderWindowPtr)
+	void RenderLayer::Draw(IRenderWindowSharedPtr renderWindowPtr)
 	{
 		for (const auto& object : _objects)
 		{
@@ -30,13 +30,13 @@ namespace TinyEngine
 		}
 	}
 
-	void RenderLayer::AddRenderObject(IRenderObjectPtr object)
+	void RenderLayer::AddRenderObject(IRenderObjectSharedPtr object)
 	{
 		TINY_ENGINE_PRINT_INFO("Added new render object");
 		_objects.push_back(object);
 	}
 
-	void RenderLayer::RemoveRenderObject(IRenderObjectPtr object)
+	void RenderLayer::RemoveRenderObject(IRenderObjectSharedPtr object)
 	{
 		TINY_ENGINE_PRINT_INFO("Remove render object");
 		const auto it = GetConstObjectIterator(object);
@@ -46,12 +46,12 @@ namespace TinyEngine
 		}
 	}
 
-	bool RenderLayer::HasRenderObject(IRenderObjectPtr object) const
+	bool RenderLayer::HasRenderObject(IRenderObjectSharedPtr object) const
 	{
 		return GetConstObjectIterator(object) != _objects.end();
 	}
 
-	RenderLayer::ObjectsList::const_iterator RenderLayer::GetConstObjectIterator(IRenderObjectPtr object) const
+	RenderLayer::ObjectsList::const_iterator RenderLayer::GetConstObjectIterator(IRenderObjectSharedPtr object) const
 	{
 		return std::find(_objects.begin(), _objects.end(), object);
 	}
@@ -62,7 +62,7 @@ namespace TinyEngine
 		_layers[layerId] = std::make_shared<RenderLayer>();
 	}
 
-	RenderLayerPtr RenderLayers::GetLayer(int layerId) const
+	RenderLayerSharedPtr RenderLayers::GetLayer(int layerId) const
 	{
 		auto it = _layers.find(layerId);
 		if (it != _layers.end())
@@ -72,7 +72,7 @@ namespace TinyEngine
 		return nullptr;
 	}
 
-	RenderLayerPtr RenderLayers::GetOrCreateLayer(int layerId)
+	RenderLayerSharedPtr RenderLayers::GetOrCreateLayer(int layerId)
 	{
 		if (auto layer = GetLayer(layerId))
 		{
@@ -105,7 +105,7 @@ namespace TinyEngine
 		}
 	}
 
-	void RenderLayers::Draw(IRenderWindowPtr renderWindowPtr)
+	void RenderLayers::Draw(IRenderWindowSharedPtr renderWindowPtr)
 	{
 		for (const auto& [ layerId, layer ] : _layers)
 		{
@@ -133,7 +133,7 @@ namespace TinyEngine
 			_renderWindowPtr->Display();
 		}
 
-		Gui::GetInstance().Shutdown(_renderWindowPtr);
+		Gui::GetInstance()->Shutdown(_renderWindowPtr);
 
 		return *this;
 	}
@@ -156,32 +156,32 @@ namespace TinyEngine
 	{
 		_renderLayers.Update(deltaTime);
 
-		auto& gui = Gui::GetInstance();
-		gui.Update(deltaTime, _renderWindowPtr);
-		gui.Draw(deltaTime, _renderWindowPtr);
+		auto gui = Gui::GetInstance();
+		gui->Update(deltaTime, _renderWindowPtr);
+		gui->Draw(deltaTime, _renderWindowPtr);
 	}
 
-	void Render::Draw(IRenderWindowPtr window)
+	void Render::Draw(IRenderWindowSharedPtr window)
 	{
 		_renderLayers.Draw(window);
 
-		Gui::GetInstance().Display(_renderWindowPtr);
+		Gui::GetInstance()->Display(_renderWindowPtr);
 	}
 
 	void Render::OnEventReceived()
 	{
-		Gui::GetInstance().EventReceived(_renderWindowPtr);
+		Gui::GetInstance()->EventReceived(_renderWindowPtr);
 	}
 
-	void Render::CreateWindow(IRenderWindowPtr window, const RenderWindowSettings& windowSettings)
+	void Render::CreateWindow(IRenderWindowSharedPtr window, const RenderWindowSettings& windowSettings)
 	{
 		_renderWindowPtr = window;
 		_renderWindowPtr->Create(windowSettings);
 		_renderWindowPtr->SetOnEventReceived(std::bind(&Render::OnEventReceived, this));
 
-		auto& gui = Gui::GetInstance();
-		gui.SetDelegate(_renderWindowPtr->CreateDelegate());
-		gui.Init(_renderWindowPtr);
+		auto gui = Gui::GetInstance();
+		gui->SetDelegate(_renderWindowPtr->CreateDelegate());
+		gui->Init(_renderWindowPtr);
 	}
 
 	RenderObjectBuilder& RenderObjectBuilder::SetTexture(std::string_view assetId)
@@ -216,7 +216,7 @@ namespace TinyEngine
 
 	RenderObjectBuilder& RenderObjectBuilder::SetToLayer(int layerId)
 	{
-		Render::GetInstance().GetLayers().GetOrCreateLayer(layerId)->AddRenderObject(GetPtr());
+		Render::GetInstance()->GetLayers().GetOrCreateLayer(layerId)->AddRenderObject(GetPtr());
 		return *this;
 	}
 }

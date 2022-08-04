@@ -1,6 +1,8 @@
 ﻿#ifndef _SERIALIAZTION_HEADER_
 #define _SERIALIAZTION_HEADER_
 
+#include <TinyEngine/Core/Forwards.hpp>
+#include <TinyEngine/Core/Constants.hpp>
 #include <TinyEngine/Data/Factory.hpp>
 
 #include <string>
@@ -8,8 +10,6 @@
 
 namespace TinyEngine
 {
-	class IArchive;
-
 	class ISerializable : public TinyEngine::IMetaInfo
 	{
 	public:
@@ -17,7 +17,7 @@ namespace TinyEngine
 		virtual ~ISerializable() = default;
 
 	public:
-		virtual void SerializationProcess(IArchive* archive) = 0;
+		virtual void SerializationProcess(IArchivePtr archive) = 0;
 	};
 
 	class IArchive
@@ -92,20 +92,14 @@ namespace TinyEngine
 	class SerializationUtils
 	{
 	public:
-		enum class ArchiveFormat
-		{
-			Xml
-		};
+		static void SaveRoot(OutputArchivePtr archive, ISerializablePtr serializable);
+		static void LoadRoot(InputArchivePtr archive, ISerializablePtr serializable);
 
-	public:
-		static void SaveRoot(OutputArchive* archive, ISerializable* serializable);
-		static void LoadRoot(InputArchive* archive, ISerializable* serializable);
+		static void SaveRootToFile(ArchiveFormat format, std::string_view path, ISerializablePtr serializable);
+		static void LoadRootFromFile(ArchiveFormat format, std::string_view path, ISerializablePtr serializable);
 
-		static void SaveRootToFile(ArchiveFormat format, std::string_view path, ISerializable* serializable);
-		static void LoadRootFromFile(ArchiveFormat format, std::string_view path, ISerializable* serializable);
-
-		static std::unique_ptr<OutputArchive> CreateOutputArchive(ArchiveFormat format);
-		static std::unique_ptr<InputArchive> CreateInputArchive(ArchiveFormat format);
+		static OutputArchiveUniquePtr CreateOutputArchive(ArchiveFormat format);
+		static InputArchiveUniquePtr CreateInputArchive(ArchiveFormat format);
 	};
 }
 

@@ -2,13 +2,13 @@
 
 namespace TinyEngine
 {
-	GuiMenuBarWidget::Ptr GuiMenuBarWidget::Create()
+	GuiMenuBarWidgetSharedPtr GuiMenuBarWidget::Create()
 	{
 		auto widget = std::make_shared<GuiMenuBarWidget>();
 		return widget;
 	}
 
-	void GuiMenuBarWidget::Draw(float deltaTime, IRenderWindowPtr renderWindowPtr)
+	void GuiMenuBarWidget::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
 	{
 		if (ImGui::BeginMenuBar())
 		{

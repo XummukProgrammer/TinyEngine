@@ -11,7 +11,7 @@ namespace TinyEngine
 		virtual ~Singleton() = default;
 
 	public:
-		static T& GetInstance();
+		static T* GetInstance();
 		void ResetInstance();
 
 	private:
@@ -22,14 +22,14 @@ namespace TinyEngine
 	T* Singleton<T>::_instance = nullptr;
 
 	template<typename T>
-	T& Singleton<T>::GetInstance()
+	T* Singleton<T>::GetInstance()
 	{
 		if (!_instance)
 		{
 			_instance = new T();
 		}
 
-		return *_instance;
+		return _instance;
 	}
 
 	template<typename T>

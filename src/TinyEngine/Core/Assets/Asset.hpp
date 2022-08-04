@@ -16,9 +16,6 @@ namespace TinyEngine
 		TINY_ENGINE_SER_END
 
 	public:
-		using Ptr = std::shared_ptr<Asset>;
-
-	public:
 		Asset() = default;
 		virtual ~Asset() = default;
 

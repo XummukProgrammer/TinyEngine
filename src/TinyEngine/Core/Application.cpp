@@ -1,21 +1,27 @@
 ﻿#include "Application.hpp"
 
-#include <TinyEngine/Render/Render.hpp>
-
+#include <TinyEngine/Core/Debug.hpp>
+#include <TinyEngine/Core/FileSystem.hpp>
+#include <TinyEngine/Core/Logger.hpp>
+#include <TinyEngine/Core/Assets/Assets.hpp>
+#include <TinyEngine/Core/Assets/Asset.hpp>
+#include <TinyEngine/Core/Assets/AssetHolder.hpp>
 #include <TinyEngine/Core/Assets/AssetLoader.hpp>
 #include <TinyEngine/Core/Assets/AssetTexture.hpp>
+#include <TinyEngine/Render/Render.hpp>
+#include <TinyEngine/Gui/Gui.hpp>
 
 namespace TinyEngine
 {
-	Application& Application::Init(int argc, char* argv[], const RenderWindowSettings& windowSettings, ApplicationDelegatePtr&& delegate)
+	Application& Application::Init(int argc, char* argv[], const RenderWindowSettings& windowSettings, ApplicationDelegateUniquePtr&& delegate)
 	{
-		GetFileSystem().SetExecutePath(argv[0]);
+		GetFileSystem()->SetExecutePath(argv[0]);
 		_delegate = std::move(delegate);
 
 		switch (windowSettings.renderType)
 		{
 			case RenderType::Sfml:
-				GetRender().CreateSfmlWindow(windowSettings);
+				GetRender()->CreateSfmlWindow(windowSettings);
 				break;
 		}
 
@@ -34,22 +40,57 @@ namespace TinyEngine
 	void Application::LoggerSaveToFile()
 	{
 		TINY_ENGINE_PRINT_INFO("Logger save to file");
-		GetLogger().SaveToFile();
+		GetLogger()->SaveToFile();
 	}
 
 	void Application::Close()
 	{
-		GetRender().Close();
+		GetRender()->Close();
+	}
+
+	DebugPtr Application::GetDebug()
+	{
+		return Debug::GetInstance();
+	}
+
+	LoggerPtr Application::GetLogger()
+	{
+		return Logger::GetInstance();
+	}
+
+	RenderPtr Application::GetRender()
+	{
+		return Render::GetInstance();
+	}
+
+	GuiPtr Application::GetGui()
+	{
+		return Gui::GetInstance();
+	}
+
+	FactoryPtr Application::GetFactory()
+	{
+		return Factory::GetInstance();
+	}
+
+	AssetsPtr Application::GetAssets()
+	{
+		return Assets::GetInstance();
+	}
+
+	FileSystemPtr Application::GetFileSystem()
+	{
+		return FileSystem::GetInstance();
 	}
 
 	void Application::OnInit()
 	{
-		auto& factory = GetFactory();
-		factory.Register<AssetHolder>();
-		factory.Register<AssetLoader>();
-		factory.Register<AssetSfmlTexture>();
+		auto factory = GetFactory();
+		factory->Register<AssetHolder>();
+		factory->Register<AssetLoader>();
+		factory->Register<AssetSfmlTexture>();
 
-		GetAssets().LoadFromFile();
+		GetAssets()->LoadFromFile();
 
 		if (_delegate)
 		{
@@ -66,13 +107,13 @@ namespace TinyEngine
 			_delegate->OnDeinit();
 		}
 
-		GetRender().Destroy();
+		GetRender()->Destroy();
 
 		LoggerSaveToFile();
 	}
 
 	void Application::OnProcess()
 	{
-		GetRender().Execute();
+		GetRender()->Execute();
 	}
 }

@@ -13,7 +13,6 @@ namespace TinyEngine
 	struct XmlDataArchive
 	{
 		pugi::xml_document document;
-		// TODO: pugi::xml_node parent;
 		std::stack<pugi::xml_node> poolSections;
 		pugi::xml_attribute lastAttribute;
 	};

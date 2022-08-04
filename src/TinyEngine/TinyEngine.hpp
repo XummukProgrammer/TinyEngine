@@ -1,13 +1,7 @@
 ﻿#ifndef _TINY_ENGINE_HEADER_
 #define _TINY_ENGINE_HEADER_
 
-#include <TinyEngine/Core/Application.hpp>
-#include <TinyEngine/Core/Logger.hpp>
-#include <TinyEngine/Core/Debug.hpp>
-#include <TinyEngine/Render/Render.hpp>
-#include <TinyEngine/Gui/Gui.hpp>
-#include <TinyEngine/Gui/Widgets/GuiLabelWidget.hpp>
-#include <TinyEngine/Gui/Widgets/GuiWindowWidget.hpp>
-#include <TinyEngine/Gui/Widgets/GuiMenuBarWidget.hpp>
+#include <TinyEngine/Core/Constants.hpp>
+#include <TinyEngine/Core/Forwards.hpp>
 
 #endif // _TINY_ENGINE_HEADER_

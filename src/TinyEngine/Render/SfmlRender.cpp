@@ -71,7 +71,7 @@ namespace TinyEngine
 		return *this;
 	}
 
-	IRenderObjectPtr SfmlRenderObjectBuilder::GetPtr() const
+	IRenderObjectSharedPtr SfmlRenderObjectBuilder::GetPtr() const
 	{
 		return _object;
 	}
@@ -83,9 +83,9 @@ namespace TinyEngine
 		_windowPtr->setVerticalSyncEnabled(false);
 	}
 
-	GuiDelegatePtr SfmlRenderWindow::CreateDelegate() const
+	GuiDelegateUniquePtr SfmlRenderWindow::CreateDelegate() const
 	{
-		return std::make_shared<SfmlGuiDelegate>();
+		return std::make_unique<SfmlGuiDelegate>();
 	}
 
 	bool SfmlRenderWindow::IsClosed() const

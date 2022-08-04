@@ -10,9 +10,6 @@ namespace TinyEngine
 	class Assets final : public Singleton<Assets>
 	{
 	public:
-		using AssetPtr = std::shared_ptr<Asset>;
-
-	public:
 		Assets() = default;
 		~Assets() = default;
 

@@ -1,9 +1,9 @@
 ﻿#ifndef _ASSET_HOLDER_HEADER_
 #define _ASSET_HOLDER_HEADER_
 
-#include <TinyEngine/Data/Serialization/SerializationVisitor.hpp>
-
+#include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Core/Assets/Asset.hpp>
+#include <TinyEngine/Data/Serialization/SerializationVisitor.hpp>
 
 #include <memory>
 
@@ -18,8 +18,7 @@ namespace TinyEngine
 		TINY_ENGINE_SER_END
 			
 	public:
-		using AssetPtr = std::shared_ptr<Asset>;
-		using AssetsData = std::vector<AssetPtr>;
+		using AssetsData = std::vector<AssetSharedPtr>;
 
 	public:
 		AssetHolder() = default;

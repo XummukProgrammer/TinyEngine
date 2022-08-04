@@ -1,6 +1,7 @@
 ﻿#ifndef _ASSET_LOADER_HEADER_
 #define _ASSET_LOADER_HEADER_
 
+#include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Core/Assets/Asset.hpp>
 
 namespace TinyEngine
@@ -18,10 +19,10 @@ namespace TinyEngine
 		~AssetSource() = default;
 
 	public:
-		Asset::Ptr GetAsset() const { return _asset; }
+		AssetSharedPtr GetAsset() const { return _asset; }
 
 	private:
-		Asset::Ptr _asset;
+		AssetSharedPtr _asset;
 	};
 
 	class AssetLoader final : public Asset
