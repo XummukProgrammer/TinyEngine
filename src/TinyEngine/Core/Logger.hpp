@@ -3,7 +3,7 @@
 
 #include <TinyEngine/Data/Singleton.hpp>
 
-#include <TinyEngine/Data/Serialization/SerializationVisitor.hpp>
+#include <TinyEngine/Data/Serialization/SerializationDefines.hpp>
 
 namespace TinyEngine
 {

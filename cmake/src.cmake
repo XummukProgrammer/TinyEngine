@@ -19,6 +19,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Data/Singleton.hpp
 	src/TinyEngine/Data/Serialization/Serialization.hpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.hpp
+	src/TinyEngine/Data/Serialization/SerializationDefines.hpp
 	src/TinyEngine/Data/Serialization/XmlArchive.hpp
 	src/TinyEngine/Data/Factory.hpp
 	src/TinyEngine/Core/Assets/Asset.hpp

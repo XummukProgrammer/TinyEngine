@@ -1,7 +1,7 @@
 ﻿#ifndef _ASSET_HEADER_
 #define _ASSET_HEADER_
 
-#include <TinyEngine/Data/Serialization/SerializationVisitor.hpp>
+#include <TinyEngine/Data/Serialization/SerializationDefines.hpp>
 
 #include <memory>
 

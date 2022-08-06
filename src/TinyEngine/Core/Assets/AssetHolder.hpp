@@ -3,7 +3,7 @@
 
 #include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Core/Assets/Asset.hpp>
-#include <TinyEngine/Data/Serialization/SerializationVisitor.hpp>
+#include <TinyEngine/Data/Serialization/SerializationDefines.hpp>
 
 #include <memory>
 
