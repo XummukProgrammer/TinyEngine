@@ -1,12 +1,13 @@
 ﻿#ifndef _SFML_RENDER_HEADER_
 #define _SFML_RENDER_HEADER_
 
-#include <TinyEngine/Render/Render.hpp>
+#include <TinyEngine/Render/Point.hpp>
+#include <TinyEngine/Render/Rect.hpp>
+#include <TinyEngine/Render/IRenderObject.hpp>
+#include <TinyEngine/Render/IRenderWindow.hpp>
+#include <TinyEngine/Render/RenderWindowSettings.hpp>
 
 #include <SFML/Graphics.hpp>
-
-#include <memory>
-#include <list>
 
 namespace TinyEngine
 {

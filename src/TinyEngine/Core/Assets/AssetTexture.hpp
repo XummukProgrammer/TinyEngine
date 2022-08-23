@@ -4,6 +4,8 @@
 #include <TinyEngine/Core/Assets/Asset.hpp>
 #include <TinyEngine/Render/Render.hpp>
 
+#include <TinyEngine/Render/Texture.hpp>
+
 #include <SFML/Graphics.hpp>
 
 #include <string>

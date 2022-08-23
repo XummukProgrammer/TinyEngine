@@ -8,6 +8,14 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Constants.hpp
 	src/TinyEngine/Core/Forwards.hpp
 	src/TinyEngine/Render/Render.hpp
+	src/TinyEngine/Render/IRenderObject.hpp
+	src/TinyEngine/Render/IRenderWindow.hpp
+	src/TinyEngine/Render/Point.hpp
+	src/TinyEngine/Render/Rect.hpp
+	src/TinyEngine/Render/RenderLayer.hpp
+	src/TinyEngine/Render/RenderLayers.hpp
+	src/TinyEngine/Render/RenderWindowSettings.hpp
+	src/TinyEngine/Render/Texture.hpp
 	src/TinyEngine/Render/SfmlRender.hpp
 	src/TinyEngine/Gui/Gui.hpp
 	src/TinyEngine/Gui/SfmlGuiDelegate.hpp
@@ -37,6 +45,14 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Constants.cpp
 	src/TinyEngine/Core/Forwards.cpp
 	src/TinyEngine/Render/Render.cpp
+	src/TinyEngine/Render/IRenderObject.cpp
+	src/TinyEngine/Render/IRenderWindow.cpp
+	src/TinyEngine/Render/Point.cpp
+	src/TinyEngine/Render/Rect.cpp
+	src/TinyEngine/Render/RenderLayer.cpp
+	src/TinyEngine/Render/RenderLayers.cpp
+	src/TinyEngine/Render/RenderWindowSettings.cpp
+	src/TinyEngine/Render/Texture.cpp
 	src/TinyEngine/Render/SfmlRender.cpp
 	src/TinyEngine/Gui/Gui.cpp
 	src/TinyEngine/Gui/SfmlGuiDelegate.cpp

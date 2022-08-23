@@ -4,6 +4,8 @@
 #include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Data/Singleton.hpp>
 
+#include <TinyEngine/Render/RenderWindowSettings.hpp>
+
 namespace TinyEngine
 {
 	class ApplicationDelegate
