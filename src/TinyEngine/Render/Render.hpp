@@ -73,30 +73,6 @@ namespace TinyEngine
 		virtual void Update(float deltaTime) = 0;
 	};
 
-	class RenderObjectBuilder
-	{
-	public:
-		RenderObjectBuilder() = default;
-		~RenderObjectBuilder() = default;
-
-	public:
-		RenderObjectBuilder& SetTexture(std::string_view assetId);
-		RenderObjectBuilder& SetTextureRect(const Rect& rectangle);
-		RenderObjectBuilder& SetPosition(const PointF& position);
-		RenderObjectBuilder& SetScale(const PointF& factors);
-		RenderObjectBuilder& SetRotation(float rotation);
-		virtual RenderObjectBuilder& Create() = 0;
-		virtual IRenderObjectSharedPtr GetPtr() const = 0;
-		RenderObjectBuilder& SetToLayer(int layerId);
-
-	protected:
-		std::string _textureAssetId;
-		Rect _rectangle { 0, 0, 32, 32 };
-		PointF _position { 0, 0 };
-		PointF _factors { 1.f, 1.f };
-		float _rotation = 0;
-	};
-
 	class IRenderWindow
 	{
 	public:

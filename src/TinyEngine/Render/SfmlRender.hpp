@@ -56,20 +56,6 @@ namespace TinyEngine
 		sf::Sprite _sprite;
 	};
 
-	class SfmlRenderObjectBuilder final : public RenderObjectBuilder
-	{
-	public:
-		SfmlRenderObjectBuilder() = default;
-		~SfmlRenderObjectBuilder() = default;
-
-	public:
-		RenderObjectBuilder& Create() override;
-		IRenderObjectSharedPtr GetPtr() const override;
-
-	private:
-		SfmlRenderObjectSharedPtr _object;
-	};
-
 	class SfmlRenderWindow final : public IRenderWindow
 	{
 	public:

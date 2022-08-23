@@ -59,23 +59,6 @@ namespace TinyEngine
 		return _sprite.getGlobalBounds().intersects(SfmlRenderUtils::RectToSfRect(rectangle));
 	}
 
-	RenderObjectBuilder& SfmlRenderObjectBuilder::Create()
-	{
-		_object = std::make_shared<SfmlRenderObject>();
-		_object->SetTexture(_textureAssetId);
-		_object->SetTextureRect(_rectangle);
-		_object->SetPosition(_position);
-		_object->SetScale(_factors);
-		_object->SetRotation(_rotation);
-
-		return *this;
-	}
-
-	IRenderObjectSharedPtr SfmlRenderObjectBuilder::GetPtr() const
-	{
-		return _object;
-	}
-
 	void SfmlRenderWindow::Create(const RenderWindowSettings& windowSettings)
 	{
 		_windowPtr = std::make_unique<sf::RenderWindow>(sf::VideoMode(windowSettings.width, windowSettings.height), windowSettings.title);
