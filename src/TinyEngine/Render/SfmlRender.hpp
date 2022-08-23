@@ -7,6 +7,8 @@
 #include <TinyEngine/Render/IRenderWindow.hpp>
 #include <TinyEngine/Render/RenderWindowSettings.hpp>
 
+#ifdef TINY_ENGINE_USE_SFML
+
 #include <SFML/Graphics.hpp>
 
 namespace TinyEngine
@@ -91,5 +93,7 @@ namespace TinyEngine
 		sf::Time _deltaTime;
 	};
 }
+
+#endif
 
 #endif // _SFML_RENDER_HEADER_

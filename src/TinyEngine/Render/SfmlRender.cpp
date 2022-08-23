@@ -2,6 +2,8 @@
 
 #include <TinyEngine/Gui/SfmlGuiDelegate.hpp>
 
+#ifdef TINY_ENGINE_USE_SFML
+
 namespace TinyEngine
 {
 	void SfmlRenderObject::Update(float deltaTime)
@@ -122,3 +124,5 @@ namespace TinyEngine
 		_deltaTime = _clock.restart();
 	}
 }
+
+#endif
