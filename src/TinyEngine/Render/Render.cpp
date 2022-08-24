@@ -2,7 +2,7 @@
 
 #include <TinyEngine/Render/IRenderObject.hpp>
 #include <TinyEngine/Render/IRenderWindow.hpp>
-#include <TinyEngine/Render/SfmlRender.hpp>
+#include <TinyEngine/Render/Sfml/SfmlRender.hpp>
 
 #include <TinyEngine/Gui/Gui.hpp>
 

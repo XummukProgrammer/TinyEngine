@@ -1,6 +1,6 @@
 ﻿#include "SfmlGuiDelegate.hpp"
 
-#include <TinyEngine/Render/SfmlRender.hpp>
+#include <TinyEngine/Render/Sfml/SfmlRender.hpp>
 
 #include "imgui.h"
 #include "imgui-SFML.h"
