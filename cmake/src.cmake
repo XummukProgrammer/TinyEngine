@@ -27,11 +27,15 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Gui/Widgets/GuiLabelWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiWindowWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiMenuBarWidget.hpp
+	src/TinyEngine/Gui/Widgets/GuiProjectWidget.hpp
 	src/TinyEngine/Data/Singleton.hpp
 	src/TinyEngine/Data/Serialization/Serialization.hpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.hpp
 	src/TinyEngine/Data/Serialization/SerializationDefines.hpp
 	src/TinyEngine/Data/Serialization/XmlArchive.hpp
+	src/TinyEngine/Data/Properties/Properties.hpp
+	src/TinyEngine/Data/Properties/IProperty.hpp
+	src/TinyEngine/Data/Properties/IntProperty.hpp
 	src/TinyEngine/Data/Factory.hpp
 	src/TinyEngine/Core/Assets/Asset.hpp
 	src/TinyEngine/Core/Assets/AssetHolder.hpp
@@ -67,10 +71,14 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Gui/Widgets/GuiLabelWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiWindowWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiMenuBarWidget.cpp
+	src/TinyEngine/Gui/Widgets/GuiProjectWidget.cpp
 	src/TinyEngine/Data/Singleton.cpp
 	src/TinyEngine/Data/Serialization/Serialization.cpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.cpp
 	src/TinyEngine/Data/Serialization/XmlArchive.cpp
+	src/TinyEngine/Data/Properties/Properties.cpp
+	src/TinyEngine/Data/Properties/IProperty.cpp
+	src/TinyEngine/Data/Properties/IntProperty.cpp
 	src/TinyEngine/Data/Factory.cpp
 	src/TinyEngine/Core/Assets/Asset.cpp
 	src/TinyEngine/Core/Assets/AssetHolder.cpp

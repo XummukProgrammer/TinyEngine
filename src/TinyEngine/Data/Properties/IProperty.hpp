@@ -1,0 +1,9 @@
+﻿#ifndef _INTERFACE_PROPERTY_HEADER_
+#define _INTERFACE_PROPERTY_HEADER_
+
+namespace TinyEngine
+{
+	
+}
+
+#endif // _INTERFACE_PROPERTY_HEADER_

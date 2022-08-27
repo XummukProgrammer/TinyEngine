@@ -17,6 +17,12 @@ namespace TinyEngine
 		_widgets[std::string{id}] = widget;
 	}
 
+	void GuiWidgetContainer::AddWidget(GuiWidgetSharedPtr widget)
+	{
+		std::string id = "widget_" + std::to_string(_widgets.size());
+		AddWidget(id, widget);
+	}
+
 	bool GuiWidgetContainer::HasWidget(std::string_view id) const
 	{
 		return _widgets.find(std::string{id}) != _widgets.end();
