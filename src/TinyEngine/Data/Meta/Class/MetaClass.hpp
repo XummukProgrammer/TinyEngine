@@ -2,7 +2,6 @@
 #define _META_CLASS_HEADER_
 
 #include <TinyEngine/Data/Meta/Members/MetaMembers.hpp>
-#include <TinyEngine/Data/Meta/Members/MetaIntMember.hpp>
 
 #include <string>
 
@@ -27,21 +26,5 @@ namespace TinyEngine
 		MetaMembers _members;
 	};
 }
-
-#define META_CLASS(className) \
-	const std::string GetName() const override { return #className; } \
-	static std::string GetStaticName() { return #className; }
-
-#define META_CLASS_MEMBERS_BEGIN \
-	public: \
-		void OnLoad() override \
-		{
-
-#define META_CLASS_MEMBERS_END \
-		} \
-	private:
-
-#define META_CLASS_INT_MEMBER_WRAPPER(field, name, description) \
-	GetMembers().AddMember(std::make_shared<TinyEngine::MetaIntMemberWrapper>(name, description, field))
 
 #endif // _META_CLASS_HEADER_

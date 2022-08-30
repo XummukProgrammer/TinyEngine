@@ -39,6 +39,8 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Data/Meta/Members/IMetaMember.hpp
 	src/TinyEngine/Data/Meta/Members/MetaMembers.hpp
 	src/TinyEngine/Data/Meta/Class/MetaClass.hpp
+	src/TinyEngine/Data/Meta/MetaDefines.hpp
+	src/TinyEngine/Data/Meta/MetaVisitor.hpp
 	src/TinyEngine/Data/Factory.hpp
 	src/TinyEngine/Core/Assets/Asset.hpp
 	src/TinyEngine/Core/Assets/AssetHolder.hpp
@@ -85,6 +87,8 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Data/Meta/Members/IMetaMember.cpp
 	src/TinyEngine/Data/Meta/Members/MetaMembers.cpp
 	src/TinyEngine/Data/Meta/Class/MetaClass.cpp
+	src/TinyEngine/Data/Meta/MetaDefines.cpp
+	src/TinyEngine/Data/Meta/MetaVisitor.cpp
 	src/TinyEngine/Data/Factory.cpp
 	src/TinyEngine/Core/Assets/Asset.cpp
 	src/TinyEngine/Core/Assets/AssetHolder.cpp
