@@ -1,5 +1,7 @@
 ﻿#include "GuiMenuBarWidget.hpp"
 
+#include <TinyEngine/Render/IRenderWindow.hpp>
+
 namespace TinyEngine
 {
 	GuiMenuBarWidgetSharedPtr GuiMenuBarWidget::Create()
@@ -10,6 +12,8 @@ namespace TinyEngine
 
 	void GuiMenuBarWidget::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
 	{
+		GuiWidget::Draw(deltaTime, renderWindowPtr);
+
 		if (ImGui::BeginMenuBar())
 		{
 			for (const auto& menu : _menus)

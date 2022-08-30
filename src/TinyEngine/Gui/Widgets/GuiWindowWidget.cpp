@@ -1,5 +1,7 @@
 ﻿#include "GuiWindowWidget.hpp"
 
+#include <TinyEngine/Render/IRenderWindow.hpp>
+
 namespace TinyEngine
 {
 	GuiWindowWidgetSharedPtr GuiWindowWidget::Create(std::string_view name)
@@ -11,6 +13,8 @@ namespace TinyEngine
 
 	void GuiWindowWidget::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
 	{
+		GuiWidget::Draw(deltaTime, renderWindowPtr);
+
 		BeginWindow();
 
 		EachWidgets([deltaTime, renderWindowPtr](std::string_view id, GuiWidgetSharedPtr widgetPtr)

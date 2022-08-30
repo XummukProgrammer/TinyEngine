@@ -13,6 +13,13 @@ namespace TinyEngine
 
 	public:
 		static GuiProjectWidgetSharedPtr Create();
+
+	public:
+		void Load();
+
+	private:
+		void OnCreate();
+		void OnLoad();
 	};
 }
 

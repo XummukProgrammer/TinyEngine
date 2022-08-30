@@ -1,5 +1,7 @@
 ﻿#include "GuiLabelWidget.hpp"
 
+#include <TinyEngine/Render/IRenderWindow.hpp>
+
 namespace TinyEngine
 {
 	GuiLabelWidgetSharedPtr GuiLabelWidget::Create(std::string_view text)
@@ -25,6 +27,8 @@ namespace TinyEngine
 
 	void GuiLabelWidget::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
 	{
+		GuiWidget::Draw(deltaTime, renderWindowPtr);
+
 		if (_isDisabled)
 		{
 			ImGui::TextDisabled(_text.c_str());
