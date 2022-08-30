@@ -79,6 +79,7 @@ namespace TinyEngine
 	TINY_ENGINE_FORWARD_CLASS(MetaIntMemberWrapper)
 	TINY_ENGINE_FORWARD_CLASS(MetaIntMember)
 	TINY_ENGINE_FORWARD_CLASS(MetaMembers)
+	TINY_ENGINE_FORWARD_CLASS(MetaClass)
 }
 
 #endif // _FORWARDS_HEADER_
