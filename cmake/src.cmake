@@ -35,9 +35,9 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Data/Serialization/SerializationVisitor.hpp
 	src/TinyEngine/Data/Serialization/SerializationDefines.hpp
 	src/TinyEngine/Data/Serialization/XmlArchive.hpp
-	src/TinyEngine/Data/Properties/Properties.hpp
-	src/TinyEngine/Data/Properties/IProperty.hpp
-	src/TinyEngine/Data/Properties/IntProperty.hpp
+	src/TinyEngine/Data/Meta/Members/MetaIntMember.hpp
+	src/TinyEngine/Data/Meta/Members/IMetaMember.hpp
+	src/TinyEngine/Data/Meta/Members/MetaMembers.hpp
 	src/TinyEngine/Data/Factory.hpp
 	src/TinyEngine/Core/Assets/Asset.hpp
 	src/TinyEngine/Core/Assets/AssetHolder.hpp
@@ -80,9 +80,9 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Data/Serialization/Serialization.cpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.cpp
 	src/TinyEngine/Data/Serialization/XmlArchive.cpp
-	src/TinyEngine/Data/Properties/Properties.cpp
-	src/TinyEngine/Data/Properties/IProperty.cpp
-	src/TinyEngine/Data/Properties/IntProperty.cpp
+	src/TinyEngine/Data/Meta/Members/MetaIntMember.cpp
+	src/TinyEngine/Data/Meta/Members/IMetaMember.cpp
+	src/TinyEngine/Data/Meta/Members/MetaMembers.cpp
 	src/TinyEngine/Data/Factory.cpp
 	src/TinyEngine/Core/Assets/Asset.cpp
 	src/TinyEngine/Core/Assets/AssetHolder.cpp

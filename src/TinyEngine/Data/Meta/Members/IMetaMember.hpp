@@ -1,5 +1,5 @@
-﻿#ifndef _INTERFACE_PROPERTY_HEADER_
-#define _INTERFACE_PROPERTY_HEADER_
+﻿#ifndef _INTERFACE_META_MEMBER_HEADER_
+#define _INTERFACE_META_MEMBER_HEADER_
 
 #include <TinyEngine/Core/Forwards.hpp>
 
@@ -7,11 +7,11 @@
 
 namespace TinyEngine
 {
-	class PropertyData
+	class MetaMemberData
 	{
 	public:
-		PropertyData(std::string_view name, std::string_view description);
-		virtual ~PropertyData() = default;
+		MetaMemberData(std::string_view name, std::string_view description);
+		virtual ~MetaMemberData() = default;
 
 	public:
 		const std::string& GetName() const { return _name; }
@@ -22,11 +22,11 @@ namespace TinyEngine
 		std::string _description;
 	};
 
-	class IProperty : public PropertyData
+	class IMetaMember : public MetaMemberData
 	{
 	public:
-		IProperty(std::string_view name, std::string_view description);
-		virtual ~IProperty() = default;
+		IMetaMember(std::string_view name, std::string_view description);
+		virtual ~IMetaMember() = default;
 
 	public:
 		virtual void LoadFromArchive(InputArchivePtr archive) = 0;
@@ -36,4 +36,4 @@ namespace TinyEngine
 	};
 }
 
-#endif // _INTERFACE_PROPERTY_HEADER_
+#endif // _INTERFACE_META_MEMBER_HEADER_

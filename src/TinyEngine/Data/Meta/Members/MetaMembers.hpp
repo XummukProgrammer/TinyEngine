@@ -9,18 +9,18 @@
 
 namespace TinyEngine
 {
-	class Properties final
+	class MetaMembers final
 	{
 	public:
-		using OnForEach = std::function<void(std::string_view, IPropertySharedPtr)>;
+		using OnForEach = std::function<void(std::string_view, IMetaMemberSharedPtr)>;
 
 	public:
-		Properties() = default;
-		~Properties() = default;
+		MetaMembers() = default;
+		~MetaMembers() = default;
 
 	public:
-		void AddProperty(IPropertySharedPtr property);
-		IPropertySharedPtr GetProperty(std::string_view id) const;
+		void AddMember(IMetaMemberSharedPtr property);
+		IMetaMemberSharedPtr GetMember(std::string_view id) const;
 
 		void ForEach(const OnForEach& callback) const;
 
@@ -28,7 +28,7 @@ namespace TinyEngine
 		void SaveToArchive(OutputArchivePtr archive);
 
 	private:
-		std::map<std::string, IPropertySharedPtr> _properties;
+		std::map<std::string, IMetaMemberSharedPtr> _members;
 	};
 }
 

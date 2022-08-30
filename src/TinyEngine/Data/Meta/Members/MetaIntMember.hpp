@@ -1,15 +1,15 @@
 ﻿#ifndef _INT_PROPERTY_HEADER_
 #define _INT_PROPERTY_HEADER_
 
-#include <TinyEngine/Data/Properties/IProperty.hpp>
+#include <TinyEngine/Data/Meta/Members/IMetaMember.hpp>
 
 namespace TinyEngine
 {
-	class IntPropertyWrapper : public IProperty
+	class MetaIntMemberWrapper : public IMetaMember
 	{
 	public:
-		IntPropertyWrapper(std::string_view name, std::string_view description, int& value);
-		virtual ~IntPropertyWrapper() = default;
+		MetaIntMemberWrapper(std::string_view name, std::string_view description, int& value);
+		virtual ~MetaIntMemberWrapper() = default;
 
 	public:
 		void LoadFromArchive(InputArchivePtr archive) override;
@@ -21,11 +21,11 @@ namespace TinyEngine
 		int& _value;
 	};
 
-	class IntProperty final : public IntPropertyWrapper
+	class MetaIntMember final : public MetaIntMemberWrapper
 	{
 	public:
-		IntProperty(std::string_view name, std::string_view description);
-		~IntProperty() = default;
+		MetaIntMember(std::string_view name, std::string_view description);
+		~MetaIntMember() = default;
 
 	public:
 		void SetValue(int value) { _value = value; }
