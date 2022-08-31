@@ -32,6 +32,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Gui/Widgets/GuiButtonWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiInputTextWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiCheckboxWidget.hpp
+	src/TinyEngine/Gui/Widgets/GuiInputNumber.hpp
 	src/TinyEngine/Data/Singleton.hpp
 	src/TinyEngine/Data/Serialization/Serialization.hpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.hpp
@@ -83,6 +84,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Gui/Widgets/GuiButtonWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiInputTextWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiCheckboxWidget.cpp
+	src/TinyEngine/Gui/Widgets/GuiInputNumber.cpp
 	src/TinyEngine/Data/Singleton.cpp
 	src/TinyEngine/Data/Serialization/Serialization.cpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.cpp

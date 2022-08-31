@@ -8,6 +8,7 @@
 #include <TinyEngine/Gui/Widgets/GuiProjectWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiWindowWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiCheckboxWidget.hpp>
+#include <TinyEngine/Gui/Widgets/GuiInputNumber.hpp>
 
 #include <string>
 
@@ -31,6 +32,21 @@ namespace TinyEngine
 			auto widget = GuiCheckboxWidget::Create(name, *value, [value](bool flag)
 			{
 				*value = flag;
+			});
+
+			container->AddWidget(name, widget);
+		}
+	};
+
+	template<>
+	class GuiVisitor<int>
+	{
+	public:
+		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, int* value)
+		{
+			auto widget = GuiInputNumber::Create(name, *value, [value](int val)
+			{
+				*value = val;
 			});
 
 			container->AddWidget(name, widget);
