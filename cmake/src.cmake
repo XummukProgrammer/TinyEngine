@@ -35,7 +35,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Data/Serialization/SerializationVisitor.hpp
 	src/TinyEngine/Data/Serialization/SerializationDefines.hpp
 	src/TinyEngine/Data/Serialization/XmlArchive.hpp
-	src/TinyEngine/Data/Meta/Members/MetaIntMember.hpp
+	src/TinyEngine/Data/Meta/Members/MetaDefaultMembers.hpp
 	src/TinyEngine/Data/Meta/Members/IMetaMember.hpp
 	src/TinyEngine/Data/Meta/Members/MetaMembers.hpp
 	src/TinyEngine/Data/Meta/Class/MetaClass.hpp
@@ -83,7 +83,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Data/Serialization/Serialization.cpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.cpp
 	src/TinyEngine/Data/Serialization/XmlArchive.cpp
-	src/TinyEngine/Data/Meta/Members/MetaIntMember.cpp
+	src/TinyEngine/Data/Meta/Members/MetaDefaultMembers.cpp
 	src/TinyEngine/Data/Meta/Members/IMetaMember.cpp
 	src/TinyEngine/Data/Meta/Members/MetaMembers.cpp
 	src/TinyEngine/Data/Meta/Class/MetaClass.cpp

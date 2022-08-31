@@ -3,6 +3,9 @@
 
 #include <TinyEngine/Core/Forwards.hpp>
 
+// TODO: Попробывать тут это включать в будущем ибо данная система вызывает сериализацию.
+// #include <TinyEngine/Data/Serialization/SerializationDefines.hpp>
+
 #include <string>
 
 namespace TinyEngine
@@ -35,5 +38,62 @@ namespace TinyEngine
 		virtual void GuiDraw(IRenderWindowSharedPtr window) = 0;
 	};
 }
+
+#define TINY_ENGINE_DEFAULT_MEMBER_HEADER(className, type, defaultValue, setValueModifType) \
+	class className ## Wrapper : public IMetaMember \
+	{ \
+	public: \
+		className ## Wrapper(std::string_view name, std::string_view description, type& value); \
+		virtual ~className ## Wrapper() = default; \
+	\
+	public: \
+		void LoadFromArchive(InputArchivePtr archive) override; \
+		void SaveToArchive(OutputArchivePtr archive) override; \
+		\
+		void GuiDraw(IRenderWindowSharedPtr window) override; \
+	\
+	private: \
+		type& _value; \
+	}; \
+	\
+	class className final : public className ## Wrapper \
+	{ \
+	public: \
+		className(std::string_view name, std::string_view description); \
+		~className() = default; \
+	\
+	public: \
+		void SetValue(type setValueModifType value) { _value = value; } \
+		type GetValue() const { return _value; } \
+	\
+	private: \
+		type _value = defaultValue; \
+	};
+
+#define TINY_ENGINE_DEFAULT_MEMBER_IMPL(className, type) \
+	className ## Wrapper::className ## Wrapper(std::string_view name, std::string_view description, type& value) \
+		: IMetaMember(name, description) \
+		, _value(value) \
+	{ \
+	} \
+	\
+	void className ## Wrapper::LoadFromArchive(InputArchivePtr archive) \
+	{ \
+		SerializationVisitor<type>::Load(archive, GetName(), &_value); \
+	} \
+	\
+	void className ## Wrapper::SaveToArchive(OutputArchivePtr archive) \
+	{ \
+		SerializationVisitor<type>::Save(archive, GetName(), &_value); \
+	} \
+	\
+	void className ## Wrapper::GuiDraw(IRenderWindowSharedPtr window) \
+	{ \
+	} \
+	\
+	className::className(std::string_view name, std::string_view description) \
+		: className ## Wrapper(name, description, _value) \
+	{ \
+	}
 
 #endif // _INTERFACE_META_MEMBER_HEADER_
