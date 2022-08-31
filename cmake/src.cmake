@@ -57,25 +57,14 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Logger.cpp
 	src/TinyEngine/Core/Debug.cpp
 	src/TinyEngine/Core/FileSystem.cpp
-	src/TinyEngine/Core/Constants.cpp
-	src/TinyEngine/Core/Forwards.cpp
 	src/TinyEngine/Render/Render.cpp
-	src/TinyEngine/Render/IRenderObject.cpp
-	src/TinyEngine/Render/IRenderWindow.cpp
-	src/TinyEngine/Render/Point.cpp
-	src/TinyEngine/Render/Rect.cpp
 	src/TinyEngine/Render/RenderLayer.cpp
 	src/TinyEngine/Render/RenderLayers.cpp
-	src/TinyEngine/Render/RenderWindowSettings.cpp
-	src/TinyEngine/Render/Texture.cpp
-	src/TinyEngine/Render/Sfml/SfmlRender.cpp
 	src/TinyEngine/Render/Sfml/SfmlRenderObject.cpp
 	src/TinyEngine/Render/Sfml/SfmlRenderUtils.cpp
 	src/TinyEngine/Render/Sfml/SfmlRenderWindow.cpp
 	src/TinyEngine/Gui/Gui.cpp
-	src/TinyEngine/Gui/GuiVisitor.cpp
 	src/TinyEngine/Gui/SfmlGuiDelegate.cpp
-	src/TinyEngine/Gui/GuiWidget.cpp
 	src/TinyEngine/Gui/GuiWidgetContainer.cpp
 	src/TinyEngine/Gui/Widgets/GuiLabelWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiWindowWidget.cpp
@@ -85,17 +74,12 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Gui/Widgets/GuiInputTextWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiCheckboxWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiInputNumber.cpp
-	src/TinyEngine/Data/Singleton.cpp
 	src/TinyEngine/Data/Serialization/Serialization.cpp
-	src/TinyEngine/Data/Serialization/SerializationVisitor.cpp
 	src/TinyEngine/Data/Serialization/XmlArchive.cpp
 	src/TinyEngine/Data/Meta/Members/MetaDefaultMembers.cpp
 	src/TinyEngine/Data/Meta/Members/IMetaMember.cpp
 	src/TinyEngine/Data/Meta/Members/MetaMembers.cpp
 	src/TinyEngine/Data/Meta/Class/MetaClass.cpp
-	src/TinyEngine/Data/Meta/MetaDefines.cpp
-	src/TinyEngine/Data/Meta/MetaVisitor.cpp
-	src/TinyEngine/Data/Factory.cpp
 	src/TinyEngine/Core/Assets/Asset.cpp
 	src/TinyEngine/Core/Assets/AssetHolder.cpp
 	src/TinyEngine/Core/Assets/AssetLoader.cpp
