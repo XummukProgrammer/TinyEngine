@@ -9,17 +9,17 @@
 
 namespace TinyEngine
 {
-	class GuiInputNumber final : public GuiWidget
+	class GuiInputNumberWidget final : public GuiWidget
 	{
 	public:
 		using OnInputed = std::function<void(int)>;
 
 	public:
-		GuiInputNumber() = default;
-		~GuiInputNumber() = default;
+		GuiInputNumberWidget() = default;
+		~GuiInputNumberWidget() = default;
 
 	public:
-		static GuiInputNumberSharedPtr Create(std::string_view title, int value, const OnInputed& callback);
+		static GuiInputNumberWidgetSharedPtr Create(std::string_view title, int value, const OnInputed& callback);
 
 	public:
 		void SetTitle(std::string_view title) { _title = title; }

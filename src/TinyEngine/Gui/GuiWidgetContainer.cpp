@@ -14,6 +14,7 @@ namespace TinyEngine
 
 	void GuiWidgetContainer::AddWidget(std::string_view id, GuiWidgetSharedPtr widget)
 	{
+		// TODO: Доработать сортировку виджетов
 		_widgets[std::string{id}] = widget;
 	}
 

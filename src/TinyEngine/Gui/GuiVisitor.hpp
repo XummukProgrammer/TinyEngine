@@ -1,14 +1,13 @@
 ﻿#ifndef _GUI_VISITOR_HEADER_
 #define _GUI_VISITOR_HEADER_
 
+#include <TinyEngine/Gui/GuiWidgetContainer.hpp>
 #include <TinyEngine/Gui/Widgets/GuiButtonWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiInputTextWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiLabelWidget.hpp>
-#include <TinyEngine/Gui/Widgets/GuiMenuBarWidget.hpp>
-#include <TinyEngine/Gui/Widgets/GuiProjectWidget.hpp>
-#include <TinyEngine/Gui/Widgets/GuiWindowWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiCheckboxWidget.hpp>
-#include <TinyEngine/Gui/Widgets/GuiInputNumber.hpp>
+#include <TinyEngine/Gui/Widgets/GuiInputNumberWidget.hpp>
+#include <TinyEngine/Gui/Widgets/GuiInputFloatWidget.hpp>
 
 #include <string>
 
@@ -44,7 +43,22 @@ namespace TinyEngine
 	public:
 		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, int* value)
 		{
-			auto widget = GuiInputNumber::Create(name, *value, [value](int val)
+			auto widget = GuiInputNumberWidget::Create(name, *value, [value](int val)
+			{
+				*value = val;
+			});
+
+			container->AddWidget(name, widget);
+		}
+	};
+
+	template<>
+	class GuiVisitor<float>
+	{
+	public:
+		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, float* value)
+		{
+			auto widget = GuiInputFloatWidget::Create(name, *value, [value](float val)
 			{
 				*value = val;
 			});

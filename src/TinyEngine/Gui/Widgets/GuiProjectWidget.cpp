@@ -4,7 +4,8 @@
 #include <TinyEngine/Gui/Widgets/GuiButtonWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiInputTextWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiCheckboxWidget.hpp>
-#include <TinyEngine/Gui/Widgets/GuiInputNumber.hpp>
+#include <TinyEngine/Gui/Widgets/GuiInputNumberWidget.hpp>
+#include <TinyEngine/Gui/Widgets/GuiInputFloatWidget.hpp>
 
 #include <TinyEngine/Core/Logger.hpp>
 
@@ -27,7 +28,8 @@ namespace TinyEngine
         AddWidget("CreateButton", GuiButtonWidget::Create("Create Project", std::bind(&GuiProjectWidget::OnCreate, this)));
         AddWidget("LoadButton", GuiButtonWidget::Create("Load Project", std::bind(&GuiProjectWidget::OnLoad, this)));
         AddWidget("Title", GuiInputTextWidget::Create("Title", {}));
-        AddWidget("TestNumber", GuiInputNumber::Create("Title", 0, {}));
+        AddWidget("TestNumber", GuiInputNumberWidget::Create("Number", 0, {}));
+        AddWidget("TestFloat", GuiInputFloatWidget::Create("Float", 0, {}));
     }
 
     void GuiProjectWidget::OnCreate()
