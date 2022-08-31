@@ -20,7 +20,8 @@ namespace TinyEngine
 		MetaMembers& GetMembers() { return _members; }
 		const MetaMembers& GetConstMembers() const { return _members; }
 
-		virtual void OnLoad() = 0;
+		// Временно без = 0, после перевода сериализации на новую систему вернуть 0 обратно.
+		virtual void OnLoad() {}
 
 	private:
 		MetaMembers _members;

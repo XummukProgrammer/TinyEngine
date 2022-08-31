@@ -10,6 +10,7 @@
 #include <TinyEngine/Core/Assets/AssetTexture.hpp>
 #include <TinyEngine/Render/Render.hpp>
 #include <TinyEngine/Gui/Gui.hpp>
+#include <TinyEngine/Data/Factory.hpp>
 
 namespace TinyEngine
 {

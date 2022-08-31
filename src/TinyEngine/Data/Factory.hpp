@@ -13,21 +13,10 @@
 
 namespace TinyEngine
 {
-	class IMetaInfo
-	{
-	public:
-		IMetaInfo() = default;
-		virtual ~IMetaInfo() = default;
-
-	public:
-		virtual std::string GetName() const = 0;
-		static std::string GetMetaName() { return ""; }
-	};
-
 	class Factory : public Singleton<Factory>
 	{
 	public:
-		using CreateCallback = std::function<IMetaInfoSharedPtr()>;
+		using CreateCallback = std::function<MetaClassSharedPtr()>;
 
 	public:
 		Factory() = default;
@@ -50,7 +39,7 @@ namespace TinyEngine
 	template<typename T>
 	void Factory::Register()
 	{
-		_createCallbacks[T::GetMetaName()] = []()
+		_createCallbacks[T::GetStaticName()] = []()
 		{
 			return std::make_shared<T>();
 		};
@@ -87,11 +76,5 @@ namespace TinyEngine
 		return types;
 	}
 }
-
-#define TINY_ENGINE_META(cls) \
-	public: \
-		std::string GetName() const override { return #cls; } \
-		static std::string GetMetaName() { return #cls; } \
-	private:
 
 #endif // _FACTORY_HEADER_

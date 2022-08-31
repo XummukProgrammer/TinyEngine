@@ -3,6 +3,8 @@
 
 #include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Data/Serialization/Serialization.hpp>
+#include <TinyEngine/Data/Factory.hpp>
+#include <TinyEngine/Data/Meta/Class/MetaClass.hpp>
 
 #include <string>
 #include <vector>

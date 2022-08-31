@@ -3,14 +3,14 @@
 
 #include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Core/Constants.hpp>
-#include <TinyEngine/Data/Factory.hpp>
+#include <TinyEngine/Data/Meta/MetaDefines.hpp>
 
 #include <string>
 #include <memory>
 
 namespace TinyEngine
 {
-	class ISerializable : public TinyEngine::IMetaInfo
+	class ISerializable : public TinyEngine::MetaClass
 	{
 	public:
 		ISerializable() = default;
