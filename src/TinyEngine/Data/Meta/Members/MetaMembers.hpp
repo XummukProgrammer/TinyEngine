@@ -29,6 +29,8 @@ namespace TinyEngine
 
 		void AddGuiWidgetsToContainer(GuiWidgetContainerPtr container);
 
+		bool IsEmpty() const { return _members.empty(); }
+
 	private:
 		std::map<std::string, IMetaMemberSharedPtr> _members;
 	};

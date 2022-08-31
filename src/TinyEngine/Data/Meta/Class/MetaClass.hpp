@@ -17,13 +17,19 @@ namespace TinyEngine
 		virtual const std::string GetName() const = 0;
 		static std::string GetStaticName() { return ""; }
 
-		MetaMembers& GetMembers() { return _members; }
+		MetaMembers& GetMembers(bool isCheckLoaded = true);
 		const MetaMembers& GetConstMembers() const { return _members; }
 
+		bool IsLoaded() const;
+
+		void AddGuiWidgetsToContainer(GuiWidgetContainerPtr container);
+
+	protected:
 		// Временно без = 0, после перевода сериализации на новую систему вернуть 0 обратно.
 		virtual void OnLoad() {}
 
-		void AddGuiWidgetsToContainer(GuiWidgetContainerPtr container);
+	private:
+		void TryLoad();
 
 	private:
 		MetaMembers _members;

@@ -15,7 +15,7 @@ namespace TinyEngine
 	private:
 
 #define TINY_ENGINE_META_CLASS_MEMBERS_BEGIN \
-	public: \
+	protected: \
 		void OnLoad() override \
 		{
 
@@ -24,6 +24,6 @@ namespace TinyEngine
 	private:
 
 #define TINY_ENGINE_META_CLASS_MEMBER_WRAPPER(field, name, description) \
-	TinyEngine::MetaVisitor<decltype(field)>::AddMemberWrapper(&GetMembers(), &field, name, description)
+	TinyEngine::MetaVisitor<decltype(field)>::AddMemberWrapper(&GetMembers(false), &field, name, description)
 
 #endif // _META_DEFINES_HEADER_
