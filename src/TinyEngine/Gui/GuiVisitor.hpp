@@ -7,6 +7,7 @@
 #include <TinyEngine/Gui/Widgets/GuiMenuBarWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiProjectWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiWindowWidget.hpp>
+#include <TinyEngine/Gui/Widgets/GuiCheckboxWidget.hpp>
 
 #include <string>
 
@@ -18,6 +19,21 @@ namespace TinyEngine
 	public:
 		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, T* value)
 		{
+		}
+	};
+
+	template<>
+	class GuiVisitor<bool>
+	{
+	public:
+		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, bool* value)
+		{
+			auto widget = GuiCheckboxWidget::Create(name, *value, [value](bool flag)
+			{
+				*value = flag;
+			});
+
+			container->AddWidget(name, widget);
 		}
 	};
 

@@ -3,6 +3,7 @@
 #include <TinyEngine/Gui/Widgets/GuiLabelWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiButtonWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiInputTextWidget.hpp>
+#include <TinyEngine/Gui/Widgets/GuiCheckboxWidget.hpp>
 
 #include <TinyEngine/Core/Logger.hpp>
 
