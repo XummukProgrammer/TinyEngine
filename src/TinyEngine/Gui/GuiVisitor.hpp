@@ -20,6 +20,21 @@ namespace TinyEngine
 		{
 		}
 	};
+
+	template<>
+	class GuiVisitor<std::string>
+	{
+	public:
+		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, std::string* value)
+		{
+			auto widget = GuiInputTextWidget::Create(name, [value](std::string_view text)
+			{
+				*value = text;
+			});
+			
+			container->AddWidget(name, widget);
+		}
+	};
 }
 
 #endif // _GUI_VISITOR_HEADER_
