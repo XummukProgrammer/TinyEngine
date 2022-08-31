@@ -19,13 +19,15 @@ namespace TinyEngine
 		~MetaMembers() = default;
 
 	public:
-		void AddMember(IMetaMemberSharedPtr property);
+		void AddMember(IMetaMemberSharedPtr member);
 		IMetaMemberSharedPtr GetMember(std::string_view id) const;
 
 		void ForEach(const OnForEach& callback) const;
 
 		void LoadFromArchive(InputArchivePtr archive);
 		void SaveToArchive(OutputArchivePtr archive);
+
+		void AddGuiWidgetsToContainer(GuiWidgetContainerPtr container);
 
 	private:
 		std::map<std::string, IMetaMemberSharedPtr> _members;

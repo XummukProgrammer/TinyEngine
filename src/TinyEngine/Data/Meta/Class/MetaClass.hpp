@@ -23,6 +23,8 @@ namespace TinyEngine
 		// Временно без = 0, после перевода сериализации на новую систему вернуть 0 обратно.
 		virtual void OnLoad() {}
 
+		void AddGuiWidgetsToContainer(GuiWidgetContainerPtr container);
+
 	private:
 		MetaMembers _members;
 	};

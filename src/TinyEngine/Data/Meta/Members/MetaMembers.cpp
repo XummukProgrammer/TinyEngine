@@ -1,12 +1,13 @@
 ﻿#include "MetaMembers.hpp"
 
 #include <TinyEngine/Data/Meta/Members/IMetaMember.hpp>
+#include <TinyEngine/Gui/GuiWidgetContainer.hpp>
 
 namespace TinyEngine
 {
-	void MetaMembers::AddMember(IMetaMemberSharedPtr property)
+	void MetaMembers::AddMember(IMetaMemberSharedPtr member)
 	{
-		_members[property->GetName()] = property;
+		_members[member->GetName()] = member;
 	}
 
 	IMetaMemberSharedPtr MetaMembers::GetMember(std::string_view id) const
@@ -26,25 +27,34 @@ namespace TinyEngine
 			return;
 		}
 
-		for (const auto& [ id, property ] : _members)
+		for (const auto& [ id, member ] : _members)
 		{
-			callback(id, property);
+			callback(id, member);
 		}
 	}
 
 	void MetaMembers::LoadFromArchive(InputArchivePtr archive)
 	{
-		ForEach([archive](std::string_view id, IMetaMemberSharedPtr property)
+		ForEach([archive](std::string_view id, IMetaMemberSharedPtr member)
 		{
-			property->LoadFromArchive(archive);
+			member->LoadFromArchive(archive);
 		});
 	}
 
 	void MetaMembers::SaveToArchive(OutputArchivePtr archive)
 	{
-		ForEach([archive](std::string_view id, IMetaMemberSharedPtr property)
+		ForEach([archive](std::string_view id, IMetaMemberSharedPtr member)
 		{
-			property->SaveToArchive(archive);
+			member->SaveToArchive(archive);
+		});
+	}
+
+	void MetaMembers::AddGuiWidgetsToContainer(GuiWidgetContainerPtr container)
+	{
+		ForEach([container](std::string_view id, IMetaMemberSharedPtr member)
+		{
+			// TODO: Передавать не Nullptr, а RenderWindow (Или вообще убрать передачу).
+			member->AddGuiWidget(container, nullptr);
 		});
 	}
 }

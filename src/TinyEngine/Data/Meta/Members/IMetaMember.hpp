@@ -6,6 +6,8 @@
 // TODO: Попробывать тут это включать в будущем ибо данная система вызывает сериализацию.
 // #include <TinyEngine/Data/Serialization/SerializationDefines.hpp>
 
+#include <TinyEngine/Gui/GuiVisitor.hpp>
+
 #include <string>
 
 namespace TinyEngine
@@ -35,7 +37,7 @@ namespace TinyEngine
 		virtual void LoadFromArchive(InputArchivePtr archive) = 0;
 		virtual void SaveToArchive(OutputArchivePtr archive) = 0;
 
-		virtual void GuiDraw(IRenderWindowSharedPtr window) = 0;
+		virtual void AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window) = 0;
 	};
 }
 
@@ -50,7 +52,7 @@ namespace TinyEngine
 		void LoadFromArchive(InputArchivePtr archive) override; \
 		void SaveToArchive(OutputArchivePtr archive) override; \
 		\
-		void GuiDraw(IRenderWindowSharedPtr window) override; \
+		void AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window) override; \
 	\
 	private: \
 		type& _value; \
@@ -87,8 +89,9 @@ namespace TinyEngine
 		SerializationVisitor<type>::Save(archive, GetName(), &_value); \
 	} \
 	\
-	void className ## Wrapper::GuiDraw(IRenderWindowSharedPtr window) \
+	void className ## Wrapper::AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window) \
 	{ \
+		GuiVisitor<type>::AddWidget(container, GetName(), GetDescription(), &_value); \
 	} \
 	\
 	className::className(std::string_view name, std::string_view description) \

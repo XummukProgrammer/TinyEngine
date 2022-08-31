@@ -21,6 +21,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Render/Sfml/SfmlRenderUtils.hpp
 	src/TinyEngine/Render/Sfml/SfmlRenderWindow.hpp
 	src/TinyEngine/Gui/Gui.hpp
+	src/TinyEngine/Gui/GuiVisitor.hpp
 	src/TinyEngine/Gui/SfmlGuiDelegate.hpp
 	src/TinyEngine/Gui/GuiWidget.hpp
 	src/TinyEngine/Gui/GuiWidgetContainer.hpp
@@ -70,6 +71,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Render/Sfml/SfmlRenderUtils.cpp
 	src/TinyEngine/Render/Sfml/SfmlRenderWindow.cpp
 	src/TinyEngine/Gui/Gui.cpp
+	src/TinyEngine/Gui/GuiVisitor.cpp
 	src/TinyEngine/Gui/SfmlGuiDelegate.cpp
 	src/TinyEngine/Gui/GuiWidget.cpp
 	src/TinyEngine/Gui/GuiWidgetContainer.cpp
