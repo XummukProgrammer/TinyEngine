@@ -14,8 +14,7 @@ namespace TinyEngine
 
 	void GuiWidgetContainer::AddWidget(std::string_view id, GuiWidgetSharedPtr widget)
 	{
-		// TODO: Доработать сортировку виджетов
-		_widgets[std::string{id}] = widget;
+		_widgets.push_back({ std::string{id}, widget });
 	}
 
 	void GuiWidgetContainer::AddWidget(GuiWidgetSharedPtr widget)
@@ -26,7 +25,14 @@ namespace TinyEngine
 
 	bool GuiWidgetContainer::HasWidget(std::string_view id) const
 	{
-		return _widgets.find(std::string{id}) != _widgets.end();
+		for (const auto& [ widgetId, widget ] : _widgets)
+		{
+			if (widgetId == id)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	void GuiWidgetContainer::EachWidgets(EachWidgetsCallback callback)

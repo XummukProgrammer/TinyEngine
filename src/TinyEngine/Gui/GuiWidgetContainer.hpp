@@ -3,7 +3,7 @@
 
 #include <TinyEngine/Core/Forwards.hpp>
 
-#include <unordered_map>
+#include <vector>
 #include <string>
 #include <memory>
 #include <functional>
@@ -31,17 +31,20 @@ namespace TinyEngine
 		void EachWidgets(EachWidgetsCallback callback);
 
 	private:
-		std::unordered_map<std::string, GuiWidgetSharedPtr> _widgets;
+		std::vector<std::pair<std::string, GuiWidgetSharedPtr>> _widgets;
 	};
 
 	template<typename T>
 	std::shared_ptr<T> GuiWidgetContainer::GetWidget(std::string_view id) const
 	{
-		auto it = _widgets.find(std::string{id});
-		if (it != _widgets.end())
+		for (const auto& [ widgetId, widget ] : _widgets)
 		{
-			return std::dynamic_pointer_cast<T>(it->second);
+			if (widgetId == id)
+			{
+				return std::dynamic_pointer_cast<T>(widget);
+			}
 		}
+
 		return nullptr;
 	}
 }
