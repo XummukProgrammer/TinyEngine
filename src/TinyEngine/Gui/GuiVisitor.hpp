@@ -10,6 +10,7 @@
 #include <TinyEngine/Gui/Widgets/GuiInputFloatWidget.hpp>
 
 #include <string>
+#include <vector>
 
 namespace TinyEngine
 {
@@ -79,6 +80,15 @@ namespace TinyEngine
 			});
 			
 			container->AddWidget(name, widget);
+		}
+	};
+
+	template<typename T>
+	class GuiVisitor<std::vector<T>>
+	{
+	public:
+		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, std::vector<T>* value)
+		{
 		}
 	};
 }

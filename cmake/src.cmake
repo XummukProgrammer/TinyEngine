@@ -35,6 +35,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Gui/Widgets/GuiInputNumberWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiInputFloatWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiPropertiesWidget.hpp
+	src/TinyEngine/Gui/Widgets/GuiInputVectorWidget.hpp
 	src/TinyEngine/Data/Singleton.hpp
 	src/TinyEngine/Data/Serialization/Serialization.hpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.hpp
@@ -43,6 +44,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Data/Meta/Members/MetaDefaultMembers.hpp
 	src/TinyEngine/Data/Meta/Members/IMetaMember.hpp
 	src/TinyEngine/Data/Meta/Members/MetaMembers.hpp
+	src/TinyEngine/Data/Meta/Members/MetaVectorMember.hpp
 	src/TinyEngine/Data/Meta/Class/MetaClass.hpp
 	src/TinyEngine/Data/Meta/MetaDefines.hpp
 	src/TinyEngine/Data/Meta/MetaVisitor.hpp
@@ -78,11 +80,13 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Gui/Widgets/GuiInputNumberWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiInputFloatWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiPropertiesWidget.cpp
+	src/TinyEngine/Gui/Widgets/GuiInputVectorWidget.cpp
 	src/TinyEngine/Data/Serialization/Serialization.cpp
 	src/TinyEngine/Data/Serialization/XmlArchive.cpp
 	src/TinyEngine/Data/Meta/Members/MetaDefaultMembers.cpp
 	src/TinyEngine/Data/Meta/Members/IMetaMember.cpp
 	src/TinyEngine/Data/Meta/Members/MetaMembers.cpp
+	src/TinyEngine/Data/Meta/Members/MetaVectorMember.cpp
 	src/TinyEngine/Data/Meta/Class/MetaClass.cpp
 	src/TinyEngine/Core/Assets/Asset.cpp
 	src/TinyEngine/Core/Assets/AssetHolder.cpp

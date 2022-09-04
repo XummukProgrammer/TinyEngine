@@ -3,7 +3,7 @@
 
 #include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Core/Constants.hpp>
-#include <TinyEngine/Data/Meta/MetaDefines.hpp>
+#include <TinyEngine/Data/Meta/Class/MetaClass.hpp>
 
 #include <string>
 #include <memory>

@@ -2,6 +2,7 @@
 #define _ASSET_HEADER_
 
 #include <TinyEngine/Data/Serialization/SerializationDefines.hpp>
+#include <TinyEngine/Data/Meta/MetaDefines.hpp>
 
 #include <memory>
 

@@ -4,6 +4,7 @@
 #include <TinyEngine/Data/Singleton.hpp>
 
 #include <TinyEngine/Data/Serialization/SerializationDefines.hpp>
+#include <TinyEngine/Data/Meta/MetaDefines.hpp>
 
 namespace TinyEngine
 {

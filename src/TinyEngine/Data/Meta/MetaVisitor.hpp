@@ -3,8 +3,10 @@
 
 #include <TinyEngine/Data/Meta/Members/MetaMembers.hpp>
 #include <TinyEngine/Data/Meta/Members/MetaDefaultMembers.hpp>
+#include <TinyEngine/Data/Meta/Members/MetaVectorMember.hpp>
 
 #include <string>
+#include <vector>
 
 namespace TinyEngine
 {
@@ -54,6 +56,16 @@ namespace TinyEngine
 		static void AddMemberWrapper(MetaMembersPtr members, std::string* value, std::string_view name, std::string_view description)
 		{
 			members->AddMember(std::make_shared<TinyEngine::MetaStringMemberWrapper>(name, description, *value));
+		}
+	};
+
+	template<typename T>
+	class MetaVisitor<std::vector<T>>
+	{
+	public:
+		static void AddMemberWrapper(MetaMembersPtr members, std::vector<T>* value, std::string_view name, std::string_view description)
+		{
+			members->AddMember(std::make_shared<TinyEngine::MetaVectorMemberWrapper<T>>(name, description, *value));
 		}
 	};
 }
