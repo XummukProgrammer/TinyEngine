@@ -3,7 +3,7 @@
 
 #include <TinyEngine/Core/Forwards.hpp>
 
-#include <map>
+#include <vector>
 #include <string>
 #include <functional>
 
@@ -32,7 +32,7 @@ namespace TinyEngine
 		bool IsEmpty() const { return _members.empty(); }
 
 	private:
-		std::map<std::string, IMetaMemberSharedPtr> _members;
+		std::vector<std::pair<std::string, IMetaMemberSharedPtr>> _members;
 	};
 }
 

@@ -7,16 +7,19 @@ namespace TinyEngine
 {
 	void MetaMembers::AddMember(IMetaMemberSharedPtr member)
 	{
-		_members[member->GetName()] = member;
+		_members.push_back({ member->GetName(), member });
 	}
 
 	IMetaMemberSharedPtr MetaMembers::GetMember(std::string_view id) const
 	{
-		auto it = _members.find(std::string{id});
-		if (it != _members.end())
+		for (const auto& [ memberId, member ] : _members)
 		{
-			return it->second;
+			if (memberId == id)
+			{
+				return member;
+			}
 		}
+
 		return nullptr;
 	}
 

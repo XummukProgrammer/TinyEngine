@@ -34,6 +34,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Gui/Widgets/GuiCheckboxWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiInputNumberWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiInputFloatWidget.hpp
+	src/TinyEngine/Gui/Widgets/GuiPropertiesWidget.hpp
 	src/TinyEngine/Data/Singleton.hpp
 	src/TinyEngine/Data/Serialization/Serialization.hpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.hpp
@@ -76,6 +77,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Gui/Widgets/GuiCheckboxWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiInputNumberWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiInputFloatWidget.cpp
+	src/TinyEngine/Gui/Widgets/GuiPropertiesWidget.cpp
 	src/TinyEngine/Data/Serialization/Serialization.cpp
 	src/TinyEngine/Data/Serialization/XmlArchive.cpp
 	src/TinyEngine/Data/Meta/Members/MetaDefaultMembers.cpp
