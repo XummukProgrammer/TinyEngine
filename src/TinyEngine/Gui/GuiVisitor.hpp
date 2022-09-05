@@ -12,6 +12,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 
 namespace TinyEngine
 {
@@ -108,6 +109,15 @@ namespace TinyEngine
 			}
 
 			container->AddWidget(name, widget);
+		}
+	};
+
+	template<typename K, typename V>
+	class GuiVisitor<std::map<K, V>>
+	{
+	public:
+		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, std::map<K, V>* values)
+		{
 		}
 	};
 }

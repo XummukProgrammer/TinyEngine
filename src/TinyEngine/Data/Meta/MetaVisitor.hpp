@@ -4,9 +4,11 @@
 #include <TinyEngine/Data/Meta/Members/MetaMembers.hpp>
 #include <TinyEngine/Data/Meta/Members/MetaDefaultMembers.hpp>
 #include <TinyEngine/Data/Meta/Members/MetaVectorMember.hpp>
+#include <TinyEngine/Data/Meta/Members/MetaMapMember.hpp>
 
 #include <string>
 #include <vector>
+#include <map>
 
 namespace TinyEngine
 {
@@ -63,9 +65,19 @@ namespace TinyEngine
 	class MetaVisitor<std::vector<T>>
 	{
 	public:
-		static void AddMemberWrapper(MetaMembersPtr members, std::vector<T>* value, std::string_view name, std::string_view description)
+		static void AddMemberWrapper(MetaMembersPtr members, std::vector<T>* values, std::string_view name, std::string_view description)
 		{
-			members->AddMember(std::make_shared<TinyEngine::MetaVectorMemberWrapper<T>>(name, description, *value));
+			members->AddMember(std::make_shared<TinyEngine::MetaVectorMemberWrapper<T>>(name, description, *values));
+		}
+	};
+
+	template<typename K, typename V>
+	class MetaVisitor<std::map<K, V>>
+	{
+	public:
+		static void AddMemberWrapper(MetaMembersPtr members, std::map<K, V>* values, std::string_view name, std::string_view description)
+		{
+			members->AddMember(std::make_shared<TinyEngine::MetaMapMemberWrapper<K, V>>(name, description, *values));
 		}
 	};
 }
