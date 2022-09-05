@@ -6,12 +6,14 @@
 #include <TinyEngine/Gui/GuiWidgetContainer.hpp>
 
 #include <string>
+#include <functional>
 
 namespace TinyEngine
 {
 	class GuiInputVectorWidget final : public GuiWidget, public GuiWidgetContainer
 	{
 	public:
+		using ValueAdd = std::function<void()>;
 
 	public:
 		GuiInputVectorWidget() = default;
@@ -24,11 +26,21 @@ namespace TinyEngine
 		void SetName(std::string_view name) { _name = name; }
 		const std::string& GetName() const { return _name; }
 
+		void SetOnValueAddCallback(const ValueAdd& callback) { _onValueAddCallback = callback; }
+
+	public:
+		void Load();
+
 	public:
 		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
 
 	private:
+		void OnValueAdd();
+
+	private:
 		std::string _name;
+		bool _isValueAdd = false;
+		ValueAdd _onValueAddCallback;
 	};
 
 }

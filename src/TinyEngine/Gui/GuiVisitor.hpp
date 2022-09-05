@@ -92,6 +92,13 @@ namespace TinyEngine
 		{
 			auto widget = GuiInputVectorWidget::Create(name);
 
+			widget->SetOnValueAddCallback([widget, values]()
+			{
+				values->push_back(T());
+				auto& back = values->back();
+				GuiVisitor<T>::AddWidget(widget.get(), std::to_string(static_cast<int>(values->size()) - 1), "", &back);
+			});
+
 			int index = 0;
 			auto& valuesRef = *values;
 			for (auto& value : valuesRef)
