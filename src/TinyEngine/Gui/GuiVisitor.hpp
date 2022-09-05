@@ -8,6 +8,7 @@
 #include <TinyEngine/Gui/Widgets/GuiCheckboxWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiInputNumberWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiInputFloatWidget.hpp>
+#include <TinyEngine/Gui/Widgets/GuiInputVectorWidget.hpp>
 
 #include <string>
 #include <vector>
@@ -87,8 +88,19 @@ namespace TinyEngine
 	class GuiVisitor<std::vector<T>>
 	{
 	public:
-		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, std::vector<T>* value)
+		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, std::vector<T>* values)
 		{
+			auto widget = GuiInputVectorWidget::Create(name);
+
+			int index = 0;
+			auto& valuesRef = *values;
+			for (auto& value : valuesRef)
+			{
+				GuiVisitor<T>::AddWidget(widget.get(), std::to_string(index), "", &value);
+				++index;
+			}
+
+			container->AddWidget(name, widget);
 		}
 	};
 }
