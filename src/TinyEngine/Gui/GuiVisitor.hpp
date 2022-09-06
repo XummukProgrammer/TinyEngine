@@ -122,9 +122,9 @@ namespace TinyEngine
 			auto widget = GuiInputMapWidget::Create();
 
 			auto& valuesRef = *values;
-			for (const auto& [ key, value ] : valuesRef)
+			for (auto& [ key, value ] : valuesRef)
 			{
-				GuiVisitor<V>::AddWidget(widget.get(), key, "", &valuesRef[key]);
+				GuiVisitor<V>::AddWidget(widget.get(), key, "", &value);
 			}
 
 			container->AddWidget(name, widget);
