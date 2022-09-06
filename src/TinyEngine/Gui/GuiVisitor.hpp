@@ -9,6 +9,7 @@
 #include <TinyEngine/Gui/Widgets/GuiInputNumberWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiInputFloatWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiInputVectorWidget.hpp>
+#include <TinyEngine/Gui/Widgets/GuiInputMapWidget.hpp>
 
 #include <string>
 #include <vector>
@@ -76,7 +77,7 @@ namespace TinyEngine
 	public:
 		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, std::string* value)
 		{
-			auto widget = GuiInputTextWidget::Create(name, [value](std::string_view text)
+			auto widget = GuiInputTextWidget::Create(name, *value, [value](std::string_view text)
 			{
 				*value = text;
 			});
@@ -118,6 +119,15 @@ namespace TinyEngine
 	public:
 		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, std::map<K, V>* values)
 		{
+			auto widget = GuiInputMapWidget::Create();
+
+			auto& valuesRef = *values;
+			for (const auto& [ key, value ] : valuesRef)
+			{
+				GuiVisitor<V>::AddWidget(widget.get(), key, "", &valuesRef[key]);
+			}
+
+			container->AddWidget(name, widget);
 		}
 	};
 }

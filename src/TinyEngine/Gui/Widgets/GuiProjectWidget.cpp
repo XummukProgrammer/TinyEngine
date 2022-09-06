@@ -27,7 +27,7 @@ namespace TinyEngine
 
         AddWidget("CreateButton", GuiButtonWidget::Create("Create Project", std::bind(&GuiProjectWidget::OnCreate, this)));
         AddWidget("LoadButton", GuiButtonWidget::Create("Load Project", std::bind(&GuiProjectWidget::OnLoad, this)));
-        AddWidget("Title", GuiInputTextWidget::Create("Title", {}));
+        AddWidget("Title", GuiInputTextWidget::Create("Title", "Title", {}));
         AddWidget("TestNumber", GuiInputNumberWidget::Create("Number", 0, {}));
         AddWidget("TestFloat", GuiInputFloatWidget::Create("Float", 0, {}));
     }

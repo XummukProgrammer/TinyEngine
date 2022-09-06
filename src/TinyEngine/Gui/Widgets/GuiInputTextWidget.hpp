@@ -19,12 +19,14 @@ namespace TinyEngine
 		~GuiInputTextWidget() = default;
 
 	public:
-		static GuiInputTextWidgetSharedPtr Create(std::string_view title, const OnInputed& callback);
+		static GuiInputTextWidgetSharedPtr Create(std::string_view title, std::string_view text, const OnInputed& callback);
 
 	public:
 		void SetTitle(std::string_view title) { _title = title; }
 		const std::string& GetTitle() const { return _title; }
 		
+		void SetText(std::string_view text);
+
 		void SetOnInputedCallback(const OnInputed& callback) { _onInputedCallback = callback; }
 
 	public:
