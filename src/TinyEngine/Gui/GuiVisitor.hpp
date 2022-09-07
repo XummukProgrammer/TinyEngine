@@ -1,6 +1,7 @@
 ﻿#ifndef _GUI_VISITOR_HEADER_
 #define _GUI_VISITOR_HEADER_
 
+#include <TinyEngine/Data/Meta/Class/MetaClass.hpp>
 #include <TinyEngine/Gui/GuiWidgetContainer.hpp>
 #include <TinyEngine/Gui/Widgets/GuiButtonWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiInputTextWidget.hpp>
@@ -10,6 +11,7 @@
 #include <TinyEngine/Gui/Widgets/GuiInputFloatWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiInputVectorWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiInputMapWidget.hpp>
+#include <TinyEngine/Gui/Widgets/GuiMetaClassWidget.hpp>
 
 #include <string>
 #include <vector>
@@ -23,6 +25,10 @@ namespace TinyEngine
 	public:
 		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, T* value)
 		{
+			if (std::is_base_of_v<MetaClass, T>)
+			{
+				GuiVisitor<MetaClass>::AddWidget(container, name, description, value);
+			}
 		}
 	};
 
@@ -134,6 +140,18 @@ namespace TinyEngine
 				GuiVisitor<V>::AddWidget(widget.get(), key, "", &value);
 			}
 
+			container->AddWidget(name, widget);
+		}
+	};
+
+	template<>
+	class GuiVisitor<MetaClass>
+	{
+	public:
+		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, MetaClass* value)
+		{
+			auto widget = GuiMetaClassWidget::Create(name);
+			value->AddGuiWidgetsToContainer(widget.get());
 			container->AddWidget(name, widget);
 		}
 	};

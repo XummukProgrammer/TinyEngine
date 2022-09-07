@@ -24,6 +24,6 @@ namespace TinyEngine
 
 	void MetaClassMemberWrapper::AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window)
 	{
-		//_metaClass->AddGuiWidgetsToContainer(container);
+		GuiVisitor<MetaClass>::AddWidget(container, GetName(), GetDescription(), _metaClass);
 	}
 }
