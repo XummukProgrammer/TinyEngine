@@ -122,6 +122,13 @@ namespace TinyEngine
 			auto widget = GuiInputMapWidget::Create();
 
 			auto& valuesRef = *values;
+
+			widget->SetOnValueAddCallback([widget, &valuesRef](std::string_view key)
+			{
+				valuesRef[std::string{key}] = V{};
+				GuiVisitor<V>::AddWidget(widget.get(), key, "", &valuesRef[std::string{key}]);
+			});
+
 			for (auto& [ key, value ] : valuesRef)
 			{
 				GuiVisitor<V>::AddWidget(widget.get(), key, "", &value);

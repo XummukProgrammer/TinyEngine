@@ -18,6 +18,11 @@ namespace TinyEngine
         strcpy_s(_buffer, sizeof(_buffer), text.data());
     }
 
+    std::string GuiInputTextWidget::GetText() const
+    {
+        return std::string{_buffer};
+    }
+
     void GuiInputTextWidget::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
     {
         if (ImGui::InputText(_title.c_str(), _buffer, sizeof(_buffer)) && _onInputedCallback)

@@ -26,6 +26,7 @@ namespace TinyEngine
 		const std::string& GetTitle() const { return _title; }
 		
 		void SetText(std::string_view text);
+		std::string GetText() const;
 
 		void SetOnInputedCallback(const OnInputed& callback) { _onInputedCallback = callback; }
 
