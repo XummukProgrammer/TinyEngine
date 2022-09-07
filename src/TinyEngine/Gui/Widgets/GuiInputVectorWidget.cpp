@@ -21,21 +21,24 @@ namespace TinyEngine
     {
         GuiWidget::Draw(deltaTime, renderWindowPtr);
 
-        ImGui::Text(_name.c_str());
-
-        EachWidgets([deltaTime, renderWindowPtr](std::string_view id, GuiWidgetSharedPtr widgetPtr)
-		{
-			widgetPtr->Draw(deltaTime, renderWindowPtr);
-		});
-
-        if (_isValueAdd)
+        if (ImGui::TreeNode(_name.c_str()))
         {
-            if (_onValueAddCallback)
+            EachWidgets([deltaTime, renderWindowPtr](std::string_view id, GuiWidgetSharedPtr widgetPtr)
+		    {
+			    widgetPtr->Draw(deltaTime, renderWindowPtr);
+		    });
+
+            if (_isValueAdd)
             {
-                _onValueAddCallback();
+                if (_onValueAddCallback)
+                {
+                    _onValueAddCallback();
+                }
+
+                _isValueAdd = false;
             }
 
-            _isValueAdd = false;
+            ImGui::TreePop();
         }
     }
 

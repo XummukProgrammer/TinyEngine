@@ -20,10 +20,13 @@ namespace TinyEngine
 		~GuiInputMapWidget() = default;
 
 	public:
-		static GuiInputMapWidgetSharedPtr Create();
+		static GuiInputMapWidgetSharedPtr Create(std::string_view name);
 
 	public:
 		void Load();
+
+		void SetName(std::string_view name) { _name = name; }
+		const std::string& GetName() const { return _name; }
 
 		void SetOnValueAddCallback(const ValueAdd& callback) { _onValueAddCallback = callback; }
 
@@ -34,6 +37,7 @@ namespace TinyEngine
 		void OnAddValue();
 
 	private:
+		std::string _name;
 		ValueAdd _onValueAddCallback;
 		bool _isValueAdd = false;
 		GuiInputTextWidgetSharedPtr _inputKeyWidget;

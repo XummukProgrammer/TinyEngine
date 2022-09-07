@@ -5,9 +5,10 @@
 
 namespace TinyEngine
 {
-    GuiInputMapWidgetSharedPtr GuiInputMapWidget::Create()
+    GuiInputMapWidgetSharedPtr GuiInputMapWidget::Create(std::string_view name)
     {
         auto widget = std::make_shared<GuiInputMapWidget>();
+        widget->SetName(name);
         widget->Load();
         return widget;
     }
@@ -24,16 +25,21 @@ namespace TinyEngine
     {
         GuiWidget::Draw(deltaTime, renderWindowPtr);
 
-        EachWidgets([deltaTime, renderWindowPtr](std::string_view id, GuiWidgetSharedPtr widgetPtr)
-		{
-			widgetPtr->Draw(deltaTime, renderWindowPtr);
-		});
-
-        if (_isValueAdd && _onValueAddCallback)
+        if (ImGui::TreeNode(_name.c_str()))
         {
-            _onValueAddCallback(_inputKeyWidget->GetText());
-            _inputKeyWidget->SetText("");
-            _isValueAdd = false;
+            EachWidgets([deltaTime, renderWindowPtr](std::string_view id, GuiWidgetSharedPtr widgetPtr)
+		    {
+			    widgetPtr->Draw(deltaTime, renderWindowPtr);
+		    });
+
+            if (_isValueAdd && _onValueAddCallback)
+            {
+                _onValueAddCallback(_inputKeyWidget->GetText());
+                _inputKeyWidget->SetText("");
+                _isValueAdd = false;
+            }
+
+            ImGui::TreePop();
         }
     }
 

@@ -119,7 +119,7 @@ namespace TinyEngine
 	public:
 		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, std::map<K, V>* values)
 		{
-			auto widget = GuiInputMapWidget::Create();
+			auto widget = GuiInputMapWidget::Create(name);
 
 			auto& valuesRef = *values;
 

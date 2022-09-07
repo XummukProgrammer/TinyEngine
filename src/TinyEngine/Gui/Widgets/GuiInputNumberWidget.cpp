@@ -14,7 +14,8 @@ namespace TinyEngine
 	void GuiInputNumberWidget::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
 	{
 		ImGui::PushID(_title.c_str());
-		if (ImGui::InputInt(_title.c_str(), &_value) && _onInputedCallback)
+		
+		if (ImGui::InputScalar(_title.c_str(), ImGuiDataType_S32, &_value) && _onInputedCallback)
 		{
 			_onInputedCallback(_value);
 		}
