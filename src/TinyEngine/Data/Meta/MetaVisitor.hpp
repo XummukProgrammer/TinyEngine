@@ -1,10 +1,12 @@
 ﻿#ifndef _META_VISITOR_HEADER_
 #define _META_VISITOR_HEADER_
 
+#include <TinyEngine/Data/Meta/Class/MetaClass.hpp>
 #include <TinyEngine/Data/Meta/Members/MetaMembers.hpp>
 #include <TinyEngine/Data/Meta/Members/MetaDefaultMembers.hpp>
 #include <TinyEngine/Data/Meta/Members/MetaVectorMember.hpp>
 #include <TinyEngine/Data/Meta/Members/MetaMapMember.hpp>
+#include <TinyEngine/Data/Meta/Members/MetaClassMember.hpp>
 
 #include <string>
 #include <vector>
@@ -16,7 +18,13 @@ namespace TinyEngine
 	class MetaVisitor
 	{
 	public:
-		static void AddMemberWrapper(MetaMembersPtr members, T* value, std::string_view name, std::string_view description) {}
+		static void AddMemberWrapper(MetaMembersPtr members, T* value, std::string_view name, std::string_view description) 
+		{
+			if (std::is_base_of_v<MetaClass, T>)
+			{
+				MetaVisitor<MetaClass>::AddMemberWrapper(members, value, name, description);
+			}
+		}
 	};
 
 	// TODO: Много повторяющегося кода, может сделать макросы?
@@ -78,6 +86,16 @@ namespace TinyEngine
 		static void AddMemberWrapper(MetaMembersPtr members, std::map<K, V>* values, std::string_view name, std::string_view description)
 		{
 			members->AddMember(std::make_shared<TinyEngine::MetaMapMemberWrapper<K, V>>(name, description, *values));
+		}
+	};
+
+	template<>
+	class MetaVisitor<MetaClass>
+	{
+	public:
+		static void AddMemberWrapper(MetaMembersPtr members, MetaClass* value, std::string_view name, std::string_view description)
+		{
+			members->AddMember(std::make_shared<TinyEngine::MetaClassMemberWrapper>(name, description, value));
 		}
 	};
 }

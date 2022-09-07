@@ -102,6 +102,7 @@ namespace TinyEngine
 		}
 	};
 
+	// ISerializable - устарело, необходимо удалить со всеми вытекающими дефайнами.
 	template<>
 	class SerializationVisitor<ISerializable>
 	{
@@ -120,6 +121,29 @@ namespace TinyEngine
 			if (archive->ToSection(id))
 			{
 				data->SerializationProcess(archive);
+				archive->EndSection();
+			}
+		}
+	};
+
+	template<>
+	class SerializationVisitor<MetaClass>
+	{
+	public:
+		static void Save(OutputArchivePtr archive, std::string_view id, MetaClassPtr data) 
+		{
+			if (archive->ToSection(id))
+			{
+				data->GetMembers().SaveToArchive(archive);
+				archive->EndSection();
+			}
+		}
+
+		static void Load(InputArchivePtr archive, std::string_view id, MetaClassPtr data) 
+		{
+			if (archive->ToSection(id))
+			{
+				data->GetMembers().LoadFromArchive(archive);
 				archive->EndSection();
 			}
 		}
