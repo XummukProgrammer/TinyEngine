@@ -39,7 +39,7 @@ namespace TinyEngine
 	template<typename T>
 	void Factory::Register()
 	{
-		_createCallbacks[T::GetStaticName()] = []()
+		_createCallbacks[T::GetStaticClassName()] = []()
 		{
 			return std::make_shared<T>();
 		};

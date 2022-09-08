@@ -6,10 +6,10 @@
 #include <TinyEngine/Data/Serialization/XmlArchive.hpp>
 
 #define TINY_ENGINE_SER_BEGIN(cls) \
-	TINY_ENGINE_META_CLASS(cls) \
+	TINY_ENGINE_META_CLASS_BASE(cls) \
 	public: void SerializationProcess(TinyEngine::IArchivePtr archive) override { const bool isSave = dynamic_cast<TinyEngine::OutputArchivePtr>(archive);
 #define TINY_ENGINE_SER_BEGIN_DERIVED(cls, parent) \
-	TINY_ENGINE_META_CLASS(cls) \
+	TINY_ENGINE_META_CLASS_BASE(cls) \
 	public: void SerializationProcess(TinyEngine::IArchivePtr archive) override { \
 	parent::SerializationProcess(archive); \
 	const bool isSave = dynamic_cast<TinyEngine::OutputArchivePtr>(archive);

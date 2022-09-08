@@ -8,22 +8,27 @@ namespace TinyEngine
 {	
 }
 
-#define TINY_ENGINE_META_CLASS(className) \
+#define TINY_ENGINE_META_CLASS_BASE(className) \
 	public: \
-		const std::string GetName() const override { return #className; } \
-		static std::string GetStaticName() { return #className; } \
+		const std::string GetClassName() const override { return #className; } \
+		static std::string GetStaticClassName() { return #className; } \
 	private:
 
-#define TINY_ENGINE_META_CLASS_MEMBERS_BEGIN \
+#define TINY_ENGINE_META_CLASS_BEGIN(className) \
+	TINY_ENGINE_META_CLASS_BASE(className) \
 	protected: \
 		void OnLoad() override \
 		{
 
-#define TINY_ENGINE_META_CLASS_MEMBERS_END \
+#define TINY_ENGINE_META_CLASS_DERIVED_BEGIN(className, parentName) \
+	TINY_ENGINE_META_CLASS_BEGIN(className) \
+			parentName::OnLoad();
+
+#define TINY_ENGINE_META_CLASS_END \
 		} \
 	private:
 
-#define TINY_ENGINE_META_CLASS_MEMBER_WRAPPER(field, name, description) \
+#define TINY_ENGINE_META_CLASS_DELC_MEMBER(field, name, description) \
 	TinyEngine::MetaVisitor<decltype(field)>::AddMemberWrapper(&GetMembers(false), &field, name, description)
 
 #endif // _META_DEFINES_HEADER_

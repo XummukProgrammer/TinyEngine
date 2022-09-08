@@ -269,7 +269,7 @@ namespace TinyEngine
 				{
 					auto rawPointer = data->get();
 
-					std::string type = rawPointer->GetName();
+					std::string type = rawPointer->GetClassName();
 					SerializationVisitor<std::string>::Save(archive, "type", &type);
 
 					SerializationVisitor<T>::Save(archive, "object", rawPointer);

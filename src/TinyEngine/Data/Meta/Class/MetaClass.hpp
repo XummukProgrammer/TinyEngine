@@ -14,8 +14,8 @@ namespace TinyEngine
 		virtual ~MetaClass() = default;
 
 	public:
-		virtual const std::string GetName() const = 0;
-		static std::string GetStaticName() { return ""; }
+		virtual const std::string GetClassName() const = 0;
+		static std::string GetStaticClassName() { return ""; }
 
 		MetaMembers& GetMembers(bool isCheckLoaded = true);
 		const MetaMembers& GetConstMembers() const { return _members; }
