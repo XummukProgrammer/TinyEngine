@@ -14,14 +14,14 @@ namespace TinyEngine
 {
 	class AssetTexture : public Asset
 	{
-		TINY_ENGINE_SER_BEGIN_DERIVED(AssetTexture, Asset)
+		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(AssetTexture, Asset)
 		{
-			TINY_ENGINE_SER_FIELD(_path)
-			TINY_ENGINE_SER_FIELD(_isRepeated)
-			TINY_ENGINE_SER_FIELD(_isSmooth)
-			TINY_ENGINE_SER_FIELD(_isSrgb)
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_path, "_path", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_isRepeated, "_isRepeated", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_isSmooth, "_isSmooth", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_isSrgb, "_isSrgb", "");
 		}
-		TINY_ENGINE_SER_END
+		TINY_ENGINE_META_CLASS_END
 
 	public:
 		AssetTexture() = default;
@@ -45,17 +45,17 @@ namespace TinyEngine
 
 	class AssetSfmlTexture final : public AssetTexture
 	{
-		TINY_ENGINE_SER_BEGIN_DERIVED(AssetSfmlTexture, AssetTexture)
+		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(AssetSfmlTexture, AssetTexture)
 		{
 		}
-		TINY_ENGINE_SER_END
+		TINY_ENGINE_META_CLASS_END
 
 	public:
 		AssetSfmlTexture() = default;
 		~AssetSfmlTexture() = default;
 
 	public:
-		void OnLoad() override;
+		void OnAssetLoad() override;
 
 	public:
 		void LoadTexture(Texture& texture) override;

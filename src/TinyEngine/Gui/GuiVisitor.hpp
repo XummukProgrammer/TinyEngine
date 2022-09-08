@@ -25,7 +25,7 @@ namespace TinyEngine
 	public:
 		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, T* value)
 		{
-			if (std::is_base_of_v<MetaClass, T>)
+			if constexpr (std::is_base_of_v<MetaClass, T>)
 			{
 				GuiVisitor<MetaClass>::AddWidget(container, name, description, value);
 			}

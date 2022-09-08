@@ -8,13 +8,13 @@
 
 namespace TinyEngine
 {
-	class Asset : public ISerializable
+	class Asset : public MetaClass
 	{
-		TINY_ENGINE_SER_BEGIN(Asset)
+		TINY_ENGINE_META_CLASS_BEGIN(Asset)
 		{
-			TINY_ENGINE_SER_FIELD(_id)
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_id, "_id", "");
 		}
-		TINY_ENGINE_SER_END
+		TINY_ENGINE_META_CLASS_END
 
 	public:
 		Asset() = default;
@@ -24,7 +24,7 @@ namespace TinyEngine
 		const std::string& GetId() const;
 
 	public:
-		virtual void OnLoad() {}
+		virtual void OnAssetLoad() {}
 
 	private:
 		std::string _id;

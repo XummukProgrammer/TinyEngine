@@ -4,7 +4,7 @@
 
 namespace TinyEngine
 {
-	void AssetSfmlTexture::OnLoad()
+	void AssetSfmlTexture::OnAssetLoad()
 	{
 		const std::string path = FileSystem::GetInstance()->BuildPath(DirType::Assets, GetPath());
 

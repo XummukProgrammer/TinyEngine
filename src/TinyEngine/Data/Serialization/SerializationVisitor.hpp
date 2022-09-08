@@ -19,11 +19,7 @@ namespace TinyEngine
 	public:
 		static void Save(OutputArchivePtr archive, std::string_view id, T* data) 
 		{
-			if constexpr (std::is_base_of_v<ISerializable, T>)
-			{
-				SerializationVisitor<ISerializable>::Save(archive, id, data);
-			}
-			else if constexpr (std::is_base_of_v<MetaClass, T>)
+			if constexpr (std::is_base_of_v<MetaClass, T>)
 			{
 				SerializationVisitor<MetaClass>::Save(archive, id, data);
 			}
@@ -31,11 +27,7 @@ namespace TinyEngine
 
 		static void Load(InputArchivePtr archive, std::string_view id, T* data) 
 		{
-			if constexpr (std::is_base_of_v<ISerializable, T>)
-			{
-				SerializationVisitor<ISerializable>::Load(archive, id, data);
-			}
-			else if constexpr (std::is_base_of_v<MetaClass, T>)
+			if constexpr (std::is_base_of_v<MetaClass, T>)
 			{
 				SerializationVisitor<MetaClass>::Load(archive, id, data);
 			}
@@ -107,30 +99,6 @@ namespace TinyEngine
 		{
 			archive->ToVariable(id);
 			*data = archive->GetString();
-		}
-	};
-
-	// ISerializable - устарело, необходимо удалить со всеми вытекающими дефайнами.
-	template<>
-	class SerializationVisitor<ISerializable>
-	{
-	public:
-		static void Save(OutputArchivePtr archive, std::string_view id, ISerializablePtr data) 
-		{
-			if (archive->ToSection(id))
-			{
-				data->SerializationProcess(archive);
-				archive->EndSection();
-			}
-		}
-
-		static void Load(InputArchivePtr archive, std::string_view id, ISerializablePtr data) 
-		{
-			if (archive->ToSection(id))
-			{
-				data->SerializationProcess(archive);
-				archive->EndSection();
-			}
 		}
 	};
 

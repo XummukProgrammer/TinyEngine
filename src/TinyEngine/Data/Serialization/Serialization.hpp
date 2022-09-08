@@ -3,23 +3,12 @@
 
 #include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Core/Constants.hpp>
-#include <TinyEngine/Data/Meta/Class/MetaClass.hpp>
 
 #include <string>
 #include <memory>
 
 namespace TinyEngine
 {
-	class ISerializable : public TinyEngine::MetaClass
-	{
-	public:
-		ISerializable() = default;
-		virtual ~ISerializable() = default;
-
-	public:
-		virtual void SerializationProcess(IArchivePtr archive) = 0;
-	};
-
 	class IArchive
 	{
 	public:
@@ -92,11 +81,11 @@ namespace TinyEngine
 	class SerializationUtils
 	{
 	public:
-		static void SaveRoot(OutputArchivePtr archive, ISerializablePtr serializable);
-		static void LoadRoot(InputArchivePtr archive, ISerializablePtr serializable);
+		static void SaveRoot(OutputArchivePtr archive, MetaClassPtr metaClass);
+		static void LoadRoot(InputArchivePtr archive, MetaClassPtr metaClass);
 
-		static void SaveRootToFile(ArchiveFormat format, std::string_view path, ISerializablePtr serializable);
-		static void LoadRootFromFile(ArchiveFormat format, std::string_view path, ISerializablePtr serializable);
+		static void SaveRootToFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass);
+		static void LoadRootFromFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass);
 
 		static OutputArchiveUniquePtr CreateOutputArchive(ArchiveFormat format);
 		static InputArchiveUniquePtr CreateInputArchive(ArchiveFormat format);

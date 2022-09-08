@@ -2,11 +2,11 @@
 
 namespace TinyEngine
 {
-	void AssetHolder::OnLoad()
+	void AssetHolder::OnAssetLoad()
 	{
 		for (const auto& asset : _assets)
 		{
-			asset->OnLoad();
+			asset->OnAssetLoad();
 		}
 	}
 }

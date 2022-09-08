@@ -6,13 +6,13 @@
 
 namespace TinyEngine
 {
-	class AssetSource final : public ISerializable
+	class AssetSource final : public MetaClass
 	{
-		TINY_ENGINE_SER_BEGIN(AssetSource)
+		TINY_ENGINE_META_CLASS_BEGIN(AssetSource)
 		{
-			TINY_ENGINE_SER_FIELD(_asset)
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_asset, "_asset", "");
 		}
-		TINY_ENGINE_SER_END
+		TINY_ENGINE_META_CLASS_END
 
 	public:
 		AssetSource() = default;
@@ -27,11 +27,11 @@ namespace TinyEngine
 
 	class AssetLoader final : public Asset
 	{
-		TINY_ENGINE_SER_BEGIN_DERIVED(AssetLoader, Asset)
+		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(AssetLoader, Asset)
 		{
-			TINY_ENGINE_SER_FIELD(_path)
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_path, "_path", "");
 		}
-		TINY_ENGINE_SER_END
+		TINY_ENGINE_META_CLASS_END
 
 	public:
 		AssetLoader() = default;
@@ -42,7 +42,7 @@ namespace TinyEngine
 		const AssetSource& GetSource() const { return _source; }
 
 	public:
-		void OnLoad() override;
+		void OnAssetLoad() override;
 
 	private:
 		void Create();

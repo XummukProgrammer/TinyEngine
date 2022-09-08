@@ -2,7 +2,7 @@
 
 namespace TinyEngine
 {
-	void AssetLoader::OnLoad()
+	void AssetLoader::OnAssetLoad()
 	{
 		Create();
 	}
@@ -10,6 +10,6 @@ namespace TinyEngine
 	void AssetLoader::Create()
 	{
 		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, _path, &_source);
-		_source.GetAsset()->OnLoad();
+		_source.GetAsset()->OnAssetLoad();
 	}
 }

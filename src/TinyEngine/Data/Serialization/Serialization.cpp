@@ -1,38 +1,39 @@
 ﻿#include "Serialization.hpp"
 
 #include <TinyEngine/Data/Serialization/SerializationVisitor.hpp>
-
 #include <TinyEngine/Data/Serialization/XmlArchive.hpp>
+#include <TinyEngine/Data/Meta/Class/MetaClass.hpp>
+
 
 namespace TinyEngine
 {
-	void SerializationUtils::SaveRoot(OutputArchivePtr archive, ISerializablePtr serializable)
+	void SerializationUtils::SaveRoot(OutputArchivePtr archive, MetaClassPtr metaClass)
 	{
-		TinyEngine::SerializationVisitor<TinyEngine::ISerializable>::Save(archive, "root", serializable);
+		TinyEngine::SerializationVisitor<TinyEngine::MetaClass>::Save(archive, "root", metaClass);
 	}
 
-	void SerializationUtils::LoadRoot(InputArchivePtr archive, ISerializablePtr serializable)
+	void SerializationUtils::LoadRoot(InputArchivePtr archive, MetaClassPtr metaClass)
 	{
-		TinyEngine::SerializationVisitor<TinyEngine::ISerializable>::Load(archive, "root", serializable);
+		TinyEngine::SerializationVisitor<TinyEngine::MetaClass>::Load(archive, "root", metaClass);
 	}
 
-	void SerializationUtils::SaveRootToFile(ArchiveFormat format, std::string_view path, ISerializablePtr serializable)
+	void SerializationUtils::SaveRootToFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass)
 	{
 		if (auto archive = CreateOutputArchive(format))
 		{
 			archive->SetPath(path);
-			SaveRoot(archive.get(), serializable);
+			SaveRoot(archive.get(), metaClass);
 			archive->Save();
 		}
 	}
 
-	void SerializationUtils::LoadRootFromFile(ArchiveFormat format, std::string_view path, ISerializablePtr serializable)
+	void SerializationUtils::LoadRootFromFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass)
 	{
 		if (auto archive = CreateInputArchive(format))
 		{
 			archive->SetPath(path);
 			archive->Load();
-			LoadRoot(archive.get(), serializable);
+			LoadRoot(archive.get(), metaClass);
 		}
 	}
 

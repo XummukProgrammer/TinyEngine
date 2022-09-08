@@ -21,7 +21,7 @@ namespace TinyEngine
 	public:
 		static void AddMemberWrapper(MetaMembersPtr members, T* value, std::string_view name, std::string_view description) 
 		{
-			if (std::is_base_of_v<MetaClass, T>)
+			if constexpr (std::is_base_of_v<MetaClass, T>)
 			{
 				MetaVisitor<MetaClass>::AddMemberWrapper(members, value, name, description);
 			}

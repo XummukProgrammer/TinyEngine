@@ -3,7 +3,6 @@
 
 #include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Core/Assets/Asset.hpp>
-#include <TinyEngine/Data/Serialization/SerializationDefines.hpp>
 
 #include <memory>
 
@@ -11,11 +10,11 @@ namespace TinyEngine
 {
 	class AssetHolder final : public Asset
 	{
-		TINY_ENGINE_SER_BEGIN_DERIVED(AssetHolder, Asset)
+		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(AssetHolder, Asset)
 		{
-			TINY_ENGINE_SER_FIELD(_assets)
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_assets, "_assets", "");
 		}
-		TINY_ENGINE_SER_END
+		TINY_ENGINE_META_CLASS_END
 			
 	public:
 		using AssetsData = std::vector<AssetSharedPtr>;
@@ -28,7 +27,7 @@ namespace TinyEngine
 		const AssetsData& GetAssets() const { return _assets; }
 
 	public:
-		void OnLoad() override;
+		void OnAssetLoad() override;
 
 	private:
 		AssetsData _assets;

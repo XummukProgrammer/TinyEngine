@@ -8,13 +8,13 @@
 
 namespace TinyEngine
 {
-	class LoggerStacktrace final : public ISerializable
+	class LoggerStacktrace final : public MetaClass
 	{
-		TINY_ENGINE_SER_BEGIN(LoggerStacktrace)
+		TINY_ENGINE_META_CLASS_BEGIN(LoggerStacktrace)
 		{
-			TINY_ENGINE_SER_FIELD(_stacktrace)
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_stacktrace, "Stacktrace", "");
 		}
-		TINY_ENGINE_SER_END
+		TINY_ENGINE_META_CLASS_END
 
 	public:
 		LoggerStacktrace() = default;
@@ -27,17 +27,17 @@ namespace TinyEngine
 		std::string _stacktrace;
 	};
 
-	class LoggerMessage final : public ISerializable
+	class LoggerMessage final : public MetaClass
 	{
-		TINY_ENGINE_SER_BEGIN(LoggerMessage)
+		TINY_ENGINE_META_CLASS_BEGIN(LoggerMessage)
 		{
-			TINY_ENGINE_SER_FIELD(_type)
-			TINY_ENGINE_SER_FIELD(_time)
-			TINY_ENGINE_SER_FIELD(_sender)
-			TINY_ENGINE_SER_FIELD(_message)
-			TINY_ENGINE_SER_FIELD(_stacktrace)
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_type, "Type", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_time, "Time", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_sender, "Sender", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_message, "Message", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_stacktrace, "Stacktrace", "");
 		}
-		TINY_ENGINE_SER_END
+		TINY_ENGINE_META_CLASS_END
 
 	public:
 		LoggerMessage() = default;
@@ -54,13 +54,13 @@ namespace TinyEngine
 		LoggerStacktrace _stacktrace;
 	};
 
-	class LoggerMessages final : public ISerializable
+	class LoggerMessages final : public MetaClass
 	{
-		TINY_ENGINE_SER_BEGIN(LoggerMessages)
+		TINY_ENGINE_META_CLASS_BEGIN(LoggerMessages)
 		{
-			TINY_ENGINE_SER_FIELD(_messages)
+			TINY_ENGINE_META_CLASS_DELC_MEMBER(_messages, "Messages", "");
 		}
-		TINY_ENGINE_SER_END
+		TINY_ENGINE_META_CLASS_END
 
 	public:
 		LoggerMessages() = default;
