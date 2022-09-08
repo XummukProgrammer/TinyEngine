@@ -60,6 +60,9 @@ namespace TinyEngine
 	public:
 		void LoadTexture(Texture& texture) override;
 
+		sf::Texture& GetTexture() { return _texture; }
+		const sf::Texture& GetConstTexture() const { return _texture; }
+
 	private:
 		sf::Texture _texture;
 	};

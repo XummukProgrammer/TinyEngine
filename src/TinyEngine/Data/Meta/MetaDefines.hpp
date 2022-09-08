@@ -10,8 +10,17 @@ namespace TinyEngine
 
 #define TINY_ENGINE_META_CLASS_BASE(className) \
 	public: \
-		const std::string GetClassName() const override { return #className; } \
+		const std::string GetClassName() const override { return GetStaticClassName(); } \
 		static std::string GetStaticClassName() { return #className; } \
+		TinyEngine::MetaClassSharedPtr CreateSharedPtr() const override { return CreateStaticSharedPtr(); } \
+		static TinyEngine::MetaClassSharedPtr CreateStaticSharedPtr() \
+		{ \
+			if constexpr (!std::is_abstract_v<className>) \
+			{ \
+				return std::dynamic_pointer_cast<MetaClass>(std::make_shared<className>()); \
+			} \
+			return nullptr; \
+		} \
 	private:
 
 #define TINY_ENGINE_META_CLASS_BEGIN(className) \

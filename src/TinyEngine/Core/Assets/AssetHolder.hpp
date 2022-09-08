@@ -26,12 +26,29 @@ namespace TinyEngine
 	public:
 		const AssetsData& GetAssets() const { return _assets; }
 
+		template<typename T>
+		T* GetAsset(std::string_view id);
+
 	public:
 		void OnAssetLoad() override;
 
 	private:
 		AssetsData _assets;
 	};
+
+	template<typename T>
+	T* AssetHolder::GetAsset(std::string_view id)
+	{
+		for (const auto& asset : _assets)
+		{
+			if (asset->GetId() == id)
+			{
+				return dynamic_cast<T*>(asset.get());
+			}
+		}
+
+		return nullptr;
+	}
 }
 
 #endif // _ASSET_HOLDER_HEADER_

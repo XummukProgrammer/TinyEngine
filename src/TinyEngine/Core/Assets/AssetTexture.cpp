@@ -18,4 +18,6 @@ namespace TinyEngine
 	{
 		texture.data = &_texture;
 	}
+
+	TINY_ENGINE_META_FACTORY_IMPL(AssetSfmlTexture)
 }

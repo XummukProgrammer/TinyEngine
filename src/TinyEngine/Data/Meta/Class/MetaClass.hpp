@@ -17,6 +17,9 @@ namespace TinyEngine
 		virtual const std::string GetClassName() const = 0;
 		static std::string GetStaticClassName() { return ""; }
 
+		virtual MetaClassSharedPtr CreateSharedPtr() const = 0;
+		static MetaClassSharedPtr CreateStaticSharedPtr() { return nullptr; }
+
 		MetaMembers& GetMembers(bool isCheckLoaded = true);
 		const MetaMembers& GetConstMembers() const { return _members; }
 
@@ -25,8 +28,7 @@ namespace TinyEngine
 		void AddGuiWidgetsToContainer(GuiWidgetContainerPtr container);
 
 	protected:
-		// Временно без = 0, после перевода сериализации на новую систему вернуть 0 обратно.
-		virtual void OnLoad() {}
+		virtual void OnLoad() = 0;
 
 	private:
 		void TryLoad();

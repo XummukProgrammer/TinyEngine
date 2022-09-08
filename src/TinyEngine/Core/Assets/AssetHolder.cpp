@@ -9,4 +9,6 @@ namespace TinyEngine
 			asset->OnAssetLoad();
 		}
 	}
+
+	TINY_ENGINE_META_FACTORY_IMPL(AssetHolder)
 }

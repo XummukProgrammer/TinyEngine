@@ -1,6 +1,8 @@
 ﻿#include "SfmlRenderObject.hpp"
 
 #include <TinyEngine/Render/Sfml/SfmlRenderUtils.hpp>
+#include <TinyEngine/Core/Assets/Assets.hpp>
+#include <TinyEngine/Core/Assets/AssetTexture.hpp>
 
 namespace TinyEngine
 {
@@ -40,8 +42,17 @@ namespace TinyEngine
 
 	void SfmlRenderObject::SetTexture(std::string_view filePath)
 	{
-		// TODO: Get from Asset Manager
-		_sprite.setTexture(sf::Texture());
+		AssetSfmlTexture a;
+		// TODO: Заглушка, реализовать потом правильно!
+		auto texture = Assets::GetInstance()->GetAssetHolder().GetAsset<AssetSfmlTexture>("");
+		if (texture)
+		{
+			_sprite.setTexture(texture->GetTexture());
+		}
+		else
+		{
+			_sprite.setTexture(sf::Texture());
+		}
 	}
 
 	void SfmlRenderObject::SetTextureRect(const Rect& rectangle)

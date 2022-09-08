@@ -16,6 +16,9 @@ namespace TinyEngine
 	public:
 		void LoadFromFile();
 
+		AssetHolder& GetAssetHolder() { return _holder; }
+		const AssetHolder& GetConstAssetHolder() const { return _holder; }
+
 	private:
 		AssetHolder _holder;
 	};

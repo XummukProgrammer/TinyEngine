@@ -12,4 +12,6 @@ namespace TinyEngine
 		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, _path, &_source);
 		_source.GetAsset()->OnAssetLoad();
 	}
+
+	TINY_ENGINE_META_FACTORY_IMPL(AssetLoader)
 }

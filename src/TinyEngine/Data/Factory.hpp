@@ -30,6 +30,9 @@ namespace TinyEngine
 		std::shared_ptr<T> Create(std::string_view id) const;
 
 		template<typename T>
+		bool Has() const;
+
+		template<typename T>
 		std::list<std::string> GetInheritorTypes() const;
 
 	private:
@@ -41,7 +44,7 @@ namespace TinyEngine
 	{
 		_createCallbacks[T::GetStaticClassName()] = []()
 		{
-			return std::make_shared<T>();
+			return T::CreateStaticSharedPtr();
 		};
 	}
 
@@ -55,6 +58,13 @@ namespace TinyEngine
 		}
 
 		return nullptr;
+	}
+
+	template<typename T>
+	bool Factory::Has() const
+	{
+		auto it = _createCallbacks.find(std::string{id});
+		return it != _createCallbacks.end();
 	}
 
 	template<typename T>
@@ -76,5 +86,21 @@ namespace TinyEngine
 		return types;
 	}
 }
+
+// TODO: Не работает! Разобраться почему
+#define TINY_ENGINE_META_FACTORY_IMPL(className) \
+	void MetaFactoryFuncImpl_ ## className(); \
+	struct MetaFactoryStructImpl_ ## className \
+	{ \
+		MetaFactoryStructImpl_ ## className() \
+		{ \
+			MetaFactoryFuncImpl_ ## className(); \
+		} \
+	}; \
+	static MetaFactoryStructImpl_ ## className _metaFactoryStructImpl_ ## className; \
+	void MetaFactoryFuncImpl_ ## className() \
+	{ \
+		TinyEngine::Factory::GetInstance()->Register<className>(); \
+	}
 
 #endif // _FACTORY_HEADER_
