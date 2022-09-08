@@ -12,12 +12,6 @@ namespace TinyEngine
 		_time = time;
 		_sender = sender;
 		_message = message;
-		_stacktrace.Init(stacktrace);
-	}
-
-	void LoggerStacktrace::Init(std::string_view stacktrace)
-	{
-		_stacktrace = stacktrace;
 	}
 
 	void LoggerMessages::AddMessage(const LoggerMessage& message)

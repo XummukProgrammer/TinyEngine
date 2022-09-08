@@ -8,25 +8,6 @@
 
 namespace TinyEngine
 {
-	class LoggerStacktrace final : public MetaClass
-	{
-		TINY_ENGINE_META_CLASS_BEGIN(LoggerStacktrace)
-		{
-			TINY_ENGINE_META_CLASS_DELC_MEMBER(_stacktrace, "Stacktrace", "");
-		}
-		TINY_ENGINE_META_CLASS_END
-
-	public:
-		LoggerStacktrace() = default;
-		~LoggerStacktrace() = default;
-
-	public:
-		void Init(std::string_view stacktrace);
-
-	private:
-		std::string _stacktrace;
-	};
-
 	class LoggerMessage final : public MetaClass
 	{
 		TINY_ENGINE_META_CLASS_BEGIN(LoggerMessage)
@@ -35,7 +16,6 @@ namespace TinyEngine
 			TINY_ENGINE_META_CLASS_DELC_MEMBER(_time, "Time", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER(_sender, "Sender", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER(_message, "Message", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER(_stacktrace, "Stacktrace", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 
@@ -51,7 +31,6 @@ namespace TinyEngine
 		std::string _time;
 		std::string _sender;
 		std::string _message;
-		LoggerStacktrace _stacktrace;
 	};
 
 	class LoggerMessages final : public MetaClass
