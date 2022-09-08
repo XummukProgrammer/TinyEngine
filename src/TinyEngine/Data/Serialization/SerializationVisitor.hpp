@@ -19,17 +19,25 @@ namespace TinyEngine
 	public:
 		static void Save(OutputArchivePtr archive, std::string_view id, T* data) 
 		{
-			if (std::is_base_of_v<ISerializable, T>)
+			if constexpr (std::is_base_of_v<ISerializable, T>)
 			{
 				SerializationVisitor<ISerializable>::Save(archive, id, data);
+			}
+			else if constexpr (std::is_base_of_v<MetaClass, T>)
+			{
+				SerializationVisitor<MetaClass>::Save(archive, id, data);
 			}
 		}
 
 		static void Load(InputArchivePtr archive, std::string_view id, T* data) 
 		{
-			if (std::is_base_of_v<ISerializable, T>)
+			if constexpr (std::is_base_of_v<ISerializable, T>)
 			{
 				SerializationVisitor<ISerializable>::Load(archive, id, data);
+			}
+			else if constexpr (std::is_base_of_v<MetaClass, T>)
+			{
+				SerializationVisitor<MetaClass>::Load(archive, id, data);
 			}
 		}
 	};
@@ -286,7 +294,7 @@ namespace TinyEngine
 					{
 						auto rawPointer = data->get();
 						
-						SerializationVisitor<ISerializable>::Load(archive, "object", rawPointer);
+						SerializationVisitor<T>::Load(archive, "object", rawPointer);
 					}
 
 					archive->EndItem();

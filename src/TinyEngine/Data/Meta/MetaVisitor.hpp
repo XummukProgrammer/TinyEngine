@@ -7,6 +7,7 @@
 #include <TinyEngine/Data/Meta/Members/MetaVectorMember.hpp>
 #include <TinyEngine/Data/Meta/Members/MetaMapMember.hpp>
 #include <TinyEngine/Data/Meta/Members/MetaClassMember.hpp>
+#include <TinyEngine/Data/Meta/Members/MetaSharedPtrMember.hpp>
 
 #include <string>
 #include <vector>
@@ -96,6 +97,16 @@ namespace TinyEngine
 		static void AddMemberWrapper(MetaMembersPtr members, MetaClass* value, std::string_view name, std::string_view description)
 		{
 			members->AddMember(std::make_shared<TinyEngine::MetaClassMemberWrapper>(name, description, value));
+		}
+	};
+
+	template<typename T>
+	class MetaVisitor<std::shared_ptr<T>>
+	{
+	public:
+		static void AddMemberWrapper(MetaMembersPtr members, std::shared_ptr<T>* value, std::string_view name, std::string_view description)
+		{
+			members->AddMember(std::make_shared<TinyEngine::MetaSharedPtrMember<T>>(name, description, *value));
 		}
 	};
 }

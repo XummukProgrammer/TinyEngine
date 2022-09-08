@@ -1,0 +1,55 @@
+﻿#ifndef _META_SHARED_PTR_MEMBER_HEADER_
+#define _META_SHARED_PTR_MEMBER_HEADER_
+
+#include <TinyEngine/Data/Meta/Members/IMetaMember.hpp>
+#include <TinyEngine/Gui/GuiVisitor.hpp>
+#include <TinyEngine/Data/Serialization/SerializationDefines.hpp>
+
+#include <memory>
+
+namespace TinyEngine
+{
+	template<typename T>
+	class MetaSharedPtrMember : public IMetaMember
+	{
+	public:
+		MetaSharedPtrMember(std::string_view name, std::string_view description, std::shared_ptr<T>& value);
+		~MetaSharedPtrMember() = default;
+
+	public:
+		void LoadFromArchive(InputArchivePtr archive) override;
+		void SaveToArchive(OutputArchivePtr archive) override;
+
+		void AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window) override;
+
+	private:
+		std::shared_ptr<T>& _value;
+	};
+
+	template<typename T>
+	MetaSharedPtrMember<T>::MetaSharedPtrMember(std::string_view name, std::string_view description, std::shared_ptr<T>& value)
+		: _value(value)
+		, IMetaMember(name, description)
+	{
+	}
+
+	template<typename T>
+	void MetaSharedPtrMember<T>::LoadFromArchive(InputArchivePtr archive)
+	{
+		SerializationVisitor<std::shared_ptr<T>>::Load(archive, GetName(), &_value);
+	}
+
+	template<typename T>
+	void MetaSharedPtrMember<T>::SaveToArchive(OutputArchivePtr archive)
+	{
+		SerializationVisitor<std::shared_ptr<T>>::Save(archive, GetName(), &_value);
+	}
+
+	template<typename T>
+	void MetaSharedPtrMember<T>::AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window)
+	{
+		// TODO: Сделать
+	}
+}
+
+#endif // _META_SHARED_PTR_MEMBER_HEADER_
