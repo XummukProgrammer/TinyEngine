@@ -13,6 +13,7 @@ namespace TinyEngine
 
 			if (debugOperation.IsLoggerDumpToFile())
 			{
+				// TODO: Исправить странную рекурсию!
 				Application::GetInstance()->LoggerSaveToFile();
 			}
 

@@ -21,6 +21,7 @@ namespace TinyEngine
 	public:
 		void AddMember(IMetaMemberSharedPtr member);
 		IMetaMemberSharedPtr GetMember(std::string_view id) const;
+		bool HasMember(std::string_view id) const;
 
 		void ForEach(const OnForEach& callback) const;
 
