@@ -9,9 +9,9 @@
 #include <TinyEngine/Gui/Widgets/GuiCheckboxWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiInputNumberWidget.hpp>
 #include <TinyEngine/Gui/Widgets/GuiInputFloatWidget.hpp>
-#include <TinyEngine/Gui/Widgets/GuiInputVectorWidget.hpp>
-#include <TinyEngine/Gui/Widgets/GuiInputMapWidget.hpp>
-#include <TinyEngine/Gui/Widgets/GuiMetaClassWidget.hpp>
+#include <TinyEngine/Gui/Widgets/Containers/GuiInputVectorWidget.hpp>
+#include <TinyEngine/Gui/Widgets/Containers/GuiInputMapWidget.hpp>
+#include <TinyEngine/Gui/Widgets/Containers/GuiMetaClassWidget.hpp>
 
 #include <string>
 #include <vector>
