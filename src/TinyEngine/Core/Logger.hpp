@@ -12,10 +12,10 @@ namespace TinyEngine
 	{
 		TINY_ENGINE_META_CLASS_BEGIN(LoggerMessage)
 		{
-			TINY_ENGINE_META_CLASS_DELC_MEMBER(_type, "Type", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER(_time, "Time", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER(_sender, "Sender", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER(_message, "Message", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_type, "Type", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_time, "Time", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_sender, "Sender", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_message, "Message", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 
@@ -37,7 +37,7 @@ namespace TinyEngine
 	{
 		TINY_ENGINE_META_CLASS_BEGIN(LoggerMessages)
 		{
-			TINY_ENGINE_META_CLASS_DELC_MEMBER(_messages, "Messages", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_messages, "Messages", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 

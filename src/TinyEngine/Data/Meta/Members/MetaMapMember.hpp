@@ -13,7 +13,7 @@ namespace TinyEngine
 	class MetaMapMemberWrapper : public IMetaMember
 	{
 	public:
-		MetaMapMemberWrapper(std::string_view name, std::string_view description, std::map<K, V>& values);
+		MetaMapMemberWrapper(std::string_view name, std::string_view description, const MetaMemberFlag& flags, std::map<K, V>& values);
 		~MetaMapMemberWrapper() = default;
 
 	public:
@@ -27,28 +27,37 @@ namespace TinyEngine
 	};
 
 	template<typename K, typename V>
-	MetaMapMemberWrapper<K, V>::MetaMapMemberWrapper(std::string_view name, std::string_view description, std::map<K, V>& values)
+	MetaMapMemberWrapper<K, V>::MetaMapMemberWrapper(std::string_view name, std::string_view description, const MetaMemberFlag& flags, std::map<K, V>& values)
 		: _values(values)
-		, IMetaMember(name, description)
+		, IMetaMember(name, description, flags)
 	{
 	}
 
 	template<typename K, typename V>
 	void MetaMapMemberWrapper<K, V>::LoadFromArchive(InputArchivePtr archive)
 	{
-		SerializationVisitor<std::map<K, V>>::Load(archive, GetName(), &_values);
+		if (IsLoadable())
+		{
+			SerializationVisitor<std::map<K, V>>::Load(archive, GetName(), &_values);
+		}
 	}
 
 	template<typename K, typename V>
 	void MetaMapMemberWrapper<K, V>::SaveToArchive(OutputArchivePtr archive)
 	{
-		SerializationVisitor<std::map<K, V>>::Save(archive, GetName(), &_values);
+		if (IsSaved())
+		{
+			SerializationVisitor<std::map<K, V>>::Save(archive, GetName(), &_values);
+		}
 	}
 
 	template<typename K, typename V>
 	void MetaMapMemberWrapper<K, V>::AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window)
 	{
-		GuiVisitor<std::map<K, V>>::AddWidget(container, GetName(), GetDescription(), &_values);
+		if (IsEditable())
+		{
+			GuiVisitor<std::map<K, V>>::AddWidget(container, GetName(), GetDescription(), &_values);
+		}
 	}
 }
 

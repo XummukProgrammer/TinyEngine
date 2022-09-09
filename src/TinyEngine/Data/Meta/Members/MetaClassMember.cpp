@@ -6,24 +6,33 @@
 
 namespace TinyEngine
 {
-	MetaClassMemberWrapper::MetaClassMemberWrapper(std::string_view name, std::string_view description, MetaClassPtr metaClass)
+	MetaClassMemberWrapper::MetaClassMemberWrapper(std::string_view name, std::string_view description, const MetaMemberFlag& flags, MetaClassPtr metaClass)
 		: _metaClass(metaClass)
-		, IMetaMember(name, description)
+		, IMetaMember(name, description, flags)
 	{
 	}
 
 	void MetaClassMemberWrapper::LoadFromArchive(InputArchivePtr archive)
 	{
-		SerializationVisitor<MetaClass>::Load(archive, GetName(), _metaClass);
+		if (IsLoadable())
+		{
+			SerializationVisitor<MetaClass>::Load(archive, GetName(), _metaClass);
+		}
 	}
 
 	void MetaClassMemberWrapper::SaveToArchive(OutputArchivePtr archive)
 	{
-		SerializationVisitor<MetaClass>::Save(archive, GetName(), _metaClass);
+		if (IsSaved())
+		{
+			SerializationVisitor<MetaClass>::Save(archive, GetName(), _metaClass);
+		}
 	}
 
 	void MetaClassMemberWrapper::AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window)
 	{
-		GuiVisitor<MetaClass>::AddWidget(container, GetName(), GetDescription(), _metaClass);
+		if (IsEditable())
+		{
+			GuiVisitor<MetaClass>::AddWidget(container, GetName(), GetDescription(), _metaClass);
+		}
 	}
 }

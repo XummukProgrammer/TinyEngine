@@ -13,7 +13,7 @@ namespace TinyEngine
 	class MetaSharedPtrMember : public IMetaMember
 	{
 	public:
-		MetaSharedPtrMember(std::string_view name, std::string_view description, std::shared_ptr<T>& value);
+		MetaSharedPtrMember(std::string_view name, std::string_view description, const MetaMemberFlag& flags, std::shared_ptr<T>& value);
 		~MetaSharedPtrMember() = default;
 
 	public:
@@ -27,28 +27,37 @@ namespace TinyEngine
 	};
 
 	template<typename T>
-	MetaSharedPtrMember<T>::MetaSharedPtrMember(std::string_view name, std::string_view description, std::shared_ptr<T>& value)
+	MetaSharedPtrMember<T>::MetaSharedPtrMember(std::string_view name, std::string_view description, const MetaMemberFlag& flags, std::shared_ptr<T>& value)
 		: _value(value)
-		, IMetaMember(name, description)
+		, IMetaMember(name, description, flags)
 	{
 	}
 
 	template<typename T>
 	void MetaSharedPtrMember<T>::LoadFromArchive(InputArchivePtr archive)
 	{
-		SerializationVisitor<std::shared_ptr<T>>::Load(archive, GetName(), &_value);
+		if (IsLoadable())
+		{
+			SerializationVisitor<std::shared_ptr<T>>::Load(archive, GetName(), &_value);
+		}
 	}
 
 	template<typename T>
 	void MetaSharedPtrMember<T>::SaveToArchive(OutputArchivePtr archive)
 	{
-		SerializationVisitor<std::shared_ptr<T>>::Save(archive, GetName(), &_value);
+		if (IsSaved())
+		{
+			SerializationVisitor<std::shared_ptr<T>>::Save(archive, GetName(), &_value);
+		}
 	}
 
 	template<typename T>
 	void MetaSharedPtrMember<T>::AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window)
 	{
-		// TODO: Сделать
+		if (IsEditable())
+		{
+			// TODO: Сделать
+		}
 	}
 }
 

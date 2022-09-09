@@ -16,10 +16,10 @@ namespace TinyEngine
 	{
 		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(AssetTexture, Asset)
 		{
-			TINY_ENGINE_META_CLASS_DELC_MEMBER(_path, "_path", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER(_isRepeated, "_isRepeated", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER(_isSmooth, "_isSmooth", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER(_isSrgb, "_isSrgb", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_path, "_path", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_isRepeated, "_isRepeated", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_isSmooth, "_isSmooth", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_isSrgb, "_isSrgb", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 

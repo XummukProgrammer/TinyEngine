@@ -13,7 +13,7 @@ namespace TinyEngine
 	class MetaVectorMemberWrapper : public IMetaMember
 	{
 	public:
-		MetaVectorMemberWrapper(std::string_view name, std::string_view description, std::vector<T>& values);
+		MetaVectorMemberWrapper(std::string_view name, std::string_view description, const MetaMemberFlag& flags, std::vector<T>& values);
 		~MetaVectorMemberWrapper() = default;
 
 	public:
@@ -27,28 +27,37 @@ namespace TinyEngine
 	};
 
 	template<typename T>
-	MetaVectorMemberWrapper<T>::MetaVectorMemberWrapper(std::string_view name, std::string_view description, std::vector<T>& values)
+	MetaVectorMemberWrapper<T>::MetaVectorMemberWrapper(std::string_view name, std::string_view description, const MetaMemberFlag& flags, std::vector<T>& values)
 		: _values(values)
-		, IMetaMember(name, description)
+		, IMetaMember(name, description, flags)
 	{
 	}
 
 	template<typename T>
 	void MetaVectorMemberWrapper<T>::LoadFromArchive(InputArchivePtr archive)
 	{
-		SerializationVisitor<std::vector<T>>::Load(archive, GetName(), &_values);
+		if (IsLoadable())
+		{
+			SerializationVisitor<std::vector<T>>::Load(archive, GetName(), &_values);
+		}
 	}
 
 	template<typename T>
 	void MetaVectorMemberWrapper<T>::SaveToArchive(OutputArchivePtr archive)
 	{
-		SerializationVisitor<std::vector<T>>::Save(archive, GetName(), &_values);
+		if (IsSaved())
+		{
+			SerializationVisitor<std::vector<T>>::Save(archive, GetName(), &_values);
+		}
 	}
 
 	template<typename T>
 	void MetaVectorMemberWrapper<T>::AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window)
 	{
-		GuiVisitor<std::vector<T>>::AddWidget(container, GetName(), GetDescription(), &_values);
+		if (IsEditable())
+		{
+			GuiVisitor<std::vector<T>>::AddWidget(container, GetName(), GetDescription(), &_values);
+		}
 	}
 }
 

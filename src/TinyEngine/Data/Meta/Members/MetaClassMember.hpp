@@ -9,7 +9,7 @@ namespace TinyEngine
 	class MetaClassMemberWrapper : public IMetaMember
 	{
 	public:
-		MetaClassMemberWrapper(std::string_view name, std::string_view description, MetaClassPtr metaClass);
+		MetaClassMemberWrapper(std::string_view name, std::string_view description, const MetaMemberFlag& flags, MetaClassPtr metaClass);
 		~MetaClassMemberWrapper() = default;
 
 	public:

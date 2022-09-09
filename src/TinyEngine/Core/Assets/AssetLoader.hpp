@@ -10,7 +10,7 @@ namespace TinyEngine
 	{
 		TINY_ENGINE_META_CLASS_BEGIN(AssetSource)
 		{
-			TINY_ENGINE_META_CLASS_DELC_MEMBER(_asset, "_asset", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_asset, "_asset", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 
@@ -29,7 +29,7 @@ namespace TinyEngine
 	{
 		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(AssetLoader, Asset)
 		{
-			TINY_ENGINE_META_CLASS_DELC_MEMBER(_path, "_path", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_path, "_path", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 

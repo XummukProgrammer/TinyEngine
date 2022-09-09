@@ -18,6 +18,7 @@ namespace TinyEngine
 	enum class DirType;
 	enum class ArchiveFormat;
 	enum class RenderType;
+	enum class MetaMemberFlag;
 
 	TINY_ENGINE_FORWARD_CLASS(ApplicationDelegate)
 	//TINY_ENGINE_FORWARD_CLASS(Application)

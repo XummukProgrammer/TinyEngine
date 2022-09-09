@@ -12,7 +12,7 @@ namespace TinyEngine
 	{
 		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(AssetHolder, Asset)
 		{
-			TINY_ENGINE_META_CLASS_DELC_MEMBER(_assets, "_assets", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_assets, "_assets", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 			
