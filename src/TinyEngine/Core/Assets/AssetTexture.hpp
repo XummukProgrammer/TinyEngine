@@ -50,6 +50,8 @@ namespace TinyEngine
 		}
 		TINY_ENGINE_META_CLASS_END
 
+		TINY_ENGINE_FACTORY_MEMBER(AssetSfmlTexture)
+
 	public:
 		AssetSfmlTexture() = default;
 		~AssetSfmlTexture() = default;

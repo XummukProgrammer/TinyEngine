@@ -85,22 +85,28 @@ namespace TinyEngine
 
 		return types;
 	}
+
+	template<typename T>
+	class FactoryAutoRegister
+	{
+	public:
+		FactoryAutoRegister();
+		virtual ~FactoryAutoRegister() = default;
+	};
+
+	template<typename T>
+	FactoryAutoRegister<T>::FactoryAutoRegister()
+	{
+		Factory::GetInstance()->Register<T>();
+	}
 }
 
-// TODO: Не работает! Разобраться почему
-#define TINY_ENGINE_META_FACTORY_IMPL(className) \
-	void MetaFactoryFuncImpl_ ## className(); \
-	struct MetaFactoryStructImpl_ ## className \
-	{ \
-		MetaFactoryStructImpl_ ## className() \
-		{ \
-			MetaFactoryFuncImpl_ ## className(); \
-		} \
-	}; \
-	static MetaFactoryStructImpl_ ## className _metaFactoryStructImpl_ ## className; \
-	void MetaFactoryFuncImpl_ ## className() \
-	{ \
-		TinyEngine::Factory::GetInstance()->Register<className>(); \
-	}
+#define TINY_ENGINE_FACTORY_MEMBER(className) \
+	private: \
+		static FactoryAutoRegister<className> _autoRegisterStaticMember; \
+	public:
+
+#define TINY_ENGINE_FACTORY_MEMBER_IMPL(className) \
+	TinyEngine::FactoryAutoRegister<className> className::_autoRegisterStaticMember;
 
 #endif // _FACTORY_HEADER_

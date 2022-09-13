@@ -86,12 +86,6 @@ namespace TinyEngine
 
 	void Application::OnInit()
 	{
-		auto factory = GetFactory();
-		// TODO: Это нужно указывать с помощью TINY_ENGINE_META_FACTORY_IMPL
-		factory->Register<AssetHolder>();
-		factory->Register<AssetLoader>();
-		factory->Register<AssetSfmlTexture>();
-
 		GetAssets()->LoadFromFile();
 
 		if (_delegate)
