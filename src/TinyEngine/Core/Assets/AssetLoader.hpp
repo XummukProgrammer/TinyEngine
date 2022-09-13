@@ -33,8 +33,6 @@ namespace TinyEngine
 		}
 		TINY_ENGINE_META_CLASS_END
 
-		TINY_ENGINE_FACTORY_MEMBER(AssetLoader)
-
 	public:
 		AssetLoader() = default;
 		~AssetLoader() = default;
