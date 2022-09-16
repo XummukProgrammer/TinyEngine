@@ -56,7 +56,7 @@ namespace TinyEngine
 	{
 		if (IsEditable())
 		{
-			// TODO: Сделать
+			GuiVisitor<std::shared_ptr<T>>::AddWidget(container, GetName(), GetDescription(), &_value);
 		}
 	}
 }

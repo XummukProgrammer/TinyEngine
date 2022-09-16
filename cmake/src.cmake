@@ -38,6 +38,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Gui/Widgets/Containers/GuiInputVectorWidget.hpp
 	src/TinyEngine/Gui/Widgets/Containers/GuiInputMapWidget.hpp
 	src/TinyEngine/Gui/Widgets/Containers/GuiMetaClassWidget.hpp
+	src/TinyEngine/Gui/Widgets/Containers/GuiSharedPtrWidget.hpp
 	src/TinyEngine/Data/Singleton.hpp
 	src/TinyEngine/Data/Serialization/Serialization.hpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.hpp
@@ -88,6 +89,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Gui/Widgets/Containers/GuiInputVectorWidget.cpp
 	src/TinyEngine/Gui/Widgets/Containers/GuiInputMapWidget.cpp
 	src/TinyEngine/Gui/Widgets/Containers/GuiMetaClassWidget.cpp
+	src/TinyEngine/Gui/Widgets/Containers/GuiSharedPtrWidget.cpp
 	src/TinyEngine/Data/Serialization/Serialization.cpp
 	src/TinyEngine/Data/Serialization/XmlArchive.cpp
 	src/TinyEngine/Data/Meta/Members/MetaDefaultMembers.cpp

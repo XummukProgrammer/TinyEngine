@@ -12,10 +12,12 @@
 #include <TinyEngine/Gui/Widgets/Containers/GuiInputVectorWidget.hpp>
 #include <TinyEngine/Gui/Widgets/Containers/GuiInputMapWidget.hpp>
 #include <TinyEngine/Gui/Widgets/Containers/GuiMetaClassWidget.hpp>
+#include <TinyEngine/Gui/Widgets/Containers/GuiSharedPtrWidget.hpp>
 
 #include <string>
 #include <vector>
 #include <map>
+#include <memory>
 
 namespace TinyEngine
 {
@@ -152,6 +154,25 @@ namespace TinyEngine
 		{
 			auto widget = GuiMetaClassWidget::Create(name);
 			value->AddGuiWidgetsToContainer(widget.get());
+			container->AddWidget(name, widget);
+		}
+	};
+
+	template<typename T>
+	class GuiVisitor<std::shared_ptr<T>>
+	{
+	public:
+		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, std::shared_ptr<T>* value)
+		{
+			bool isInited = value->get() != nullptr;
+			auto& valueRef = *value;
+			auto widget = GuiSharedPtrWidget::Create(name, isInited, {});
+			widget->SetOnInitCallback([&valueRef, widget](std::string_view type)
+			{
+				valueRef = Factory::GetInstance()->Create<T>(type);
+				valueRef->AddGuiWidgetsToContainer(widget.get());
+
+			});
 			container->AddWidget(name, widget);
 		}
 	};
