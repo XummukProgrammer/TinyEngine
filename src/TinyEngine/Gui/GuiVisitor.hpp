@@ -164,9 +164,10 @@ namespace TinyEngine
 	public:
 		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, std::shared_ptr<T>* value)
 		{
-			bool isInited = value->get() != nullptr;
+			const bool isInited = value->get() != nullptr;
 			auto& valueRef = *value;
-			auto widget = GuiSharedPtrWidget::Create(name, isInited, {});
+			const auto& inheritorTypes = Factory::GetInstance()->GetInheritorTypes<T>();
+			auto widget = GuiSharedPtrWidget::Create(name, isInited, {}, inheritorTypes);
 			widget->SetOnInitCallback([&valueRef, widget](std::string_view type)
 			{
 				valueRef = Factory::GetInstance()->Create<T>(type);

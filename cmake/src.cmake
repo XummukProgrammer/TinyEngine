@@ -34,6 +34,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Gui/Widgets/GuiCheckboxWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiInputNumberWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiInputFloatWidget.hpp
+	src/TinyEngine/Gui/Widgets/GuiStringListBoxWidget.hpp
 	src/TinyEngine/Gui/Widgets/Containers/GuiPropertiesWidget.hpp
 	src/TinyEngine/Gui/Widgets/Containers/GuiInputVectorWidget.hpp
 	src/TinyEngine/Gui/Widgets/Containers/GuiInputMapWidget.hpp
@@ -85,6 +86,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Gui/Widgets/GuiCheckboxWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiInputNumberWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiInputFloatWidget.cpp
+	src/TinyEngine/Gui/Widgets/GuiStringListBoxWidget.cpp
 	src/TinyEngine/Gui/Widgets/Containers/GuiPropertiesWidget.cpp
 	src/TinyEngine/Gui/Widgets/Containers/GuiInputVectorWidget.cpp
 	src/TinyEngine/Gui/Widgets/Containers/GuiInputMapWidget.cpp

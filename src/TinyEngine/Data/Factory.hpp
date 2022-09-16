@@ -33,7 +33,7 @@ namespace TinyEngine
 		bool Has() const;
 
 		template<typename T>
-		std::list<std::string> GetInheritorTypes() const;
+		std::vector<std::string> GetInheritorTypes() const;
 
 	private:
 		std::map<std::string, CreateCallback> _createCallbacks;
@@ -68,9 +68,9 @@ namespace TinyEngine
 	}
 
 	template<typename T>
-	std::list<std::string> Factory::GetInheritorTypes() const
+	std::vector<std::string> Factory::GetInheritorTypes() const
 	{
-		std::list<std::string> types;
+		std::vector<std::string> types;
 
 		for (const auto& [ id, callback ] : _createCallbacks)
 		{

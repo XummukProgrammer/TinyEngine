@@ -7,6 +7,7 @@
 
 #include <functional>
 #include <string>
+#include <vector>
 
 namespace TinyEngine
 {
@@ -20,7 +21,7 @@ namespace TinyEngine
 		~GuiSharedPtrWidget() = default;
 
 	public:
-		static GuiSharedPtrWidgetSharedPtr Create(std::string_view name, bool isInited, const OnInit& callback);
+		static GuiSharedPtrWidgetSharedPtr Create(std::string_view name, bool isInited, const OnInit& callback, const std::vector<std::string>& inheritorTypes);
 
 	public:
 		void Load();
@@ -33,6 +34,8 @@ namespace TinyEngine
 
 		void SetOnInitCallback(const OnInit& callback) { _onInitCallback = callback; }
 
+		void SetInheritorTypes(const std::vector<std::string>& types) { _inheritorTypes = types; }
+
 	public:
 		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
 
@@ -42,9 +45,10 @@ namespace TinyEngine
 	private:
 		std::string _name;
 		bool _isInited = false;
-		GuiInputTextWidgetSharedPtr _inputTextPtr;
+		GuiStringListBoxWidgetSharedPtr _typesListWidget;
 		OnInit _onInitCallback;
 		bool _isInit = false;
+		std::vector<std::string> _inheritorTypes;
 	};
 }
 
