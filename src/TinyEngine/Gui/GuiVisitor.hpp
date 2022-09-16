@@ -14,6 +14,8 @@
 #include <TinyEngine/Gui/Widgets/Containers/GuiMetaClassWidget.hpp>
 #include <TinyEngine/Gui/Widgets/Containers/GuiSharedPtrWidget.hpp>
 
+#include <magic_enum.hpp>
+
 #include <string>
 #include <vector>
 #include <map>
@@ -30,6 +32,10 @@ namespace TinyEngine
 			if constexpr (std::is_base_of_v<MetaClass, T>)
 			{
 				GuiVisitor<MetaClass>::AddWidget(container, name, description, value);
+			}
+			else if constexpr (std::is_enum_v<T>)
+			{
+				
 			}
 		}
 	};

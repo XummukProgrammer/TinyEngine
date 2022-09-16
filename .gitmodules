@@ -13,3 +13,6 @@
 [submodule "deps/imgui-sfml"]
 	path = deps/imgui-sfml
 	url = https://github.com/eliasdaler/imgui-sfml.git
+[submodule "deps/magic_enum"]
+	path = deps/magic_enum
+	url = https://github.com/Neargye/magic_enum.git

@@ -6,6 +6,8 @@
 #include <TinyEngine/Data/Factory.hpp>
 #include <TinyEngine/Data/Meta/Class/MetaClass.hpp>
 
+#include <magic_enum.hpp>
+
 #include <string>
 #include <vector>
 #include <map>
@@ -23,6 +25,10 @@ namespace TinyEngine
 			{
 				SerializationVisitor<MetaClass>::Save(archive, id, data);
 			}
+			else if constexpr (std::is_enum_v<T>)
+			{
+				// TODO: Реализовать
+			}
 		}
 
 		static void Load(InputArchivePtr archive, std::string_view id, T* data) 
@@ -30,6 +36,10 @@ namespace TinyEngine
 			if constexpr (std::is_base_of_v<MetaClass, T>)
 			{
 				SerializationVisitor<MetaClass>::Load(archive, id, data);
+			}
+			else if constexpr (std::is_enum_v<T>)
+			{
+				// TODO: Реализовать
 			}
 		}
 	};

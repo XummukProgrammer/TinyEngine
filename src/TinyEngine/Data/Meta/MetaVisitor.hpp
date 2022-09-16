@@ -8,6 +8,7 @@
 #include <TinyEngine/Data/Meta/Members/MetaMapMember.hpp>
 #include <TinyEngine/Data/Meta/Members/MetaClassMember.hpp>
 #include <TinyEngine/Data/Meta/Members/MetaSharedPtrMember.hpp>
+#include <TinyEngine/Data/Meta/Members/MetaEnumMember.hpp>
 
 #include <string>
 #include <vector>
@@ -24,6 +25,10 @@ namespace TinyEngine
 			if constexpr (std::is_base_of_v<MetaClass, T>)
 			{
 				MetaVisitor<MetaClass>::AddMemberWrapper(members, value, name, description, flags);
+			}
+			else if constexpr (std::is_enum_v<T>)
+			{
+				members->AddMember(std::make_shared<TinyEngine::MetaEnumMemberWrapper<T>>(name, description, flags, *value));
 			}
 		}
 	};

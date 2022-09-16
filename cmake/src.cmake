@@ -40,6 +40,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Gui/Widgets/Containers/GuiInputMapWidget.hpp
 	src/TinyEngine/Gui/Widgets/Containers/GuiMetaClassWidget.hpp
 	src/TinyEngine/Gui/Widgets/Containers/GuiSharedPtrWidget.hpp
+	src/TinyEngine/Gui/Widgets/GuiInputEnumWidget.hpp
 	src/TinyEngine/Data/Singleton.hpp
 	src/TinyEngine/Data/Serialization/Serialization.hpp
 	src/TinyEngine/Data/Serialization/SerializationVisitor.hpp
@@ -52,6 +53,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Data/Meta/Members/MetaMapMember.hpp
 	src/TinyEngine/Data/Meta/Members/MetaClassMember.hpp
 	src/TinyEngine/Data/Meta/Members/MetaSharedPtrMember.hpp
+	src/TinyEngine/Data/Meta/Members/MetaEnumMember.hpp
 	src/TinyEngine/Data/Meta/Class/MetaClass.hpp
 	src/TinyEngine/Data/Meta/MetaDefines.hpp
 	src/TinyEngine/Data/Meta/MetaVisitor.hpp
@@ -92,6 +94,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Gui/Widgets/Containers/GuiInputMapWidget.cpp
 	src/TinyEngine/Gui/Widgets/Containers/GuiMetaClassWidget.cpp
 	src/TinyEngine/Gui/Widgets/Containers/GuiSharedPtrWidget.cpp
+	src/TinyEngine/Gui/Widgets/GuiInputEnumWidget.cpp
 	src/TinyEngine/Data/Serialization/Serialization.cpp
 	src/TinyEngine/Data/Serialization/XmlArchive.cpp
 	src/TinyEngine/Data/Meta/Members/MetaDefaultMembers.cpp
@@ -101,6 +104,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Data/Meta/Members/MetaMapMember.cpp
 	src/TinyEngine/Data/Meta/Members/MetaClassMember.cpp
 	src/TinyEngine/Data/Meta/Members/MetaSharedPtrMember.cpp
+	src/TinyEngine/Data/Meta/Members/MetaEnumMember.cpp
 	src/TinyEngine/Data/Meta/Class/MetaClass.cpp
 	src/TinyEngine/Core/Assets/Asset.cpp
 	src/TinyEngine/Core/Assets/AssetHolder.cpp

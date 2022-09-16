@@ -22,6 +22,9 @@ set_target_properties(pugixml-static PROPERTIES FOLDER "deps")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/fmt" "${CMAKE_CURRENT_BINARY_DIR}/deps/fmt")
 set_target_properties(fmt PROPERTIES FOLDER "deps")
 
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/magic_enum" "${CMAKE_CURRENT_BINARY_DIR}/deps/magic_enum")
+set_target_properties(magic_enum PROPERTIES FOLDER "deps")
+
 if (TINY_ENGINE_SFML_RENDER)
 	set(SFML_STATIC_LIBRARIES TRUE)
 	find_package(SFML COMPONENTS audio graphics main network system window REQUIRED)
@@ -55,4 +58,5 @@ target_link_libraries(TinyEngine PUBLIC
 	Candle-s
 	ImGui-SFML
 	${Boost_LIBRARIES}
+	magic_enum
 )
