@@ -296,7 +296,7 @@ namespace TinyEngine
 		template<typename T, typename = std::enable_if<std::is_enum_v<T>, bool>::type>
 		static void EnumLoad(InputArchivePtr archive, std::string_view id, T* data)
 		{
-			std::string name = magic_enum::enum_name(*data).data();
+			std::string name;
 			SerializationVisitor<std::string>::Load(archive, id, &name);
 			*data = magic_enum::enum_cast<T>(name).value();
 		}
