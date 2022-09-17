@@ -16,6 +16,13 @@ namespace TinyEngine
 
 	public:
 		virtual void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) {}
+
+	public:
+		void SetIsActive(bool isActive) { _isActive = isActive; }
+		bool IsActive() const { return _isActive; }
+
+	private:
+		bool _isActive = true;
 	};
 }
 

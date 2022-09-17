@@ -44,7 +44,10 @@ namespace TinyEngine
 
 		for (const auto& [ id, widget ] : _widgets)
 		{
-			callback(id, widget);
+			if (widget->IsActive())
+			{
+				callback(id, widget);
+			}
 		}
 	}
 }
