@@ -44,6 +44,7 @@ namespace TinyEngine
 
 	private:
 		void SettingsIO();
+		void SettingsStyle();
 
 	private:
 		GuiDelegateUniquePtr _delegatePtr;
