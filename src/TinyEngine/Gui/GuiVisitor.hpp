@@ -13,6 +13,7 @@
 #include <TinyEngine/Gui/Widgets/Containers/GuiInputMapWidget.hpp>
 #include <TinyEngine/Gui/Widgets/Containers/GuiMetaClassWidget.hpp>
 #include <TinyEngine/Gui/Widgets/Containers/GuiSharedPtrWidget.hpp>
+#include <TinyEngine/Gui/Widgets/GuiStringListBoxWidget.hpp>
 
 #include <magic_enum.hpp>
 
@@ -35,7 +36,23 @@ namespace TinyEngine
 			}
 			else if constexpr (std::is_enum_v<T>)
 			{
+				auto widget = GuiStringListBoxWidget::Create(name);
+				widget->SetOnChangedCallback([value](std::string_view val)
+				{
+					*value = magic_enum::enum_cast<T>(val).value();
+				});
 				
+				const auto enumNames = magic_enum::enum_names<T>();
+				for (const auto& enumName : enumNames)
+				{
+					widget->AddItem(enumName);
+				}
+
+				const auto& enumName = magic_enum::enum_name(*value);
+				int enumNumber = widget->GetNumberFromString(enumName);
+				widget->SetCurrentItem(enumNumber);
+
+				container->AddWidget(name, widget);
 			}
 		}
 	};

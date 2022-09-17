@@ -27,7 +27,8 @@ namespace TinyEngine
 			}
 			else if constexpr (std::is_enum_v<T>)
 			{
-				// TODO: Реализовать
+				std::string name = magic_enum::enum_name(*data).data();
+				SerializationVisitor<std::string>::Save(archive, id, &name);
 			}
 		}
 
@@ -39,7 +40,9 @@ namespace TinyEngine
 			}
 			else if constexpr (std::is_enum_v<T>)
 			{
-				// TODO: Реализовать
+				std::string name = magic_enum::enum_name(*data).data();
+				SerializationVisitor<std::string>::Load(archive, id, &name);
+				*data = magic_enum::enum_cast<T>(name).value();
 			}
 		}
 	};
