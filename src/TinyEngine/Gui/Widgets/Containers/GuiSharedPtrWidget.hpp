@@ -46,6 +46,7 @@ namespace TinyEngine
 		std::string _name;
 		bool _isInited = false;
 		GuiStringListBoxWidgetSharedPtr _typesListWidget;
+		GuiButtonWidgetSharedPtr _buttonWidget;
 		OnInit _onInitCallback;
 		bool _isInit = false;
 		std::vector<std::string> _inheritorTypes;

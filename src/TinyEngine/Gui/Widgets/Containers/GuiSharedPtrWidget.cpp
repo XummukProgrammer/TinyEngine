@@ -19,18 +19,19 @@ namespace TinyEngine
 
     void GuiSharedPtrWidget::Load()
     {
-        if (!IsInited())
+        _typesListWidget = GuiStringListBoxWidget::Create("Type");
+        _buttonWidget = GuiButtonWidget::Create("Init", std::bind(&GuiSharedPtrWidget::OnInitHandler, this));
+
+        for (const auto& type : _inheritorTypes)
         {
-            _typesListWidget = GuiStringListBoxWidget::Create("Type");
-
-            for (const auto& type : _inheritorTypes)
-            {
-                _typesListWidget->AddItem(type);
-            }
-
-            AddWidget("Uninited_PointerType", _typesListWidget);
-            AddWidget("Uninited_InitPoint", GuiButtonWidget::Create("Init", std::bind(&GuiSharedPtrWidget::OnInitHandler, this)));
+            _typesListWidget->AddItem(type);
         }
+
+        AddWidget("Uninited_PointerType", _typesListWidget);
+        AddWidget("Uninited_InitPoint", _buttonWidget);
+
+        _typesListWidget->SetIsActive(!IsInited());
+        _buttonWidget->SetIsActive(!IsInited());
     }
 
     void GuiSharedPtrWidget::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
@@ -52,6 +53,9 @@ namespace TinyEngine
             _onInitCallback(_typesListWidget->GetCurrentItemString());
             _isInit = false;
             _isInited = true;
+
+            _typesListWidget->SetIsActive(false);
+            _buttonWidget->SetIsActive(false);
         }
     }
 
