@@ -36,23 +36,7 @@ namespace TinyEngine
 			}
 			else if constexpr (std::is_enum_v<T>)
 			{
-				auto widget = GuiStringListBoxWidget::Create(name);
-				widget->SetOnChangedCallback([value](std::string_view val)
-				{
-					*value = magic_enum::enum_cast<T>(val).value();
-				});
-				
-				const auto enumNames = magic_enum::enum_names<T>();
-				for (const auto& enumName : enumNames)
-				{
-					widget->AddItem(enumName);
-				}
-
-				const auto& enumName = magic_enum::enum_name(*value);
-				int enumNumber = widget->GetNumberFromString(enumName);
-				widget->SetCurrentItem(enumNumber);
-
-				container->AddWidget(name, widget);
+				GuiVisitorUniqueImpl::EnumAddWidget<T>(container, name, description, value);
 			}
 		}
 	};
@@ -197,6 +181,32 @@ namespace TinyEngine
 				valueRef->AddGuiWidgetsToContainer(widget.get());
 
 			});
+			container->AddWidget(name, widget);
+		}
+	};
+
+	class GuiVisitorUniqueImpl
+	{
+	public:
+		template<typename T, typename = std::enable_if<std::is_enum_v<T>, bool>::type>
+		static void EnumAddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, T* value)
+		{
+			auto widget = GuiStringListBoxWidget::Create(name);
+			widget->SetOnChangedCallback([value](std::string_view val)
+			{
+				*value = magic_enum::enum_cast<T>(val).value();
+			});
+				
+			const auto enumNames = magic_enum::enum_names<T>();
+			for (const auto& enumName : enumNames)
+			{
+				widget->AddItem(enumName);
+			}
+
+			const auto& enumName = magic_enum::enum_name(*value);
+			int enumNumber = widget->GetNumberFromString(enumName);
+			widget->SetCurrentItem(enumNumber);
+
 			container->AddWidget(name, widget);
 		}
 	};

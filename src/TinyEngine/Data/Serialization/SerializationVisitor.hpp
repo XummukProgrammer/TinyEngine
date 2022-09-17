@@ -27,8 +27,7 @@ namespace TinyEngine
 			}
 			else if constexpr (std::is_enum_v<T>)
 			{
-				std::string name = magic_enum::enum_name(*data).data();
-				SerializationVisitor<std::string>::Save(archive, id, &name);
+				SerializationVisitorUniqueImpl::EnumSave(archive, id, data);
 			}
 		}
 
@@ -40,9 +39,7 @@ namespace TinyEngine
 			}
 			else if constexpr (std::is_enum_v<T>)
 			{
-				std::string name = magic_enum::enum_name(*data).data();
-				SerializationVisitor<std::string>::Load(archive, id, &name);
-				*data = magic_enum::enum_cast<T>(name).value();
+				SerializationVisitorUniqueImpl::EnumLoad(archive, id, data);
 			}
 		}
 	};
@@ -283,6 +280,25 @@ namespace TinyEngine
 
 				archive->EndSection();
 			}
+		}
+	};
+
+	class SerializationVisitorUniqueImpl
+	{
+	public:
+		template<typename T, typename = std::enable_if<std::is_enum_v<T>, bool>::type>
+		static void EnumSave(OutputArchivePtr archive, std::string_view id, T* data)
+		{
+			std::string name = magic_enum::enum_name(*data).data();
+			SerializationVisitor<std::string>::Save(archive, id, &name);
+		}
+
+		template<typename T, typename = std::enable_if<std::is_enum_v<T>, bool>::type>
+		static void EnumLoad(InputArchivePtr archive, std::string_view id, T* data)
+		{
+			std::string name = magic_enum::enum_name(*data).data();
+			SerializationVisitor<std::string>::Load(archive, id, &name);
+			*data = magic_enum::enum_cast<T>(name).value();
 		}
 	};
 }

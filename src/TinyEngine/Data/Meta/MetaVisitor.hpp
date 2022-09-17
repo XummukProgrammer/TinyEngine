@@ -28,7 +28,7 @@ namespace TinyEngine
 			}
 			else if constexpr (std::is_enum_v<T>)
 			{
-				members->AddMember(std::make_shared<TinyEngine::MetaEnumMemberWrapper<T>>(name, description, flags, *value));
+				MetaVisitorUniqueImpl::EnumAddMemberWrapper(members, value, name, description, flags);
 			}
 		}
 	};
@@ -112,6 +112,16 @@ namespace TinyEngine
 		static void AddMemberWrapper(MetaMembersPtr members, std::shared_ptr<T>* value, std::string_view name, std::string_view description, const MetaMemberFlag& flags)
 		{
 			members->AddMember(std::make_shared<TinyEngine::MetaSharedPtrMember<T>>(name, description, flags, *value));
+		}
+	};
+
+	class MetaVisitorUniqueImpl
+	{
+	public:
+		template<typename T, typename = std::enable_if<std::is_enum_v<T>, bool>::type>
+		static void EnumAddMemberWrapper(MetaMembersPtr members, T* value, std::string_view name, std::string_view description, const MetaMemberFlag& flags)
+		{
+			members->AddMember(std::make_shared<TinyEngine::MetaEnumMemberWrapper<T>>(name, description, flags, *value));
 		}
 	};
 }
