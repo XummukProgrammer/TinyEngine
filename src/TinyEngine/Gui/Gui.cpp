@@ -7,12 +7,9 @@
 
 namespace TinyEngine
 {
-	void Gui::Init(IRenderWindowSharedPtr renderWindowPtr)
+	void Gui::Init()
 	{
-		if (_delegatePtr)
-		{
-			_delegatePtr->Init(renderWindowPtr);
-		}
+		PreInit();
 
 		SettingsIO();
 		SettingsStyle();
@@ -20,41 +17,9 @@ namespace TinyEngine
 		SetMainWindow(GuiMainWindowWidget::Create());
 	}
 
-	void Gui::EventReceived(IRenderWindowSharedPtr renderWindowPtr)
+	void Gui::Draw(float deltaTime)
 	{
-		if (_delegatePtr)
-		{
-			_delegatePtr->EventReceived(renderWindowPtr);
-		}
-	}
-
-	void Gui::Update(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
-	{
-		if (_delegatePtr)
-		{
-			_delegatePtr->Update(deltaTime, renderWindowPtr);
-		}
-	}
-
-	void Gui::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
-	{
-		_mainWindowPtr->Draw(deltaTime, renderWindowPtr);
-	}
-
-	void Gui::Display(IRenderWindowSharedPtr renderWindowPtr)
-	{
-		if (_delegatePtr)
-		{
-			_delegatePtr->Display(renderWindowPtr);
-		}
-	}
-
-	void Gui::Shutdown(IRenderWindowSharedPtr renderWindowPtr)
-	{
-		if (_delegatePtr)
-		{
-			_delegatePtr->Shutdown(renderWindowPtr);
-		}
+		_mainWindowPtr->Draw(deltaTime);
 	}
 
 	void Gui::SetMainWindow(GuiMainWindowWidgetSharedPtr mainWindowPtr)

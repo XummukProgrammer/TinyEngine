@@ -19,12 +19,7 @@ namespace TinyEngine
 		GetFileSystem()->SetExecutePath(argv[0]);
 		_delegate = std::move(delegate);
 
-		switch (windowSettings.renderType)
-		{
-			case RenderType::Sfml:
-				GetRender()->CreateSfmlWindow(windowSettings);
-				break;
-		}
+		GetRender()->CreateWindow(windowSettings);
 
 		return *this;
 	}

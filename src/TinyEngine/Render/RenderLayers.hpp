@@ -15,7 +15,7 @@ namespace TinyEngine
 
 	public:
 		void Update(float deltaTime);
-		void Draw(IRenderWindowSharedPtr renderWindowPtr);
+		void Draw();
 
 	public:
 		void CreateLayer(int layerId);

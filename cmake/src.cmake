@@ -8,21 +8,16 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Constants.hpp
 	src/TinyEngine/Core/Forwards.hpp
 	src/TinyEngine/Render/Render.hpp
-	src/TinyEngine/Render/IRenderObject.hpp
-	src/TinyEngine/Render/IRenderWindow.hpp
+	src/TinyEngine/Render/RenderObject.hpp
+	src/TinyEngine/Render/RenderWindow.hpp
 	src/TinyEngine/Render/Point.hpp
 	src/TinyEngine/Render/Rect.hpp
 	src/TinyEngine/Render/RenderLayer.hpp
 	src/TinyEngine/Render/RenderLayers.hpp
 	src/TinyEngine/Render/RenderWindowSettings.hpp
 	src/TinyEngine/Render/Texture.hpp
-	src/TinyEngine/Render/Sfml/SfmlRender.hpp
-	src/TinyEngine/Render/Sfml/SfmlRenderObject.hpp
-	src/TinyEngine/Render/Sfml/SfmlRenderUtils.hpp
-	src/TinyEngine/Render/Sfml/SfmlRenderWindow.hpp
 	src/TinyEngine/Gui/Gui.hpp
 	src/TinyEngine/Gui/GuiVisitor.hpp
-	src/TinyEngine/Gui/SfmlGuiDelegate.hpp
 	src/TinyEngine/Gui/GuiWidget.hpp
 	src/TinyEngine/Gui/GuiWidgetContainer.hpp
 	src/TinyEngine/Gui/Widgets/GuiLabelWidget.hpp
@@ -73,11 +68,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Render/Render.cpp
 	src/TinyEngine/Render/RenderLayer.cpp
 	src/TinyEngine/Render/RenderLayers.cpp
-	src/TinyEngine/Render/Sfml/SfmlRenderObject.cpp
-	src/TinyEngine/Render/Sfml/SfmlRenderUtils.cpp
-	src/TinyEngine/Render/Sfml/SfmlRenderWindow.cpp
 	src/TinyEngine/Gui/Gui.cpp
-	src/TinyEngine/Gui/SfmlGuiDelegate.cpp
 	src/TinyEngine/Gui/GuiWidgetContainer.cpp
 	src/TinyEngine/Gui/Widgets/GuiLabelWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiWindowWidget.cpp
@@ -109,6 +100,10 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Assets/Asset.cpp
 	src/TinyEngine/Core/Assets/AssetHolder.cpp
 	src/TinyEngine/Core/Assets/AssetLoader.cpp
-	src/TinyEngine/Core/Assets/AssetTexture.cpp
 	src/TinyEngine/Core/Assets/Assets.cpp
+	# TODO: Не подключать, если сборка с SFML отключена
+	src/TinyEngine/Backends/SFML/GUI/SfmlGuiImpl.cpp
+	src/TinyEngine/Backends/SFML/Render/SfmlRenderObjectImpl.cpp
+	src/TinyEngine/Backends/SFML/Render/SfmlRenderWindowImpl.cpp
+	src/TinyEngine/Backends/SFML/Assets/AssetSfmlTexture.cpp
 )

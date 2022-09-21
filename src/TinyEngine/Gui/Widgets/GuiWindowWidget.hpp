@@ -19,7 +19,7 @@ namespace TinyEngine
 		static GuiWindowWidgetSharedPtr Create(std::string_view name);
 
 	public:
-		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
+		void Draw(float deltaTime) override;
 
 	public:
 		void SetName(std::string_view name) { _name = name; }

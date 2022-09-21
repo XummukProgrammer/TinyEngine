@@ -1,8 +1,7 @@
 ﻿#include "Render.hpp"
 
-#include <TinyEngine/Render/IRenderObject.hpp>
-#include <TinyEngine/Render/IRenderWindow.hpp>
-#include <TinyEngine/Render/Sfml/SfmlRender.hpp>
+#include <TinyEngine/Render/RenderObject.hpp>
+#include <TinyEngine/Render/RenderWindow.hpp>
 
 #include <TinyEngine/Gui/Gui.hpp>
 
@@ -11,34 +10,25 @@
 
 namespace TinyEngine
 {
-	Render& Render::CreateSfmlWindow(const RenderWindowSettings& windowSettings)
-	{
-		TINY_ENGINE_PRINT_INFO("Use Sfml Window");
-		CreateWindow(std::make_shared<SfmlRenderWindow>(), windowSettings);
-		return *this;
-	}
-
 	Render& Render::Execute()
 	{
-		TINY_ENGINE_ASSERT(_renderWindowPtr.get(), "Render Window not inited");
+		RenderWindow::GetInstance()->ResetClock();
 
-		_renderWindowPtr->ResetClock();
-
-		while (!_renderWindowPtr->IsClosed())
+		while (!RenderWindow::GetInstance()->IsClosed())
 		{
-			_renderWindowPtr->UpdateClock();
-			const float deltaTime = _renderWindowPtr->GetDeltaTime();
+			RenderWindow::GetInstance()->UpdateClock();
+			const float deltaTime = RenderWindow::GetInstance()->GetDeltaTime();
 
-			_renderWindowPtr->ExtractEvents();
+			RenderWindow::GetInstance()->ExtractEvents();
 
 			Update(deltaTime);
 
-			_renderWindowPtr->Clear();
-			Draw(_renderWindowPtr);
-			_renderWindowPtr->Display();
+			RenderWindow::GetInstance()->Clear();
+			Draw();
+			RenderWindow::GetInstance()->Display();
 		}
 
-		Gui::GetInstance()->Shutdown(_renderWindowPtr);
+		Gui::GetInstance()->Shutdown();
 
 		return *this;
 	}
@@ -47,14 +37,14 @@ namespace TinyEngine
 	{
 		TINY_ENGINE_PRINT_INFO("Destroy");
 
-		_renderWindowPtr.reset();
+		RenderWindow::ResetInstance();
 
 		return *this;
 	}
 
 	void Render::Close()
 	{
-		_renderWindowPtr->Close();
+		RenderWindow::GetInstance()->Close();
 	}
 
 	void Render::Update(float deltaTime)
@@ -62,30 +52,28 @@ namespace TinyEngine
 		_renderLayers.Update(deltaTime);
 
 		auto gui = Gui::GetInstance();
-		gui->Update(deltaTime, _renderWindowPtr);
-		gui->Draw(deltaTime, _renderWindowPtr);
+		gui->Update(deltaTime);
+		gui->Draw(deltaTime);
 	}
 
-	void Render::Draw(IRenderWindowSharedPtr window)
+	void Render::Draw()
 	{
-		_renderLayers.Draw(window);
+		_renderLayers.Draw();
 
-		Gui::GetInstance()->Display(_renderWindowPtr);
+		Gui::GetInstance()->Display();
 	}
 
 	void Render::OnEventReceived()
 	{
-		Gui::GetInstance()->EventReceived(_renderWindowPtr);
+		Gui::GetInstance()->EventReceived();
 	}
 
-	void Render::CreateWindow(IRenderWindowSharedPtr window, const RenderWindowSettings& windowSettings)
+	void Render::CreateWindow(const RenderWindowSettings& windowSettings)
 	{
-		_renderWindowPtr = window;
-		_renderWindowPtr->Create(windowSettings);
-		_renderWindowPtr->SetOnEventReceived(std::bind(&Render::OnEventReceived, this));
+		RenderWindow::GetInstance()->Create(windowSettings);
+		RenderWindow::GetInstance()->SetOnEventReceived(std::bind(&Render::OnEventReceived, this));
 
 		auto gui = Gui::GetInstance();
-		gui->SetDelegate(_renderWindowPtr->CreateDelegate());
-		gui->Init(_renderWindowPtr);
+		gui->Init();
 	}
 }

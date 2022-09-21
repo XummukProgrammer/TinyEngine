@@ -4,12 +4,12 @@
 
 namespace TinyEngine
 {
-	void GuiWidgetContainer::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
+	void GuiWidgetContainer::Draw(float deltaTime)
 	{
-		for (const auto& [ id, widget ] : _widgets)
+		EachWidgets([deltaTime](std::string_view id, GuiWidgetSharedPtr widgetPtr)
 		{
-			widget->Draw(deltaTime, renderWindowPtr);
-		}
+			widgetPtr->Draw(deltaTime);
+		});
 	}
 
 	void GuiWidgetContainer::AddWidget(std::string_view id, GuiWidgetSharedPtr widget)

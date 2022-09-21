@@ -1,7 +1,5 @@
 ﻿#include "GuiWindowWidget.hpp"
 
-#include <TinyEngine/Render/IRenderWindow.hpp>
-
 namespace TinyEngine
 {
 	GuiWindowWidgetSharedPtr GuiWindowWidget::Create(std::string_view name)
@@ -11,16 +9,13 @@ namespace TinyEngine
 		return widget;
 	}
 
-	void GuiWindowWidget::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
+	void GuiWindowWidget::Draw(float deltaTime)
 	{
-		GuiWidget::Draw(deltaTime, renderWindowPtr);
+		GuiWidget::Draw(deltaTime);
 
 		BeginWindow();
 
-		EachWidgets([deltaTime, renderWindowPtr](std::string_view id, GuiWidgetSharedPtr widgetPtr)
-		{
-			widgetPtr->Draw(deltaTime, renderWindowPtr);
-		});
+		GuiWidgetContainer::Draw(deltaTime);
 
 		EndWindow();
 	}
@@ -83,5 +78,7 @@ namespace TinyEngine
 	void GuiMainWindowWidget::EndWindow()
 	{
 		ImGui::End();
+
+		ImGui::ShowDemoWindow();
 	}
 }

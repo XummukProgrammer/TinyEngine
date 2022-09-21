@@ -15,7 +15,7 @@ namespace TinyEngine
 		~GuiWidget() = default;
 
 	public:
-		virtual void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) {}
+		virtual void Draw(float deltaTime) {}
 
 	public:
 		void SetIsActive(bool isActive) { _isActive = isActive; }

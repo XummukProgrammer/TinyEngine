@@ -37,7 +37,7 @@ namespace TinyEngine
 		void SetInheritorTypes(const std::vector<std::string>& types) { _inheritorTypes = types; }
 
 	public:
-		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
+		void Draw(float deltaTime) override;
 
 	private:
 		void OnInitHandler();

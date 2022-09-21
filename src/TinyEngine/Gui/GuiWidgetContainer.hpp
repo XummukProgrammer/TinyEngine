@@ -20,7 +20,7 @@ namespace TinyEngine
 		virtual ~GuiWidgetContainer() = default;
 
 	public:
-		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr);
+		void Draw(float deltaTime);
 
 	public:
 		void AddWidget(std::string_view id, GuiWidgetSharedPtr widget);

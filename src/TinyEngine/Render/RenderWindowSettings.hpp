@@ -9,7 +9,6 @@ namespace TinyEngine
 {
 	struct RenderWindowSettings
 	{
-		RenderType renderType;
 		std::string title;
 		int width;
 		int height;

@@ -31,7 +31,7 @@ namespace TinyEngine
 		void SetOnInputedCallback(const OnInputed& callback) { _onInputedCallback = callback; }
 
 	public:
-		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
+		void Draw(float deltaTime) override;
 
 	private:
 		std::string _title;

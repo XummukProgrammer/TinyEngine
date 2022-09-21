@@ -11,8 +11,10 @@ namespace TinyEngine
         return widget;
     }
 
-    void GuiInputFloatWidget::Draw(float deltaTime,IRenderWindowSharedPtr renderWindowPtr)
+    void GuiInputFloatWidget::Draw(float deltaTime)
     {
+        GuiWidget::Draw(deltaTime);
+
         if (ImGui::InputFloat(_title.c_str(), &_value) && _onInputedCallback)
         {
             _onInputedCallback(_value);

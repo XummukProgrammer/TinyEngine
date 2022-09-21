@@ -28,7 +28,7 @@ namespace TinyEngine
 		}
 	}
 
-	void MetaClassMemberWrapper::AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window)
+	void MetaClassMemberWrapper::AddGuiWidget(GuiWidgetContainerPtr container)
 	{
 		if (IsEditable())
 		{

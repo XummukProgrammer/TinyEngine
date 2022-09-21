@@ -31,7 +31,7 @@ namespace TinyEngine
 		void SetOnValueAddCallback(const ValueAdd& callback) { _onValueAddCallback = callback; }
 
 	public:
-		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
+		void Draw(float deltaTime) override;
 
 	private:
 		void OnAddValue();

@@ -1,10 +1,10 @@
-﻿#include "AssetTexture.hpp"
+﻿#include <TinyEngine/Core/Assets/AssetTexture.hpp>
 
 #include <TinyEngine/Core/FileSystem.hpp>
 
 namespace TinyEngine
 {
-	void AssetSfmlTexture::OnAssetLoad()
+	void AssetTexture::OnAssetLoad()
 	{
 		const std::string path = FileSystem::GetInstance()->BuildPath(DirType::Assets, GetPath());
 
@@ -14,10 +14,10 @@ namespace TinyEngine
 		_texture.setSrgb(IsSrgb());
 	}
 
-	void AssetSfmlTexture::LoadTexture(Texture& texture)
+	void AssetTexture::LoadTexture(Texture& texture)
 	{
 		texture.data = &_texture;
 	}
 
-	TINY_ENGINE_META_FACTORY_IMPL(AssetSfmlTexture)
+	TINY_ENGINE_META_FACTORY_IMPL(AssetTexture)
 }

@@ -15,25 +15,22 @@ namespace TinyEngine
 		~Render() = default;
 
 	public:
-		Render& CreateSfmlWindow(const RenderWindowSettings& windowSettings);
-
 		Render& Execute();
 		Render& Destroy();
 		RenderLayers& GetLayers() { return _renderLayers; }
+
+		void CreateWindow(const RenderWindowSettings& windowSettings);
 
 	public:
 		void Close();
 
 	private:
 		void Update(float deltaTime);
-		void Draw(IRenderWindowSharedPtr window);
+		void Draw();
 
 		void OnEventReceived();
 
-		void CreateWindow(IRenderWindowSharedPtr window, const RenderWindowSettings& windowSettings);
-
 	private:
-		IRenderWindowSharedPtr _renderWindowPtr;
 		RenderLayers _renderLayers;
 	};
 };

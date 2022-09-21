@@ -6,7 +6,9 @@
 
 #include <TinyEngine/Render/Texture.hpp>
 
+#ifdef TINY_ENGINE_USE_SFML
 #include <SFML/Graphics.hpp>
+#endif
 
 #include <string>
 
@@ -34,37 +36,19 @@ namespace TinyEngine
 		bool IsSrgb() const { return _isSrgb; }
 
 	public:
-		virtual void LoadTexture(Texture& texture) = 0;
+		void LoadTexture(Texture& texture);
+
+		void OnAssetLoad() override;
 
 	private:
 		std::string _path;
 		bool _isRepeated;
 		bool _isSmooth;
 		bool _isSrgb;
-	};
 
-	class AssetSfmlTexture final : public AssetTexture
-	{
-		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(AssetSfmlTexture, AssetTexture)
-		{
-		}
-		TINY_ENGINE_META_CLASS_END
-
-	public:
-		AssetSfmlTexture() = default;
-		~AssetSfmlTexture() = default;
-
-	public:
-		void OnAssetLoad() override;
-
-	public:
-		void LoadTexture(Texture& texture) override;
-
-		sf::Texture& GetTexture() { return _texture; }
-		const sf::Texture& GetConstTexture() const { return _texture; }
-
-	private:
+#ifdef TINY_ENGINE_USE_SFML
 		sf::Texture _texture;
+#endif
 	};
 }
 

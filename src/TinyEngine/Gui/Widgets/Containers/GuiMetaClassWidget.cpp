@@ -9,16 +9,13 @@ namespace TinyEngine
         return widget;
     }
 
-    void GuiMetaClassWidget::Draw(float deltaTime,IRenderWindowSharedPtr renderWindowPtr)
+    void GuiMetaClassWidget::Draw(float deltaTime)
     {
-        GuiWidget::Draw(deltaTime, renderWindowPtr);
+        GuiWidget::Draw(deltaTime);
 
         if (ImGui::TreeNode(_name.c_str()))
         {
-            EachWidgets([deltaTime, renderWindowPtr](std::string_view id, GuiWidgetSharedPtr widgetPtr)
-		    {
-			    widgetPtr->Draw(deltaTime, renderWindowPtr);
-		    });
+            GuiWidgetContainer::Draw(deltaTime);
 
             ImGui::TreePop();
         }

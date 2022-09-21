@@ -20,7 +20,7 @@ namespace TinyEngine
 		void LoadFromArchive(InputArchivePtr archive) override;
 		void SaveToArchive(OutputArchivePtr archive) override;
 
-		void AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window) override;
+		void AddGuiWidget(GuiWidgetContainerPtr container) override;
 
 	private:
 		std::map<K, V>& _values;
@@ -52,7 +52,7 @@ namespace TinyEngine
 	}
 
 	template<typename K, typename V>
-	void MetaMapMemberWrapper<K, V>::AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window)
+	void MetaMapMemberWrapper<K, V>::AddGuiWidget(GuiWidgetContainerPtr container)
 	{
 		if (IsEditable())
 		{

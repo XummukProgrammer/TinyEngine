@@ -55,11 +55,11 @@ namespace TinyEngine
 		}
 	}
 
-	void RenderLayers::Draw(IRenderWindowSharedPtr renderWindowPtr)
+	void RenderLayers::Draw()
 	{
 		for (const auto& [ layerId, layer ] : _layers)
 		{
-			layer->Draw(renderWindowPtr);
+			layer->Draw();
 		}
 	}
 }

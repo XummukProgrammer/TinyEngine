@@ -10,7 +10,7 @@ namespace TinyEngine
 	class RenderLayer final
 	{
 	public:
-		using ObjectsList = std::list<IRenderObjectSharedPtr>;
+		using ObjectsList = std::list<RenderObjectSharedPtr>;
 
 	public:
 		RenderLayer() = default;
@@ -18,15 +18,15 @@ namespace TinyEngine
 
 	public:
 		void Update(float deltaTime);
-		void Draw(IRenderWindowSharedPtr renderWindowPtr);
+		void Draw();
 
 	public:
-		void AddRenderObject(IRenderObjectSharedPtr object);
-		void RemoveRenderObject(IRenderObjectSharedPtr object);
-		bool HasRenderObject(IRenderObjectSharedPtr object) const;
+		void AddRenderObject(RenderObjectSharedPtr object);
+		void RemoveRenderObject(RenderObjectSharedPtr object);
+		bool HasRenderObject(RenderObjectSharedPtr object) const;
 
 	private:
-		ObjectsList::const_iterator GetConstObjectIterator(IRenderObjectSharedPtr object) const;
+		ObjectsList::const_iterator GetConstObjectIterator(RenderObjectSharedPtr object) const;
 
 	private:
 		ObjectsList _objects;

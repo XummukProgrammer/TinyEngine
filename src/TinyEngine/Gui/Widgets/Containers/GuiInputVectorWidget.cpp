@@ -17,16 +17,13 @@ namespace TinyEngine
         AddWidget("ValueAdd", GuiButtonWidget::Create("Value Add", std::bind(&GuiInputVectorWidget::OnValueAdd, this)));
     }
 
-    void GuiInputVectorWidget::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
+    void GuiInputVectorWidget::Draw(float deltaTime)
     {
-        GuiWidget::Draw(deltaTime, renderWindowPtr);
+        GuiWidget::Draw(deltaTime);
 
         if (ImGui::TreeNode(_name.c_str()))
         {
-            EachWidgets([deltaTime, renderWindowPtr](std::string_view id, GuiWidgetSharedPtr widgetPtr)
-		    {
-			    widgetPtr->Draw(deltaTime, renderWindowPtr);
-		    });
+            GuiWidgetContainer::Draw(deltaTime);
 
             if (_isValueAdd)
             {

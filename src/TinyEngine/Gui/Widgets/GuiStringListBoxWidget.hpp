@@ -38,7 +38,7 @@ namespace TinyEngine
 		void SetOnChangedCallback(const OnChanged& callback) { _onChangedCallback = callback; }
 
 	public:
-		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
+		void Draw(float deltaTime) override;
 
 	private:
 		static inline const int MAX_ITEMS = 64;

@@ -11,8 +11,10 @@ namespace TinyEngine
         return widget;
     }
 
-    void GuiCheckboxWidget::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
+    void GuiCheckboxWidget::Draw(float deltaTime)
     {
+        GuiWidget::Draw(deltaTime);
+
         if (ImGui::Checkbox(_title.c_str(), &_value) && _onChangedCallback)
         {
             _onChangedCallback(_value);

@@ -1,7 +1,5 @@
 ﻿#include "GuiButtonWidget.hpp"
 
-#include <TinyEngine/Render/IRenderWindow.hpp>
-
 namespace TinyEngine
 {
     GuiButtonWidgetSharedPtr GuiButtonWidget::Create(std::string_view text, const OnClicked& callback)
@@ -12,9 +10,9 @@ namespace TinyEngine
         return widget;
     }
 
-    void GuiButtonWidget::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
+    void GuiButtonWidget::Draw(float deltaTime)
     {
-        GuiWidget::Draw(deltaTime, renderWindowPtr);
+        GuiWidget::Draw(deltaTime);
 
         if (ImGui::Button(_text.c_str()) && _onClickedCallback)
         {

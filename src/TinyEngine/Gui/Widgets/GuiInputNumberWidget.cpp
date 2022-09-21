@@ -11,8 +11,10 @@ namespace TinyEngine
 		return widget;
 	}
 
-	void GuiInputNumberWidget::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
+	void GuiInputNumberWidget::Draw(float deltaTime)
 	{
+		GuiWidget::Draw(deltaTime);
+
 		ImGui::PushID(_title.c_str());
 		
 		if (ImGui::InputScalar(_title.c_str(), ImGuiDataType_S32, &_value) && _onInputedCallback)

@@ -8,20 +8,6 @@
 
 namespace TinyEngine
 {
-	class GuiDelegate
-	{
-	public:
-		GuiDelegate() = default;
-		virtual ~GuiDelegate() = default;
-
-	public:
-		virtual void Init(IRenderWindowSharedPtr renderWindowPtr) = 0;
-		virtual void EventReceived(IRenderWindowSharedPtr renderWindowPtr) = 0;
-		virtual void Update(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) = 0;
-		virtual void Display(IRenderWindowSharedPtr renderWindowPtr) = 0;
-		virtual void Shutdown(IRenderWindowSharedPtr renderWindowPtr) = 0;
-	};
-
 	class Gui final : public Singleton<Gui>
 	{
 	public:
@@ -29,16 +15,15 @@ namespace TinyEngine
 		~Gui() = default;
 
 	public:
-		void Init(IRenderWindowSharedPtr renderWindowPtr);
-		void EventReceived(IRenderWindowSharedPtr renderWindowPtr);
-		void Update(float deltaTime, IRenderWindowSharedPtr renderWindowPtr);
-		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr);
-		void Display(IRenderWindowSharedPtr renderWindowPtr);
-		void Shutdown(IRenderWindowSharedPtr renderWindowPtr);
+		void PreInit();
+		void Init();
+		void EventReceived();
+		void Update(float deltaTime);
+		void Draw(float deltaTime);
+		void Display();
+		void Shutdown();
 
 	public:
-		void SetDelegate(GuiDelegateUniquePtr&& delegatePtr) { _delegatePtr = std::move(delegatePtr); }
-
 		void SetMainWindow(GuiMainWindowWidgetSharedPtr mainWindowPtr);
 		GuiMainWindowWidgetSharedPtr GetMainWindow() const;
 
@@ -47,7 +32,6 @@ namespace TinyEngine
 		void SettingsStyle();
 
 	private:
-		GuiDelegateUniquePtr _delegatePtr;
 		GuiMainWindowWidgetSharedPtr _mainWindowPtr;
 	};
 }

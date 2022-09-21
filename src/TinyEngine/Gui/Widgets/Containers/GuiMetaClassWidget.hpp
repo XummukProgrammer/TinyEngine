@@ -21,7 +21,7 @@ namespace TinyEngine
 		const std::string& GetName() const { return _name; }
 
 	public:
-		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
+		void Draw(float deltaTime) override;
 
 	private:
 		std::string _name;

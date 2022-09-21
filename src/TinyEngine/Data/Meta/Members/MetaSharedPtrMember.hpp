@@ -20,7 +20,7 @@ namespace TinyEngine
 		void LoadFromArchive(InputArchivePtr archive) override;
 		void SaveToArchive(OutputArchivePtr archive) override;
 
-		void AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window) override;
+		void AddGuiWidget(GuiWidgetContainerPtr container) override;
 
 	private:
 		std::shared_ptr<T>& _value;
@@ -52,7 +52,7 @@ namespace TinyEngine
 	}
 
 	template<typename T>
-	void MetaSharedPtrMember<T>::AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window)
+	void MetaSharedPtrMember<T>::AddGuiWidget(GuiWidgetContainerPtr container)
 	{
 		if (IsEditable())
 		{

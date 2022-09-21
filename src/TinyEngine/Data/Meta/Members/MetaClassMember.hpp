@@ -16,7 +16,7 @@ namespace TinyEngine
 		void LoadFromArchive(InputArchivePtr archive) override;
 		void SaveToArchive(OutputArchivePtr archive) override;
 
-		void AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window) override;
+		void AddGuiWidget(GuiWidgetContainerPtr container) override;
 
 	private:
 		MetaClassPtr _metaClass;

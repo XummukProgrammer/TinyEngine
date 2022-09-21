@@ -12,7 +12,7 @@ namespace TinyEngine
 
 	public:
 		static T* GetInstance();
-		void ResetInstance();
+		static void ResetInstance();
 
 	private:
 		static T* _instance;

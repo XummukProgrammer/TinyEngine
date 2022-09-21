@@ -32,7 +32,7 @@ namespace TinyEngine
 		void Load();
 
 	public:
-		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
+		void Draw(float deltaTime) override;
 
 	private:
 		void OnValueAdd();

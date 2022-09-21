@@ -34,9 +34,9 @@ namespace TinyEngine
         return number;
     }
 
-    void GuiStringListBoxWidget::Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr)
+    void GuiStringListBoxWidget::Draw(float deltaTime)
     {
-        GuiWidget::Draw(deltaTime, renderWindowPtr);
+        GuiWidget::Draw(deltaTime);
 
         if (ImGui::Combo(_name.c_str(), &_currentItem, _items, _itemsCount) && _onChangedCallback)
         {

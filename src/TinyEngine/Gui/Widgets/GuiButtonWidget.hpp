@@ -28,7 +28,7 @@ namespace TinyEngine
 		void SetOnClickedCallback(OnClicked callback) { _onClickedCallback = callback; }
 
 	public:
-		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
+		void Draw(float deltaTime) override;
 
 	private:
 		std::string _text;

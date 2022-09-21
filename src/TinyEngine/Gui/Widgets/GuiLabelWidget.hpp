@@ -22,7 +22,7 @@ namespace TinyEngine
 		static GuiLabelWidgetSharedPtr Create(std::string_view text, bool isDisabled);
 
 	public:
-		void Draw(float deltaTime, IRenderWindowSharedPtr renderWindowPtr) override;
+		void Draw(float deltaTime) override;
 
 	public:
 		// Взаимозаменяем с SetColor.

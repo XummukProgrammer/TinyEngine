@@ -16,11 +16,6 @@ namespace TinyEngine
 		Xml
 	};
 
-	enum class RenderType
-	{
-		Sfml
-	};
-
 	enum class MetaMemberFlag
 	{
 		Save = 1 << 1,

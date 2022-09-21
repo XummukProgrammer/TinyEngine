@@ -40,7 +40,7 @@ namespace TinyEngine
 		virtual void LoadFromArchive(InputArchivePtr archive) = 0;
 		virtual void SaveToArchive(OutputArchivePtr archive) = 0;
 
-		virtual void AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window) = 0;
+		virtual void AddGuiWidget(GuiWidgetContainerPtr container) = 0;
 	};
 }
 
@@ -55,7 +55,7 @@ namespace TinyEngine
 		void LoadFromArchive(InputArchivePtr archive) override; \
 		void SaveToArchive(OutputArchivePtr archive) override; \
 		\
-		void AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window) override; \
+		void AddGuiWidget(GuiWidgetContainerPtr container) override; \
 	\
 	private: \
 		type& _value; \
@@ -98,7 +98,7 @@ namespace TinyEngine
 		} \
 	} \
 	\
-	void className ## Wrapper::AddGuiWidget(GuiWidgetContainerPtr container, IRenderWindowSharedPtr window) \
+	void className ## Wrapper::AddGuiWidget(GuiWidgetContainerPtr container) \
 	{ \
 		if (IsEditable()) \
 		{ \

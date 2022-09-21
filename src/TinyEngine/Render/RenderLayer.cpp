@@ -1,7 +1,7 @@
 ﻿#include "RenderLayer.hpp"
 
-#include <TinyEngine/Render/IRenderObject.hpp>
-#include <TinyEngine/Render/IRenderWindow.hpp>
+#include <TinyEngine/Render/RenderObject.hpp>
+#include <TinyEngine/Render/RenderWindow.hpp>
 
 #include <TinyEngine/Core/Logger.hpp>
 
@@ -15,21 +15,21 @@ namespace TinyEngine
 		}
 	}
 
-	void RenderLayer::Draw(IRenderWindowSharedPtr renderWindowPtr)
+	void RenderLayer::Draw()
 	{
 		for (const auto& object : _objects)
 		{
-			renderWindowPtr->Draw(object.get());
+			RenderWindow::GetInstance()->Draw(object.get());
 		}
 	}
 
-	void RenderLayer::AddRenderObject(IRenderObjectSharedPtr object)
+	void RenderLayer::AddRenderObject(RenderObjectSharedPtr object)
 	{
 		TINY_ENGINE_PRINT_INFO("Added new render object");
 		_objects.push_back(object);
 	}
 
-	void RenderLayer::RemoveRenderObject(IRenderObjectSharedPtr object)
+	void RenderLayer::RemoveRenderObject(RenderObjectSharedPtr object)
 	{
 		TINY_ENGINE_PRINT_INFO("Remove render object");
 		const auto it = GetConstObjectIterator(object);
@@ -39,12 +39,12 @@ namespace TinyEngine
 		}
 	}
 
-	bool RenderLayer::HasRenderObject(IRenderObjectSharedPtr object) const
+	bool RenderLayer::HasRenderObject(RenderObjectSharedPtr object) const
 	{
 		return GetConstObjectIterator(object) != _objects.end();
 	}
 
-	RenderLayer::ObjectsList::const_iterator RenderLayer::GetConstObjectIterator(IRenderObjectSharedPtr object) const
+	RenderLayer::ObjectsList::const_iterator RenderLayer::GetConstObjectIterator(RenderObjectSharedPtr object) const
 	{
 		return std::find(_objects.begin(), _objects.end(), object);
 	}

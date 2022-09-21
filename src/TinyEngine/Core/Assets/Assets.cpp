@@ -10,7 +10,7 @@ namespace TinyEngine
 		// Костыли для автоматического добавления классов в фабрику.
 		// Без явного объявления нужные классы просто не попадают в экзешник.
 		TinyEngine::AssetLoader costilLoader;
-		TinyEngine::AssetSfmlTexture costilSfmlTexture;
+		TinyEngine::AssetTexture costilSfmlTexture;
 
 		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, "root.xml", &_holder);
 		_holder.OnAssetLoad();
