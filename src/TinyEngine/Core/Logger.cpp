@@ -1,6 +1,7 @@
 ﻿#include "Logger.hpp"
 
 #include <fmt/format.h>
+#include <TinyEngine/../../stacktrace/stacktrace.hpp>
 
 namespace TinyEngine
 {
@@ -31,7 +32,7 @@ namespace TinyEngine
 
 		if (isShowStacktrace)
 		{
-			//stacktrace = boost::stacktrace::to_string(boost::stacktrace::stacktrace());
+			stacktrace = markusjx::stacktrace::stacktrace().toString();
 			fmt::print("\n\nStacktrace:\n{}\n\n", stacktrace);
 		}
 

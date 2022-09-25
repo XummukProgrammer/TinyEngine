@@ -23,6 +23,9 @@ set_target_properties(fmt PROPERTIES FOLDER "deps")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/magic_enum" "${CMAKE_CURRENT_BINARY_DIR}/deps/magic_enum")
 set_target_properties(magic_enum PROPERTIES FOLDER "deps")
 
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/stacktrace" "${CMAKE_CURRENT_BINARY_DIR}/deps/stacktrace")
+set_target_properties(stacktrace PROPERTIES FOLDER "deps")
+
 if (TINY_ENGINE_SFML_RENDER)
 	set(SFML_STATIC_LIBRARIES TRUE)
 	find_package(SFML COMPONENTS audio graphics main network system window REQUIRED)
@@ -55,4 +58,5 @@ target_link_libraries(TinyEngine PUBLIC
 	Candle-s
 	ImGui-SFML
 	magic_enum
+	stacktrace
 )

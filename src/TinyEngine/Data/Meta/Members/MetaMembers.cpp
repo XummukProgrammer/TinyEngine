@@ -65,7 +65,6 @@ namespace TinyEngine
 	{
 		ForEach([container](std::string_view id, IMetaMemberSharedPtr member)
 		{
-			// TODO: Передавать не Nullptr, а RenderWindow (Или вообще убрать передачу).
 			member->AddGuiWidget(container);
 		});
 	}
