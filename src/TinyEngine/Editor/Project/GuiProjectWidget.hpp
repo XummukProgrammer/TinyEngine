@@ -18,8 +18,10 @@ namespace TinyEngine
 		void Load();
 
 	private:
-		void OnCreate();
 		void OnLoad();
+
+	private:
+		GuiInputTextWidgetSharedPtr _loadProjectFileWidget;
 	};
 }
 

@@ -14,14 +14,12 @@
 
 namespace TinyEngine
 {
-	Application& Application::Init(int argc, char* argv[], const RenderWindowSettings& windowSettings, std::string_view projectFile, ApplicationDelegateUniquePtr&& delegate)
+	Application& Application::Init(int argc, char* argv[], const RenderWindowSettings& windowSettings, ApplicationDelegateUniquePtr&& delegate)
 	{
 		GetFileSystem()->SetExecutePath(argv[0]);
 		_delegate = std::move(delegate);
 
 		GetRender()->CreateWindow(windowSettings);
-
-		_projectFile = projectFile;
 
 		return *this;
 	}
@@ -83,8 +81,6 @@ namespace TinyEngine
 
 	void Application::OnInit()
 	{
-		ProjectUtils::LoadProject(&_project, _projectFile);
-
 		if (_delegate)
 		{
 			_delegate->OnInit();

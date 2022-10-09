@@ -79,6 +79,6 @@ namespace TinyEngine
 	{
 		ImGui::End();
 
-		ImGui::ShowDemoWindow();
+		//ImGui::ShowDemoWindow();
 	}
 }
