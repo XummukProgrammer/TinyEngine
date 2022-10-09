@@ -14,7 +14,7 @@ namespace TinyEngine
 		~Assets() = default;
 
 	public:
-		void LoadFromFile();
+		void LoadFromFile(std::string_view filePath);
 
 		AssetHolder& GetAssetHolder() { return _holder; }
 		const AssetHolder& GetConstAssetHolder() const { return _holder; }

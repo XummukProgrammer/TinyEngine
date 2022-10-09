@@ -23,7 +23,6 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Gui/Widgets/GuiLabelWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiWindowWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiMenuBarWidget.hpp
-	src/TinyEngine/Gui/Widgets/GuiProjectWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiButtonWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiInputTextWidget.hpp
 	src/TinyEngine/Gui/Widgets/GuiCheckboxWidget.hpp
@@ -58,6 +57,10 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Assets/AssetLoader.hpp
 	src/TinyEngine/Core/Assets/AssetTexture.hpp
 	src/TinyEngine/Core/Assets/Assets.hpp
+	
+	# Файлы редактора
+	src/TinyEngine/Editor/Project/GuiProjectWidget.hpp
+	src/TinyEngine/Editor/Project/Project.hpp
 )
 
 set(ENGINE_SOURCES
@@ -73,7 +76,6 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Gui/Widgets/GuiLabelWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiWindowWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiMenuBarWidget.cpp
-	src/TinyEngine/Gui/Widgets/GuiProjectWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiButtonWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiInputTextWidget.cpp
 	src/TinyEngine/Gui/Widgets/GuiCheckboxWidget.cpp
@@ -101,9 +103,14 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Assets/AssetHolder.cpp
 	src/TinyEngine/Core/Assets/AssetLoader.cpp
 	src/TinyEngine/Core/Assets/Assets.cpp
+	
 	# TODO: Не подключать, если сборка с SFML отключена
 	src/TinyEngine/Backends/SFML/GUI/SfmlGuiImpl.cpp
 	src/TinyEngine/Backends/SFML/Render/SfmlRenderObjectImpl.cpp
 	src/TinyEngine/Backends/SFML/Render/SfmlRenderWindowImpl.cpp
 	src/TinyEngine/Backends/SFML/Assets/AssetSfmlTexture.cpp
+	
+	# Файлы редактора
+	src/TinyEngine/Editor/Project/GuiProjectWidget.cpp
+	src/TinyEngine/Editor/Project/Project.cpp
 )

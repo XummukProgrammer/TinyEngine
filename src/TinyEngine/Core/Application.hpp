@@ -6,6 +6,8 @@
 
 #include <TinyEngine/Render/RenderWindowSettings.hpp>
 
+#include <TinyEngine/Editor/Project/Project.hpp>
+
 namespace TinyEngine
 {
 	class ApplicationDelegate
@@ -26,7 +28,7 @@ namespace TinyEngine
 		~Application() = default;
 
 	public:
-		Application& Init(int argc, char* argv[], const RenderWindowSettings& windowSettings, ApplicationDelegateUniquePtr&& delegate);
+		Application& Init(int argc, char* argv[], const RenderWindowSettings& windowSettings, std::string_view projectFile, ApplicationDelegateUniquePtr&& delegate);
 
 	public:
 		void Execute();
@@ -42,6 +44,8 @@ namespace TinyEngine
 		FactoryPtr GetFactory();
 		AssetsPtr GetAssets();
 		FileSystemPtr GetFileSystem();
+		Project& GetProject() { return _project; }
+		const Project& GetConstProject() const { return _project; }
 
 	private:
 		void OnInit();
@@ -51,6 +55,8 @@ namespace TinyEngine
 
 	private:
 		ApplicationDelegateUniquePtr _delegate;
+		Project _project;
+		std::string _projectFile;
 	};
 }
 
