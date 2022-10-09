@@ -19,7 +19,7 @@ namespace TinyEngine
     {
         SetName("ProjectWindow");
 
-        _loadProjectFileWidget = GuiInputTextWidget::Create("File", "File", {});
+        _loadProjectFileWidget = GuiInputTextWidget::Create("File", "project.xml", {});
 
         AddWidget("Title", _loadProjectFileWidget);
         AddWidget("LoadButton", GuiButtonWidget::Create("Load Project", std::bind(&GuiProjectWidget::OnLoad, this)));
