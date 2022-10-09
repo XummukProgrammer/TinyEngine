@@ -23,6 +23,15 @@ namespace TinyEngine
 		Editor = 1 << 3,
 		Default = Save | Load | Editor
 	};
+
+	enum class LogType
+	{
+		Info = 1 << 1,
+		Assert = 1 << 2,
+		Verify = 1 << 3,
+		Critical = 1 << 4,
+		All = Info | Assert | Verify | Critical
+	};
 }
 
 #endif // _CONSTANTS_HEADER_

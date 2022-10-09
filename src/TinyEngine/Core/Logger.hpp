@@ -6,6 +6,8 @@
 #include <TinyEngine/Data/Serialization/SerializationDefines.hpp>
 #include <TinyEngine/Data/Meta/MetaDefines.hpp>
 
+#include <TinyEngine/Core/Constants.hpp>
+
 namespace TinyEngine
 {
 	class LoggerMessage final : public MetaClass
@@ -13,8 +15,6 @@ namespace TinyEngine
 		TINY_ENGINE_META_CLASS_BEGIN(LoggerMessage)
 		{
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_type, "Type", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_time, "Time", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_sender, "Sender", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_message, "Message", "");
 		}
 		TINY_ENGINE_META_CLASS_END
@@ -24,12 +24,13 @@ namespace TinyEngine
 		~LoggerMessage() = default;
 
 	public:
-		void Init(std::string_view type, std::string_view time, std::string_view sender, std::string_view message, std::string_view stacktrace);
+		void Init(LogType type, std::string_view time, std::string_view sender, std::string_view message);
+
+		LogType GetType() const { return _type; }
+		const std::string& GetMsg() const { return _message; }
 
 	private:
-		std::string _type;
-		std::string _time;
-		std::string _sender;
+		LogType _type;
 		std::string _message;
 	};
 
@@ -48,6 +49,8 @@ namespace TinyEngine
 	public:
 		void AddMessage(const LoggerMessage& message);
 
+		std::vector<std::string> GetMessagesFromType(LogType type) const;
+
 	private:
 		std::vector<LoggerMessage> _messages;
 	};
@@ -61,7 +64,9 @@ namespace TinyEngine
 	public:
 		void SaveToFile();
 
-		void PrintMessage(std::string_view type, std::string_view sender, std::string_view message, bool isShowStacktrace);
+		void PrintMessage(LogType type, std::string_view sender, std::string_view message, bool isShowStacktrace);
+
+		std::vector<std::string> GetMessagesFromType(LogType type) const;
 
 	private:
 		LoggerMessages _messages;
@@ -69,6 +74,6 @@ namespace TinyEngine
 }
 
 #define TINY_ENGINE_PRINT_MESSAGE(type, message, isShowStacktrace) TinyEngine::Logger::GetInstance()->PrintMessage(type, __FUNCTION__, message, isShowStacktrace)
-#define TINY_ENGINE_PRINT_INFO(message) TINY_ENGINE_PRINT_MESSAGE("info", message, false)
+#define TINY_ENGINE_PRINT_INFO(message) TINY_ENGINE_PRINT_MESSAGE(TinyEngine::LogType::Info, message, false)
 
 #endif // _LOGGER_HEADER_

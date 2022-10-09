@@ -13,11 +13,14 @@
 #define TINY_ENGINE_FORWARD_STRUCT(cls) TINY_ENGINE_FORWARD_BASE(struct, cls)
 #define TINY_ENGINE_FORWARD_CLASS(cls) TINY_ENGINE_FORWARD_BASE(class, cls)
 
+#define TINY_ENGINE_FORWARD_ENUM_CLASS(name) enum class name;
+
 namespace TinyEngine
 {
-	enum class DirType;
-	enum class ArchiveFormat;
-	enum class MetaMemberFlag;
+	TINY_ENGINE_FORWARD_ENUM_CLASS(DirType)
+	TINY_ENGINE_FORWARD_ENUM_CLASS(ArchiveFormat)
+	TINY_ENGINE_FORWARD_ENUM_CLASS(MetaMemberFlag)
+	TINY_ENGINE_FORWARD_ENUM_CLASS(LogType)
 
 	TINY_ENGINE_FORWARD_CLASS(ApplicationDelegate)
 	TINY_ENGINE_FORWARD_CLASS(Debug)

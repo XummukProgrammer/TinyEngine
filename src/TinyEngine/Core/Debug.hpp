@@ -3,6 +3,8 @@
 
 #include <TinyEngine/Data/Singleton.hpp>
 
+#include <TinyEngine/Core/Constants.hpp>
+
 #include <string>
 
 #define ASSERT_ENABLE
@@ -25,7 +27,7 @@ namespace TinyEngine
 		virtual bool IsStopProgram() const = 0;
 		virtual bool IsLoggerDumpToFile() const { return IsStopProgram(); }
 
-		virtual std::string GetLoggerMessageType() const = 0;
+		virtual LogType GetLoggerMessageType() const = 0;
 
 	public:
 		const std::string& GetMessage() const { return _message; }
@@ -58,7 +60,7 @@ namespace TinyEngine
 		bool IsShowStacktrace() const override { return true; }
 		bool IsStopProgram() const override { return true; }
 
-		std::string GetLoggerMessageType() const override { return "assert"; }
+		LogType GetLoggerMessageType() const override { return LogType::Assert; }
 	};
 
 	class DebugVerifyOperation : public IDebugOperation
@@ -75,7 +77,7 @@ namespace TinyEngine
 		bool IsShowStacktrace() const override { return true; }
 		bool IsStopProgram() const override { return false; }
 
-		std::string GetLoggerMessageType() const override { return "verify"; }
+		LogType GetLoggerMessageType() const override { return LogType::Verify; }
 	};
 
 	class DebugCriticalOperation : public IDebugOperation
@@ -92,7 +94,7 @@ namespace TinyEngine
 		bool IsShowStacktrace() const override { return true; }
 		bool IsStopProgram() const override { return true; }
 
-		std::string GetLoggerMessageType() const override { return "critical"; }
+		LogType GetLoggerMessageType() const override { return LogType::Critical; }
 	};
 
 	class Debug final : public Singleton<Debug>
