@@ -19,7 +19,9 @@ namespace TinyEngine
 		GetFileSystem()->SetExecutePath(argv[0]);
 		_delegate = std::move(delegate);
 
-		GetRender()->CreateWindow(windowSettings);
+		auto render = GetRender();
+		render->CreateWindow(windowSettings);
+		render->SetOnUpdateCallback(std::bind(&Application::OnUpdate, this));
 
 		return *this;
 	}
@@ -104,5 +106,10 @@ namespace TinyEngine
 	void Application::OnProcess()
 	{
 		GetRender()->Execute();
+	}
+
+	void Application::OnUpdate()
+	{
+		_world.OnUpdate();
 	}
 }

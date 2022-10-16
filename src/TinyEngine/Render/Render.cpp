@@ -54,6 +54,8 @@ namespace TinyEngine
 		auto gui = Gui::GetInstance();
 		gui->Update(deltaTime);
 		gui->Draw(deltaTime);
+
+		OnUpdate();
 	}
 
 	void Render::Draw()
@@ -66,6 +68,14 @@ namespace TinyEngine
 	void Render::OnEventReceived()
 	{
 		Gui::GetInstance()->EventReceived();
+	}
+
+	void Render::OnUpdate()
+	{
+		if (_onUpdateCallback)
+		{
+			_onUpdateCallback();
+		}
 	}
 
 	void Render::CreateWindow(const RenderWindowSettings& windowSettings)

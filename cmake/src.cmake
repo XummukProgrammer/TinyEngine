@@ -57,6 +57,9 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Assets/AssetLoader.hpp
 	src/TinyEngine/Core/Assets/AssetTexture.hpp
 	src/TinyEngine/Core/Assets/Assets.hpp
+	src/TinyEngine/World/World.hpp
+	src/TinyEngine/World/Entity.hpp
+	src/TinyEngine/World/Component.hpp
 	
 	# Файлы редактора
 	src/TinyEngine/Editor/Project/GuiProjectWidget.hpp
@@ -103,6 +106,9 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Assets/AssetHolder.cpp
 	src/TinyEngine/Core/Assets/AssetLoader.cpp
 	src/TinyEngine/Core/Assets/Assets.cpp
+	src/TinyEngine/World/World.cpp
+	src/TinyEngine/World/Entity.cpp
+	src/TinyEngine/World/Component.cpp
 	
 	# TODO: Не подключать, если сборка с SFML отключена
 	src/TinyEngine/Backends/SFML/GUI/SfmlGuiImpl.cpp
