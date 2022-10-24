@@ -21,6 +21,9 @@ namespace TinyEngine
 		void Draw();
 
 	public:
+		void SetLayerId(int layerId) { _layerId = layerId; }
+		int GetLayerId() const { return _layerId; }
+
 		void AddRenderObject(RenderObjectSharedPtr object);
 		void RemoveRenderObject(RenderObjectSharedPtr object);
 		bool HasRenderObject(RenderObjectSharedPtr object) const;
@@ -30,6 +33,7 @@ namespace TinyEngine
 
 	private:
 		ObjectsList _objects;
+		int _layerId = 0;
 	};
 };
 

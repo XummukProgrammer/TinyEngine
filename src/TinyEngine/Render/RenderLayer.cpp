@@ -26,6 +26,7 @@ namespace TinyEngine
 	void RenderLayer::AddRenderObject(RenderObjectSharedPtr object)
 	{
 		TINY_ENGINE_PRINT_INFO("Added new render object");
+		object->SetLayerId(GetLayerId());
 		_objects.push_back(object);
 	}
 

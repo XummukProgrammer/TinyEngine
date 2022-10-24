@@ -44,6 +44,7 @@ namespace TinyEngine
 		void SetRotation(float rotation);
 
 		void UpdateWithTransform();
+		void TryUpdateLayer();
 
 	private:
 		RenderObjectSharedPtr _object;
@@ -53,6 +54,7 @@ namespace TinyEngine
 
 	private:
 		int _layerId = 0;
+		int _prevLayerId = 0;
 	};
 }
 

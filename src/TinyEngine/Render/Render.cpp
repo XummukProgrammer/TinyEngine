@@ -8,6 +8,8 @@
 #include <TinyEngine/Core/Logger.hpp>
 #include <TinyEngine/Core/Debug.hpp>
 
+#include <TinyEngine/Render/RenderLayer.hpp>
+
 namespace TinyEngine
 {
 	Render& Render::Execute()
@@ -40,6 +42,24 @@ namespace TinyEngine
 		RenderWindow::ResetInstance();
 
 		return *this;
+	}
+
+	void Render::ChangeObjectLayer(RenderObjectSharedPtr object, int newLayerId)
+	{
+		if (!object)
+		{
+			return;
+		}
+
+		if (auto layer = _renderLayers.GetLayer(object->GetLayerId()))
+		{
+			layer->RemoveRenderObject(object);
+		}
+
+		if (auto layer = _renderLayers.GetOrCreateLayer(newLayerId))
+		{
+			layer->AddRenderObject(object);
+		}
 	}
 
 	void Render::Close()

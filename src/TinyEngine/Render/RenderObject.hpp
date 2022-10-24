@@ -34,6 +34,9 @@ namespace TinyEngine
 		bool IsPointIntersects(const PointF& point) const;
 		bool IsRectIntersects(const RectF& rectangle) const;
 
+		void SetLayerId(int layerId) { _layerId = layerId; }
+		int GetLayerId() const { return _layerId; }
+
 		void Update(float deltaTime);
 
 #ifdef TINY_ENGINE_USE_SFML
@@ -45,6 +48,8 @@ namespace TinyEngine
 #ifdef TINY_ENGINE_USE_SFML
 		sf::Sprite _sprite;
 #endif
+
+		int _layerId = 0;
 	};
 };
 

@@ -22,11 +22,8 @@ namespace TinyEngine
 		_object->SetTexture("");
 		_object->SetTextureRect({ 0, 0, 32, 32 });
 
-		_layer = Render::GetInstance()->GetLayers().GetOrCreateLayer(_layerId);
-		if (_layer)
-		{
-			_layer->AddRenderObject(_object);
-		}
+		_prevLayerId = -1;
+		TryUpdateLayer();
 	}
 
 	void VisualComponent::OnDeinit()
@@ -49,6 +46,7 @@ namespace TinyEngine
 	void VisualComponent::OnUpdate()
 	{
 		UpdateWithTransform();
+		TryUpdateLayer();
 	}
 
 	void VisualComponent::SetPosition(const PointF& position)
@@ -103,6 +101,16 @@ namespace TinyEngine
 		SetPosition(_transformComponent->GetPosition());
 		SetScale(_transformComponent->GetScale());
 		SetRotation(_transformComponent->GetRotation());
+	}
+
+	void VisualComponent::TryUpdateLayer()
+	{
+		if (_prevLayerId != _layerId)
+		{
+			_prevLayerId = _layerId;
+
+			Render::GetInstance()->ChangeObjectLayer(_object, _layerId);
+		}
 	}
 
 	float VisualComponent::GetRotation() const

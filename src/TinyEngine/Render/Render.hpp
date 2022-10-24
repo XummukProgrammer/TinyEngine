@@ -28,6 +28,8 @@ namespace TinyEngine
 
 		void SetOnUpdateCallback(const DefaultCallback& callback) { _onUpdateCallback = callback; }
 
+		void ChangeObjectLayer(RenderObjectSharedPtr object, int newLayerId);
+
 	public:
 		void Close();
 

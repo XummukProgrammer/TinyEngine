@@ -9,7 +9,9 @@ namespace TinyEngine
 	void RenderLayers::CreateLayer(int layerId)
 	{
 		TINY_ENGINE_PRINT_INFO("Create layer: " + std::to_string(layerId));
-		_layers[layerId] = std::make_shared<RenderLayer>();
+		auto layer = std::make_shared<RenderLayer>();
+		layer->SetLayerId(layerId);
+		_layers[layerId] = std::move(layer);
 	}
 
 	RenderLayerSharedPtr RenderLayers::GetLayer(int layerId) const
