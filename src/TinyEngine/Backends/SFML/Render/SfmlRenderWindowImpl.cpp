@@ -51,7 +51,8 @@ namespace TinyEngine
 
 	void RenderWindow::Draw(RenderObject* object) const
 	{
-		_renderWindow->draw(object->GetSprite());
+		auto& sprite = object->GetSprite();
+		_renderWindow->draw(sprite);
 	}
 
 	void RenderWindow::Display()

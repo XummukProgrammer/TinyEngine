@@ -11,7 +11,7 @@ namespace TinyEngine
 
 	void RenderObject::SetPosition(const PointF& position)
 	{
-		_sprite.setPosition({ position.x, position.y });
+		_sprite.setPosition({ position.GetX(), position.GetY() });
 	}
 
 	PointF RenderObject::GetPosition() const
@@ -22,7 +22,7 @@ namespace TinyEngine
 
 	void RenderObject::SetScale(const PointF& factors)
 	{
-		_sprite.setScale({ factors.x, factors.y });
+		_sprite.setScale({ factors.GetX(), factors.GetY() });
 	}
 
 	PointF RenderObject::GetScale() const
@@ -45,6 +45,7 @@ namespace TinyEngine
 	{
 		// TODO: Доработать
 		_sprite.setTexture(sf::Texture());
+		_sprite.setColor(sf::Color::White);
 	}
 
 	void RenderObject::SetTextureRect(const Rect& rectangle)
@@ -54,7 +55,7 @@ namespace TinyEngine
 
 	bool RenderObject::IsPointIntersects(const PointF& point) const
 	{
-		return _sprite.getGlobalBounds().contains({ point.x, point.y });
+		return _sprite.getGlobalBounds().contains({ point.GetX(), point.GetY() });
 	}
 
 	bool RenderObject::IsRectIntersects(const RectF& rectangle) const

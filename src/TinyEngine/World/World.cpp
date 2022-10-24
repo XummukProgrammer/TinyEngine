@@ -6,25 +6,25 @@ namespace TinyEngine
 {
 	void World::OnInit()
 	{
-		for (const auto& entity : _entities)
+		for (auto& entity : _entities)
 		{
-			entity->OnInit();
+			entity.OnInit();
 		}
 	}
 
 	void World::OnDeinit()
 	{
-		for (const auto& entity : _entities)
+		for (auto& entity : _entities)
 		{
-			entity->OnDeinit();
+			entity.OnDeinit();
 		}
 	}
 
 	void World::OnUpdate()
 	{
-		for (const auto& entity : _entities)
+		for (auto& entity : _entities)
 		{
-			entity->OnUpdate();
+			entity.OnUpdate();
 		}
 	}
 }

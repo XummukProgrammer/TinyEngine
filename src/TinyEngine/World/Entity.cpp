@@ -8,7 +8,11 @@ namespace TinyEngine
 	{
 		for (const auto& component : _components)
 		{
-			component->OnInit();
+			if (component)
+			{
+				component->SetEntity(this);
+				component->OnInit();
+			}
 		}
 	}
 
@@ -16,7 +20,10 @@ namespace TinyEngine
 	{
 		for (const auto& component : _components)
 		{
-			component->OnDeinit();
+			if (component)
+			{
+				component->OnDeinit();
+			}
 		}
 	}
 
@@ -24,7 +31,10 @@ namespace TinyEngine
 	{
 		for (const auto& component : _components)
 		{
-			component->OnUpdate();
+			if (component)
+			{
+				component->OnUpdate();
+			}
 		}
 	}
 }

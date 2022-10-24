@@ -6,16 +6,17 @@
 
 namespace TinyEngine
 {
-	class World : public MetaClass
+	class World final : public MetaClass
 	{
 		TINY_ENGINE_META_CLASS_BEGIN(World)
 		{
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_entities, "Entities", "Entities");
 		}
 		TINY_ENGINE_META_CLASS_END
 
 	public:
 		World() = default;
-		virtual ~World() = default;
+		~World() = default;
 
 	public:
 		void OnInit();
@@ -23,7 +24,7 @@ namespace TinyEngine
 		void OnUpdate();
 
 	private:
-		std::vector<EntitySharedPtr> _entities;
+		std::vector<Entity> _entities;
 	};
 }
 

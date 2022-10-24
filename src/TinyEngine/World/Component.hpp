@@ -19,7 +19,18 @@ namespace TinyEngine
 	public:
 		virtual void OnInit() {}
 		virtual void OnDeinit() {}
+
+		virtual void OnEnable() {}
+		virtual void OnDisable() {}
+
 		virtual void OnUpdate() {}
+
+	public:
+		void SetEntity(EntityPtr entity) { _entity = entity; }
+		EntityPtr GetEntity() const { return _entity; }
+
+	private:
+		EntityPtr _entity;
 	};
 }
 

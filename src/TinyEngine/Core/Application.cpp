@@ -87,6 +87,8 @@ namespace TinyEngine
 		{
 			_delegate->OnInit();
 		}
+
+		_world.OnInit();
 	}
 
 	void Application::OnDeinit()
@@ -97,6 +99,8 @@ namespace TinyEngine
 		{
 			_delegate->OnDeinit();
 		}
+
+		_world.OnDeinit();
 
 		GetRender()->Destroy();
 

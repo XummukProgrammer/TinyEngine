@@ -16,5 +16,6 @@ namespace TinyEngine
 			project->GetName(), project->GetDescription(), project->GetVersion(), project->GetMainAssetsFile(), project->GetWorldFile()));
 		Assets::GetInstance()->LoadFromFile(project->GetMainAssetsFile());
 		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, project->GetWorldFile(), world);
+		world->OnInit();
 	}
 }
