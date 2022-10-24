@@ -17,9 +17,7 @@ namespace TinyEngine
 		}
 
 		_object = std::make_shared<RenderObject>();
-		SetPosition(_transformComponent->GetPosition());
-		SetScale(_transformComponent->GetScale());
-		SetRotation(_transformComponent->GetRotation());
+		UpdateWithTransform();
 
 		_object->SetTexture("");
 		_object->SetTextureRect({ 0, 0, 32, 32 });
@@ -50,6 +48,7 @@ namespace TinyEngine
 
 	void VisualComponent::OnUpdate()
 	{
+		UpdateWithTransform();
 	}
 
 	void VisualComponent::SetPosition(const PointF& position)
@@ -92,6 +91,18 @@ namespace TinyEngine
 		{
 			_object->SetRotation(rotation);
 		}
+	}
+
+	void VisualComponent::UpdateWithTransform()
+	{
+		if (!_transformComponent)
+		{
+			return;
+		}
+
+		SetPosition(_transformComponent->GetPosition());
+		SetScale(_transformComponent->GetScale());
+		SetRotation(_transformComponent->GetRotation());
 	}
 
 	float VisualComponent::GetRotation() const

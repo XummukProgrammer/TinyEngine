@@ -43,6 +43,8 @@ namespace TinyEngine
 		void SetScale(const PointF& factors);
 		void SetRotation(float rotation);
 
+		void UpdateWithTransform();
+
 	private:
 		RenderObjectSharedPtr _object;
 		RenderLayerSharedPtr _layer;
