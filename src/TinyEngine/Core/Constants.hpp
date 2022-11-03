@@ -29,8 +29,8 @@ namespace TinyEngine
 		Info = 1 << 1,
 		Assert = 1 << 2,
 		Verify = 1 << 3,
-		Critical = 1 << 4,
-		All = Info | Assert | Verify | Critical
+		Error = 1 << 4,
+		All = Info | Assert | Verify | Error
 	};
 }
 

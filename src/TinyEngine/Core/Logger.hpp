@@ -8,6 +8,8 @@
 
 #include <TinyEngine/Core/Constants.hpp>
 
+#include <fmt/format.h>
+
 namespace TinyEngine
 {
 	class LoggerMessage final : public MetaClass
@@ -65,10 +67,18 @@ namespace TinyEngine
 		void SaveToFile();
 
 		void PrintMessage(LogType type, std::string_view message);
-		void PrintInfo(std::string_view message) { PrintMessage(LogType::Info, message); }
-		void PrintAssert(std::string_view message) { PrintMessage(LogType::Assert, message); }
-		void PrintVerify(std::string_view message) { PrintMessage(LogType::Verify, message); }
-		void PrintCritical(std::string_view message) { PrintMessage(LogType::Critical, message); }
+		
+		template<typename ... Args>
+		void PrintMessageFormat(LogType type, std::string_view message, Args&&... args) { PrintMessage(type, fmt::format(message, std::forward<Args>(args)...)); }
+
+		template<typename ... Args>
+		void PrintInfo(std::string_view message, Args&&... args) { PrintMessageFormat(LogType::Info, message, std::forward<Args>(args)...); }
+
+		template<typename ... Args>
+		void PrintAssert(std::string_view message, Args&&... args) { PrintMessageFormat(LogType::Assert, message, std::forward<Args>(args)...); }
+
+		template<typename ... Args>
+		void PrintError(std::string_view message, Args&&... args) { PrintMessageFormat(LogType::Critical, message, std::forward<Args>(args)...); }
 
 		std::vector<std::string> GetMessagesFromType(LogType type) const;
 

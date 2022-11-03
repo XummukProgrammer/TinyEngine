@@ -1,6 +1,5 @@
 ﻿#include "Logger.hpp"
 
-#include <fmt/format.h>
 #include <TinyEngine/../../stacktrace/stacktrace.hpp>
 
 namespace TinyEngine
@@ -39,7 +38,6 @@ namespace TinyEngine
 
 	void Logger::PrintMessage(LogType type, std::string_view message)
 	{
-
 		LoggerMessage loggerMessage;
 		loggerMessage.Init(type, message);
 
