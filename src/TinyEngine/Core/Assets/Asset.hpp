@@ -21,7 +21,7 @@ namespace TinyEngine
 		virtual ~Asset() = default;
 
 	public:
-		const std::string& GetId() const;
+		const std::string& GetId() const { return _id; }
 
 	public:
 		virtual void OnAssetLoad() {}

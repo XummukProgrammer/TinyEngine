@@ -101,22 +101,14 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Data/Meta/Members/MetaDefaultMembers.cpp
 	src/TinyEngine/Core/Data/Meta/Members/IMetaMember.cpp
 	src/TinyEngine/Core/Data/Meta/Members/MetaMembers.cpp
-	src/TinyEngine/Core/Data/Meta/Members/MetaVectorMember.cpp
-	src/TinyEngine/Core/Data/Meta/Members/MetaMapMember.cpp
 	src/TinyEngine/Core/Data/Meta/Members/MetaClassMember.cpp
-	src/TinyEngine/Core/Data/Meta/Members/MetaSharedPtrMember.cpp
-	src/TinyEngine/Core/Data/Meta/Members/MetaEnumMember.cpp
 	src/TinyEngine/Core/Data/Meta/Class/MetaClass.cpp
-	src/TinyEngine/Core/Assets/Asset.cpp
 	src/TinyEngine/Core/Assets/AssetHolder.cpp
 	src/TinyEngine/Core/Assets/AssetLoader.cpp
 	src/TinyEngine/Core/Assets/Assets.cpp
 	src/TinyEngine/Core/World/World.cpp
 	src/TinyEngine/Core/World/Entity.cpp
-	src/TinyEngine/Core/World/Component.cpp
-	src/TinyEngine/Core/World/Common/Components/TransformComponent.cpp
 	src/TinyEngine/Core/World/Common/Components/VisualComponent.cpp
-	src/TinyEngine/Core/Event/Event.cpp
 	src/TinyEngine/Core/Event/EventSender.cpp
 	src/TinyEngine/Core/Event/EventSubscriber.cpp
 	
