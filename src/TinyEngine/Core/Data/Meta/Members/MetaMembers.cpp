@@ -10,7 +10,6 @@ namespace TinyEngine
 	void MetaMembers::AddMember(IMetaMemberSharedPtr member)
 	{
 		const auto& name = member->GetName();
-		TINY_ENGINE_CRITICAL(!HasMember(name), "");
 		_members.push_back({ name, member });
 	}
 

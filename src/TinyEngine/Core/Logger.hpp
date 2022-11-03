@@ -24,7 +24,7 @@ namespace TinyEngine
 		~LoggerMessage() = default;
 
 	public:
-		void Init(LogType type, std::string_view time, std::string_view sender, std::string_view message);
+		void Init(LogType type, std::string_view message);
 
 		LogType GetType() const { return _type; }
 		const std::string& GetMsg() const { return _message; }
@@ -64,7 +64,11 @@ namespace TinyEngine
 	public:
 		void SaveToFile();
 
-		void PrintMessage(LogType type, std::string_view sender, std::string_view message, bool isShowStacktrace);
+		void PrintMessage(LogType type, std::string_view message);
+		void PrintInfo(std::string_view message) { PrintMessage(LogType::Info, message); }
+		void PrintAssert(std::string_view message) { PrintMessage(LogType::Assert, message); }
+		void PrintVerify(std::string_view message) { PrintMessage(LogType::Verify, message); }
+		void PrintCritical(std::string_view message) { PrintMessage(LogType::Critical, message); }
 
 		std::vector<std::string> GetMessagesFromType(LogType type) const;
 
@@ -73,7 +77,5 @@ namespace TinyEngine
 	};
 }
 
-#define TINY_ENGINE_PRINT_MESSAGE(type, message, isShowStacktrace) TinyEngine::Logger::GetInstance()->PrintMessage(type, __FUNCTION__, message, isShowStacktrace)
-#define TINY_ENGINE_PRINT_INFO(message) TINY_ENGINE_PRINT_MESSAGE(TinyEngine::LogType::Info, message, false)
 
 #endif // _LOGGER_HEADER_

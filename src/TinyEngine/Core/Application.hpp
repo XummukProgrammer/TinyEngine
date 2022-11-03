@@ -36,15 +36,9 @@ namespace TinyEngine
 		void Close();
 
 	public:
-		DebugPtr GetDebug();
-		LoggerPtr GetLogger();
-		RenderPtr GetRender();
-		GuiPtr GetGui();
-		FactoryPtr GetFactory();
-		AssetsPtr GetAssets();
-		FileSystemPtr GetFileSystem();
 		Project& GetProject() { return _project; }
 		const Project& GetConstProject() const { return _project; }
+
 		World& GetWorld() { return _world; }
 		const World& GetConstWorld() const { return _world; }
 

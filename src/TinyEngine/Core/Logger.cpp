@@ -5,10 +5,10 @@
 
 namespace TinyEngine
 {
-	void LoggerMessage::Init(LogType type, std::string_view time, std::string_view sender, std::string_view message)
+	void LoggerMessage::Init(LogType type, std::string_view message)
 	{
 		_type = type;
-		_message = fmt::format("[{}][{}] {}", sender, time, message);
+		_message = message;
 	}
 
 	void LoggerMessages::AddMessage(const LoggerMessage& message)
@@ -37,25 +37,13 @@ namespace TinyEngine
 		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, "../_logs/logs.xml", &_messages);
 	}
 
-	void Logger::PrintMessage(LogType type, std::string_view sender, std::string_view message, bool isShowStacktrace)
+	void Logger::PrintMessage(LogType type, std::string_view message)
 	{
-		const std::string time = "12.12.2099 23:59:59";
-		std::string stacktrace;
-
-		if (isShowStacktrace)
-		{
-			stacktrace = markusjx::stacktrace::stacktrace().toString();
-		}
 
 		LoggerMessage loggerMessage;
-		loggerMessage.Init(type, time, sender, message);
+		loggerMessage.Init(type, message);
 
 		fmt::print("{}\n", loggerMessage.GetMsg());
-
-		if (!stacktrace.empty())
-		{
-			fmt::print("\n\nStacktrace:\n{}\n\n", stacktrace);
-		}
 
 		_messages.AddMessage(loggerMessage);
 	}

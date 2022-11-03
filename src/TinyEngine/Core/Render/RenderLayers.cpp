@@ -8,7 +8,6 @@ namespace TinyEngine
 {
 	void RenderLayers::CreateLayer(int layerId)
 	{
-		TINY_ENGINE_PRINT_INFO("Create layer: " + std::to_string(layerId));
 		auto layer = std::make_shared<RenderLayer>();
 		layer->SetLayerId(layerId);
 		_layers[layerId] = std::move(layer);
@@ -36,7 +35,6 @@ namespace TinyEngine
 
 	void RenderLayers::RemoveLayer(int layerId)
 	{
-		TINY_ENGINE_PRINT_INFO("Remove layer: " + std::to_string(layerId));
 		auto it = _layers.find(layerId);
 		if (it != _layers.end())
 		{

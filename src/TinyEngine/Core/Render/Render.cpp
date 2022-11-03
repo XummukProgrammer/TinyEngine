@@ -37,8 +37,6 @@ namespace TinyEngine
 
 	Render& Render::Destroy()
 	{
-		TINY_ENGINE_PRINT_INFO("Destroy");
-
 		RenderWindow::ResetInstance();
 
 		return *this;

@@ -16,9 +16,7 @@ namespace TinyEngine
 		TinyEngine::AssetLoader costilLoader;
 		TinyEngine::AssetTexture costilSfmlTexture;
 
-		TINY_ENGINE_PRINT_INFO(fmt::format("Load assets file: {}", filePath));
 		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, &_holder);
 		_holder.OnAssetLoad();
-		TINY_ENGINE_PRINT_INFO("Assets file loaded!");
 	}
 }
