@@ -2,10 +2,10 @@
 #define _APPLICATION_HEADER_
 
 #include <TinyEngine/Core/Forwards.hpp>
-#include <TinyEngine/Data/Singleton.hpp>
-#include <TinyEngine/Render/RenderWindowSettings.hpp>
-#include <TinyEngine/Editor/Project/Project.hpp>
-#include <TinyEngine/World/World.hpp>
+#include <TinyEngine/Core/Data/Singleton.hpp>
+#include <TinyEngine/Core/Render/RenderWindowSettings.hpp>
+#include <TinyEngine/Core/Editor/Project/Project.hpp>
+#include <TinyEngine/Core/World/World.hpp>
 
 namespace TinyEngine
 {

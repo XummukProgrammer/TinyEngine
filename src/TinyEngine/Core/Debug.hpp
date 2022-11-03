@@ -1,7 +1,7 @@
 ﻿#ifndef _DEBUG_HEADER_
 #define _DEBUG_HEADER_
 
-#include <TinyEngine/Data/Singleton.hpp>
+#include <TinyEngine/Core/Data/Singleton.hpp>
 
 #include <TinyEngine/Core/Constants.hpp>
 

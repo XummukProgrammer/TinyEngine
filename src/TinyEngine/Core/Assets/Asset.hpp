@@ -1,8 +1,8 @@
 ﻿#ifndef _ASSET_HEADER_
 #define _ASSET_HEADER_
 
-#include <TinyEngine/Data/Serialization/SerializationDefines.hpp>
-#include <TinyEngine/Data/Meta/MetaDefines.hpp>
+#include <TinyEngine/Core/Data/Serialization/SerializationDefines.hpp>
+#include <TinyEngine/Core/Data/Meta/MetaDefines.hpp>
 
 #include <memory>
 

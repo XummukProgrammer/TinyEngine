@@ -2,9 +2,9 @@
 #define _ASSET_TEXTURE_HEADER_
 
 #include <TinyEngine/Core/Assets/Asset.hpp>
-#include <TinyEngine/Render/Render.hpp>
+#include <TinyEngine/Core/Render/Render.hpp>
 
-#include <TinyEngine/Render/Texture.hpp>
+#include <TinyEngine/Core/Render/Texture.hpp>
 
 #ifdef TINY_ENGINE_USE_SFML
 #include <SFML/Graphics.hpp>

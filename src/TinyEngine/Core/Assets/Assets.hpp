@@ -1,7 +1,7 @@
 ﻿#ifndef _ASSETS_HEADER_
 #define _ASSETS_HEADER_
 
-#include <TinyEngine/Data/Singleton.hpp>
+#include <TinyEngine/Core/Data/Singleton.hpp>
 
 #include <TinyEngine/Core/Assets/AssetHolder.hpp>
 

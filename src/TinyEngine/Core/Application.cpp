@@ -8,9 +8,9 @@
 #include <TinyEngine/Core/Assets/AssetHolder.hpp>
 #include <TinyEngine/Core/Assets/AssetLoader.hpp>
 #include <TinyEngine/Core/Assets/AssetTexture.hpp>
-#include <TinyEngine/Render/Render.hpp>
-#include <TinyEngine/Gui/Gui.hpp>
-#include <TinyEngine/Data/Factory.hpp>
+#include <TinyEngine/Core/Render/Render.hpp>
+#include <TinyEngine/Core/Gui/Gui.hpp>
+#include <TinyEngine/Core/Data/Factory.hpp>
 
 namespace TinyEngine
 {

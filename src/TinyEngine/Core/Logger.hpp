@@ -1,10 +1,10 @@
 ﻿#ifndef _LOGGER_HEADER_
 #define _LOGGER_HEADER_
 
-#include <TinyEngine/Data/Singleton.hpp>
+#include <TinyEngine/Core/Data/Singleton.hpp>
 
-#include <TinyEngine/Data/Serialization/SerializationDefines.hpp>
-#include <TinyEngine/Data/Meta/MetaDefines.hpp>
+#include <TinyEngine/Core/Data/Serialization/SerializationDefines.hpp>
+#include <TinyEngine/Core/Data/Meta/MetaDefines.hpp>
 
 #include <TinyEngine/Core/Constants.hpp>
 
