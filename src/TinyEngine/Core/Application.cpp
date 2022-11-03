@@ -28,6 +28,7 @@ namespace TinyEngine
 
 	void Application::Execute()
 	{
+		TINY_ENGINE_INFO("Application", "Execute");
 		OnInit();
 		OnProcess();
 		OnDeinit();
@@ -45,6 +46,8 @@ namespace TinyEngine
 
 	void Application::OnInit()
 	{
+		TINY_ENGINE_INFO("Application", "Init");
+
 		if (_delegate)
 		{
 			_delegate->OnInit();
@@ -55,6 +58,8 @@ namespace TinyEngine
 
 	void Application::OnDeinit()
 	{
+		TINY_ENGINE_INFO("Application", "Deinit");
+
 		if (_delegate)
 		{
 			_delegate->OnDeinit();
@@ -69,6 +74,8 @@ namespace TinyEngine
 
 	void Application::OnProcess()
 	{
+		TINY_ENGINE_INFO("Application", "Start process");
+
 		Render::GetInstance()->Execute();
 	}
 

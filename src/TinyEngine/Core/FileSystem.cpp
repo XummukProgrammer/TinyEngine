@@ -1,5 +1,7 @@
 ﻿#include "FileSystem.hpp"
 
+#include <TinyEngine/Core/Logger.hpp>
+
 #include <filesystem>
 
 namespace TinyEngine
@@ -8,6 +10,8 @@ namespace TinyEngine
 	{
 		_executePath = executePath;
 		_executeDir = std::filesystem::path(_executePath).remove_filename().generic_string();
+
+		TINY_ENGINE_INFO("FileSystem", "Success init (ExecutePath: {}, ExecuteDir: {})", _executePath, _executeDir);
 	}
 
 	std::string FileSystem::BuildPath(DirType type, std::string_view path) const

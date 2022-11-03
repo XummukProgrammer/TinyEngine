@@ -87,5 +87,6 @@ namespace TinyEngine
 	};
 }
 
+#define TINY_ENGINE_INFO(tag, message, ...) Logger::GetInstance()->PrintInfo(std::string{"["} + tag + "] " + message, __VA_ARGS__)
 
 #endif // _LOGGER_HEADER_
