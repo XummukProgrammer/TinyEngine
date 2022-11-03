@@ -34,6 +34,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiInputMapWidget.hpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiMetaClassWidget.hpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiSharedPtrWidget.hpp
+	src/TinyEngine/Core/Gui/Widgets/Containers/GuiTreeContainerWidget.hpp
 	src/TinyEngine/Core/Gui/Widgets/GuiInputEnumWidget.hpp
 	src/TinyEngine/Core/Data/Singleton.hpp
 	src/TinyEngine/Core/Data/Serialization/Serialization.hpp
@@ -95,6 +96,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiInputMapWidget.cpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiMetaClassWidget.cpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiSharedPtrWidget.cpp
+	src/TinyEngine/Core/Gui/Widgets/Containers/GuiTreeContainerWidget.cpp
 	src/TinyEngine/Core/Gui/Widgets/GuiInputEnumWidget.cpp
 	src/TinyEngine/Core/Data/Serialization/Serialization.cpp
 	src/TinyEngine/Core/Data/Serialization/XmlArchive.cpp

@@ -2,8 +2,7 @@
 #define _GUI_SHARED_PTR_WIDGET_HEADER_
 
 #include <TinyEngine/Core/Forwards.hpp>
-#include <TinyEngine/Core/Gui/GuiWidget.hpp>
-#include <TinyEngine/Core/Gui/GuiWidgetContainer.hpp>
+#include <TinyEngine/Core/Gui/Widgets/Containers/GuiTreeContainerWidget.hpp>
 
 #include <functional>
 #include <string>
@@ -11,7 +10,7 @@
 
 namespace TinyEngine
 {
-	class GuiSharedPtrWidget final : public GuiWidget, public GuiWidgetContainer
+	class GuiSharedPtrWidget final : public GuiTreeContainerWidget
 	{
 	public:
 		using OnInit = std::function<void(std::string_view)>;
@@ -24,10 +23,7 @@ namespace TinyEngine
 		static GuiSharedPtrWidgetSharedPtr Create(std::string_view name, bool isInited, const OnInit& callback, const std::vector<std::string>& inheritorTypes);
 
 	public:
-		void Load();
-
-		void SetName(std::string_view name) { _name = name; }
-		const std::string& GetName() const { return _name; }
+		void Load() override;
 
 		void SetIsInited(bool isInited) { _isInited = isInited; }
 		bool IsInited() const { return _isInited; }
@@ -36,14 +32,12 @@ namespace TinyEngine
 
 		void SetInheritorTypes(const std::vector<std::string>& types) { _inheritorTypes = types; }
 
-	public:
-		void Draw(float deltaTime) override;
-
 	private:
 		void OnInitHandler();
 
+		void OnPostDraw() override;
+
 	private:
-		std::string _name;
 		bool _isInited = false;
 		GuiStringListBoxWidgetSharedPtr _typesListWidget;
 		GuiButtonWidgetSharedPtr _buttonWidget;

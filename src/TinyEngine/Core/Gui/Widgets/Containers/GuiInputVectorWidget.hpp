@@ -2,15 +2,14 @@
 #define _GUI_INPUT_VECTOR_WIDGET_HEADER_
 
 #include <TinyEngine/Core/Forwards.hpp>
-#include <TinyEngine/Core/Gui/GuiWidget.hpp>
-#include <TinyEngine/Core/Gui/GuiWidgetContainer.hpp>
+#include <TinyEngine/Core/Gui/Widgets/Containers/GuiTreeContainerWidget.hpp>
 
 #include <string>
 #include <functional>
 
 namespace TinyEngine
 {
-	class GuiInputVectorWidget final : public GuiWidget, public GuiWidgetContainer
+	class GuiInputVectorWidget final : public GuiTreeContainerWidget
 	{
 	public:
 		using ValueAdd = std::function<void()>;
@@ -23,22 +22,17 @@ namespace TinyEngine
 		static GuiInputVectorWidgetSharedPtr Create(std::string_view name);
 
 	public:
-		void SetName(std::string_view name) { _name = name; }
-		const std::string& GetName() const { return _name; }
-
 		void SetOnValueAddCallback(const ValueAdd& callback) { _onValueAddCallback = callback; }
 
 	public:
-		void Load();
-
-	public:
-		void Draw(float deltaTime) override;
+		void Load() override;
 
 	private:
 		void OnValueAdd();
 
+		void OnPostDraw() override;
+
 	private:
-		std::string _name;
 		bool _isValueAdd = false;
 		ValueAdd _onValueAddCallback;
 	};

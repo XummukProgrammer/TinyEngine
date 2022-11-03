@@ -34,17 +34,13 @@ namespace TinyEngine
         _buttonWidget->SetIsActive(!IsInited());
     }
 
-    void GuiSharedPtrWidget::Draw(float deltaTime)
+    void GuiSharedPtrWidget::OnInitHandler()
     {
-        GuiWidget::Draw(deltaTime);
+        _isInit = true;
+    }
 
-        if (ImGui::TreeNode(_name.c_str()))
-        {
-            GuiWidgetContainer::Draw(deltaTime);
-
-            ImGui::TreePop();
-        }
-
+    void GuiSharedPtrWidget::OnPostDraw()
+    {
         if (_isInit)
         {
             _onInitCallback(_typesListWidget->GetCurrentItemString());
@@ -54,10 +50,5 @@ namespace TinyEngine
             _typesListWidget->SetIsActive(false);
             _buttonWidget->SetIsActive(false);
         }
-    }
-
-    void GuiSharedPtrWidget::OnInitHandler()
-    {
-        _isInit = true;
     }
 }

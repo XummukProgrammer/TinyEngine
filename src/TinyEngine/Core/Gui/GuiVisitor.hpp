@@ -11,7 +11,6 @@
 #include <TinyEngine/Core/Gui/Widgets/GuiInputFloatWidget.hpp>
 #include <TinyEngine/Core/Gui/Widgets/Containers/GuiInputVectorWidget.hpp>
 #include <TinyEngine/Core/Gui/Widgets/Containers/GuiInputMapWidget.hpp>
-#include <TinyEngine/Core/Gui/Widgets/Containers/GuiMetaClassWidget.hpp>
 #include <TinyEngine/Core/Gui/Widgets/Containers/GuiSharedPtrWidget.hpp>
 #include <TinyEngine/Core/Gui/Widgets/GuiStringListBoxWidget.hpp>
 
@@ -159,7 +158,7 @@ namespace TinyEngine
 	public:
 		static void AddWidget(GuiWidgetContainerPtr container, std::string_view name, std::string_view description, MetaClass* value)
 		{
-			auto widget = GuiMetaClassWidget::Create(name);
+			auto widget = GuiTreeContainerWidget::Create(name);
 			value->AddGuiWidgetsToContainer(widget.get());
 			container->AddWidget(name, widget);
 		}

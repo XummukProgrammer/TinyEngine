@@ -21,25 +21,6 @@ namespace TinyEngine
         AddWidget("CreateValue", GuiButtonWidget::Create("Create value", std::bind(&GuiInputMapWidget::OnAddValue, this)));
     }
 
-    void GuiInputMapWidget::Draw(float deltaTime)
-    {
-        GuiWidget::Draw(deltaTime);
-
-        if (ImGui::TreeNode(_name.c_str()))
-        {
-            GuiWidgetContainer::Draw(deltaTime);
-
-            if (_isValueAdd && _onValueAddCallback)
-            {
-                _onValueAddCallback(_inputKeyWidget->GetText());
-                _inputKeyWidget->SetText("");
-                _isValueAdd = false;
-            }
-
-            ImGui::TreePop();
-        }
-    }
-
     void GuiInputMapWidget::OnAddValue()
     {
         if (_inputKeyWidget->GetText().empty())
@@ -48,5 +29,15 @@ namespace TinyEngine
         }
 
         _isValueAdd = true;
+    }
+
+    void GuiInputMapWidget::OnPostDraw()
+    {
+        if (_isValueAdd && _onValueAddCallback)
+        {
+            _onValueAddCallback(_inputKeyWidget->GetText());
+            _inputKeyWidget->SetText("");
+            _isValueAdd = false;
+        }
     }
 }
