@@ -1,0 +1,8 @@
+﻿#ifndef _STATE_TRANSITIONS_HEADER_
+#define _STATE_TRANSITIONS_HEADER_
+
+namespace TinyEngine
+{
+}
+
+#endif // _STATE_TRANSITIONS_HEADER_

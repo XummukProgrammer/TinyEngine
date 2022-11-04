@@ -180,6 +180,10 @@ namespace TinyEngine
 				valueRef->AddGuiWidgetsToContainer(widget.get());
 
 			});
+			if (value)
+			{
+				valueRef->AddGuiWidgetsToContainer(widget.get());
+			}
 			container->AddWidget(name, widget);
 		}
 	};

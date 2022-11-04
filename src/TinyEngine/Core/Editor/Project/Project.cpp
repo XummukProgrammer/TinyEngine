@@ -14,5 +14,11 @@ namespace TinyEngine
 		Assets::GetInstance()->LoadFromFile(project->GetMainAssetsFile());
 		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, project->GetWorldFile(), world);
 		world->OnInit();
+		project->SetFilePath(filePath);
+	}
+
+	void ProjectUtils::SaveProject(Project* project)
+	{
+		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, project->GetFilePath(), project);
 	}
 }

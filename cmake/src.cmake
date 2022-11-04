@@ -66,6 +66,10 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Event/Event.hpp
 	src/TinyEngine/Core/Event/EventSender.hpp
 	src/TinyEngine/Core/Event/EventSubscriber.hpp
+	src/TinyEngine/Core/States/State.hpp
+	src/TinyEngine/Core/States/States.hpp
+	src/TinyEngine/Core/States/StateTransition.hpp
+	src/TinyEngine/Core/States/StateTransitions.hpp
 	
 	# Файлы редактора
 	src/TinyEngine/Core/Editor/Project/GuiProjectWidget.hpp
@@ -113,6 +117,10 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/World/Common/Components/VisualComponent.cpp
 	src/TinyEngine/Core/Event/EventSender.cpp
 	src/TinyEngine/Core/Event/EventSubscriber.cpp
+	src/TinyEngine/Core/States/State.cpp
+	src/TinyEngine/Core/States/States.cpp
+	src/TinyEngine/Core/States/StateTransition.cpp
+	src/TinyEngine/Core/States/StateTransitions.cpp
 	
 	# TODO: Не подключать, если сборка с SFML отключена
 	src/TinyEngine/Core/Backends/SFML/GUI/SfmlGuiImpl.cpp

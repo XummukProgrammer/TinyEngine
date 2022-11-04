@@ -6,6 +6,10 @@
 #include <TinyEngine/Core/Application.hpp>
 #include <TinyEngine/Core/Editor/Project/Project.hpp>
 
+#include <TinyEngine/Core/Gui/Widgets/Containers/GuiPropertiesWidget.hpp>
+#include <TinyEngine/Core/Gui/Widgets/GuiWindowWidget.hpp>
+#include <TinyEngine/Core/Gui/Gui.hpp>
+
 namespace TinyEngine
 {
     GuiProjectWidgetSharedPtr GuiProjectWidget::Create()
@@ -31,5 +35,12 @@ namespace TinyEngine
             _loadProjectFileWidget->GetText(), 
             &Application::GetInstance()->GetWorld());
         SetIsActive(false);
+
+        // For tests
+        auto mainWindowWidgetPtr = TinyEngine::Gui::GetInstance()->GetMainWindow();
+
+        auto propertiesWindow = TinyEngine::GuiPropertiesWidget::Create();
+		propertiesWindow->InitFromMetaClass(&TinyEngine::Application::GetInstance()->GetProject());
+		mainWindowWidgetPtr->AddWidget(propertiesWindow);
     }
 }

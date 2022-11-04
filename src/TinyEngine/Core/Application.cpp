@@ -11,6 +11,7 @@
 #include <TinyEngine/Core/Render/Render.hpp>
 #include <TinyEngine/Core/Gui/Gui.hpp>
 #include <TinyEngine/Core/Data/Factory.hpp>
+#include <TinyEngine/Core/Editor/Project/Project.hpp>
 
 namespace TinyEngine
 {
@@ -70,6 +71,8 @@ namespace TinyEngine
 		Render::GetInstance()->Destroy();
 
 		LoggerSaveToFile();
+
+		ProjectUtils::SaveProject(&GetProject());
 	}
 
 	void Application::OnProcess()
