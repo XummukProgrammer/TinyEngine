@@ -4,7 +4,7 @@
 #include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Core/Data/Singleton.hpp>
 #include <TinyEngine/Core/Render/RenderWindowSettings.hpp>
-#include <TinyEngine/Core/Editor/Project/Project.hpp>
+#include <TinyEngine/Core/Project.hpp>
 #include <TinyEngine/Core/World/World.hpp>
 
 namespace TinyEngine

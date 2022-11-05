@@ -4,7 +4,7 @@
 #include <TinyEngine/Core/Gui/Widgets/GuiInputTextWidget.hpp>
 
 #include <TinyEngine/Core/Application.hpp>
-#include <TinyEngine/Core/Editor/Project/Project.hpp>
+#include <TinyEngine/Core/Project.hpp>
 
 #include <TinyEngine/Core/Gui/Widgets/Containers/GuiPropertiesWidget.hpp>
 #include <TinyEngine/Core/Gui/Widgets/GuiWindowWidget.hpp>
