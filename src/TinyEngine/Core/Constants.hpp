@@ -32,6 +32,15 @@ namespace TinyEngine
 		Error = 1 << 4,
 		All = Info | Assert | Verify | Error
 	};
+
+	enum class ServiceProviderPriority
+	{
+		VeryHigh,
+		High,
+		Normal,
+		Low,
+		VeryLow
+	};
 }
 
 #endif // _CONSTANTS_HEADER_

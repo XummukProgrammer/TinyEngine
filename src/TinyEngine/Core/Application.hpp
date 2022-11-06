@@ -5,7 +5,6 @@
 #include <TinyEngine/Core/Data/Singleton.hpp>
 #include <TinyEngine/Core/Render/RenderWindowSettings.hpp>
 #include <TinyEngine/Core/Project.hpp>
-#include <TinyEngine/Core/World/World.hpp>
 
 namespace TinyEngine
 {
@@ -39,8 +38,7 @@ namespace TinyEngine
 		Project& GetProject() { return _project; }
 		const Project& GetConstProject() const { return _project; }
 
-		World& GetWorld() { return _world; }
-		const World& GetConstWorld() const { return _world; }
+		void UpdateWorld();
 
 	private:
 		void OnInit();
@@ -52,7 +50,6 @@ namespace TinyEngine
 	private:
 		ApplicationDelegateUniquePtr _delegate;
 		Project _project;
-		World _world;
 	};
 }
 

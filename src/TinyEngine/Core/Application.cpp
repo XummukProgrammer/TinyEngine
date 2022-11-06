@@ -12,6 +12,8 @@
 #include <TinyEngine/Core/Gui/Gui.hpp>
 #include <TinyEngine/Core/Data/Factory.hpp>
 #include <TinyEngine/Core/Project.hpp>
+#include <TinyEngine/Core/ServiceProviders/ServiceProviders.hpp>
+#include <TinyEngine/Core/World/World.hpp>
 
 namespace TinyEngine
 {
@@ -30,6 +32,8 @@ namespace TinyEngine
 	void Application::Execute()
 	{
 		TINY_ENGINE_INFO("Application", "Execute");
+		ServiceProviders::GetInstance()->OnExecute();
+
 		OnInit();
 		OnProcess();
 		OnDeinit();
@@ -45,6 +49,14 @@ namespace TinyEngine
 		Render::GetInstance()->Close();
 	}
 
+	void Application::UpdateWorld()
+	{
+		if (auto world = ServiceProviders::GetInstance()->GetProvider<IWorldServiceProvider>())
+		{
+			world->OnServiceInit();
+		}
+	}
+
 	void Application::OnInit()
 	{
 		TINY_ENGINE_INFO("Application", "Init");
@@ -54,7 +66,7 @@ namespace TinyEngine
 			_delegate->OnInit();
 		}
 
-		_world.OnInit();
+		ServiceProviders::GetInstance()->OnInit();
 	}
 
 	void Application::OnDeinit()
@@ -66,7 +78,7 @@ namespace TinyEngine
 			_delegate->OnDeinit();
 		}
 
-		_world.OnDeinit();
+		ServiceProviders::GetInstance()->OnDeinit();
 
 		Render::GetInstance()->Destroy();
 
@@ -84,6 +96,6 @@ namespace TinyEngine
 
 	void Application::OnUpdate()
 	{
-		_world.OnUpdate();
+		ServiceProviders::GetInstance()->OnUpdate();
 	}
 }
