@@ -1,65 +1,30 @@
 ﻿#include "World.hpp"
 
 #include <TinyEngine/Core/World/Entity.hpp>
-#include <TinyEngine/Core/Application.hpp>
-#include <TinyEngine/Core/ServiceProviders/ServiceProviders.hpp>
 
 namespace TinyEngine
 {
-	class WorldServiceProvider final : public IWorldServiceProvider
+	void World::OnInit()
 	{
-	public:
-		WorldServiceProvider() = default;
-		~WorldServiceProvider() = default;
-
-	public:
-		void OnServiceInit() override;
-		void OnServiceDeinit() override;
-		void OnServiceUpdate() override;
-
-	public:
-		void LoadWorld() override;
-
-	private:
-		WorldEntities _worldEntities;
-	};
-
-	void WorldServiceProvider::OnServiceInit()
-	{
-		for (auto& entity : _worldEntities.GetEntities())
+		for (auto& entity : _entities)
 		{
 			entity.OnInit();
 		}
 	}
 
-	void WorldServiceProvider::OnServiceDeinit()
+	void World::OnDeinit()
 	{
-		for (auto& entity : _worldEntities.GetEntities())
+		for (auto& entity : _entities)
 		{
 			entity.OnDeinit();
 		}
 	}
 
-	void WorldServiceProvider::OnServiceUpdate()
+	void World::OnUpdate()
 	{
-		for (auto& entity : _worldEntities.GetEntities())
+		for (auto& entity : _entities)
 		{
 			entity.OnUpdate();
-		}
-	}
-
-	void WorldServiceProvider::LoadWorld()
-	{
-		const auto& worldFile = Application::GetInstance()->GetConstProject().GetWorldFile();
-		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, worldFile, &_worldEntities);
-		OnServiceInit();
-	}
-
-	namespace Services
-	{
-		void RegisterWorldServiceProvider()
-		{
-			ServiceProviders::GetInstance()->AddProvider(ServiceProviderPriority::VeryHigh, new WorldServiceProvider());
 		}
 	}
 }

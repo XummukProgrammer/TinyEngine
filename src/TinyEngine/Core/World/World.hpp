@@ -3,44 +3,29 @@
 
 #include <TinyEngine/Core/Data/Meta/MetaDefines.hpp>
 #include <TinyEngine/Core/World/Entity.hpp>
-#include <TinyEngine/Core/ServiceProviders/IServiceProvider.hpp>
 
 namespace TinyEngine
 {
-	class WorldEntities final : public MetaClass
+	class World final : public MetaClass
 	{
-		TINY_ENGINE_META_CLASS_BEGIN(WorldEntities)
+		TINY_ENGINE_META_CLASS_BEGIN(World)
 		{
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_entities, "Entities", "Entities");
 		}
 		TINY_ENGINE_META_CLASS_END
 
 	public:
-		WorldEntities() = default;
-		~WorldEntities() = default;
+		World() = default;
+		~World() = default;
 
 	public:
-		std::vector<Entity>& GetEntities() { return _entities; }
-		const std::vector<Entity>& GetConstEntities() const { return _entities; }
+		void OnInit();
+		void OnDeinit();
+		void OnUpdate();
 
 	private:
 		std::vector<Entity> _entities;
 	};
-
-	class IWorldServiceProvider : public IServiceProvider
-	{
-	public:
-		IWorldServiceProvider() = default;
-		virtual ~IWorldServiceProvider() = default;
-
-	public:
-		virtual void LoadWorld() = 0;
-	};
-
-	namespace Services
-	{
-		void RegisterWorldServiceProvider();
-	}
 }
 
 #endif // _WORLD_HEADER_

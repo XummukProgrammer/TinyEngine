@@ -3,20 +3,17 @@
 #include <TinyEngine/Core/Assets/Assets.hpp>
 #include <TinyEngine/Core/Logger.hpp>
 #include <TinyEngine/Core/World/World.hpp>
-#include <TinyEngine/Core/ServiceProviders/ServiceProviders.hpp>
 
 #include <fmt/format.h>
 
 namespace TinyEngine
 {
-	void ProjectUtils::LoadProject(Project* project, std::string_view filePath)
+	void ProjectUtils::LoadProject(Project* project, std::string_view filePath, World* world)
 	{
 		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, project);
 		Assets::GetInstance()->LoadFromFile(project->GetMainAssetsFile());
-		if (auto world = ServiceProviders::GetInstance()->GetProvider<IWorldServiceProvider>())
-		{
-			world->LoadWorld();
-		}
+		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, project->GetWorldFile(), world);
+		world->OnInit();
 		project->SetFilePath(filePath);
 	}
 

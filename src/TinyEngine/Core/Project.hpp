@@ -46,7 +46,7 @@ namespace TinyEngine
 	class ProjectUtils
 	{
 	public:
-		static void LoadProject(Project* project, std::string_view filePath);
+		static void LoadProject(Project* project, std::string_view filePath, World* world);
 		static void SaveProject(Project* project);
 	};
 }

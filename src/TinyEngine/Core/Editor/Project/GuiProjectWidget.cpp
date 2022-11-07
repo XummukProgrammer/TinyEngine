@@ -32,7 +32,8 @@ namespace TinyEngine
     void GuiProjectWidget::OnLoad()
     {
         ProjectUtils::LoadProject(&Application::GetInstance()->GetProject(), 
-            _loadProjectFileWidget->GetText());
+            _loadProjectFileWidget->GetText(), 
+            &Application::GetInstance()->GetWorld());
         SetIsActive(false);
 
         // For tests

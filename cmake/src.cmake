@@ -70,8 +70,6 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/States/States.hpp
 	src/TinyEngine/Core/States/StateTransition.hpp
 	src/TinyEngine/Core/States/StateTransitions.hpp
-	src/TinyEngine/Core/ServiceProviders/IServiceProvider.hpp
-	src/TinyEngine/Core/ServiceProviders/ServiceProviders.hpp
 	
 	src/TinyEngine/Core/Project.hpp
 	
@@ -124,8 +122,6 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/States/States.cpp
 	src/TinyEngine/Core/States/StateTransition.cpp
 	src/TinyEngine/Core/States/StateTransitions.cpp
-	src/TinyEngine/Core/ServiceProviders/IServiceProvider.cpp
-	src/TinyEngine/Core/ServiceProviders/ServiceProviders.cpp
 	
 	src/TinyEngine/Core/Project.cpp
 	
