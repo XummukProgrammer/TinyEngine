@@ -15,16 +15,16 @@
 
 namespace TinyEngine
 {
-	Application& Application::Init(int argc, char* argv[], const RenderWindowSettings& windowSettings, ApplicationDelegateUniquePtr&& delegate)
+	void Application::SetConsoleVars(int argc, char* argv[])
 	{
 		FileSystem::GetInstance()->SetExecutePath(argv[0]);
-		_delegate = std::move(delegate);
+	}
 
+	void Application::SetWindowSettings(const RenderWindowSettings& windowSettings)
+	{
 		auto render = Render::GetInstance();
 		render->CreateWindow(windowSettings);
 		render->SetOnUpdateCallback(std::bind(&Application::OnUpdate, this));
-
-		return *this;
 	}
 
 	void Application::Execute()
@@ -49,22 +49,12 @@ namespace TinyEngine
 	{
 		TINY_ENGINE_INFO("Application", "Init");
 
-		if (_delegate)
-		{
-			_delegate->OnInit();
-		}
-
 		_world.OnInit();
 	}
 
 	void Application::OnDeinit()
 	{
 		TINY_ENGINE_INFO("Application", "Deinit");
-
-		if (_delegate)
-		{
-			_delegate->OnDeinit();
-		}
 
 		_world.OnDeinit();
 

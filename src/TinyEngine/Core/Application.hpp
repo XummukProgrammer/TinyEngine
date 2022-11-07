@@ -9,17 +9,6 @@
 
 namespace TinyEngine
 {
-	class ApplicationDelegate
-	{
-	public:
-		ApplicationDelegate() = default;
-		virtual ~ApplicationDelegate() = default;
-
-	public:
-		virtual void OnInit() {}
-		virtual void OnDeinit() {}
-	};
-
 	class Application final : public Singleton<Application>
 	{
 	public:
@@ -27,9 +16,9 @@ namespace TinyEngine
 		~Application() = default;
 
 	public:
-		Application& Init(int argc, char* argv[], const RenderWindowSettings& windowSettings, ApplicationDelegateUniquePtr&& delegate);
+		void SetConsoleVars(int argc, char* argv[]);
+		void SetWindowSettings(const RenderWindowSettings& windowSettings);
 
-	public:
 		void Execute();
 
 		void LoggerSaveToFile();
@@ -50,7 +39,6 @@ namespace TinyEngine
 		void OnUpdate();
 
 	private:
-		ApplicationDelegateUniquePtr _delegate;
 		Project _project;
 		World _world;
 	};
