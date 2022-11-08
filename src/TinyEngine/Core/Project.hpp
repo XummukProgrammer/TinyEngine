@@ -3,6 +3,7 @@
 
 #include <TinyEngine/Core/Data/Meta/MetaDefines.hpp>
 #include <TinyEngine/Core/States/States.hpp>
+#include <TinyEngine/Core/World/ObjectNode.hpp>
 
 namespace TinyEngine
 {
@@ -16,6 +17,7 @@ namespace TinyEngine
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_mainAssetsFile, "MainAssetsFile", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_worldFile, "WorldFile", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_states, "States", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_node, "Node", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 
@@ -40,6 +42,7 @@ namespace TinyEngine
 		std::string _mainAssetsFile = "root.xml";
 		std::string _worldFile = "world.xml";
 		States _states;
+		ObjectNode _node;
 		std::string _filePath;
 	};
 

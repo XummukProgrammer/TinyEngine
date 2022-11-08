@@ -118,7 +118,7 @@ namespace TinyEngine
 	public:
 		static void Save(OutputArchivePtr archive, std::string_view id, MetaClassPtr data) 
 		{
-			if (archive->ToSection(id))
+			if (data && archive->ToSection(id))
 			{
 				data->GetMembers().SaveToArchive(archive);
 				archive->EndSection();
