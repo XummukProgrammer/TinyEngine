@@ -12,6 +12,8 @@
 #include <TinyEngine/Core/Gui/Gui.hpp>
 #include <TinyEngine/Core/Data/Factory.hpp>
 #include <TinyEngine/Core/Project.hpp>
+#include <TinyEngine/Core/Editor/Project/GuiProjectWidget.hpp>
+#include <TinyEngine/Core/States/State.hpp>
 
 namespace TinyEngine
 {
@@ -50,6 +52,14 @@ namespace TinyEngine
 		TINY_ENGINE_INFO("Application", "Init");
 
 		_world.OnInit();
+
+		Factory::GetInstance()->Register<State>();
+		Factory::GetInstance()->Register<StateTransition>();
+
+		auto mainWindowWidgetPtr = TinyEngine::Gui::GetInstance()->GetMainWindow();
+
+        auto projectWidget = TinyEngine::GuiProjectWidget::Create();
+		mainWindowWidgetPtr->AddWidget(projectWidget);
 	}
 
 	void Application::OnDeinit()

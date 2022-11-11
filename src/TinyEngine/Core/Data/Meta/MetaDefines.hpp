@@ -41,6 +41,6 @@ namespace TinyEngine
 	TinyEngine::MetaVisitor<decltype(field)>::AddMemberWrapper(&GetMembers(false), &field, name, description, flags)
 
 #define TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(field, name, description) \
-	TinyEngine::MetaVisitor<decltype(field)>::AddMemberWrapper(&GetMembers(false), &field, name, description, TinyEngine::MetaMemberFlag::Default)
+	TINY_ENGINE_META_CLASS_DELC_MEMBER(field, name, description, TinyEngine::MetaMemberFlag::Default)
 
 #endif // _META_DEFINES_HEADER_
