@@ -53,7 +53,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Assets/Assets.hpp
 	src/TinyEngine/Core/World/World.hpp
 	src/TinyEngine/Core/World/Entity.hpp
-	src/TinyEngine/Core/World/ObjectNode.hpp
+	src/TinyEngine/Core/World/SceneNode.hpp
 	src/TinyEngine/Core/World/Component.hpp
 	src/TinyEngine/Core/World/Common/Components/TransformComponent.hpp
 	src/TinyEngine/Core/World/Common/Components/VisualComponent.hpp
@@ -105,7 +105,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Assets/Assets.cpp
 	src/TinyEngine/Core/World/World.cpp
 	src/TinyEngine/Core/World/Entity.cpp
-	src/TinyEngine/Core/World/ObjectNode.cpp
+	src/TinyEngine/Core/World/SceneNode.cpp
 	src/TinyEngine/Core/World/Common/Components/VisualComponent.cpp
 	src/TinyEngine/Core/Event/EventSender.cpp
 	src/TinyEngine/Core/Event/EventSubscriber.cpp

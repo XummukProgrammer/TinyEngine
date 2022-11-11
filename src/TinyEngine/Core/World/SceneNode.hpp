@@ -1,5 +1,5 @@
-﻿#ifndef _OBJECT_NODE_HEADER_
-#define _OBJECT_NODE_HEADER_
+﻿#ifndef _SCENE_NODE_HEADER_
+#define _SCENE_NODE_HEADER_
 
 #include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Core/Data/Meta/MetaDefines.hpp>
@@ -7,9 +7,9 @@
 
 namespace TinyEngine
 {
-	class ObjectNode final : public MetaClass
+	class SceneNode final : public MetaClass
 	{
-		TINY_ENGINE_META_CLASS_BEGIN(ObjectNode)
+		TINY_ENGINE_META_CLASS_BEGIN(SceneNode)
 		{
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_parent, "Parent", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_children, "Children", "");
@@ -18,18 +18,18 @@ namespace TinyEngine
 		TINY_ENGINE_META_CLASS_END
 
 	public:
-		ObjectNode() = default;
-		~ObjectNode() = default;
+		SceneNode() = default;
+		~SceneNode() = default;
 
 	public:
-		ObjectNodeSharedPtr GetParent() const;
-		const std::vector<ObjectNodeSharedPtr>& GetChildren() const;
+		SceneNodeSharedPtr GetParent() const;
+		const std::vector<SceneNodeSharedPtr>& GetChildren() const;
 
 	public:
-		ObjectNodeSharedPtr _parent;
-		std::vector<ObjectNodeSharedPtr> _children;
+		SceneNodeSharedPtr _parent;
+		std::vector<SceneNodeSharedPtr> _children;
 		EntitySharedPtr _entity;
 	};
 }
 
-#endif // _OBJECT_NODE_HEADER_
+#endif // _SCENE_NODE_HEADER_

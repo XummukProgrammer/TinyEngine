@@ -3,7 +3,7 @@
 
 #include <TinyEngine/Core/Data/Meta/MetaDefines.hpp>
 #include <TinyEngine/Core/States/States.hpp>
-#include <TinyEngine/Core/World/ObjectNode.hpp>
+#include <TinyEngine/Core/World/SceneNode.hpp>
 
 namespace TinyEngine
 {
@@ -42,7 +42,7 @@ namespace TinyEngine
 		std::string _mainAssetsFile = "root.xml";
 		std::string _worldFile = "world.xml";
 		States _states;
-		ObjectNode _node;
+		SceneNode _node;
 		std::string _filePath;
 	};
 
