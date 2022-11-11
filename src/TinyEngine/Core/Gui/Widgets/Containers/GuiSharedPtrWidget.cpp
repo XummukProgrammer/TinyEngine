@@ -31,7 +31,7 @@ namespace TinyEngine
         AddWidget("Uninited_InitPoint", _buttonWidget);
 
         _typesListWidget->SetIsActive(!IsInited());
-        _buttonWidget->SetIsActive(!IsInited());
+        _buttonWidget->SetIsActive(!IsInited() && !_inheritorTypes.empty());
     }
 
     void GuiSharedPtrWidget::OnInitHandler()

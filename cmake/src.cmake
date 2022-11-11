@@ -40,14 +40,8 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Data/Serialization/SerializationVisitor.hpp
 	src/TinyEngine/Core/Data/Serialization/SerializationDefines.hpp
 	src/TinyEngine/Core/Data/Serialization/XmlArchive.hpp
-	src/TinyEngine/Core/Data/Meta/Members/MetaDefaultMembers.hpp
 	src/TinyEngine/Core/Data/Meta/Members/IMetaMember.hpp
 	src/TinyEngine/Core/Data/Meta/Members/MetaMembers.hpp
-	src/TinyEngine/Core/Data/Meta/Members/MetaVectorMember.hpp
-	src/TinyEngine/Core/Data/Meta/Members/MetaMapMember.hpp
-	src/TinyEngine/Core/Data/Meta/Members/MetaClassMember.hpp
-	src/TinyEngine/Core/Data/Meta/Members/MetaSharedPtrMember.hpp
-	src/TinyEngine/Core/Data/Meta/Members/MetaEnumMember.hpp
 	src/TinyEngine/Core/Data/Meta/Class/MetaClass.hpp
 	src/TinyEngine/Core/Data/Meta/MetaDefines.hpp
 	src/TinyEngine/Core/Data/Meta/MetaVisitor.hpp
@@ -103,10 +97,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiTreeContainerWidget.cpp
 	src/TinyEngine/Core/Data/Serialization/Serialization.cpp
 	src/TinyEngine/Core/Data/Serialization/XmlArchive.cpp
-	src/TinyEngine/Core/Data/Meta/Members/MetaDefaultMembers.cpp
-	src/TinyEngine/Core/Data/Meta/Members/IMetaMember.cpp
 	src/TinyEngine/Core/Data/Meta/Members/MetaMembers.cpp
-	src/TinyEngine/Core/Data/Meta/Members/MetaClassMember.cpp
 	src/TinyEngine/Core/Data/Meta/Class/MetaClass.cpp
 	src/TinyEngine/Core/Assets/AssetHolder.cpp
 	src/TinyEngine/Core/Assets/AssetLoader.cpp

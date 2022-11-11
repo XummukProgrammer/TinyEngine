@@ -3,12 +3,7 @@
 
 #include <TinyEngine/Core/Data/Meta/Class/MetaClass.hpp>
 #include <TinyEngine/Core/Data/Meta/Members/MetaMembers.hpp>
-#include <TinyEngine/Core/Data/Meta/Members/MetaDefaultMembers.hpp>
-#include <TinyEngine/Core/Data/Meta/Members/MetaVectorMember.hpp>
-#include <TinyEngine/Core/Data/Meta/Members/MetaMapMember.hpp>
-#include <TinyEngine/Core/Data/Meta/Members/MetaClassMember.hpp>
-#include <TinyEngine/Core/Data/Meta/Members/MetaSharedPtrMember.hpp>
-#include <TinyEngine/Core/Data/Meta/Members/MetaEnumMember.hpp>
+#include <TinyEngine/Core/Data/Meta/Members/IMetaMember.hpp>
 
 #include <string>
 #include <vector>
@@ -41,7 +36,7 @@ namespace TinyEngine
 	public:
 		static void AddMemberWrapper(MetaMembersPtr members, bool* value, std::string_view name, std::string_view description, const MetaMemberFlag& flags)
 		{
-			members->AddMember(std::make_shared<TinyEngine::MetaBoolMemberWrapper>(name, description, flags, *value));
+			members->AddMember(std::make_shared<MetaMember<bool>>(name, description, flags, value));
 		}
 	};
 
@@ -51,7 +46,7 @@ namespace TinyEngine
 	public:
 		static void AddMemberWrapper(MetaMembersPtr members, int* value, std::string_view name, std::string_view description, const MetaMemberFlag& flags)
 		{
-			members->AddMember(std::make_shared<TinyEngine::MetaIntMemberWrapper>(name, description, flags, *value));
+			members->AddMember(std::make_shared<MetaMember<int>>(name, description, flags, value));
 		}
 	};
 
@@ -61,7 +56,7 @@ namespace TinyEngine
 	public:
 		static void AddMemberWrapper(MetaMembersPtr members, float* value, std::string_view name, std::string_view description, const MetaMemberFlag& flags)
 		{
-			members->AddMember(std::make_shared<TinyEngine::MetaFloatMemberWrapper>(name, description, flags, *value));
+			members->AddMember(std::make_shared<MetaMember<float>>(name, description, flags, value));
 		}
 	};
 	
@@ -71,7 +66,7 @@ namespace TinyEngine
 	public:
 		static void AddMemberWrapper(MetaMembersPtr members, std::string* value, std::string_view name, std::string_view description, const MetaMemberFlag& flags)
 		{
-			members->AddMember(std::make_shared<TinyEngine::MetaStringMemberWrapper>(name, description, flags, *value));
+			members->AddMember(std::make_shared<MetaMember<std::string>>(name, description, flags, value));
 		}
 	};
 
@@ -81,7 +76,7 @@ namespace TinyEngine
 	public:
 		static void AddMemberWrapper(MetaMembersPtr members, std::vector<T>* values, std::string_view name, std::string_view description, const MetaMemberFlag& flags)
 		{
-			members->AddMember(std::make_shared<TinyEngine::MetaVectorMemberWrapper<T>>(name, description, flags, *values));
+			members->AddMember(std::make_shared<MetaMember<std::vector<T>>>(name, description, flags, values));
 		}
 	};
 
@@ -91,7 +86,7 @@ namespace TinyEngine
 	public:
 		static void AddMemberWrapper(MetaMembersPtr members, std::map<K, V>* values, std::string_view name, std::string_view description, const MetaMemberFlag& flags)
 		{
-			members->AddMember(std::make_shared<TinyEngine::MetaMapMemberWrapper<K, V>>(name, description, flags, *values));
+			members->AddMember(std::make_shared<MetaMember<std::map<K, V>>>(name, description, flags, values));
 		}
 	};
 
@@ -101,7 +96,7 @@ namespace TinyEngine
 	public:
 		static void AddMemberWrapper(MetaMembersPtr members, MetaClass* value, std::string_view name, std::string_view description, const MetaMemberFlag& flags)
 		{
-			members->AddMember(std::make_shared<TinyEngine::MetaClassMemberWrapper>(name, description, flags, value));
+			members->AddMember(std::make_shared<MetaMember<MetaClass>>(name, description, flags, value));
 		}
 	};
 
@@ -111,7 +106,7 @@ namespace TinyEngine
 	public:
 		static void AddMemberWrapper(MetaMembersPtr members, std::shared_ptr<T>* value, std::string_view name, std::string_view description, const MetaMemberFlag& flags)
 		{
-			members->AddMember(std::make_shared<TinyEngine::MetaSharedPtrMember<T>>(name, description, flags, *value));
+			members->AddMember(std::make_shared<MetaMember<std::shared_ptr<T>>>(name, description, flags, value));
 		}
 	};
 
@@ -121,7 +116,7 @@ namespace TinyEngine
 		template<typename T, typename = std::enable_if<std::is_enum_v<T>, bool>::type>
 		static void EnumAddMemberWrapper(MetaMembersPtr members, T* value, std::string_view name, std::string_view description, const MetaMemberFlag& flags)
 		{
-			members->AddMember(std::make_shared<TinyEngine::MetaEnumMemberWrapper<T>>(name, description, flags, *value));
+			members->AddMember(std::make_shared<MetaMember<T>>(name, description, flags, value));
 		}
 	};
 }
