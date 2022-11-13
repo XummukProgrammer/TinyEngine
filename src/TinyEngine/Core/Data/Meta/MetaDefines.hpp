@@ -37,10 +37,15 @@ namespace TinyEngine
 		} \
 	private:
 
-#define TINY_ENGINE_META_CLASS_DELC_MEMBER(field, name, description, flags) \
-	TinyEngine::MetaVisitor<decltype(field)>::AddMemberWrapper(&GetMembers(false), &field, name, description, flags)
+#define TINY_ENGINE_META_CLASS_DELC_MEMBER(field, ...) \
+	TinyEngine::MetaVisitor<decltype(field)>::AddMemberWrapper(&GetMembers(false), &field, { __VA_ARGS__ })
 
-#define TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(field, name, description) \
-	TINY_ENGINE_META_CLASS_DELC_MEMBER(field, name, description, TinyEngine::MetaMemberFlag::Default)
+#define TINY_ENGINE_META_CLASS_MEMBER_NAME(name) std::make_shared<TinyEngine::MetaMemberNameInitializer>(name)
+#define TINY_ENGINE_META_CLASS_MEMBER_DESCRIPTION(description) std::make_shared<TinyEngine::MetaMemberDescriptionInitializer>(description)
+#define TINY_ENGINE_META_CLASS_MEMBER_SAVE_FLAG() std::make_shared<TinyEngine::MetaMemberSaveFlagInitializer>()
+#define TINY_ENGINE_META_CLASS_MEMBER_LOAD_FLAG() std::make_shared<TinyEngine::MetaMemberLoadFlagInitializer>()
+#define TINY_ENGINE_META_CLASS_MEMBER_EDITOR_FLAG() std::make_shared<TinyEngine::MetaMemberEditorFlagInitializer>()
+#define TINY_ENGINE_META_CLASS_MEMBER_DEFAULT_FLAGS() std::make_shared<TinyEngine::MetaMemberDefaultFlagsInitializer>()
+#define TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(field, name, description) TINY_ENGINE_META_CLASS_DELC_MEMBER(field, TINY_ENGINE_META_CLASS_MEMBER_NAME(name), TINY_ENGINE_META_CLASS_MEMBER_DESCRIPTION(description), TINY_ENGINE_META_CLASS_MEMBER_DEFAULT_FLAGS())
 
 #endif // _META_DEFINES_HEADER_

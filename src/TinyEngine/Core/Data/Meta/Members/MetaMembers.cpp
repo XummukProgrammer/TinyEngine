@@ -7,10 +7,16 @@
 
 namespace TinyEngine
 {
-	void MetaMembers::AddMember(IMetaMemberSharedPtr member)
+	void MetaMembers::AddMember(IMetaMemberSharedPtr member, const MemberInitializerList& initializerList)
 	{
 		const auto& name = member->GetName();
 		_members.push_back({ name, member });
+
+		for (const auto& initializer : initializerList)
+		{
+			initializer->SetMember(member);
+			initializer->OnInit();
+		}
 	}
 
 	IMetaMemberSharedPtr MetaMembers::GetMember(std::string_view id) const
@@ -66,5 +72,40 @@ namespace TinyEngine
 		{
 			member->AddGuiWidget(container);
 		});
+	}
+
+	void MetaMemberInitializer::SetMember(const IMetaMemberSharedPtr& member)
+	{
+		_member = member;
+	}
+
+	void MetaMemberNameInitializer::OnInit()
+	{
+		_member->SetName(_name);
+	}
+
+	void MetaMemberDescriptionInitializer::OnInit()
+	{
+		_member->SetDescription(_description);
+	}
+
+	void MetaMemberSaveFlagInitializer::OnInit()
+	{
+		_member->SetSaveFlag();
+	}
+
+	void MetaMemberLoadFlagInitializer::OnInit()
+	{
+		_member->SetLoadFlag();
+	}
+
+	void MetaMemberEditorFlagInitializer::OnInit()
+	{
+		_member->SetEditorFlag();
+	}
+
+	void MetaMemberDefaultFlagsInitializer::OnInit()
+	{
+		_member->SetDefaultFlags();
 	}
 }
