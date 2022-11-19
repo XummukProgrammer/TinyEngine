@@ -28,10 +28,12 @@ namespace TinyEngine
 		virtual bool IsUnifiedType(IConditionVariable* variable) const = 0;
 	};
 
-	template<typename T>
+	template<typename T, const char* Name>
 	class ConditionVariable final : public IConditionVariable
 	{
-		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(ConditionVariable<T>, IConditionVariable)
+		using Origin = ConditionVariable<T, Name>;
+
+		TINY_ENGINE_META_CLASS_BASE_DERIVED_BEGIN(Origin, IConditionVariable, Name)
 		{
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_value, "Value", "");
 		}
@@ -54,7 +56,7 @@ namespace TinyEngine
 		bool IsUnifiedType(IConditionVariable* variable) const override;
 
 	private:
-		ConditionVariable<T>* CastToCurrentType(IConditionVariable* variable) const;
+		ConditionVariable<T, Name>* CastToCurrentType(IConditionVariable* variable) const;
 
 	private:
 		T _value { 0 };
@@ -62,8 +64,8 @@ namespace TinyEngine
 
 	// TODO: Для float нельзя делать обычные сравнения!
 
-	template<typename T>
-	bool ConditionVariable<T>::IsEqual(IConditionVariable* variable) const
+	template<typename T, const char* Name>
+	bool ConditionVariable<T, Name>::IsEqual(IConditionVariable* variable) const
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
@@ -72,8 +74,8 @@ namespace TinyEngine
 		return false;
 	}
 
-	template<typename T>
-	bool ConditionVariable<T>::IsLess(IConditionVariable* variable) const
+	template<typename T, const char* Name>
+	bool ConditionVariable<T, Name>::IsLess(IConditionVariable* variable) const
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
@@ -82,8 +84,8 @@ namespace TinyEngine
 		return false;
 	}
 
-	template<typename T>
-	bool ConditionVariable<T>::IsLessOrEqual(IConditionVariable* variable) const
+	template<typename T, const char* Name>
+	bool ConditionVariable<T, Name>::IsLessOrEqual(IConditionVariable* variable) const
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
@@ -92,8 +94,8 @@ namespace TinyEngine
 		return false;
 	}
 
-	template<typename T>
-	bool ConditionVariable<T>::IsMore(IConditionVariable* variable) const
+	template<typename T, const char* Name>
+	bool ConditionVariable<T, Name>::IsMore(IConditionVariable* variable) const
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
@@ -102,8 +104,8 @@ namespace TinyEngine
 		return false;
 	}
 
-	template<typename T>
-	bool ConditionVariable<T>::IsMoreOrEqual(IConditionVariable* variable) const
+	template<typename T, const char* Name>
+	bool ConditionVariable<T, Name>::IsMoreOrEqual(IConditionVariable* variable) const
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
@@ -112,21 +114,26 @@ namespace TinyEngine
 		return false;
 	}
 
-	template<typename T>
-	bool ConditionVariable<T>::IsUnifiedType(IConditionVariable* variable) const
+	template<typename T, const char* Name>
+	bool ConditionVariable<T, Name>::IsUnifiedType(IConditionVariable* variable) const
 	{
 		return CastToCurrentType(variable) != nullptr;
 	}
 
-	template<typename T>
-	ConditionVariable<T>* ConditionVariable<T>::CastToCurrentType(IConditionVariable* variable) const
+	template<typename T, const char* Name>
+	ConditionVariable<T, Name>* ConditionVariable<T, Name>::CastToCurrentType(IConditionVariable* variable) const
 	{
-		return dynamic_cast<ConditionVariable<T>*>(variable);
+		return dynamic_cast<ConditionVariable<T, Name>*>(variable);
 	}
 
-	using ConditionIntVariable = ConditionVariable<int>;
-	using ConditionFloatVariable = ConditionVariable<float>;
-	using ConditionStringVariable = ConditionVariable<std::string>;
+	static const char conditionIntVariableString[] = "ConditionIntVariable";
+	using ConditionIntVariable = ConditionVariable<int, conditionIntVariableString>;
+
+	static const char conditionFloatVariableString[] = "ConditionFloatVariable";
+	using ConditionFloatVariable = ConditionVariable<float, conditionFloatVariableString>;
+
+	static const char conditionStringVariableString[] = "ConditionStringVariable";
+	using ConditionStringVariable = ConditionVariable<std::string, conditionStringVariableString>;
 }
 
 #endif // _CONDITION_VARIABLE_HEADER_
