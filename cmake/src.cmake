@@ -66,7 +66,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Conditions/Condition.hpp
 	src/TinyEngine/Core/Conditions/ConditionVariable.hpp
 	src/TinyEngine/Core/Conditions/Common/AndCondition.hpp
-	src/TinyEngine/Core/Conditions/Common/EqualCondition.hpp
+	src/TinyEngine/Core/Conditions/Common/CompareCondition.hpp
 	src/TinyEngine/Core/Conditions/Common/OrCondition.hpp
 	
 	src/TinyEngine/Core/Project.hpp
@@ -119,7 +119,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Conditions/Condition.cpp
 	src/TinyEngine/Core/Conditions/ConditionVariable.cpp
 	src/TinyEngine/Core/Conditions/Common/AndCondition.cpp
-	src/TinyEngine/Core/Conditions/Common/EqualCondition.cpp
+	src/TinyEngine/Core/Conditions/Common/CompareCondition.cpp
 	src/TinyEngine/Core/Conditions/Common/OrCondition.cpp
 	
 	src/TinyEngine/Core/Project.cpp

@@ -5,16 +5,16 @@
 
 namespace TinyEngine
 {
-	class Condition : public MetaClass
+	class ICondition : public MetaClass
 	{
-		TINY_ENGINE_META_CLASS_BEGIN(Condition)
+		TINY_ENGINE_META_CLASS_BEGIN(ICondition)
 		{
 		}
 		TINY_ENGINE_META_CLASS_END
 
 	public:
-		Condition() = default;
-		virtual ~Condition() = default;
+		ICondition() = default;
+		virtual ~ICondition() = default;
 
 	public:
 		virtual bool IsResult() const = 0;
