@@ -63,6 +63,8 @@ namespace TinyEngine
 		Factory::GetInstance()->Register<ConditionFloatVariable>();
 		Factory::GetInstance()->Register<ConditionStringVariable>();
 		Factory::GetInstance()->Register<CompareCondition>();
+		Factory::GetInstance()->Register<OrCondition>();
+		Factory::GetInstance()->Register<AndCondition>();
 
 		auto mainWindowWidgetPtr = TinyEngine::Gui::GetInstance()->GetMainWindow();
 
