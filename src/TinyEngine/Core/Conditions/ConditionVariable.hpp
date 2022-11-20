@@ -7,6 +7,8 @@
 
 namespace TinyEngine
 {
+	class ConditionContextVariable;
+
 	class IConditionVariable : public MetaClass
 	{
 		TINY_ENGINE_META_CLASS_BEGIN(IConditionVariable)
@@ -44,6 +46,7 @@ namespace TinyEngine
 		~ConditionVariable() = default;
 
 	public:
+		void SetValue(T value) { _value = value; }
 		T GetValue() const { return _value; }
 
 	public:
@@ -123,7 +126,12 @@ namespace TinyEngine
 	template<typename T, const char* Name>
 	ConditionVariable<T, Name>* ConditionVariable<T, Name>::CastToCurrentType(IConditionVariable* variable) const
 	{
-		return dynamic_cast<ConditionVariable<T, Name>*>(variable);
+		IConditionVariable* inputVariable = variable;
+		if (auto contextVariable = dynamic_cast<ConditionContextVariable*>(variable))
+		{
+			inputVariable = contextVariable->GetVariable().get();
+		}
+		return dynamic_cast<ConditionVariable<T, Name>*>(inputVariable);
 	}
 
 	static const char conditionIntVariableString[] = "ConditionIntVariable";
@@ -134,6 +142,38 @@ namespace TinyEngine
 
 	static const char conditionStringVariableString[] = "ConditionStringVariable";
 	using ConditionStringVariable = ConditionVariable<std::string, conditionStringVariableString>;
+
+	class ConditionContextVariable final : public IConditionVariable
+	{
+		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(ConditionContextVariable, IConditionVariable)
+		{
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_contextVariableId, "ContextVariableID", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_isGlobalContext, "IsGlobalContext", "");
+		}
+		TINY_ENGINE_META_CLASS_END
+
+	public:
+		ConditionContextVariable() = default;
+		~ConditionContextVariable() = default;
+
+	public:
+		const std::string& GetContextVariableId() const { return _contextVariableId; }
+		IConditionVariableSharedPtr GetVariable() const;
+
+	public:
+		bool IsEqual(IConditionVariable* variable) const override;
+		bool IsLess(IConditionVariable* variable) const override;
+		bool IsLessOrEqual(IConditionVariable* variable) const override;
+		bool IsMore(IConditionVariable* variable) const override;
+		bool IsMoreOrEqual(IConditionVariable* variable) const override;
+
+		bool IsUnifiedType(IConditionVariable* variable) const override;
+
+	public:
+		std::string _contextVariableId;
+		bool _isGlobalContext = false;
+		mutable IConditionVariableSharedPtr _cashedContextVariable;
+	};
 }
 
 #endif // _CONDITION_VARIABLE_HEADER_
