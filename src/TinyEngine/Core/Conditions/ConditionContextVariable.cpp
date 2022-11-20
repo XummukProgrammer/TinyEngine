@@ -4,24 +4,30 @@
 
 namespace TinyEngine
 {
-    IConditionVariableSharedPtr ConditionContextVariable::GetVariable() const
+    BaseConditionVariableSharedPtr ConditionContextVariable::GetVariable() const
     {
         if (!_cashedContextVariable)
         {
+            ConditionContextPtr context = nullptr;
+
             if (_isGlobalContext)
             {
-                const auto& globalContext = Application::GetInstance()->GetConstGlobalContext();
-                _cashedContextVariable = globalContext.GetVariable(_contextVariableId);
+                context = &Application::GetInstance()->GetGlobalContext();
             }
             else
             {
-                // TODO: На текущий момент идёт поддержка только GlobalContext, необходимо ещё сделать локальный.
+                context = GetLocalContext();
+            }
+
+            if (context)
+            {
+                _cashedContextVariable = context->GetVariable(_contextVariableId);
             }
         }
         return _cashedContextVariable;
     }
 
-    bool ConditionContextVariable::IsEqual(IConditionVariable* variable) const
+    bool ConditionContextVariable::IsEqual(BaseConditionVariable* variable) const
     {
         if (auto contextVariable = GetVariable())
         {
@@ -30,7 +36,7 @@ namespace TinyEngine
         return false;
     }
 
-    bool ConditionContextVariable::IsLess(IConditionVariable* variable) const
+    bool ConditionContextVariable::IsLess(BaseConditionVariable* variable) const
     {
         if (auto contextVariable = GetVariable())
         {
@@ -39,7 +45,7 @@ namespace TinyEngine
         return false;
     }
 
-    bool ConditionContextVariable::IsLessOrEqual(IConditionVariable* variable) const
+    bool ConditionContextVariable::IsLessOrEqual(BaseConditionVariable* variable) const
     {
         if (auto contextVariable = GetVariable())
         {
@@ -48,7 +54,7 @@ namespace TinyEngine
         return false;
     }
 
-    bool ConditionContextVariable::IsMore(IConditionVariable* variable) const
+    bool ConditionContextVariable::IsMore(BaseConditionVariable* variable) const
     {
         if (auto contextVariable = GetVariable())
         {
@@ -57,7 +63,7 @@ namespace TinyEngine
         return false;
     }
 
-    bool ConditionContextVariable::IsMoreOrEqual(IConditionVariable* variable) const
+    bool ConditionContextVariable::IsMoreOrEqual(BaseConditionVariable* variable) const
     {
         if (auto contextVariable = GetVariable())
         {
@@ -66,7 +72,7 @@ namespace TinyEngine
         return false;
     }
 
-    bool ConditionContextVariable::IsUnifiedType(IConditionVariable* variable) const
+    bool ConditionContextVariable::IsUnifiedType(BaseConditionVariable* variable) const
     {
         if (auto contextVariable = GetVariable())
         {

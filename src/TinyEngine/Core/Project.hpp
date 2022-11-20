@@ -35,7 +35,7 @@ namespace TinyEngine
 		void SetFilePath(std::string_view filePath) { _filePath = filePath; }
 		const std::string& GetFilePath() const { return _filePath; }
 
-		IConditionSharedPtr GetCondition() const { return _condition; }
+		ConditionSharedPtr GetCondition() const { return _condition; }
 
 	private:
 		std::string _name = "Game";
@@ -44,7 +44,7 @@ namespace TinyEngine
 		std::string _mainAssetsFile = "root.xml";
 		std::string _worldFile = "world.xml";
 		States _states;
-		IConditionSharedPtr _condition;
+		ConditionSharedPtr _condition;
 		std::string _filePath;
 	};
 

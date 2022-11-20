@@ -4,7 +4,7 @@
 
 namespace TinyEngine
 {
-	void ConditionContext::AddVariable(std::string_view id, IConditionVariableSharedPtr variable)
+	void ConditionContext::AddVariable(std::string_view id, BaseConditionVariableSharedPtr variable)
 	{
 		_variables[std::string{id}] = variable;
 	}
@@ -14,7 +14,7 @@ namespace TinyEngine
 		return GetVariable(id) != nullptr;
 	}
 
-	IConditionVariableSharedPtr ConditionContext::GetVariable(std::string_view id) const
+	BaseConditionVariableSharedPtr ConditionContext::GetVariable(std::string_view id) const
 	{
 		auto it = _variables.find(std::string{id});
 		if (it != _variables.end())

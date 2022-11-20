@@ -5,6 +5,14 @@
 
 namespace TinyEngine
 {
+	void State::OnInit()
+	{
+		for (const auto& transition : _transitions)
+		{
+			transition->OnInit();
+		}
+	}
+
 	bool State::IsActive() const
 	{
 		return _states->GetCurrentStateId() == GetStateId();

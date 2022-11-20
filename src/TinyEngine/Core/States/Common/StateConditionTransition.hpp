@@ -19,10 +19,11 @@ namespace TinyEngine
 		~StateConditionTransition() = default;
 
 	public:
+		void OnInit() override;
 		bool CanChangeState() const override;
 
 	private:
-		IConditionSharedPtr _condition;
+		ConditionSharedPtr _condition;
 	};
 }
 

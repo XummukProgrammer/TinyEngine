@@ -7,9 +7,9 @@
 
 namespace TinyEngine
 {
-	class CompareCondition final : public ICondition
+	class CompareCondition final : public Condition
 	{
-		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(CompareCondition, ICondition)
+		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(CompareCondition, Condition)
 		{
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_leftVariable, "LeftVariable", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_rightVariable, "RightVariable", "");
@@ -22,11 +22,12 @@ namespace TinyEngine
 		~CompareCondition() = default;
 
 	public:
+		void OnInit() override;
 		bool IsResult() const override;
 
 	private:
-		IConditionVariableSharedPtr _leftVariable;
-		IConditionVariableSharedPtr _rightVariable;
+		BaseConditionVariableSharedPtr _leftVariable;
+		BaseConditionVariableSharedPtr _rightVariable;
 		CompareConditionType _type;
 	};
 }

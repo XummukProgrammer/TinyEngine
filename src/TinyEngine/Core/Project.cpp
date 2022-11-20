@@ -21,10 +21,11 @@ namespace TinyEngine
 
 		if (auto condition = project->GetCondition())
 		{
-			auto globalVariableA = std::make_shared<ConditionIntVariable>();
-			globalVariableA->SetValue(6);
-			Application::GetInstance()->GetGlobalContext().AddVariable("A", globalVariableA);
+			auto localVariableA = std::make_shared<ConditionIntVariable>();
+			localVariableA->SetValue(6);
+			condition->GetLocalContext().AddVariable("A", localVariableA);
 
+			condition->OnInit();
 			std::cout << "Condition Is Result: " << (condition->IsResult() ? "true" : "false") << std::endl;
 		}
 	}

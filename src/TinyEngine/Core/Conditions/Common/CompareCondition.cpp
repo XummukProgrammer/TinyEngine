@@ -2,6 +2,21 @@
 
 namespace TinyEngine
 {
+    void CompareCondition::OnInit()
+    {
+        auto localContext = &GetLocalContext();
+
+        if (_leftVariable)
+        {
+            _leftVariable->SetLocalContext(localContext);
+        }
+
+        if (_rightVariable)
+        {
+            _rightVariable->SetLocalContext(localContext);
+        }
+    }
+
     bool CompareCondition::IsResult() const
     {
         if (_leftVariable && _rightVariable)

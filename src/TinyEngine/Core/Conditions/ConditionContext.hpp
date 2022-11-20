@@ -15,12 +15,12 @@ namespace TinyEngine
 		~ConditionContext() = default;
 
 	public:
-		void AddVariable(std::string_view id, IConditionVariableSharedPtr variable);
+		void AddVariable(std::string_view id, BaseConditionVariableSharedPtr variable);
 		bool HasVariable(std::string_view id) const;
-		IConditionVariableSharedPtr GetVariable(std::string_view id) const;
+		BaseConditionVariableSharedPtr GetVariable(std::string_view id) const;
 
 	private:
-		std::map<std::string, IConditionVariableSharedPtr> _variables;
+		std::map<std::string, BaseConditionVariableSharedPtr> _variables;
 	};
 }
 

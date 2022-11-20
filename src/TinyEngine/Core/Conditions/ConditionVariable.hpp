@@ -9,33 +9,40 @@ namespace TinyEngine
 {
 	class ConditionContextVariable;
 
-	class IConditionVariable : public MetaClass
+	class BaseConditionVariable : public MetaClass
 	{
-		TINY_ENGINE_META_CLASS_BEGIN(IConditionVariable)
+		TINY_ENGINE_META_CLASS_BEGIN(BaseConditionVariable)
 		{
 		}
 		TINY_ENGINE_META_CLASS_END
 
 	public:
-		IConditionVariable() = default;
-		virtual ~IConditionVariable() = default;
+		BaseConditionVariable() = default;
+		virtual ~BaseConditionVariable() = default;
 
 	public:
-		virtual bool IsEqual(IConditionVariable* variable) const = 0;
-		virtual bool IsLess(IConditionVariable* variable) const = 0;
-		virtual bool IsLessOrEqual(IConditionVariable* variable) const = 0;
-		virtual bool IsMore(IConditionVariable* variable) const = 0;
-		virtual bool IsMoreOrEqual(IConditionVariable* variable) const = 0;
+		virtual bool IsEqual(BaseConditionVariable* variable) const = 0;
+		virtual bool IsLess(BaseConditionVariable* variable) const = 0;
+		virtual bool IsLessOrEqual(BaseConditionVariable* variable) const = 0;
+		virtual bool IsMore(BaseConditionVariable* variable) const = 0;
+		virtual bool IsMoreOrEqual(BaseConditionVariable* variable) const = 0;
 
-		virtual bool IsUnifiedType(IConditionVariable* variable) const = 0;
+		virtual bool IsUnifiedType(BaseConditionVariable* variable) const = 0;
+
+	public:
+		void SetLocalContext(ConditionContextPtr context);
+		ConditionContextPtr GetLocalContext() const;
+
+	private:
+		ConditionContextPtr _localContext = nullptr;
 	};
 
 	template<typename T, const char* Name>
-	class ConditionVariable final : public IConditionVariable
+	class ConditionVariable final : public BaseConditionVariable
 	{
 		using Origin = ConditionVariable<T, Name>;
 
-		TINY_ENGINE_META_CLASS_BASE_DERIVED_BEGIN(Origin, IConditionVariable, Name)
+		TINY_ENGINE_META_CLASS_BASE_DERIVED_BEGIN(Origin, BaseConditionVariable, Name)
 		{
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_value, "Value", "");
 		}
@@ -50,16 +57,16 @@ namespace TinyEngine
 		T GetValue() const { return _value; }
 
 	public:
-		bool IsEqual(IConditionVariable* variable) const override;
-		bool IsLess(IConditionVariable* variable) const override;
-		bool IsLessOrEqual(IConditionVariable* variable) const override;
-		bool IsMore(IConditionVariable* variable) const override;
-		bool IsMoreOrEqual(IConditionVariable* variable) const override;
+		bool IsEqual(BaseConditionVariable* variable) const override;
+		bool IsLess(BaseConditionVariable* variable) const override;
+		bool IsLessOrEqual(BaseConditionVariable* variable) const override;
+		bool IsMore(BaseConditionVariable* variable) const override;
+		bool IsMoreOrEqual(BaseConditionVariable* variable) const override;
 
-		bool IsUnifiedType(IConditionVariable* variable) const override;
+		bool IsUnifiedType(BaseConditionVariable* variable) const override;
 
 	private:
-		ConditionVariable<T, Name>* CastToCurrentType(IConditionVariable* variable) const;
+		ConditionVariable<T, Name>* CastToCurrentType(BaseConditionVariable* variable) const;
 
 	private:
 		T _value { 0 };
@@ -68,7 +75,7 @@ namespace TinyEngine
 	// TODO: Для float нельзя делать обычные сравнения!
 
 	template<typename T, const char* Name>
-	bool ConditionVariable<T, Name>::IsEqual(IConditionVariable* variable) const
+	bool ConditionVariable<T, Name>::IsEqual(BaseConditionVariable* variable) const
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
@@ -78,7 +85,7 @@ namespace TinyEngine
 	}
 
 	template<typename T, const char* Name>
-	bool ConditionVariable<T, Name>::IsLess(IConditionVariable* variable) const
+	bool ConditionVariable<T, Name>::IsLess(BaseConditionVariable* variable) const
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
@@ -88,7 +95,7 @@ namespace TinyEngine
 	}
 
 	template<typename T, const char* Name>
-	bool ConditionVariable<T, Name>::IsLessOrEqual(IConditionVariable* variable) const
+	bool ConditionVariable<T, Name>::IsLessOrEqual(BaseConditionVariable* variable) const
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
@@ -98,7 +105,7 @@ namespace TinyEngine
 	}
 
 	template<typename T, const char* Name>
-	bool ConditionVariable<T, Name>::IsMore(IConditionVariable* variable) const
+	bool ConditionVariable<T, Name>::IsMore(BaseConditionVariable* variable) const
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
@@ -108,7 +115,7 @@ namespace TinyEngine
 	}
 
 	template<typename T, const char* Name>
-	bool ConditionVariable<T, Name>::IsMoreOrEqual(IConditionVariable* variable) const
+	bool ConditionVariable<T, Name>::IsMoreOrEqual(BaseConditionVariable* variable) const
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
@@ -118,15 +125,15 @@ namespace TinyEngine
 	}
 
 	template<typename T, const char* Name>
-	bool ConditionVariable<T, Name>::IsUnifiedType(IConditionVariable* variable) const
+	bool ConditionVariable<T, Name>::IsUnifiedType(BaseConditionVariable* variable) const
 	{
 		return CastToCurrentType(variable) != nullptr;
 	}
 
 	template<typename T, const char* Name>
-	ConditionVariable<T, Name>* ConditionVariable<T, Name>::CastToCurrentType(IConditionVariable* variable) const
+	ConditionVariable<T, Name>* ConditionVariable<T, Name>::CastToCurrentType(BaseConditionVariable* variable) const
 	{
-		IConditionVariable* inputVariable = variable;
+		BaseConditionVariable* inputVariable = variable;
 		if (auto contextVariable = dynamic_cast<ConditionContextVariable*>(variable))
 		{
 			inputVariable = contextVariable->GetVariable().get();
@@ -143,9 +150,9 @@ namespace TinyEngine
 	static const char conditionStringVariableString[] = "ConditionStringVariable";
 	using ConditionStringVariable = ConditionVariable<std::string, conditionStringVariableString>;
 
-	class ConditionContextVariable final : public IConditionVariable
+	class ConditionContextVariable final : public BaseConditionVariable
 	{
-		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(ConditionContextVariable, IConditionVariable)
+		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(ConditionContextVariable, BaseConditionVariable)
 		{
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_contextVariableId, "ContextVariableID", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_isGlobalContext, "IsGlobalContext", "");
@@ -158,21 +165,21 @@ namespace TinyEngine
 
 	public:
 		const std::string& GetContextVariableId() const { return _contextVariableId; }
-		IConditionVariableSharedPtr GetVariable() const;
+		BaseConditionVariableSharedPtr GetVariable() const;
 
 	public:
-		bool IsEqual(IConditionVariable* variable) const override;
-		bool IsLess(IConditionVariable* variable) const override;
-		bool IsLessOrEqual(IConditionVariable* variable) const override;
-		bool IsMore(IConditionVariable* variable) const override;
-		bool IsMoreOrEqual(IConditionVariable* variable) const override;
+		bool IsEqual(BaseConditionVariable* variable) const override;
+		bool IsLess(BaseConditionVariable* variable) const override;
+		bool IsLessOrEqual(BaseConditionVariable* variable) const override;
+		bool IsMore(BaseConditionVariable* variable) const override;
+		bool IsMoreOrEqual(BaseConditionVariable* variable) const override;
 
-		bool IsUnifiedType(IConditionVariable* variable) const override;
+		bool IsUnifiedType(BaseConditionVariable* variable) const override;
 
 	public:
 		std::string _contextVariableId;
 		bool _isGlobalContext = false;
-		mutable IConditionVariableSharedPtr _cashedContextVariable;
+		mutable BaseConditionVariableSharedPtr _cashedContextVariable;
 	};
 }
 

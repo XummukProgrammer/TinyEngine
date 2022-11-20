@@ -5,9 +5,9 @@
 
 namespace TinyEngine
 {
-	class AndCondition final : public ICondition
+	class AndCondition final : public Condition
 	{
-		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(AndCondition, ICondition)
+		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(AndCondition, Condition)
 		{
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_conditions, "Conditions", "");
 		}
@@ -18,10 +18,11 @@ namespace TinyEngine
 		~AndCondition() = default;
 
 	public:
+		void OnInit() override;
 		bool IsResult() const override;
 
 	private:
-		std::vector<IConditionSharedPtr> _conditions;
+		std::vector<ConditionSharedPtr> _conditions;
 	};
 }
 
