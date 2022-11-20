@@ -11,6 +11,8 @@
 #include <TinyEngine/Core/Gui/Gui.hpp>
 #include <TinyEngine/Core/Gui/Widgets/GuiWindowWidget.hpp>
 #include <TinyEngine/Core/Gui/Widgets/GuiMenuBarWidget.hpp>
+#include <TinyEngine/Core/Assets/AssetLoader.hpp>
+#include <TinyEngine/Core/Assets/AssetTexture.hpp>
 
 namespace TinyEngine
 {
@@ -64,6 +66,8 @@ namespace TinyEngine
 
 		_world.OnInit();
 
+		Factory::GetInstance()->Register<AssetLoader>();
+		Factory::GetInstance()->Register<AssetTexture>();
 		Factory::GetInstance()->Register<StartState>();
 		Factory::GetInstance()->Register<CloseState>();
 		Factory::GetInstance()->Register<StateTransition>();

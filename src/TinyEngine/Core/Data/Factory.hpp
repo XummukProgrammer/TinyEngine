@@ -87,19 +87,4 @@ namespace TinyEngine
 	}
 }
 
-#define TINY_ENGINE_META_FACTORY_IMPL(className) \
-	void MetaFactoryFuncImpl_ ## className(); \
-	struct MetaFactoryStructImpl_ ## className \
-	{ \
-		MetaFactoryStructImpl_ ## className() \
-		{ \
-			MetaFactoryFuncImpl_ ## className(); \
-		} \
-	}; \
-	static MetaFactoryStructImpl_ ## className _metaFactoryStructImpl_ ## className; \
-	void MetaFactoryFuncImpl_ ## className() \
-	{ \
-		TinyEngine::Factory::GetInstance()->Register<className>(); \
-	}
-
 #endif // _FACTORY_HEADER_
