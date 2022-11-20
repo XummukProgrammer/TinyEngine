@@ -63,6 +63,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/States/States.hpp
 	src/TinyEngine/Core/States/StateTransition.hpp
 	src/TinyEngine/Core/States/StateTransitions.hpp
+	src/TinyEngine/Core/States/Common/StateConditionTransition.hpp
 	src/TinyEngine/Core/Conditions/Condition.hpp
 	src/TinyEngine/Core/Conditions/ConditionVariable.hpp
 	src/TinyEngine/Core/Conditions/ConditionContext.hpp
@@ -118,6 +119,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/States/States.cpp
 	src/TinyEngine/Core/States/StateTransition.cpp
 	src/TinyEngine/Core/States/StateTransitions.cpp
+	src/TinyEngine/Core/States/Common/StateConditionTransition.cpp
 	src/TinyEngine/Core/Conditions/Condition.cpp
 	src/TinyEngine/Core/Conditions/ConditionVariable.cpp
 	src/TinyEngine/Core/Conditions/ConditionContext.cpp
