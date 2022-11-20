@@ -49,8 +49,8 @@ namespace TinyEngine
 		TINY_ENGINE_INFO("Application", "Init");
 
 		{
-			auto variable = std::make_shared<ConditionIntVariable>();
-			variable->SetValue(0);
+			auto variable = std::make_shared<ConditionBoolVariable>();
+			variable->SetGetter([this]() { return _isClose; });
 			_globalContext.AddVariable("IsClose", variable);	
 		}
 
@@ -64,11 +64,11 @@ namespace TinyEngine
 
 		_world.OnInit();
 
-		Factory::GetInstance()->Register<State>();
 		Factory::GetInstance()->Register<StartState>();
 		Factory::GetInstance()->Register<CloseState>();
 		Factory::GetInstance()->Register<StateTransition>();
 		Factory::GetInstance()->Register<StateConditionTransition>();
+		Factory::GetInstance()->Register<ConditionBoolVariable>();
 		Factory::GetInstance()->Register<ConditionIntVariable>();
 		Factory::GetInstance()->Register<ConditionFloatVariable>();
 		Factory::GetInstance()->Register<ConditionStringVariable>();
@@ -116,12 +116,6 @@ namespace TinyEngine
 
 	void Application::OnClose()
 	{
-		if (auto variable = _globalContext.GetVariable("IsClose"))
-		{
-			if (auto castedVariable = std::dynamic_pointer_cast<ConditionIntVariable>(variable))
-			{
-				castedVariable->SetValue(1);
-			}
-		}
+		_isClose = 1;
 	}
 }

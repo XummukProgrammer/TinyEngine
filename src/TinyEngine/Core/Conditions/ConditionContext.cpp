@@ -11,10 +11,11 @@ namespace TinyEngine
 
 	bool ConditionContext::HasVariable(std::string_view id) const
 	{
-		return GetVariable(id) != nullptr;
+		auto it = _variables.find(std::string{id});
+		return it != _variables.end();
 	}
 
-	BaseConditionVariableSharedPtr ConditionContext::GetVariable(std::string_view id) const
+	BaseConditionVariableSharedPtr ConditionContext::GetBaseVariable(std::string_view id) const
 	{
 		auto it = _variables.find(std::string{id});
 		if (it != _variables.end())

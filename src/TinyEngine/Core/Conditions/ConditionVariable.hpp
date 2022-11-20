@@ -4,6 +4,7 @@
 #include <TinyEngine/Core/Data/Meta/MetaDefines.hpp>
 
 #include <string>
+#include <functional>
 
 namespace TinyEngine
 {
@@ -40,6 +41,7 @@ namespace TinyEngine
 	template<typename T, const char* Name>
 	class ConditionVariable final : public BaseConditionVariable
 	{
+	private:
 		using Origin = ConditionVariable<T, Name>;
 
 		TINY_ENGINE_META_CLASS_BASE_DERIVED_BEGIN(Origin, BaseConditionVariable, Name)
@@ -49,12 +51,17 @@ namespace TinyEngine
 		TINY_ENGINE_META_CLASS_END
 
 	public:
+		using GetterCallback = std::function<T()>;
+
+	public:
 		ConditionVariable() = default;
 		~ConditionVariable() = default;
 
 	public:
+		void SetGetter(const GetterCallback& callback) { _getterCallback = callback; }
+
 		void SetValue(T value) { _value = value; }
-		T GetValue() const { return _value; }
+		T GetValue() const { return _getterCallback ? _getterCallback() : _value; }
 
 	public:
 		bool IsEqual(BaseConditionVariable* variable) const override;
@@ -70,6 +77,7 @@ namespace TinyEngine
 
 	private:
 		T _value { 0 };
+		GetterCallback _getterCallback;
 	};
 
 	// TODO: Для float нельзя делать обычные сравнения!
@@ -79,7 +87,7 @@ namespace TinyEngine
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
-			return _value == castedVariable->GetValue();
+			return GetValue() == castedVariable->GetValue();
 		}
 		return false;
 	}
@@ -89,7 +97,7 @@ namespace TinyEngine
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
-			return _value < castedVariable->GetValue();
+			return GetValue() < castedVariable->GetValue();
 		}
 		return false;
 	}
@@ -99,7 +107,7 @@ namespace TinyEngine
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
-			return _value <= castedVariable->GetValue();
+			return GetValue() <= castedVariable->GetValue();
 		}
 		return false;
 	}
@@ -109,7 +117,7 @@ namespace TinyEngine
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
-			return _value > castedVariable->GetValue();
+			return GetValue() > castedVariable->GetValue();
 		}
 		return false;
 	}
@@ -119,7 +127,7 @@ namespace TinyEngine
 	{
 		if (auto castedVariable = CastToCurrentType(variable))
 		{
-			return _value >= castedVariable->GetValue();
+			return GetValue() >= castedVariable->GetValue();
 		}
 		return false;
 	}
@@ -140,6 +148,9 @@ namespace TinyEngine
 		}
 		return dynamic_cast<ConditionVariable<T, Name>*>(inputVariable);
 	}
+
+	static const char conditionBoolVariableString[] = "ConditionBoolVariable";
+	using ConditionBoolVariable = ConditionVariable<bool, conditionBoolVariableString>;
 
 	static const char conditionIntVariableString[] = "ConditionIntVariable";
 	using ConditionIntVariable = ConditionVariable<int, conditionIntVariableString>;

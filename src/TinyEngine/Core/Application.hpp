@@ -50,6 +50,7 @@ namespace TinyEngine
 		Project _project;
 		World _world;
 		ConditionContext _globalContext;
+		bool _isClose = false;
 	};
 }
 
