@@ -42,6 +42,10 @@ namespace TinyEngine
 		void OnProcess();
 		void OnUpdate();
 
+		void OnLoadProject();
+		void OnSaveProject();
+		void OnClose();
+
 	private:
 		Project _project;
 		World _world;

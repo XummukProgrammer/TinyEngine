@@ -34,6 +34,9 @@ namespace TinyEngine
 		void SetFilePath(std::string_view filePath) { _filePath = filePath; }
 		const std::string& GetFilePath() const { return _filePath; }
 
+		States& GetStates() { return _states; }
+		const States& GetConstStates() const { return _states; }
+
 	private:
 		std::string _name = "Game";
 		std::string _description = "Default Game";
@@ -47,8 +50,8 @@ namespace TinyEngine
 	class ProjectUtils
 	{
 	public:
-		static void LoadProject(Project* project, std::string_view filePath, World* world);
-		static void SaveProject(Project* project);
+		static void LoadProject(std::string_view filePath);
+		static void SaveProject();
 	};
 }
 

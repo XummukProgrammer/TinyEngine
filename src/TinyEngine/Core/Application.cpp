@@ -1,25 +1,16 @@
 ﻿#include "Application.hpp"
 
-#include <TinyEngine/Core/Debug.hpp>
 #include <TinyEngine/Core/FileSystem.hpp>
 #include <TinyEngine/Core/Logger.hpp>
-#include <TinyEngine/Core/Assets/Assets.hpp>
-#include <TinyEngine/Core/Assets/Asset.hpp>
-#include <TinyEngine/Core/Assets/AssetHolder.hpp>
-#include <TinyEngine/Core/Assets/AssetLoader.hpp>
-#include <TinyEngine/Core/Assets/AssetTexture.hpp>
-#include <TinyEngine/Core/Render/Render.hpp>
-#include <TinyEngine/Core/Gui/Gui.hpp>
-#include <TinyEngine/Core/Data/Factory.hpp>
-#include <TinyEngine/Core/Project.hpp>
-#include <TinyEngine/Core/Editor/Project/GuiProjectWidget.hpp>
-#include <TinyEngine/Core/States/State.hpp>
+#include <TinyEngine/Core/States/Common/StartState.hpp>
+#include <TinyEngine/Core/States/Common/CloseState.hpp>
 #include <TinyEngine/Core/States/Common/StateConditionTransition.hpp>
-#include <TinyEngine/Core/Conditions/ConditionVariable.hpp>
-#include <TinyEngine/Core/Conditions/ConditionContextVariable.hpp>
 #include <TinyEngine/Core/Conditions/Common/AndCondition.hpp>
 #include <TinyEngine/Core/Conditions/Common/CompareCondition.hpp>
 #include <TinyEngine/Core/Conditions/Common/OrCondition.hpp>
+#include <TinyEngine/Core/Gui/Gui.hpp>
+#include <TinyEngine/Core/Gui/Widgets/GuiWindowWidget.hpp>
+#include <TinyEngine/Core/Gui/Widgets/GuiMenuBarWidget.hpp>
 
 namespace TinyEngine
 {
@@ -57,9 +48,25 @@ namespace TinyEngine
 	{
 		TINY_ENGINE_INFO("Application", "Init");
 
+		{
+			auto variable = std::make_shared<ConditionIntVariable>();
+			variable->SetValue(0);
+			_globalContext.AddVariable("IsClose", variable);	
+		}
+
+		auto menuBar = Gui::GetInstance()->GetMainWindow()->GetMenuBar();
+		GuiMenuBarWidget::Menu projectMenu;
+		projectMenu.name = "Project";
+		projectMenu.items.push_back({ "Load Project", std::bind(&Application::OnLoadProject, this) });
+		projectMenu.items.push_back({ "Save Project", std::bind(&Application::OnSaveProject, this) });
+		projectMenu.items.push_back({ "Close", std::bind(&Application::OnClose, this) });
+		menuBar->AddMenu(projectMenu);
+
 		_world.OnInit();
 
 		Factory::GetInstance()->Register<State>();
+		Factory::GetInstance()->Register<StartState>();
+		Factory::GetInstance()->Register<CloseState>();
 		Factory::GetInstance()->Register<StateTransition>();
 		Factory::GetInstance()->Register<StateConditionTransition>();
 		Factory::GetInstance()->Register<ConditionIntVariable>();
@@ -69,11 +76,6 @@ namespace TinyEngine
 		Factory::GetInstance()->Register<CompareCondition>();
 		Factory::GetInstance()->Register<OrCondition>();
 		Factory::GetInstance()->Register<AndCondition>();
-
-		auto mainWindowWidgetPtr = TinyEngine::Gui::GetInstance()->GetMainWindow();
-
-        auto projectWidget = TinyEngine::GuiProjectWidget::Create();
-		mainWindowWidgetPtr->AddWidget(projectWidget);
 	}
 
 	void Application::OnDeinit()
@@ -84,9 +86,9 @@ namespace TinyEngine
 
 		Render::GetInstance()->Destroy();
 
-		LoggerSaveToFile();
+		_project.GetStates().OnDeinit();
 
-		ProjectUtils::SaveProject(&GetProject());
+		LoggerSaveToFile();
 	}
 
 	void Application::OnProcess()
@@ -98,6 +100,28 @@ namespace TinyEngine
 
 	void Application::OnUpdate()
 	{
+		_project.GetStates().OnUpdate();
 		_world.OnUpdate();
+	}
+
+	void Application::OnLoadProject()
+	{
+		ProjectUtils::LoadProject("project.xml");
+	}
+
+	void Application::OnSaveProject()
+	{
+		ProjectUtils::SaveProject();
+	}
+
+	void Application::OnClose()
+	{
+		if (auto variable = _globalContext.GetVariable("IsClose"))
+		{
+			if (auto castedVariable = std::dynamic_pointer_cast<ConditionIntVariable>(variable))
+			{
+				castedVariable->SetValue(1);
+			}
+		}
 	}
 }

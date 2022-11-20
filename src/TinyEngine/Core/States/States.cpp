@@ -46,7 +46,7 @@ namespace TinyEngine
 			it->second->OnExit();
 		}
 
-		const auto& prevStateId = _currentStateId;
+		const auto prevStateId = _currentStateId;
 		_currentStateId = stateId;
 
 		if (auto it = _states.find(_currentStateId); it != _states.end())

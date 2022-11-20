@@ -64,6 +64,8 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/States/StateTransition.hpp
 	src/TinyEngine/Core/States/StateTransitions.hpp
 	src/TinyEngine/Core/States/Common/StateConditionTransition.hpp
+	src/TinyEngine/Core/States/Common/StartState.hpp
+	src/TinyEngine/Core/States/Common/CloseState.hpp
 	src/TinyEngine/Core/Conditions/Condition.hpp
 	src/TinyEngine/Core/Conditions/ConditionVariable.hpp
 	src/TinyEngine/Core/Conditions/ConditionContext.hpp
@@ -73,9 +75,6 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Conditions/Common/OrCondition.hpp
 	
 	src/TinyEngine/Core/Project.hpp
-	
-	# Файлы редактора
-	src/TinyEngine/Core/Editor/Project/GuiProjectWidget.hpp
 )
 
 set(ENGINE_SOURCES
@@ -120,6 +119,8 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/States/StateTransition.cpp
 	src/TinyEngine/Core/States/StateTransitions.cpp
 	src/TinyEngine/Core/States/Common/StateConditionTransition.cpp
+	src/TinyEngine/Core/States/Common/StartState.cpp
+	src/TinyEngine/Core/States/Common/CloseState.cpp
 	src/TinyEngine/Core/Conditions/Condition.cpp
 	src/TinyEngine/Core/Conditions/ConditionVariable.cpp
 	src/TinyEngine/Core/Conditions/ConditionContext.cpp
@@ -135,7 +136,4 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Backends/SFML/Render/SfmlRenderObjectImpl.cpp
 	src/TinyEngine/Core/Backends/SFML/Render/SfmlRenderWindowImpl.cpp
 	src/TinyEngine/Core/Backends/SFML/Assets/AssetSfmlTexture.cpp
-	
-	# Файлы редактора
-	src/TinyEngine/Core/Editor/Project/GuiProjectWidget.cpp
 )
