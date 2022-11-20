@@ -14,6 +14,12 @@
 #include <TinyEngine/Core/Project.hpp>
 #include <TinyEngine/Core/Editor/Project/GuiProjectWidget.hpp>
 #include <TinyEngine/Core/States/State.hpp>
+#include <TinyEngine/Core/States/Common/StateConditionTransition.hpp>
+#include <TinyEngine/Core/Conditions/ConditionVariable.hpp>
+#include <TinyEngine/Core/Conditions/ConditionContextVariable.hpp>
+#include <TinyEngine/Core/Conditions/Common/AndCondition.hpp>
+#include <TinyEngine/Core/Conditions/Common/CompareCondition.hpp>
+#include <TinyEngine/Core/Conditions/Common/OrCondition.hpp>
 
 namespace TinyEngine
 {
@@ -55,6 +61,14 @@ namespace TinyEngine
 
 		Factory::GetInstance()->Register<State>();
 		Factory::GetInstance()->Register<StateTransition>();
+		Factory::GetInstance()->Register<StateConditionTransition>();
+		Factory::GetInstance()->Register<ConditionIntVariable>();
+		Factory::GetInstance()->Register<ConditionFloatVariable>();
+		Factory::GetInstance()->Register<ConditionStringVariable>();
+		Factory::GetInstance()->Register<ConditionContextVariable>();
+		Factory::GetInstance()->Register<CompareCondition>();
+		Factory::GetInstance()->Register<OrCondition>();
+		Factory::GetInstance()->Register<AndCondition>();
 
 		auto mainWindowWidgetPtr = TinyEngine::Gui::GetInstance()->GetMainWindow();
 

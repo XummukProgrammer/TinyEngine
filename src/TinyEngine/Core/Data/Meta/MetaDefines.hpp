@@ -8,10 +8,10 @@ namespace TinyEngine
 {	
 }
 
-#define TINY_ENGINE_META_CLASS_BASE(className) \
+#define TINY_ENGINE_META_CLASS_BASE(className, strClassName) \
 	public: \
 		const std::string GetClassName() const override { return GetStaticClassName(); } \
-		static std::string GetStaticClassName() { return #className; } \
+		static std::string GetStaticClassName() { return strClassName; } \
 		TinyEngine::MetaClassSharedPtr CreateSharedPtr() const override { return CreateStaticSharedPtr(); } \
 		static TinyEngine::MetaClassSharedPtr CreateStaticSharedPtr() \
 		{ \
@@ -23,15 +23,21 @@ namespace TinyEngine
 		} \
 	private:
 
-#define TINY_ENGINE_META_CLASS_BEGIN(className) \
-	TINY_ENGINE_META_CLASS_BASE(className) \
+#define TINY_ENGINE_META_CLASS_BASE_BEGIN(className, strClassName) \
+	TINY_ENGINE_META_CLASS_BASE(className, strClassName) \
 	protected: \
 		void OnLoad() override \
 		{
 
-#define TINY_ENGINE_META_CLASS_DERIVED_BEGIN(className, parentName) \
-	TINY_ENGINE_META_CLASS_BEGIN(className) \
+#define TINY_ENGINE_META_CLASS_BEGIN(className) \
+	TINY_ENGINE_META_CLASS_BASE_BEGIN(className, #className)
+
+#define TINY_ENGINE_META_CLASS_BASE_DERIVED_BEGIN(className, parentName, strClassName) \
+	TINY_ENGINE_META_CLASS_BASE_BEGIN(className, strClassName) \
 			parentName::OnLoad();
+
+#define TINY_ENGINE_META_CLASS_DERIVED_BEGIN(className, parentName) \
+	TINY_ENGINE_META_CLASS_BASE_DERIVED_BEGIN(className, parentName, #className)
 
 #define TINY_ENGINE_META_CLASS_END \
 		} \
