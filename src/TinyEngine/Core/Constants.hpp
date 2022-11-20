@@ -32,6 +32,15 @@ namespace TinyEngine
 		Error = 1 << 4,
 		All = Info | Assert | Verify | Error
 	};
+
+	enum class CompareConditionType
+	{
+		Equal,
+		Less,
+		LessOrEqual,
+		More,
+		MoreOrEqual
+	};
 }
 
 #endif // _CONSTANTS_HEADER_

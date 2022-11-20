@@ -29,7 +29,7 @@ namespace TinyEngine
 		void SetPrevStateId(std::string_view prevStateId) { _prevStateId = prevStateId; }
 
 	public:
-		virtual void OnInit() {}
+		virtual void OnInit();
 		virtual void OnDeinit() {}
 		virtual void OnUpdate() {}
 		virtual void OnEnter() {}

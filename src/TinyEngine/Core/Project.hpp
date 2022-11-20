@@ -4,6 +4,7 @@
 #include <TinyEngine/Core/Data/Meta/MetaDefines.hpp>
 #include <TinyEngine/Core/States/States.hpp>
 #include <TinyEngine/Core/World/SceneNode.hpp>
+#include <TinyEngine/Core/Conditions/Condition.hpp>
 
 namespace TinyEngine
 {
@@ -18,6 +19,7 @@ namespace TinyEngine
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_worldFile, "WorldFile", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_states, "States", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_node, "Node", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_condition, "Condition", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 
@@ -35,6 +37,8 @@ namespace TinyEngine
 		void SetFilePath(std::string_view filePath) { _filePath = filePath; }
 		const std::string& GetFilePath() const { return _filePath; }
 
+		ConditionSharedPtr GetCondition() const { return _condition; }
+
 	private:
 		std::string _name = "Game";
 		std::string _description = "Default Game";
@@ -43,6 +47,7 @@ namespace TinyEngine
 		std::string _worldFile = "world.xml";
 		States _states;
 		SceneNode _node;
+		ConditionSharedPtr _condition;
 		std::string _filePath;
 	};
 

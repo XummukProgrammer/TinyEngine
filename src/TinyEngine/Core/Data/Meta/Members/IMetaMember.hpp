@@ -26,17 +26,25 @@ namespace TinyEngine
 	public:
 		virtual const std::string& GetName() const = 0;
 		virtual const std::string& GetDescription() const = 0;
-		virtual const MetaMemberFlag& GetFlags() const = 0;
+		virtual MetaMemberFlag GetFlags() const = 0;
 		virtual bool IsSaved() const = 0;
 		virtual bool IsLoadable() const = 0;
 		virtual bool IsEditable() const = 0;
+
+		virtual void SetName(std::string_view name) = 0;
+		virtual void SetDescription(std::string_view description) = 0;
+
+		virtual void SetSaveFlag() = 0;
+		virtual void SetLoadFlag() = 0;
+		virtual void SetEditorFlag() = 0;
+		virtual void SetDefaultFlags() = 0;
 	};
 	
 	template<typename T>
 	class MetaMember final : public IMetaMember
 	{
 	public:
-		MetaMember(std::string_view name, std::string_view description, const MetaMemberFlag& flags, T* value);
+		MetaMember(T* value);
 		~MetaMember() = default;
 
 	public:
@@ -48,24 +56,29 @@ namespace TinyEngine
 	public:
 		const std::string& GetName() const override { return _name; }
 		const std::string& GetDescription() const override { return _description; }
-		const MetaMemberFlag& GetFlags() const override { return _flags; }
-		bool IsSaved() const override { return static_cast<int>(_flags) & static_cast<int>(MetaMemberFlag::Save); }
-		bool IsLoadable() const override { return static_cast<int>(_flags) & static_cast<int>(MetaMemberFlag::Load); }
-		bool IsEditable() const override { return static_cast<int>(_flags) & static_cast<int>(MetaMemberFlag::Editor); }
+		MetaMemberFlag GetFlags() const override { return static_cast<MetaMemberFlag>(_flags); }
+		bool IsSaved() const override { return _flags & static_cast<int>(MetaMemberFlag::Save); }
+		bool IsLoadable() const override { return _flags & static_cast<int>(MetaMemberFlag::Load); }
+		bool IsEditable() const override { return _flags & static_cast<int>(MetaMemberFlag::Editor); }
+
+		void SetName(std::string_view name) override { _name = name; }
+		void SetDescription(std::string_view description) override { _description = description; }
+
+		void SetSaveFlag() override { _flags |= static_cast<int>(MetaMemberFlag::Save); }
+		void SetLoadFlag() override { _flags |= static_cast<int>(MetaMemberFlag::Load); }
+		void SetEditorFlag() override { _flags |= static_cast<int>(MetaMemberFlag::Editor); }
+		void SetDefaultFlags() override { _flags = static_cast<int>(MetaMemberFlag::Default); }
 
 	private:
 		std::string _name;
 		std::string _description;
-		MetaMemberFlag _flags;
+		int _flags;
 		T* _value = nullptr;
 	};
 
 	template<typename T>
-	MetaMember<T>::MetaMember(std::string_view name, std::string_view description, const MetaMemberFlag& flags, T* value)
-		: _name(name)
-		, _description(description)
-		, _flags(flags)
-		, _value(value)
+	MetaMember<T>::MetaMember(T* value)
+		: _value(value)
 	{
 	}
 

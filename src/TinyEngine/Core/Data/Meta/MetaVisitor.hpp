@@ -15,15 +15,15 @@ namespace TinyEngine
 	class MetaVisitor
 	{
 	public:
-		static void AddMemberWrapper(MetaMembersPtr members, T* value, std::string_view name, std::string_view description, const MetaMemberFlag& flags) 
+		static void AddMemberWrapper(MetaMembersPtr members, T* value, const MetaMembers::MemberInitializerList& initializerList) 
 		{
 			if constexpr (std::is_base_of_v<MetaClass, T>)
 			{
-				members->AddMember(std::make_shared<MetaMember<MetaClass>>(name, description, flags, value));
+				members->AddMember(std::make_shared<MetaMember<MetaClass>>(value), initializerList);
 			}
 			else
 			{
-				members->AddMember(std::make_shared<MetaMember<T>>(name, description, flags, value));
+				members->AddMember(std::make_shared<MetaMember<T>>(value), initializerList);
 			}
 		}
 	};

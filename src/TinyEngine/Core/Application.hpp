@@ -6,6 +6,7 @@
 #include <TinyEngine/Core/Render/RenderWindowSettings.hpp>
 #include <TinyEngine/Core/Project.hpp>
 #include <TinyEngine/Core/World/World.hpp>
+#include <TinyEngine/Core/Conditions/ConditionContext.hpp>
 
 namespace TinyEngine
 {
@@ -31,6 +32,9 @@ namespace TinyEngine
 		World& GetWorld() { return _world; }
 		const World& GetConstWorld() const { return _world; }
 
+		ConditionContext& GetGlobalContext() { return _globalContext; }
+		const ConditionContext& GetConstGlobalContext() const { return _globalContext; }
+
 	private:
 		void OnInit();
 		void OnDeinit();
@@ -41,6 +45,7 @@ namespace TinyEngine
 	private:
 		Project _project;
 		World _world;
+		ConditionContext _globalContext;
 	};
 }
 

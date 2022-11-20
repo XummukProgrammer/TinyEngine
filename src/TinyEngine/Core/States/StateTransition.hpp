@@ -25,6 +25,7 @@ namespace TinyEngine
 		const std::string& GetNextStateId() const { return _nextStateId; }
 
 	public:
+		virtual void OnInit() {}
 		virtual bool CanChangeState() const { return false; }
 
 	private:

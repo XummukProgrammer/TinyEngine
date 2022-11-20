@@ -64,6 +64,14 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/States/States.hpp
 	src/TinyEngine/Core/States/StateTransition.hpp
 	src/TinyEngine/Core/States/StateTransitions.hpp
+	src/TinyEngine/Core/States/Common/StateConditionTransition.hpp
+	src/TinyEngine/Core/Conditions/Condition.hpp
+	src/TinyEngine/Core/Conditions/ConditionVariable.hpp
+	src/TinyEngine/Core/Conditions/ConditionContext.hpp
+	src/TinyEngine/Core/Conditions/ConditionContextVariable.hpp
+	src/TinyEngine/Core/Conditions/Common/AndCondition.hpp
+	src/TinyEngine/Core/Conditions/Common/CompareCondition.hpp
+	src/TinyEngine/Core/Conditions/Common/OrCondition.hpp
 	
 	src/TinyEngine/Core/Project.hpp
 	
@@ -113,6 +121,14 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/States/States.cpp
 	src/TinyEngine/Core/States/StateTransition.cpp
 	src/TinyEngine/Core/States/StateTransitions.cpp
+	src/TinyEngine/Core/States/Common/StateConditionTransition.cpp
+	src/TinyEngine/Core/Conditions/Condition.cpp
+	src/TinyEngine/Core/Conditions/ConditionVariable.cpp
+	src/TinyEngine/Core/Conditions/ConditionContext.cpp
+	src/TinyEngine/Core/Conditions/ConditionContextVariable.cpp
+	src/TinyEngine/Core/Conditions/Common/AndCondition.cpp
+	src/TinyEngine/Core/Conditions/Common/CompareCondition.cpp
+	src/TinyEngine/Core/Conditions/Common/OrCondition.cpp
 	
 	src/TinyEngine/Core/Project.cpp
 	
