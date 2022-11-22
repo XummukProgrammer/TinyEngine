@@ -47,10 +47,8 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Data/Meta/MetaVisitor.hpp
 	src/TinyEngine/Core/Data/Factory.hpp
 	src/TinyEngine/Core/Assets/Asset.hpp
-	src/TinyEngine/Core/Assets/AssetHolder.hpp
-	src/TinyEngine/Core/Assets/AssetLoader.hpp
-	src/TinyEngine/Core/Assets/AssetTexture.hpp
 	src/TinyEngine/Core/Assets/Assets.hpp
+	src/TinyEngine/Core/Assets/Common/TextureAsset.hpp
 	src/TinyEngine/Core/World/World.hpp
 	src/TinyEngine/Core/World/Entity.hpp
 	src/TinyEngine/Core/World/Component.hpp
@@ -106,9 +104,9 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Data/Serialization/XmlArchive.cpp
 	src/TinyEngine/Core/Data/Meta/Members/MetaMembers.cpp
 	src/TinyEngine/Core/Data/Meta/Class/MetaClass.cpp
-	src/TinyEngine/Core/Assets/AssetHolder.cpp
-	src/TinyEngine/Core/Assets/AssetLoader.cpp
+	src/TinyEngine/Core/Assets/Asset.cpp
 	src/TinyEngine/Core/Assets/Assets.cpp
+	src/TinyEngine/Core/Assets/Common/TextureAsset.cpp
 	src/TinyEngine/Core/World/World.cpp
 	src/TinyEngine/Core/World/Entity.cpp
 	src/TinyEngine/Core/World/Common/Components/VisualComponent.cpp
@@ -135,5 +133,4 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Backends/SFML/GUI/SfmlGuiImpl.cpp
 	src/TinyEngine/Core/Backends/SFML/Render/SfmlRenderObjectImpl.cpp
 	src/TinyEngine/Core/Backends/SFML/Render/SfmlRenderWindowImpl.cpp
-	src/TinyEngine/Core/Backends/SFML/Assets/AssetSfmlTexture.cpp
 )
