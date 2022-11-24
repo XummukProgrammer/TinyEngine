@@ -15,6 +15,7 @@ namespace TinyEngine
 		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, &project);
 		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, project.GetWorldFile(), &world);
 
+		project.GetLinkAsset().OnAssetLoad();
 		world.OnInit();
 		project.SetFilePath(filePath);
 		project.GetStates().OnInit();

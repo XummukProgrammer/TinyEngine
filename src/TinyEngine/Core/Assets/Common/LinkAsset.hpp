@@ -1,21 +1,23 @@
-﻿#ifndef _TEXTURE_ASSET_HEADER_
-#define _TEXTURE_ASSET_HEADER_
+﻿#ifndef _LINK_ASSET_HEADER_
+#define _LINK_ASSET_HEADER_
 
 #include <TinyEngine/Core/Assets/Asset.hpp>
 
+#include <string>
+
 namespace TinyEngine
 {
-	class TextureAsset final : public Asset
+	class LinkAsset final : public Asset
 	{
-		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(TextureAsset, Asset)
+		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(LinkAsset, Asset)
 		{
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_filePath, "FilePath", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 
 	public:
-		TextureAsset() = default;
-		~TextureAsset() = default;
+		LinkAsset() = default;
+		~LinkAsset() = default;
 
 	public:
 		void OnAssetLoad() override;
@@ -25,4 +27,4 @@ namespace TinyEngine
 	};
 }
 
-#endif // _TEXTURE_ASSET_HEADER_
+#endif // _LINK_ASSET_HEADER_

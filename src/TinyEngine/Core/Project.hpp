@@ -4,6 +4,7 @@
 #include <TinyEngine/Core/Data/Meta/MetaDefines.hpp>
 #include <TinyEngine/Core/States/States.hpp>
 #include <TinyEngine/Core/Conditions/Condition.hpp>
+#include <TinyEngine/Core/Assets/Common/LinkAsset.hpp>
 
 namespace TinyEngine
 {
@@ -17,6 +18,7 @@ namespace TinyEngine
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_mainAssetsFile, "MainAssetsFile", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_worldFile, "WorldFile", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_states, "States", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_linkAsset, "LinkAsset", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 
@@ -37,6 +39,9 @@ namespace TinyEngine
 		States& GetStates() { return _states; }
 		const States& GetConstStates() const { return _states; }
 
+		LinkAsset& GetLinkAsset() { return _linkAsset; }
+		const LinkAsset& GetConstLinkAsset() const { return _linkAsset; }
+
 	private:
 		std::string _name = "Game";
 		std::string _description = "Default Game";
@@ -45,6 +50,7 @@ namespace TinyEngine
 		std::string _worldFile = "world.xml";
 		States _states;
 		std::string _filePath;
+		LinkAsset _linkAsset;
 	};
 
 	class ProjectUtils
