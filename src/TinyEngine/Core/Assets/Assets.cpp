@@ -27,6 +27,6 @@ namespace TinyEngine
 	void AssetsUtils::CreateAssetFile(std::string_view filePath)
 	{
 		AssetFile assetFile;
-		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, filePath, &assetFile);
+		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, filePath, &assetFile, false);
 	}
 }

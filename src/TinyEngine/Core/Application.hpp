@@ -47,9 +47,10 @@ namespace TinyEngine
 		void OnSaveProject();
 		void OnClose();
 
-		void OnCreateAssetFile();
+		void OnCreateAsset();
 		
-		void OnOpenProjectFile(EventPtr event);
+		void OnOpenFileBrowserHandler(EventPtr event);
+		void OnSaveFileBrowserHandler(EventPtr event);
 
 	private:
 		Project _project;
@@ -58,9 +59,11 @@ namespace TinyEngine
 		bool _isClose = false;
 
 		EventSubscriberSharedPtr _fileBrowserOpenFileSubscriber;
+		EventSubscriberSharedPtr _fileBrowserSaveFileSubscriber;
 
 	private:
-		static inline const std::string FILE_BROWSER_SOURCE = "Application";
+		static inline const std::string OPEN_PROJECT_SOURCE = "OpenProject";
+		static inline const std::string CREATE_ASSET_SOURCE = "CreateAsset";
 	};
 }
 

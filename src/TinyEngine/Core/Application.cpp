@@ -67,14 +67,17 @@ namespace TinyEngine
 
 		GuiMenuBarWidget::Menu assetsMenu;
 		assetsMenu.name = "Assets";
-		assetsMenu.items.push_back({ "Create Asset File", std::bind(&Application::OnCreateAssetFile, this) });
+		assetsMenu.items.push_back({ "Create Asset File", std::bind(&Application::OnCreateAsset, this) });
 		menuBar->AddMenu(assetsMenu);
 		
 		auto fileBrowser = Gui::GetInstance()->GetMainWindow()->GetFileBrowser();
 		fileBrowser->SetTypes(".xml");
 
-		_fileBrowserOpenFileSubscriber = EventSubscriber::Create(std::bind(&Application::OnOpenProjectFile, this, std::placeholders::_1));
+		_fileBrowserOpenFileSubscriber = EventSubscriber::Create(std::bind(&Application::OnOpenFileBrowserHandler, this, std::placeholders::_1));
 		fileBrowser->GetOnOpenFileSender().AddSubscriber(_fileBrowserOpenFileSubscriber);
+
+		_fileBrowserSaveFileSubscriber = EventSubscriber::Create(std::bind(&Application::OnSaveFileBrowserHandler, this, std::placeholders::_1));
+		fileBrowser->GetOnSaveFileSender().AddSubscriber(_fileBrowserSaveFileSubscriber);
 
 		_world.OnInit();
 
@@ -121,7 +124,7 @@ namespace TinyEngine
 	void Application::OnOpenProject()
 	{
 		auto fileBrowser = Gui::GetInstance()->GetMainWindow()->GetFileBrowser();
-		fileBrowser->SetSource(FILE_BROWSER_SOURCE);
+		fileBrowser->SetSource(OPEN_PROJECT_SOURCE);
 		fileBrowser->ShowOpenFile();
 	}
 
@@ -135,22 +138,34 @@ namespace TinyEngine
 		_isClose = 1;
 	}
 
-	void Application::OnCreateAssetFile()
+	void Application::OnCreateAsset()
 	{
-		AssetsUtils::CreateAssetFile("test.xml");
+		auto fileBrowser = Gui::GetInstance()->GetMainWindow()->GetFileBrowser();
+		fileBrowser->SetSource(CREATE_ASSET_SOURCE);
+		fileBrowser->ShowSaveFile();
 	}
 	
-	void Application::OnOpenProjectFile(EventPtr event)
+	void Application::OnOpenFileBrowserHandler(EventPtr event)
 	{
 		auto castedEvent = static_cast<GuiFileBrowserOpenFileEvent*>(event);
 		const auto& source = castedEvent->GetSource();
-
-		if (source != FILE_BROWSER_SOURCE)
-		{
-			return;
-		}
-
 		const auto& filePath = castedEvent->GetFilePath();
-		ProjectUtils::LoadProject(filePath);
+
+		if (source == OPEN_PROJECT_SOURCE)
+		{
+			ProjectUtils::LoadProject(filePath);
+		}
+	}
+
+	void Application::OnSaveFileBrowserHandler(EventPtr event)
+	{
+		auto castedEvent = static_cast<GuiFileBrowserSaveFileEvent*>(event);
+		const auto& source = castedEvent->GetSource();
+		const auto& filePath = castedEvent->GetFilePath();
+
+		if (source == CREATE_ASSET_SOURCE)
+		{
+			AssetsUtils::CreateAssetFile(filePath);
+		}
 	}
 }
