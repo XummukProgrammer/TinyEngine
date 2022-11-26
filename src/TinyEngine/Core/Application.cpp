@@ -11,6 +11,7 @@
 #include <TinyEngine/Core/Gui/Gui.hpp>
 #include <TinyEngine/Core/Gui/Widgets/GuiWindowWidget.hpp>
 #include <TinyEngine/Core/Gui/Widgets/GuiMenuBarWidget.hpp>
+#include <TinyEngine/Core/Assets/Assets.hpp>
 
 namespace TinyEngine
 {
@@ -55,12 +56,18 @@ namespace TinyEngine
 		}
 
 		auto menuBar = Gui::GetInstance()->GetMainWindow()->GetMenuBar();
+
 		GuiMenuBarWidget::Menu projectMenu;
 		projectMenu.name = "Project";
 		projectMenu.items.push_back({ "Load Project", std::bind(&Application::OnLoadProject, this) });
 		projectMenu.items.push_back({ "Save Project", std::bind(&Application::OnSaveProject, this) });
 		projectMenu.items.push_back({ "Close", std::bind(&Application::OnClose, this) });
 		menuBar->AddMenu(projectMenu);
+
+		GuiMenuBarWidget::Menu assetsMenu;
+		assetsMenu.name = "Assets";
+		assetsMenu.items.push_back({ "Create Asset File", std::bind(&Application::OnCreateAssetFile, this) });
+		menuBar->AddMenu(assetsMenu);
 
 		_world.OnInit();
 
@@ -117,5 +124,10 @@ namespace TinyEngine
 	void Application::OnClose()
 	{
 		_isClose = 1;
+	}
+
+	void Application::OnCreateAssetFile()
+	{
+		AssetsUtils::CreateAssetFile("test.xml");
 	}
 }

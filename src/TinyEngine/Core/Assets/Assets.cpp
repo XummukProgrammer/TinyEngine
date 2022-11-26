@@ -1,5 +1,7 @@
 ﻿#include "Assets.hpp"
 
+#include <TinyEngine/Core/Assets/AssetFile.hpp>
+
 namespace TinyEngine
 {
 	void Assets::AddAsset(std::string_view id, const AssetSharedPtr& asset)
@@ -20,5 +22,11 @@ namespace TinyEngine
 			return it->second;
 		}
 		return nullptr;
+	}
+
+	void AssetsUtils::CreateAssetFile(std::string_view filePath)
+	{
+		AssetFile assetFile;
+		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, filePath, &assetFile);
 	}
 }

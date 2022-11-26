@@ -46,6 +46,8 @@ namespace TinyEngine
 		void OnSaveProject();
 		void OnClose();
 
+		void OnCreateAssetFile();
+
 	private:
 		Project _project;
 		World _world;

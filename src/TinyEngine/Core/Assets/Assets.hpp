@@ -34,6 +34,12 @@ namespace TinyEngine
 		}
 		return nullptr;
 	}
+
+	class AssetsUtils final
+	{
+	public:
+		static void CreateAssetFile(std::string_view filePath);
+	};
 }
 
 #endif // _ASSETS_HEADER_

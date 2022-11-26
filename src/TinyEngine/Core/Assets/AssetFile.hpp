@@ -3,6 +3,7 @@
 
 #include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Core/Data/Meta/MetaDefines.hpp>
+#include <TinyEngine/Core/Assets/Asset.hpp>
 
 namespace TinyEngine
 {
