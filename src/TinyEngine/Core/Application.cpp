@@ -13,8 +13,6 @@
 #include <TinyEngine/Core/Gui/Widgets/GuiMenuBarWidget.hpp>
 #include <TinyEngine/Core/Assets/Assets.hpp>
 #include <TinyEngine/Core/Gui/Widgets/GuiFileBrowserWidget.hpp>
-#include <TinyEngine/Core/Assets/AssetLoader.hpp>
-#include <TinyEngine/Core/Assets/AssetTexture.hpp>
 
 namespace TinyEngine
 {
