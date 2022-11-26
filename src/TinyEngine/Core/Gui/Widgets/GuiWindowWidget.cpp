@@ -1,8 +1,6 @@
 ﻿#include "GuiWindowWidget.hpp"
 
-#include <TinyEngine/Libs/ImGui-Addons/FileBrowser/ImGuiFileBrowser.h>
-
-imgui_addons::ImGuiFileBrowser file_dialog;
+#include <TinyEngine/Core/Gui/Widgets/GuiFileBrowserWidget.hpp>
 
 namespace TinyEngine
 {
@@ -38,6 +36,7 @@ namespace TinyEngine
 	{
 		auto widget = std::make_shared<GuiMainWindowWidget>();
 		widget->SetMenuBar(GuiMenuBarWidget::Create());
+		widget->SetFileBrowser(GuiFileBrowserWidget::Create());
 		return widget;
 	}
 
@@ -45,6 +44,12 @@ namespace TinyEngine
 	{
 		_menuBarPtr = menuBarPtr;
 		AddWidget("menuBar", _menuBarPtr);
+	}
+
+	void GuiMainWindowWidget::SetFileBrowser(GuiFileBrowserWidgetSharedPtr widget)
+	{
+		_fileBrowserWidget = widget;
+		AddWidget("fileBrowser", _fileBrowserWidget);
 	}
 
 	void GuiMainWindowWidget::BeginWindow()
@@ -77,11 +82,6 @@ namespace TinyEngine
             ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
             ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
         }
-
-		ImGui::OpenPopup("Open File");
-		if(file_dialog.showFileDialog("Open File", imgui_addons::ImGuiFileBrowser::DialogMode::OPEN, ImVec2(700, 310), ".rar,.zip,.7z"))
-		{
-		}
 	}
 
 	void GuiMainWindowWidget::EndWindow()

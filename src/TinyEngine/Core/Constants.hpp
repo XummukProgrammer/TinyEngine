@@ -41,6 +41,14 @@ namespace TinyEngine
 		More,
 		MoreOrEqual
 	};
+
+	enum class FileBrowserState
+	{
+		Hide,
+		OpenFile,
+		SaveFile,
+		SelectDirectory
+	};
 }
 
 #endif // _CONSTANTS_HEADER_

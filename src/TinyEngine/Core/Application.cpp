@@ -11,6 +11,7 @@
 #include <TinyEngine/Core/Gui/Gui.hpp>
 #include <TinyEngine/Core/Gui/Widgets/GuiWindowWidget.hpp>
 #include <TinyEngine/Core/Gui/Widgets/GuiMenuBarWidget.hpp>
+#include <TinyEngine/Core/Gui/Widgets/GuiFileBrowserWidget.hpp>
 #include <TinyEngine/Core/Assets/AssetLoader.hpp>
 #include <TinyEngine/Core/Assets/AssetTexture.hpp>
 
@@ -59,10 +60,12 @@ namespace TinyEngine
 		auto menuBar = Gui::GetInstance()->GetMainWindow()->GetMenuBar();
 		GuiMenuBarWidget::Menu projectMenu;
 		projectMenu.name = "Project";
-		projectMenu.items.push_back({ "Load Project", std::bind(&Application::OnLoadProject, this) });
+		projectMenu.items.push_back({ "Open Project", std::bind(&Application::OnOpenProject, this) });
 		projectMenu.items.push_back({ "Save Project", std::bind(&Application::OnSaveProject, this) });
 		projectMenu.items.push_back({ "Close", std::bind(&Application::OnClose, this) });
 		menuBar->AddMenu(projectMenu);
+
+		Gui::GetInstance()->GetMainWindow()->GetFileBrowser()->SetTypes(".xml");
 
 		_world.OnInit();
 
@@ -108,14 +111,16 @@ namespace TinyEngine
 		_world.OnUpdate();
 	}
 
-	void Application::OnLoadProject()
+	void Application::OnOpenProject()
 	{
-		ProjectUtils::LoadProject("project.xml");
+		//ProjectUtils::LoadProject("project.xml");
+		Gui::GetInstance()->GetMainWindow()->GetFileBrowser()->ShowOpenFile();
 	}
 
 	void Application::OnSaveProject()
 	{
-		ProjectUtils::SaveProject();
+		//ProjectUtils::SaveProject();
+		Gui::GetInstance()->GetMainWindow()->GetFileBrowser()->ShowSaveFile();
 	}
 
 	void Application::OnClose()

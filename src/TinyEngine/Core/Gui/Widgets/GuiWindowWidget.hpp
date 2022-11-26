@@ -4,6 +4,7 @@
 #include <TinyEngine/Core/Gui/GuiWidget.hpp>
 #include <TinyEngine/Core/Gui/GuiWidgetContainer.hpp>
 #include <TinyEngine/Core/Gui/Widgets/GuiMenuBarWidget.hpp>
+#include <TinyEngine/Core/Gui/Widgets/GuiFileBrowserWidget.hpp>
 
 #include <string>
 
@@ -46,12 +47,16 @@ namespace TinyEngine
 		void SetMenuBar(GuiMenuBarWidgetSharedPtr menuBarPtr);
 		GuiMenuBarWidgetSharedPtr GetMenuBar() const { return _menuBarPtr; }
 
+		void SetFileBrowser(GuiFileBrowserWidgetSharedPtr widget);
+		GuiFileBrowserWidgetSharedPtr GetFileBrowser() const { return _fileBrowserWidget; }
+
 	protected:
 		void BeginWindow() override;
 		void EndWindow() override;
 
 	private:
 		GuiMenuBarWidgetSharedPtr _menuBarPtr;
+		GuiFileBrowserWidgetSharedPtr _fileBrowserWidget;
 	};
 }
 

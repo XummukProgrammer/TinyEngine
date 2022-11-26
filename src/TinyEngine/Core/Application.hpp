@@ -42,7 +42,7 @@ namespace TinyEngine
 		void OnProcess();
 		void OnUpdate();
 
-		void OnLoadProject();
+		void OnOpenProject();
 		void OnSaveProject();
 		void OnClose();
 
