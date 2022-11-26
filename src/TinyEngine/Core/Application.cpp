@@ -120,7 +120,9 @@ namespace TinyEngine
 
 	void Application::OnOpenProject()
 	{
-		Gui::GetInstance()->GetMainWindow()->GetFileBrowser()->ShowOpenFile();
+		auto fileBrowser = Gui::GetInstance()->GetMainWindow()->GetFileBrowser();
+		fileBrowser->SetSource(FILE_BROWSER_SOURCE);
+		fileBrowser->ShowOpenFile();
 	}
 
 	void Application::OnSaveProject()
@@ -141,8 +143,14 @@ namespace TinyEngine
 	void Application::OnOpenProjectFile(EventPtr event)
 	{
 		auto castedEvent = static_cast<GuiFileBrowserOpenFileEvent*>(event);
+		const auto& source = castedEvent->GetSource();
+
+		if (source != FILE_BROWSER_SOURCE)
+		{
+			return;
+		}
+
 		const auto& filePath = castedEvent->GetFilePath();
-		
 		ProjectUtils::LoadProject(filePath);
 	}
 }

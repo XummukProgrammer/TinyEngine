@@ -58,6 +58,9 @@ namespace TinyEngine
 		bool _isClose = false;
 
 		EventSubscriberSharedPtr _fileBrowserOpenFileSubscriber;
+
+	private:
+		static inline const std::string FILE_BROWSER_SOURCE = "Application";
 	};
 }
 
