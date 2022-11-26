@@ -1,5 +1,7 @@
 ﻿#include "GuiWindowWidget.hpp"
 
+#include <TinyEngine/Core/Gui/Widgets/GuiFileBrowserWidget.hpp>
+
 namespace TinyEngine
 {
 	GuiWindowWidgetSharedPtr GuiWindowWidget::Create(std::string_view name)
@@ -34,6 +36,7 @@ namespace TinyEngine
 	{
 		auto widget = std::make_shared<GuiMainWindowWidget>();
 		widget->SetMenuBar(GuiMenuBarWidget::Create());
+		widget->SetFileBrowser(GuiFileBrowserWidget::Create());
 		return widget;
 	}
 
@@ -41,6 +44,12 @@ namespace TinyEngine
 	{
 		_menuBarPtr = menuBarPtr;
 		AddWidget("menuBar", _menuBarPtr);
+	}
+
+	void GuiMainWindowWidget::SetFileBrowser(GuiFileBrowserWidgetSharedPtr widget)
+	{
+		_fileBrowserWidget = widget;
+		AddWidget("fileBrowser", _fileBrowserWidget);
 	}
 
 	void GuiMainWindowWidget::BeginWindow()

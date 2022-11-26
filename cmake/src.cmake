@@ -29,6 +29,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Gui/Widgets/GuiInputNumberWidget.hpp
 	src/TinyEngine/Core/Gui/Widgets/GuiInputFloatWidget.hpp
 	src/TinyEngine/Core/Gui/Widgets/GuiStringListBoxWidget.hpp
+	src/TinyEngine/Core/Gui/Widgets/GuiFileBrowserWidget.hpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiPropertiesWidget.hpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiInputVectorWidget.hpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiInputMapWidget.hpp
@@ -75,6 +76,10 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Conditions/Common/OrCondition.hpp
 	
 	src/TinyEngine/Core/Project.hpp
+	
+	src/TinyEngine/Libs/ImGui-Addons/FileBrowser/ImGuiFileBrowser.h
+	
+	src/Dirent/dirent.h
 )
 
 set(ENGINE_SOURCES
@@ -96,6 +101,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Gui/Widgets/GuiInputNumberWidget.cpp
 	src/TinyEngine/Core/Gui/Widgets/GuiInputFloatWidget.cpp
 	src/TinyEngine/Core/Gui/Widgets/GuiStringListBoxWidget.cpp
+	src/TinyEngine/Core/Gui/Widgets/GuiFileBrowserWidget.cpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiPropertiesWidget.cpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiInputVectorWidget.cpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiInputMapWidget.cpp
@@ -130,6 +136,8 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Conditions/Common/OrCondition.cpp
 	
 	src/TinyEngine/Core/Project.cpp
+	
+	src/TinyEngine/Libs/ImGui-Addons/FileBrowser/ImGuiFileBrowser.cpp
 	
 	# TODO: Не подключать, если сборка с SFML отключена
 	src/TinyEngine/Core/Backends/SFML/GUI/SfmlGuiImpl.cpp

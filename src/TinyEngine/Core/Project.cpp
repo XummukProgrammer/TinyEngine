@@ -12,7 +12,7 @@ namespace TinyEngine
 		auto& project = Application::GetInstance()->GetProject();
 		auto& world = Application::GetInstance()->GetWorld();
 
-		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, &project);
+		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, &project, false);
 		Assets::GetInstance()->LoadFromFile(project.GetMainAssetsFile());
 		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, project.GetWorldFile(), &world);
 
@@ -24,6 +24,6 @@ namespace TinyEngine
 	void ProjectUtils::SaveProject()
 	{
 		auto& project = Application::GetInstance()->GetProject();
-		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, project.GetFilePath(), &project);
+		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, project.GetFilePath(), &project, false);
 	}
 }
