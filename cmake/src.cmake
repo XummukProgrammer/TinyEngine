@@ -75,6 +75,10 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Conditions/Common/OrCondition.hpp
 	
 	src/TinyEngine/Core/Project.hpp
+	
+	src/TinyEngine/Libs/ImGui-Addons/FileBrowser/ImGuiFileBrowser.h
+	
+	src/Dirent/dirent.h
 )
 
 set(ENGINE_SOURCES
@@ -130,6 +134,8 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Conditions/Common/OrCondition.cpp
 	
 	src/TinyEngine/Core/Project.cpp
+	
+	src/TinyEngine/Libs/ImGui-Addons/FileBrowser/ImGuiFileBrowser.cpp
 	
 	# TODO: Не подключать, если сборка с SFML отключена
 	src/TinyEngine/Core/Backends/SFML/GUI/SfmlGuiImpl.cpp

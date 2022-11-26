@@ -1,5 +1,9 @@
 ﻿#include "GuiWindowWidget.hpp"
 
+#include <TinyEngine/Libs/ImGui-Addons/FileBrowser/ImGuiFileBrowser.h>
+
+imgui_addons::ImGuiFileBrowser file_dialog;
+
 namespace TinyEngine
 {
 	GuiWindowWidgetSharedPtr GuiWindowWidget::Create(std::string_view name)
@@ -73,6 +77,11 @@ namespace TinyEngine
             ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
             ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
         }
+
+		ImGui::OpenPopup("Open File");
+		if(file_dialog.showFileDialog("Open File", imgui_addons::ImGuiFileBrowser::DialogMode::OPEN, ImVec2(700, 310), ".rar,.zip,.7z"))
+		{
+		}
 	}
 
 	void GuiMainWindowWidget::EndWindow()
