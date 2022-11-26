@@ -12,6 +12,9 @@
 #include <TinyEngine/Core/Gui/Widgets/GuiWindowWidget.hpp>
 #include <TinyEngine/Core/Gui/Widgets/GuiMenuBarWidget.hpp>
 #include <TinyEngine/Core/Assets/Assets.hpp>
+#include <TinyEngine/Core/Gui/Widgets/GuiFileBrowserWidget.hpp>
+#include <TinyEngine/Core/Assets/AssetLoader.hpp>
+#include <TinyEngine/Core/Assets/AssetTexture.hpp>
 
 namespace TinyEngine
 {
@@ -59,7 +62,7 @@ namespace TinyEngine
 
 		GuiMenuBarWidget::Menu projectMenu;
 		projectMenu.name = "Project";
-		projectMenu.items.push_back({ "Load Project", std::bind(&Application::OnLoadProject, this) });
+		projectMenu.items.push_back({ "Open Project", std::bind(&Application::OnOpenProject, this) });
 		projectMenu.items.push_back({ "Save Project", std::bind(&Application::OnSaveProject, this) });
 		projectMenu.items.push_back({ "Close", std::bind(&Application::OnClose, this) });
 		menuBar->AddMenu(projectMenu);
@@ -68,6 +71,12 @@ namespace TinyEngine
 		assetsMenu.name = "Assets";
 		assetsMenu.items.push_back({ "Create Asset File", std::bind(&Application::OnCreateAssetFile, this) });
 		menuBar->AddMenu(assetsMenu);
+		
+		auto fileBrowser = Gui::GetInstance()->GetMainWindow()->GetFileBrowser();
+		fileBrowser->SetTypes(".xml");
+
+		_fileBrowserOpenFileSubscriber = EventSubscriber::Create(std::bind(&Application::OnOpenProjectFile, this, std::placeholders::_1));
+		fileBrowser->GetOnOpenFileSender().AddSubscriber(_fileBrowserOpenFileSubscriber);
 
 		_world.OnInit();
 
@@ -111,9 +120,9 @@ namespace TinyEngine
 		_world.OnUpdate();
 	}
 
-	void Application::OnLoadProject()
+	void Application::OnOpenProject()
 	{
-		ProjectUtils::LoadProject("project.xml");
+		Gui::GetInstance()->GetMainWindow()->GetFileBrowser()->ShowOpenFile();
 	}
 
 	void Application::OnSaveProject()
@@ -129,5 +138,13 @@ namespace TinyEngine
 	void Application::OnCreateAssetFile()
 	{
 		AssetsUtils::CreateAssetFile("test.xml");
+	}
+	
+	void Application::OnOpenProjectFile(EventPtr event)
+	{
+		auto castedEvent = static_cast<GuiFileBrowserOpenFileEvent*>(event);
+		const auto& filePath = castedEvent->GetFilePath();
+		
+		ProjectUtils::LoadProject(filePath);
 	}
 }
