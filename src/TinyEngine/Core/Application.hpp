@@ -7,6 +7,7 @@
 #include <TinyEngine/Core/Project.hpp>
 #include <TinyEngine/Core/World/World.hpp>
 #include <TinyEngine/Core/Conditions/ConditionContext.hpp>
+#include <TinyEngine/Core/Event/EventSubscriber.hpp>
 
 namespace TinyEngine
 {
@@ -46,11 +47,15 @@ namespace TinyEngine
 		void OnSaveProject();
 		void OnClose();
 
+		void OnOpenProjectFile(EventPtr event);
+
 	private:
 		Project _project;
 		World _world;
 		ConditionContext _globalContext;
 		bool _isClose = false;
+
+		EventSubscriberSharedPtr _fileBrowserOpenFileSubscriber;
 	};
 }
 

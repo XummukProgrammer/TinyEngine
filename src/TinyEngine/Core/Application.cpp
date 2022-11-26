@@ -65,7 +65,11 @@ namespace TinyEngine
 		projectMenu.items.push_back({ "Close", std::bind(&Application::OnClose, this) });
 		menuBar->AddMenu(projectMenu);
 
-		Gui::GetInstance()->GetMainWindow()->GetFileBrowser()->SetTypes(".xml");
+		auto fileBrowser = Gui::GetInstance()->GetMainWindow()->GetFileBrowser();
+		fileBrowser->SetTypes(".xml");
+
+		_fileBrowserOpenFileSubscriber = EventSubscriber::Create(std::bind(&Application::OnOpenProjectFile, this, std::placeholders::_1));
+		fileBrowser->GetOnOpenFileSender().AddSubscriber(_fileBrowserOpenFileSubscriber);
 
 		_world.OnInit();
 
@@ -113,18 +117,24 @@ namespace TinyEngine
 
 	void Application::OnOpenProject()
 	{
-		//ProjectUtils::LoadProject("project.xml");
 		Gui::GetInstance()->GetMainWindow()->GetFileBrowser()->ShowOpenFile();
 	}
 
 	void Application::OnSaveProject()
 	{
-		//ProjectUtils::SaveProject();
-		Gui::GetInstance()->GetMainWindow()->GetFileBrowser()->ShowSaveFile();
+		ProjectUtils::SaveProject();
 	}
 
 	void Application::OnClose()
 	{
 		_isClose = 1;
+	}
+
+	void Application::OnOpenProjectFile(EventPtr event)
+	{
+		auto castedEvent = static_cast<GuiFileBrowserOpenFileEvent*>(event);
+		const auto& filePath = castedEvent->GetFilePath();
+		
+		ProjectUtils::LoadProject(filePath);
 	}
 }
