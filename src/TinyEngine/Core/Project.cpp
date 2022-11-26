@@ -13,7 +13,6 @@ namespace TinyEngine
 		auto& world = Application::GetInstance()->GetWorld();
 
 		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, &project, false);
-		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, project.GetWorldFile(), &world);
 
 		project.GetLinkAsset().OnAssetLoad();
 		world.OnInit();
