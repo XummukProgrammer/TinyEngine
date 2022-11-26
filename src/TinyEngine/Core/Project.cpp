@@ -24,6 +24,6 @@ namespace TinyEngine
 	void ProjectUtils::SaveProject()
 	{
 		auto& project = Application::GetInstance()->GetProject();
-		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, project.GetFilePath(), &project);
+		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, project.GetFilePath(), &project, false);
 	}
 }
