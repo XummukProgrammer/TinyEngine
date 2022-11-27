@@ -13,11 +13,7 @@ namespace TinyEngine
 
     void GuiPropertiesWidget::InitFromMetaClass(MetaClassPtr metaClass)
     {
+        RemoveAllWidgets();
         metaClass->AddGuiWidgetsToContainer(this);
-    }
-
-    void GuiPropertiesWidget::Reset()
-    {
-        // TODO: Реализовать
     }
 }

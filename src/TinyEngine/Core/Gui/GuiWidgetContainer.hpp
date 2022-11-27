@@ -27,6 +27,8 @@ namespace TinyEngine
 		void AddWidget(GuiWidgetSharedPtr widget);
 		template<typename T> std::shared_ptr<T> GetWidget(std::string_view id) const;
 		bool HasWidget(std::string_view id) const;
+		void RemoveWidget(std::string_view id);
+		void RemoveAllWidgets();
 
 		void EachWidgets(EachWidgetsCallback callback);
 

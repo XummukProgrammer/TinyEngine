@@ -17,7 +17,6 @@ namespace TinyEngine
 
 	public:
 		void InitFromMetaClass(MetaClassPtr metaClass);
-		void Reset();
 	};
 }
 

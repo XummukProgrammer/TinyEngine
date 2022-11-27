@@ -111,6 +111,12 @@ namespace TinyEngine
 
 	void Application::OnUpdate()
 	{
+		if (_isOpenProjectFile)
+		{
+			ProjectUtils::LoadProject(_projectFilePath);
+			_isOpenProjectFile = false;
+		}
+
 		_project.GetStates().OnUpdate();
 		_world.OnUpdate();
 	}
@@ -133,8 +139,7 @@ namespace TinyEngine
 	void Application::OnOpenProjectFile(EventPtr event)
 	{
 		auto castedEvent = static_cast<GuiFileBrowserOpenFileEvent*>(event);
-		const auto& filePath = castedEvent->GetFilePath();
-		
-		ProjectUtils::LoadProject(filePath);
+		_projectFilePath = castedEvent->GetFilePath();
+		_isOpenProjectFile = true;
 	}
 }
