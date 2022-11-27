@@ -4,6 +4,7 @@
 #include <TinyEngine/Core/Logger.hpp>
 #include <TinyEngine/Core/World/World.hpp>
 #include <TinyEngine/Core/Application.hpp>
+#include <TinyEngine/Core/FileSystem.hpp>
 
 namespace TinyEngine
 {
@@ -12,17 +13,18 @@ namespace TinyEngine
 		auto& project = Application::GetInstance()->GetProject();
 		auto& world = Application::GetInstance()->GetWorld();
 
-		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, &project, false);
+		FileSystem::GetInstance()->SetProjectPath(filePath);
+
+		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, &project, true);
 
 		project.GetLinkAsset().OnAssetLoad();
 		world.OnInit();
-		project.SetFilePath(filePath);
 		project.GetStates().OnInit();
 	}
 
 	void ProjectUtils::SaveProject()
 	{
 		auto& project = Application::GetInstance()->GetProject();
-		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, project.GetFilePath(), &project, false);
+		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, FileSystem::GetInstance()->GetProjectPath(), &project, true);
 	}
 }

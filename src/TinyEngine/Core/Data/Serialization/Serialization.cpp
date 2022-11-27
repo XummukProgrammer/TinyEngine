@@ -17,23 +17,21 @@ namespace TinyEngine
 		TinyEngine::SerializationVisitor<TinyEngine::MetaClass>::Load(archive, "root", metaClass);
 	}
 
-	void SerializationUtils::SaveRootToFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass, bool isFromAssetsDir)
+	void SerializationUtils::SaveRootToFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass, bool isProjectFilePath)
 	{
 		if (auto archive = CreateOutputArchive(format))
 		{
-			archive->SetPath(path);
-			archive->SetIsFromAssetsDir(isFromAssetsDir);
+			archive->SetPath(path, isProjectFilePath);
 			SaveRoot(archive.get(), metaClass);
 			archive->Save();
 		}
 	}
 
-	void SerializationUtils::LoadRootFromFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass, bool isFromAssetsDir)
+	void SerializationUtils::LoadRootFromFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass, bool isProjectFilePath)
 	{
 		if (auto archive = CreateInputArchive(format))
 		{
-			archive->SetPath(path);
-			archive->SetIsFromAssetsDir(isFromAssetsDir);
+			archive->SetPath(path, isProjectFilePath);
 			archive->Load();
 			LoadRoot(archive.get(), metaClass);
 		}

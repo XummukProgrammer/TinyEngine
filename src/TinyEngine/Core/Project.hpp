@@ -35,17 +35,12 @@ namespace TinyEngine
 		LinkAsset& GetLinkAsset() { return _linkAsset; }
 		const LinkAsset& GetConstLinkAsset() const { return _linkAsset; }
 
-		void SetFilePath(std::string_view filePath) { _filePath = filePath; }
-		const std::string& GetFilePath() const { return _filePath; }
-
 	private:
 		std::string _name = "Game";
 		std::string _description = "Default Game";
 		std::string _version = "1.0.0";
 		States _states;
 		LinkAsset _linkAsset;
-
-		std::string _filePath;
 	};
 
 	class ProjectUtils

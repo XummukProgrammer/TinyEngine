@@ -16,13 +16,20 @@ namespace TinyEngine
 
 	public:
 		void SetExecutePath(std::string_view executePath);
+		void SetProjectPath(std::string_view projectPath);
+
 		const std::string& GetExecutePath() const { return _executePath; }
 		const std::string& GetExecuteDir() const { return _executeDir; }
+		const std::string& GetProjectDir() const { return _projectDir; }
+		const std::string& GetProjectPath() const { return _projectPath; }
 		std::string GetRootDir() const { return _executeDir + "../"; }
-		std::string GetAssetsDir() const { return GetRootDir() + "assets/"; }
-		std::string GetLogsDir() const { return GetRootDir() + "_logs/"; }
+
+		std::string GetLogsDir() const { return GetRootDir() + "logs/"; }
 
 		std::string BuildPath(DirType type, std::string_view path) const;
+
+	public:
+		static std::string RemoveFileName(std::string_view filePath);
 
 	private:
 		std::string GetDirFromType(DirType type) const;
@@ -30,6 +37,9 @@ namespace TinyEngine
 	private:
 		std::string _executePath;
 		std::string _executeDir;
+
+		std::string _projectDir;
+		std::string _projectPath;
 	};
 }
 

@@ -41,14 +41,10 @@ namespace TinyEngine
 		virtual ~BaseArchive() = default;
 
 	public:
-		void SetIsFromAssetsDir(bool isFromAssetsDir) { _isFromAssetsDir = isFromAssetsDir; }
-		bool IsFromAssetsDir() const { return _isFromAssetsDir; }
-
-		void SetPath(std::string_view path) { _path = path; }
-		std::string GetPath() const override { return _isFromAssetsDir ? FileSystem::GetInstance()->BuildPath(DirType::Assets, _path) : _path; }
+		void SetPath(std::string_view path, bool isProjectFilePath = false) { _path = isProjectFilePath ? path : FileSystem::GetInstance()->BuildPath(DirType::Project, path); }
+		std::string GetPath() const override { return _path; }
 
 	private:
-		bool _isFromAssetsDir = true;
 		std::string _path;
 	};
 
@@ -90,8 +86,8 @@ namespace TinyEngine
 		static void SaveRoot(OutputArchivePtr archive, MetaClassPtr metaClass);
 		static void LoadRoot(InputArchivePtr archive, MetaClassPtr metaClass);
 
-		static void SaveRootToFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass, bool isFromAssetsDir = true);
-		static void LoadRootFromFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass, bool isFromAssetsDir = true);
+		static void SaveRootToFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass, bool isProjectFilePath = false);
+		static void LoadRootFromFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass, bool isProjectFilePath = false);
 
 		static OutputArchiveUniquePtr CreateOutputArchive(ArchiveFormat format);
 		static InputArchiveUniquePtr CreateInputArchive(ArchiveFormat format);

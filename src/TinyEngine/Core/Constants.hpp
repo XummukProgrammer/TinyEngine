@@ -5,9 +5,7 @@ namespace TinyEngine
 {
 	enum class DirType
 	{
-		Execute,
-		Root,
-		Assets,
+		Project,
 		Logs
 	};
 
