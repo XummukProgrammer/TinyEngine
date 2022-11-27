@@ -57,6 +57,8 @@ namespace TinyEngine
 		World _world;
 		ConditionContext _globalContext;
 		bool _isClose = false;
+		bool _isOpenProjectFile = false;
+		std::string _projectFilePath;
 
 		EventSubscriberSharedPtr _fileBrowserOpenFileSubscriber;
 		EventSubscriberSharedPtr _fileBrowserSaveFileSubscriber;

@@ -117,6 +117,12 @@ namespace TinyEngine
 
 	void Application::OnUpdate()
 	{
+		if (_isOpenProjectFile)
+		{
+			ProjectUtils::LoadProject(_projectFilePath);
+			_isOpenProjectFile = false;
+		}
+
 		_project.GetStates().OnUpdate();
 		_world.OnUpdate();
 	}
@@ -153,7 +159,8 @@ namespace TinyEngine
 
 		if (source == OPEN_PROJECT_SOURCE)
 		{
-			ProjectUtils::LoadProject(filePath);
+			_projectFilePath = castedEvent->GetFilePath();
+			_isOpenProjectFile = true;
 		}
 	}
 

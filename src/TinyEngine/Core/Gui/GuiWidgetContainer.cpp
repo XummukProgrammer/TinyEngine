@@ -15,6 +15,7 @@ namespace TinyEngine
 	void GuiWidgetContainer::AddWidget(std::string_view id, GuiWidgetSharedPtr widget)
 	{
 		_widgets.push_back({ std::string{id}, widget });
+		widget->OnInit();
 	}
 
 	void GuiWidgetContainer::AddWidget(GuiWidgetSharedPtr widget)
@@ -35,6 +36,26 @@ namespace TinyEngine
 		return false;
 	}
 
+	void GuiWidgetContainer::RemoveWidget(std::string_view id)
+	{
+		for (const auto& [ widgetId, widget ] : _widgets)
+		{
+			if (widgetId == id)
+			{
+				widget->SetIsRemove(true);
+				return;
+			}
+		}
+	}
+
+	void GuiWidgetContainer::RemoveAllWidgets()
+	{
+		for (const auto& [ widgetId, widget ] : _widgets)
+		{
+			widget->SetIsRemove(true);
+		}
+	}
+
 	void GuiWidgetContainer::EachWidgets(EachWidgetsCallback callback)
 	{
 		if (!callback)
@@ -42,11 +63,21 @@ namespace TinyEngine
 			return;
 		}
 
-		for (const auto& [ id, widget ] : _widgets)
+		for (auto it = _widgets.begin(); it != _widgets.end();)
 		{
-			if (widget->IsActive())
+			if (it->second->IsRemove())
 			{
-				callback(id, widget);
+				it->second->OnDeinit();
+				it = _widgets.erase(it);
+			}
+			else
+			{
+				if (it->second->IsActive())
+				{
+					callback(it->first, it->second);
+				}
+
+				++it;
 			}
 		}
 	}

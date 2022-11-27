@@ -15,14 +15,22 @@ namespace TinyEngine
 		~GuiWidget() = default;
 
 	public:
+		virtual void OnInit() {}
+		virtual void OnDeinit() {}
 		virtual void Draw(float deltaTime) {}
 
 	public:
 		void SetIsActive(bool isActive) { _isActive = isActive; }
 		bool IsActive() const { return _isActive; }
 
+		void SetIsRemove(bool isRemove) { _isRemove = isRemove; }
+		bool IsRemove() const { return _isRemove; }
+
+		bool IsValid() const { return IsActive() && !IsRemove(); }
+
 	private:
 		bool _isActive = true;
+		bool _isRemove = false;
 	};
 }
 
