@@ -41,7 +41,7 @@ namespace TinyEngine
 		virtual ~BaseArchive() = default;
 
 	public:
-		void SetPath(std::string_view path, bool isProjectFilePath = false) { _path = isProjectFilePath ? path : FileSystem::GetInstance()->BuildPath(DirType::Project, path); }
+		void SetPath(std::string_view path, bool isWithProjectDir = true) { _path = isWithProjectDir ? FileSystem::GetInstance()->BuildPath(DirType::Project, path) : path; }
 		std::string GetPath() const override { return _path; }
 
 	private:
@@ -86,8 +86,8 @@ namespace TinyEngine
 		static void SaveRoot(OutputArchivePtr archive, MetaClassPtr metaClass);
 		static void LoadRoot(InputArchivePtr archive, MetaClassPtr metaClass);
 
-		static void SaveRootToFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass, bool isProjectFilePath = false);
-		static void LoadRootFromFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass, bool isProjectFilePath = false);
+		static void SaveRootToFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass, bool isWithProjectDir = true);
+		static void LoadRootFromFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass, bool isWithProjectDir = true);
 
 		static OutputArchiveUniquePtr CreateOutputArchive(ArchiveFormat format);
 		static InputArchiveUniquePtr CreateInputArchive(ArchiveFormat format);

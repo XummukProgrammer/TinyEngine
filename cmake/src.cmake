@@ -48,7 +48,6 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Data/Meta/MetaVisitor.hpp
 	src/TinyEngine/Core/Data/Factory.hpp
 	src/TinyEngine/Core/Assets/Asset.hpp
-	src/TinyEngine/Core/Assets/AssetFile.hpp
 	src/TinyEngine/Core/Assets/Common/AssetHolder.hpp
 	src/TinyEngine/Core/Assets/Assets.hpp
 	src/TinyEngine/Core/Assets/Common/TextureAsset.hpp
@@ -114,7 +113,6 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Data/Meta/Members/MetaMembers.cpp
 	src/TinyEngine/Core/Data/Meta/Class/MetaClass.cpp
 	src/TinyEngine/Core/Assets/Asset.cpp
-	src/TinyEngine/Core/Assets/AssetFile.cpp
 	src/TinyEngine/Core/Assets/Common/AssetHolder.cpp
 	src/TinyEngine/Core/Assets/Assets.cpp
 	src/TinyEngine/Core/Assets/Common/TextureAsset.cpp

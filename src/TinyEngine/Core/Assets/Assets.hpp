@@ -38,7 +38,7 @@ namespace TinyEngine
 	class AssetsUtils final
 	{
 	public:
-		static void CreateAssetFile(std::string_view filePath);
+		static void CreateAssetFile(std::string_view filePath, std::string_view type);
 	};
 }
 

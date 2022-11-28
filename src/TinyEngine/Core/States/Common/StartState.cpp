@@ -17,7 +17,7 @@ namespace TinyEngine
 
         auto propertiesWindow = TinyEngine::GuiPropertiesWidget::Create();
 		propertiesWindow->InitFromMetaClass(&TinyEngine::Application::GetInstance()->GetProject());
-		mainWindowWidgetPtr->AddWidget(propertiesWindow);
+		mainWindowWidgetPtr->AddWidget("Properties", propertiesWindow);
 	}
 
 	void StartState::OnExit()

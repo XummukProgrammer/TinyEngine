@@ -43,11 +43,18 @@ namespace TinyEngine
 		void OnProcess();
 		void OnUpdate();
 
+		void OnRegisterFactory();
+		void OnLoadGlobalContext();
+		void OnLoadGui();
+
 		void OnOpenProject();
 		void OnSaveProject();
 		void OnClose();
 
-		void OnCreateAsset();
+		void OnCreateAssetFile();
+
+		void OnOpenProjectProperties();
+		void OnOpenAssetFileProperties();
 		
 		void OnOpenFileBrowserHandler(EventPtr event);
 		void OnSaveFileBrowserHandler(EventPtr event);

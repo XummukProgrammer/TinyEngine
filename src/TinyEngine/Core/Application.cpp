@@ -12,7 +12,11 @@
 #include <TinyEngine/Core/Gui/Widgets/GuiWindowWidget.hpp>
 #include <TinyEngine/Core/Gui/Widgets/GuiMenuBarWidget.hpp>
 #include <TinyEngine/Core/Assets/Assets.hpp>
+#include <TinyEngine/Core/Assets/Common/AssetHolder.hpp>
+#include <TinyEngine/Core/Assets/Common/LinkAsset.hpp>
+#include <TinyEngine/Core/Assets/Common/TextureAsset.hpp>
 #include <TinyEngine/Core/Gui/Widgets/GuiFileBrowserWidget.hpp>
+#include <TinyEngine/Core/Gui/Widgets/Containers/GuiPropertiesWidget.hpp>
 
 namespace TinyEngine
 {
@@ -50,49 +54,11 @@ namespace TinyEngine
 	{
 		TINY_ENGINE_INFO("Application", "Init");
 
-		{
-			auto variable = std::make_shared<ConditionBoolVariable>();
-			variable->SetGetter([this]() { return _isClose; });
-			_globalContext.AddVariable("IsClose", variable);	
-		}
-
-		auto menuBar = Gui::GetInstance()->GetMainWindow()->GetMenuBar();
-
-		GuiMenuBarWidget::Menu projectMenu;
-		projectMenu.name = "Project";
-		projectMenu.items.push_back({ "Open Project", std::bind(&Application::OnOpenProject, this) });
-		projectMenu.items.push_back({ "Save Project", std::bind(&Application::OnSaveProject, this) });
-		projectMenu.items.push_back({ "Close", std::bind(&Application::OnClose, this) });
-		menuBar->AddMenu(projectMenu);
-
-		GuiMenuBarWidget::Menu assetsMenu;
-		assetsMenu.name = "Assets";
-		assetsMenu.items.push_back({ "Create Asset File", std::bind(&Application::OnCreateAsset, this) });
-		menuBar->AddMenu(assetsMenu);
-		
-		auto fileBrowser = Gui::GetInstance()->GetMainWindow()->GetFileBrowser();
-		fileBrowser->SetTypes(".xml");
-
-		_fileBrowserOpenFileSubscriber = EventSubscriber::Create(std::bind(&Application::OnOpenFileBrowserHandler, this, std::placeholders::_1));
-		fileBrowser->GetOnOpenFileSender().AddSubscriber(_fileBrowserOpenFileSubscriber);
-
-		_fileBrowserSaveFileSubscriber = EventSubscriber::Create(std::bind(&Application::OnSaveFileBrowserHandler, this, std::placeholders::_1));
-		fileBrowser->GetOnSaveFileSender().AddSubscriber(_fileBrowserSaveFileSubscriber);
+		OnRegisterFactory();
+		OnLoadGlobalContext();
+		OnLoadGui();
 
 		_world.OnInit();
-
-		Factory::GetInstance()->Register<StartState>();
-		Factory::GetInstance()->Register<CloseState>();
-		Factory::GetInstance()->Register<StateTransition>();
-		Factory::GetInstance()->Register<StateConditionTransition>();
-		Factory::GetInstance()->Register<ConditionBoolVariable>();
-		Factory::GetInstance()->Register<ConditionIntVariable>();
-		Factory::GetInstance()->Register<ConditionFloatVariable>();
-		Factory::GetInstance()->Register<ConditionStringVariable>();
-		Factory::GetInstance()->Register<ConditionContextVariable>();
-		Factory::GetInstance()->Register<CompareCondition>();
-		Factory::GetInstance()->Register<OrCondition>();
-		Factory::GetInstance()->Register<AndCondition>();
 	}
 
 	void Application::OnDeinit()
@@ -127,6 +93,69 @@ namespace TinyEngine
 		_world.OnUpdate();
 	}
 
+	void Application::OnRegisterFactory()
+	{
+		Factory::GetInstance()->Register<AssetHolder>();
+		Factory::GetInstance()->Register<LinkAsset>();
+		Factory::GetInstance()->Register<TextureAsset>();
+
+		Factory::GetInstance()->Register<States>();
+		Factory::GetInstance()->Register<StartState>();
+		Factory::GetInstance()->Register<CloseState>();
+		Factory::GetInstance()->Register<StateTransition>();
+		Factory::GetInstance()->Register<StateConditionTransition>();
+
+		Factory::GetInstance()->Register<ConditionBoolVariable>();
+		Factory::GetInstance()->Register<ConditionIntVariable>();
+		Factory::GetInstance()->Register<ConditionFloatVariable>();
+		Factory::GetInstance()->Register<ConditionStringVariable>();
+		Factory::GetInstance()->Register<ConditionContextVariable>();
+		Factory::GetInstance()->Register<CompareCondition>();
+		Factory::GetInstance()->Register<OrCondition>();
+		Factory::GetInstance()->Register<AndCondition>();
+	}
+
+	void Application::OnLoadGlobalContext()
+	{
+		{
+			auto variable = std::make_shared<ConditionBoolVariable>();
+			variable->SetGetter([this]() { return _isClose; });
+			_globalContext.AddVariable("IsClose", variable);	
+		}
+	}
+
+	void Application::OnLoadGui()
+	{
+		auto menuBar = Gui::GetInstance()->GetMainWindow()->GetMenuBar();
+
+		GuiMenuBarWidget::Menu projectMenu;
+		projectMenu.name = "Project";
+		projectMenu.items.push_back({ "Open Project", std::bind(&Application::OnOpenProject, this) });
+		projectMenu.items.push_back({ "Save Project", std::bind(&Application::OnSaveProject, this) });
+		projectMenu.items.push_back({ "Close", std::bind(&Application::OnClose, this) });
+		menuBar->AddMenu(projectMenu);
+
+		GuiMenuBarWidget::Menu assetsMenu;
+		assetsMenu.name = "Assets";
+		assetsMenu.items.push_back({ "Create Asset File", std::bind(&Application::OnCreateAssetFile, this) });
+		menuBar->AddMenu(assetsMenu);
+		
+		GuiMenuBarWidget::Menu propertiesMenu;
+		propertiesMenu.name = "Properties";
+		propertiesMenu.items.push_back({ "Open Project Properties", std::bind(&Application::OnOpenProjectProperties, this) });
+		propertiesMenu.items.push_back({ "Open Asset File Properties", std::bind(&Application::OnOpenAssetFileProperties, this) });
+		menuBar->AddMenu(propertiesMenu);
+
+		auto fileBrowser = Gui::GetInstance()->GetMainWindow()->GetFileBrowser();
+		fileBrowser->SetTypes(".xml");
+
+		_fileBrowserOpenFileSubscriber = EventSubscriber::Create(std::bind(&Application::OnOpenFileBrowserHandler, this, std::placeholders::_1));
+		fileBrowser->GetOnOpenFileSender().AddSubscriber(_fileBrowserOpenFileSubscriber);
+
+		_fileBrowserSaveFileSubscriber = EventSubscriber::Create(std::bind(&Application::OnSaveFileBrowserHandler, this, std::placeholders::_1));
+		fileBrowser->GetOnSaveFileSender().AddSubscriber(_fileBrowserSaveFileSubscriber);
+	}
+
 	void Application::OnOpenProject()
 	{
 		auto fileBrowser = Gui::GetInstance()->GetMainWindow()->GetFileBrowser();
@@ -144,11 +173,26 @@ namespace TinyEngine
 		_isClose = 1;
 	}
 
-	void Application::OnCreateAsset()
+	void Application::OnCreateAssetFile()
 	{
 		auto fileBrowser = Gui::GetInstance()->GetMainWindow()->GetFileBrowser();
 		fileBrowser->SetSource(CREATE_ASSET_SOURCE);
 		fileBrowser->ShowSaveFile();
+	}
+
+	void Application::OnOpenProjectProperties()
+	{
+		auto mainWindowWidgetPtr = TinyEngine::Gui::GetInstance()->GetMainWindow();
+		auto propertiesWindow = mainWindowWidgetPtr->GetWidget<GuiPropertiesWidget>("Properties");
+		propertiesWindow->InitFromMetaClass(&TinyEngine::Application::GetInstance()->GetProject());
+	}
+
+	void Application::OnOpenAssetFileProperties()
+	{
+		auto mainWindowWidgetPtr = TinyEngine::Gui::GetInstance()->GetMainWindow();
+		auto propertiesWindow = mainWindowWidgetPtr->GetWidget<GuiPropertiesWidget>("Properties");
+		auto asset = Assets::GetInstance()->GetAsset<States>("States");
+		propertiesWindow->InitFromMetaClass(asset.get());
 	}
 	
 	void Application::OnOpenFileBrowserHandler(EventPtr event)
@@ -172,7 +216,7 @@ namespace TinyEngine
 
 		if (source == CREATE_ASSET_SOURCE)
 		{
-			AssetsUtils::CreateAssetFile(filePath);
+			AssetsUtils::CreateAssetFile(filePath, "States");
 		}
 	}
 }

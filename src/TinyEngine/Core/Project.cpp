@@ -15,9 +15,9 @@ namespace TinyEngine
 
 		FileSystem::GetInstance()->SetProjectPath(filePath);
 
-		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, &project, true);
+		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, &project, false);
 
-		project.GetLinkAsset().OnAssetLoad();
+		project.GetAssetHolder().OnAssetLoad();
 		world.OnInit();
 		project.GetStates().OnInit();
 	}
@@ -25,6 +25,7 @@ namespace TinyEngine
 	void ProjectUtils::SaveProject()
 	{
 		auto& project = Application::GetInstance()->GetProject();
-		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, FileSystem::GetInstance()->GetProjectPath(), &project, true);
+		const auto& projectPath = FileSystem::GetInstance()->GetProjectPath();
+		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, projectPath, &project, false);
 	}
 }

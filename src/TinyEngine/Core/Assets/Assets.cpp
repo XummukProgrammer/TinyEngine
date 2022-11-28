@@ -1,6 +1,8 @@
 ﻿#include "Assets.hpp"
 
-#include <TinyEngine/Core/Assets/AssetFile.hpp>
+#include <TinyEngine/Core/Data/Factory.hpp>
+#include <TinyEngine/Core/Data/Serialization/Serialization.hpp>
+#include <TinyEngine/Core/Assets/Asset.hpp>
 
 namespace TinyEngine
 {
@@ -24,9 +26,9 @@ namespace TinyEngine
 		return nullptr;
 	}
 
-	void AssetsUtils::CreateAssetFile(std::string_view filePath)
+	void AssetsUtils::CreateAssetFile(std::string_view filePath, std::string_view type)
 	{
-		AssetFile assetFile;
-		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, filePath, &assetFile);
+		auto asset = Factory::GetInstance()->CreateBase(type);
+		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, filePath, asset.get());
 	}
 }

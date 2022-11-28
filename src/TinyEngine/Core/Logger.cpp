@@ -2,6 +2,8 @@
 
 #include <TinyEngine/../../stacktrace/stacktrace.hpp>
 
+#include <TinyEngine/Core/FileSystem.hpp>
+
 namespace TinyEngine
 {
 	void LoggerMessage::Init(LogType type, std::string_view message)
@@ -33,7 +35,8 @@ namespace TinyEngine
 
 	void Logger::SaveToFile()
 	{
-		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, "../_logs/logs.xml", &_messages);
+		const auto logsFilePath = FileSystem::GetInstance()->BuildPath(DirType::Logs, "logs.xml");
+		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, logsFilePath, &_messages, false);
 	}
 
 	void Logger::PrintMessage(LogType type, std::string_view message)
