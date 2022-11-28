@@ -2,23 +2,28 @@
 
 #include <TinyEngine/Core/Assets/Assets.hpp>
 #include <TinyEngine/Core/Data/Factory.hpp>
+#include <TinyEngine/Core/FileSystem.hpp>
+
+#include <string>
 
 namespace TinyEngine
 {
 	void LinkAsset::OnAssetLoad()
 	{
-		_asset = Factory::GetInstance()->Create<Asset>(_type);
-		if (!_asset)
+		auto asset = Factory::GetInstance()->Create<Asset>(_type);
+		if (!asset)
 		{
 			return;
 		}
 
-		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, _filePath, _asset.get());
+		const auto filePath = FileSystem::GetInstance()->BuildPath(DirType::Project, _filePath);
+		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, asset.get(), false);
 		
-		if (_asset)
+		if (asset)
 		{
-			_asset->OnAssetLoad();
-			Assets::GetInstance()->AddAsset(_asset->GetId(), _asset);
+			asset->SetFilePath(filePath);
+			asset->OnAssetLoad();
+			Assets::GetInstance()->AddAsset(asset->GetId(), asset);
 		}
 	}
 }

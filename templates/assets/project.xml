@@ -1,52 +1,5 @@
 <?xml version="1.0"?>
 <root Name="MyTestGame" Description="Default Game" Version="1.0.0">
-	<States ID="" StartStateID="Start">
-		<States>
-			<pair key="Close">
-				<value>
-					<pointer type="CloseState">
-						<object>
-							<Transitions />
-						</object>
-					</pointer>
-				</value>
-			</pair>
-			<pair key="Start">
-				<value>
-					<pointer type="StartState">
-						<object>
-							<Transitions>
-								<element>
-									<value>
-										<pointer type="StateConditionTransition">
-											<object PrevStateID="" NextStateID="Close">
-												<Condition>
-													<pointer type="CompareCondition">
-														<object Type="Equal">
-															<LeftVariable>
-																<pointer type="ConditionContextVariable">
-																	<object ContextVariableID="IsClose" IsGlobalContext="true" />
-																</pointer>
-															</LeftVariable>
-															<RightVariable>
-																<pointer type="ConditionBoolVariable">
-																	<object Value="true" />
-																</pointer>
-															</RightVariable>
-														</object>
-													</pointer>
-												</Condition>
-											</object>
-										</pointer>
-									</value>
-								</element>
-							</Transitions>
-						</object>
-					</pointer>
-				</value>
-			</pair>
-		</States>
-	</States>
 	<AssetHolder ID="">
 		<Assets>
 			<element>

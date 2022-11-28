@@ -26,6 +26,15 @@ namespace TinyEngine
 		return nullptr;
 	}
 
+	void Assets::SaveAllAssets()
+	{
+		for (const auto& [ id, asset ] : _assets)
+		{
+			const auto& filePath = asset->GetFilePath();
+			SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, filePath, asset.get(), false);
+		}
+	}
+
 	void AssetsUtils::CreateAssetFile(std::string_view filePath, std::string_view type)
 	{
 		auto asset = Factory::GetInstance()->CreateBase(type);

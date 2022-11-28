@@ -15,7 +15,6 @@ namespace TinyEngine
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_name, "Name", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_description, "Description", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_version, "Version", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_states, "States", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_assetHolder, "AssetHolder", "");
 		}
 		TINY_ENGINE_META_CLASS_END
@@ -29,8 +28,7 @@ namespace TinyEngine
 		const std::string& GetDescription() const { return _description; }
 		const std::string& GetVersion() const { return _version; }
 
-		States& GetStates() { return _states; }
-		const States& GetConstStates() const { return _states; }
+		StatesSharedPtr GetStates() const;
 
 		AssetHolder& GetAssetHolder() { return _assetHolder; }
 		const AssetHolder& GetConstAssetHolder() const { return _assetHolder; }
@@ -39,7 +37,6 @@ namespace TinyEngine
 		std::string _name = "Game";
 		std::string _description = "Default Game";
 		std::string _version = "1.0.0";
-		States _states;
 		AssetHolder _assetHolder;
 	};
 

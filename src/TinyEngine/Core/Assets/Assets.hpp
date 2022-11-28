@@ -21,6 +21,8 @@ namespace TinyEngine
 		AssetSharedPtr GetBaseAsset(std::string_view id) const;
 		template<typename T> std::shared_ptr<T> GetAsset(std::string_view id) const;
 
+		void SaveAllAssets();
+
 	private:
 		std::map<std::string, AssetSharedPtr> _assets;
 	};

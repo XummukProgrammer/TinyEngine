@@ -23,24 +23,10 @@ namespace TinyEngine
 	public:
 		void OnAssetLoad() override;
 
-	public:
-		template<typename T> std::shared_ptr<T> GetAsset() const;
-
 	private:
 		std::string _filePath;
 		std::string _type;
-		AssetSharedPtr _asset;
 	};
-
-	template<typename T>
-	std::shared_ptr<T> LinkAsset::GetAsset() const
-	{
-		if (_asset)
-		{
-			return std::dynamic_pointer_cast<T>(_asset);
-		}
-		return nullptr;
-	}
 }
 
 #endif // _LINK_ASSET_HEADER_

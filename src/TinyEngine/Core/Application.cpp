@@ -69,7 +69,10 @@ namespace TinyEngine
 
 		Render::GetInstance()->Destroy();
 
-		_project.GetStates().OnDeinit();
+		if (auto states = _project.GetStates())
+		{
+			states->OnDeinit();
+		}
 
 		LoggerSaveToFile();
 	}
@@ -89,7 +92,11 @@ namespace TinyEngine
 			_isOpenProjectFile = false;
 		}
 
-		_project.GetStates().OnUpdate();
+		if (auto states = _project.GetStates())
+		{
+			states->OnUpdate();
+		}
+		
 		_world.OnUpdate();
 	}
 
