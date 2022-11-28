@@ -1,7 +1,5 @@
 ﻿#include "XmlArchive.hpp"
 
-#include <TinyEngine/Core/FileSystem.hpp>
-
 namespace TinyEngine
 {
 	bool XmlOutputArchive::ToSection(std::string_view id)
@@ -58,7 +56,7 @@ namespace TinyEngine
 
 	void XmlOutputArchive::Save() const
 	{
-		const std::string path = FileSystem::GetInstance()->BuildPath(DirType::Assets, GetPath());
+		const std::string path = GetPath();
 
 		_data.document.save_file(path.c_str());
 	}
@@ -187,7 +185,7 @@ namespace TinyEngine
 
 	void XmlInputArchive::Load()
 	{
-		const std::string path = FileSystem::GetInstance()->BuildPath(DirType::Assets, GetPath());
+		const std::string path = GetPath();
 
 		_data.document.load_file(path.c_str());
 	}

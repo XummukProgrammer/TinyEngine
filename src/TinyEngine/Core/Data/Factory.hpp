@@ -29,6 +29,17 @@ namespace TinyEngine
 		template<typename T>
 		std::shared_ptr<T> Create(std::string_view id) const;
 
+		MetaClassSharedPtr CreateBase(std::string_view id) const
+		{
+			auto it = _createCallbacks.find(std::string{id});
+			if (it != _createCallbacks.end())
+			{
+				return it->second();
+			}
+
+			return nullptr;
+		}
+
 		template<typename T>
 		bool Has() const;
 
@@ -86,20 +97,5 @@ namespace TinyEngine
 		return types;
 	}
 }
-
-#define TINY_ENGINE_META_FACTORY_IMPL(className) \
-	void MetaFactoryFuncImpl_ ## className(); \
-	struct MetaFactoryStructImpl_ ## className \
-	{ \
-		MetaFactoryStructImpl_ ## className() \
-		{ \
-			MetaFactoryFuncImpl_ ## className(); \
-		} \
-	}; \
-	static MetaFactoryStructImpl_ ## className _metaFactoryStructImpl_ ## className; \
-	void MetaFactoryFuncImpl_ ## className() \
-	{ \
-		TinyEngine::Factory::GetInstance()->Register<className>(); \
-	}
 
 #endif // _FACTORY_HEADER_

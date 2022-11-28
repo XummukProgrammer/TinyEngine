@@ -2,8 +2,10 @@
 #define _ASSETS_HEADER_
 
 #include <TinyEngine/Core/Data/Singleton.hpp>
+#include <TinyEngine/Core/Forwards.hpp>
 
-#include <TinyEngine/Core/Assets/AssetHolder.hpp>
+#include <map>
+#include <string>
 
 namespace TinyEngine
 {
@@ -14,13 +16,31 @@ namespace TinyEngine
 		~Assets() = default;
 
 	public:
-		void LoadFromFile(std::string_view filePath);
+		void AddAsset(std::string_view id, const AssetSharedPtr& asset);
+		bool HasAsset(std::string_view id) const;
+		AssetSharedPtr GetBaseAsset(std::string_view id) const;
+		template<typename T> std::shared_ptr<T> GetAsset(std::string_view id) const;
 
-		AssetHolder& GetAssetHolder() { return _holder; }
-		const AssetHolder& GetConstAssetHolder() const { return _holder; }
+		void SaveAllAssets();
 
 	private:
-		AssetHolder _holder;
+		std::map<std::string, AssetSharedPtr> _assets;
+	};
+
+	template<typename T>
+	std::shared_ptr<T> Assets::GetAsset(std::string_view id) const
+	{
+		if (auto asset = GetBaseAsset(id))
+		{
+			return std::dynamic_pointer_cast<T>(asset);
+		}
+		return nullptr;
+	}
+
+	class AssetsUtils final
+	{
+	public:
+		static void CreateAssetFile(std::string_view filePath, std::string_view type);
 	};
 }
 

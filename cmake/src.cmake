@@ -29,6 +29,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Gui/Widgets/GuiInputNumberWidget.hpp
 	src/TinyEngine/Core/Gui/Widgets/GuiInputFloatWidget.hpp
 	src/TinyEngine/Core/Gui/Widgets/GuiStringListBoxWidget.hpp
+	src/TinyEngine/Core/Gui/Widgets/GuiFileBrowserWidget.hpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiPropertiesWidget.hpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiInputVectorWidget.hpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiInputMapWidget.hpp
@@ -47,10 +48,13 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Data/Meta/MetaVisitor.hpp
 	src/TinyEngine/Core/Data/Factory.hpp
 	src/TinyEngine/Core/Assets/Asset.hpp
-	src/TinyEngine/Core/Assets/AssetHolder.hpp
-	src/TinyEngine/Core/Assets/AssetLoader.hpp
-	src/TinyEngine/Core/Assets/AssetTexture.hpp
+	src/TinyEngine/Core/Assets/Common/AssetHolder.hpp
 	src/TinyEngine/Core/Assets/Assets.hpp
+	src/TinyEngine/Core/Assets/Common/TextureAsset.hpp
+	src/TinyEngine/Core/Assets/Common/LinkAsset.hpp
+	src/TinyEngine/Core/Assets/Resources/Resource.hpp
+	src/TinyEngine/Core/Assets/Resources/Resources.hpp
+	src/TinyEngine/Core/Assets/Resources/Common/TextureResource.hpp
 	src/TinyEngine/Core/World/World.hpp
 	src/TinyEngine/Core/World/Entity.hpp
 	src/TinyEngine/Core/World/SceneNode.hpp
@@ -65,6 +69,8 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/States/StateTransition.hpp
 	src/TinyEngine/Core/States/StateTransitions.hpp
 	src/TinyEngine/Core/States/Common/StateConditionTransition.hpp
+	src/TinyEngine/Core/States/Common/StartState.hpp
+	src/TinyEngine/Core/States/Common/CloseState.hpp
 	src/TinyEngine/Core/Conditions/Condition.hpp
 	src/TinyEngine/Core/Conditions/ConditionVariable.hpp
 	src/TinyEngine/Core/Conditions/ConditionContext.hpp
@@ -75,8 +81,9 @@ set(ENGINE_HEADERS
 	
 	src/TinyEngine/Core/Project.hpp
 	
-	# Файлы редактора
-	src/TinyEngine/Core/Editor/Project/GuiProjectWidget.hpp
+	src/TinyEngine/Libs/ImGui-Addons/FileBrowser/ImGuiFileBrowser.h
+	
+	src/Dirent/dirent.h
 )
 
 set(ENGINE_SOURCES
@@ -98,6 +105,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Gui/Widgets/GuiInputNumberWidget.cpp
 	src/TinyEngine/Core/Gui/Widgets/GuiInputFloatWidget.cpp
 	src/TinyEngine/Core/Gui/Widgets/GuiStringListBoxWidget.cpp
+	src/TinyEngine/Core/Gui/Widgets/GuiFileBrowserWidget.cpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiPropertiesWidget.cpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiInputVectorWidget.cpp
 	src/TinyEngine/Core/Gui/Widgets/Containers/GuiInputMapWidget.cpp
@@ -108,9 +116,14 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Data/Serialization/XmlArchive.cpp
 	src/TinyEngine/Core/Data/Meta/Members/MetaMembers.cpp
 	src/TinyEngine/Core/Data/Meta/Class/MetaClass.cpp
-	src/TinyEngine/Core/Assets/AssetHolder.cpp
-	src/TinyEngine/Core/Assets/AssetLoader.cpp
+	src/TinyEngine/Core/Assets/Asset.cpp
+	src/TinyEngine/Core/Assets/Common/AssetHolder.cpp
 	src/TinyEngine/Core/Assets/Assets.cpp
+	src/TinyEngine/Core/Assets/Common/TextureAsset.cpp
+	src/TinyEngine/Core/Assets/Common/LinkAsset.cpp
+	src/TinyEngine/Core/Assets/Resources/Resource.cpp
+	src/TinyEngine/Core/Assets/Resources/Resources.cpp
+	src/TinyEngine/Core/Assets/Resources/Common/TextureResource.cpp
 	src/TinyEngine/Core/World/World.cpp
 	src/TinyEngine/Core/World/Entity.cpp
 	src/TinyEngine/Core/World/SceneNode.cpp
@@ -122,6 +135,8 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/States/StateTransition.cpp
 	src/TinyEngine/Core/States/StateTransitions.cpp
 	src/TinyEngine/Core/States/Common/StateConditionTransition.cpp
+	src/TinyEngine/Core/States/Common/StartState.cpp
+	src/TinyEngine/Core/States/Common/CloseState.cpp
 	src/TinyEngine/Core/Conditions/Condition.cpp
 	src/TinyEngine/Core/Conditions/ConditionVariable.cpp
 	src/TinyEngine/Core/Conditions/ConditionContext.cpp
@@ -132,12 +147,10 @@ set(ENGINE_SOURCES
 	
 	src/TinyEngine/Core/Project.cpp
 	
+	src/TinyEngine/Libs/ImGui-Addons/FileBrowser/ImGuiFileBrowser.cpp
+	
 	# TODO: Не подключать, если сборка с SFML отключена
 	src/TinyEngine/Core/Backends/SFML/GUI/SfmlGuiImpl.cpp
 	src/TinyEngine/Core/Backends/SFML/Render/SfmlRenderObjectImpl.cpp
 	src/TinyEngine/Core/Backends/SFML/Render/SfmlRenderWindowImpl.cpp
-	src/TinyEngine/Core/Backends/SFML/Assets/AssetSfmlTexture.cpp
-	
-	# Файлы редактора
-	src/TinyEngine/Core/Editor/Project/GuiProjectWidget.cpp
 )

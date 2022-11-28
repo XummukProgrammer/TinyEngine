@@ -5,6 +5,7 @@
 #include <TinyEngine/Core/States/States.hpp>
 #include <TinyEngine/Core/World/SceneNode.hpp>
 #include <TinyEngine/Core/Conditions/Condition.hpp>
+#include <TinyEngine/Core/Assets/Common/AssetHolder.hpp>
 
 namespace TinyEngine
 {
@@ -15,11 +16,7 @@ namespace TinyEngine
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_name, "Name", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_description, "Description", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_version, "Version", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_mainAssetsFile, "MainAssetsFile", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_worldFile, "WorldFile", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_states, "States", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_node, "Node", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_condition, "Condition", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_assetHolder, "AssetHolder", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 
@@ -31,31 +28,24 @@ namespace TinyEngine
 		const std::string& GetName() const { return _name; }
 		const std::string& GetDescription() const { return _description; }
 		const std::string& GetVersion() const { return _version; }
-		const std::string& GetMainAssetsFile() const { return _mainAssetsFile; }
-		const std::string& GetWorldFile() const { return _worldFile; }
 
-		void SetFilePath(std::string_view filePath) { _filePath = filePath; }
-		const std::string& GetFilePath() const { return _filePath; }
+		StatesSharedPtr GetStates() const;
 
-		ConditionSharedPtr GetCondition() const { return _condition; }
+		AssetHolder& GetAssetHolder() { return _assetHolder; }
+		const AssetHolder& GetConstAssetHolder() const { return _assetHolder; }
 
 	private:
 		std::string _name = "Game";
 		std::string _description = "Default Game";
 		std::string _version = "1.0.0";
-		std::string _mainAssetsFile = "root.xml";
-		std::string _worldFile = "world.xml";
-		States _states;
-		SceneNode _node;
-		ConditionSharedPtr _condition;
-		std::string _filePath;
+		AssetHolder _assetHolder;
 	};
 
 	class ProjectUtils
 	{
 	public:
-		static void LoadProject(Project* project, std::string_view filePath, World* world);
-		static void SaveProject(Project* project);
+		static void LoadProject(std::string_view filePath);
+		static void SaveProject();
 	};
 }
 

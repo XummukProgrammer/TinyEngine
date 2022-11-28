@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<root>
-	<_asset>
-		<pointer type="AssetTexture">
-			<object _id="test_texture" _path="textures/test.png" />
-		</pointer>
-	</_asset>
-</root>

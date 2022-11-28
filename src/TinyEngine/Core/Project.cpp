@@ -3,35 +3,42 @@
 #include <TinyEngine/Core/Assets/Assets.hpp>
 #include <TinyEngine/Core/Logger.hpp>
 #include <TinyEngine/Core/World/World.hpp>
-
 #include <TinyEngine/Core/Application.hpp>
-#include <TinyEngine/Core/Conditions/ConditionVariable.hpp>
-
-#include <iostream>
+#include <TinyEngine/Core/FileSystem.hpp>
+#include <TinyEngine/Core/Assets/Assets.hpp>
 
 namespace TinyEngine
 {
-	void ProjectUtils::LoadProject(Project* project, std::string_view filePath, World* world)
+	StatesSharedPtr Project::GetStates() const
 	{
-		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, project);
-		Assets::GetInstance()->LoadFromFile(project->GetMainAssetsFile());
-		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, project->GetWorldFile(), world);
-		world->OnInit();
-		project->SetFilePath(filePath);
-
-		if (auto condition = project->GetCondition())
+		static StatesSharedPtr states;
+		if (!states)
 		{
-			auto localVariableA = std::make_shared<ConditionIntVariable>();
-			localVariableA->SetValue(6);
-			condition->GetLocalContext().AddVariable("A", localVariableA);
-
-			condition->OnInit();
-			std::cout << "Condition Is Result: " << (condition->IsResult() ? "true" : "false") << std::endl;
+			states = Assets::GetInstance()->GetAsset<States>("States");
 		}
+		return states;
 	}
 
-	void ProjectUtils::SaveProject(Project* project)
+	void ProjectUtils::LoadProject(std::string_view filePath)
 	{
-		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, project->GetFilePath(), project);
+		auto& project = Application::GetInstance()->GetProject();
+		auto& world = Application::GetInstance()->GetWorld();
+
+		FileSystem::GetInstance()->SetProjectPath(filePath);
+
+		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, &project, false);
+
+		project.GetAssetHolder().OnAssetLoad();
+		world.OnInit();
+		project.GetStates()->OnInit();
+	}
+
+	void ProjectUtils::SaveProject()
+	{
+		auto& project = Application::GetInstance()->GetProject();
+		const auto& projectPath = FileSystem::GetInstance()->GetProjectPath();
+		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, projectPath, &project, false);
+
+		Assets::GetInstance()->SaveAllAssets();
 	}
 }

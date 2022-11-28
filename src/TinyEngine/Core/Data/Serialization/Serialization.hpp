@@ -4,6 +4,8 @@
 #include <TinyEngine/Core/Forwards.hpp>
 #include <TinyEngine/Core/Constants.hpp>
 
+#include <TinyEngine/Core/FileSystem.hpp>
+
 #include <string>
 #include <memory>
 
@@ -16,7 +18,7 @@ namespace TinyEngine
 		virtual ~IArchive() = default;
 
 	public:
-		virtual const std::string& GetPath() const = 0;
+		virtual std::string GetPath() const = 0;
 
 		virtual bool ToSection(std::string_view id) = 0;
 		virtual bool HasSection(std::string_view id) const = 0;
@@ -39,8 +41,8 @@ namespace TinyEngine
 		virtual ~BaseArchive() = default;
 
 	public:
-		void SetPath(std::string_view path) { _path = path; }
-		const std::string& GetPath() const override { return _path; }
+		void SetPath(std::string_view path, bool isWithProjectDir = true) { _path = isWithProjectDir ? FileSystem::GetInstance()->BuildPath(DirType::Project, path) : path; }
+		std::string GetPath() const override { return _path; }
 
 	private:
 		std::string _path;
@@ -84,8 +86,8 @@ namespace TinyEngine
 		static void SaveRoot(OutputArchivePtr archive, MetaClassPtr metaClass);
 		static void LoadRoot(InputArchivePtr archive, MetaClassPtr metaClass);
 
-		static void SaveRootToFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass);
-		static void LoadRootFromFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass);
+		static void SaveRootToFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass, bool isWithProjectDir = true);
+		static void LoadRootFromFile(ArchiveFormat format, std::string_view path, MetaClassPtr metaClass, bool isWithProjectDir = true);
 
 		static OutputArchiveUniquePtr CreateOutputArchive(ArchiveFormat format);
 		static InputArchiveUniquePtr CreateInputArchive(ArchiveFormat format);

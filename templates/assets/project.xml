@@ -1,2 +1,21 @@
 <?xml version="1.0"?>
-<root Name="MyTestGame" Description="Default Game" Version="1.0.0" MainAssetsFile="root.xml" />
+<root Name="MyTestGame" Description="Default Game" Version="1.0.0">
+	<AssetHolder ID="">
+		<Assets>
+			<element>
+				<value>
+					<pointer type="LinkAsset">
+						<object ID="" FilePath="states.xml" Type="States" />
+					</pointer>
+				</value>
+			</element>
+			<element>
+				<value>
+					<pointer type="TextureAsset">
+						<object ID="Test" FilePath="test.png" IsRepeated="false" IsSmooth="false" IsSrgb="false" />
+					</pointer>
+				</value>
+			</element>
+		</Assets>
+	</AssetHolder>
+</root>

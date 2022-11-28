@@ -5,9 +5,7 @@ namespace TinyEngine
 {
 	enum class DirType
 	{
-		Execute,
-		Root,
-		Assets,
+		Project,
 		Logs
 	};
 
@@ -40,6 +38,14 @@ namespace TinyEngine
 		LessOrEqual,
 		More,
 		MoreOrEqual
+	};
+
+	enum class FileBrowserState
+	{
+		Hide,
+		OpenFile,
+		SaveFile,
+		SelectDirectory
 	};
 }
 

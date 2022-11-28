@@ -21,7 +21,7 @@ namespace TinyEngine
 
             if (context)
             {
-                _cashedContextVariable = context->GetVariable(_contextVariableId);
+                _cashedContextVariable = context->GetBaseVariable(_contextVariableId);
             }
         }
         return _cashedContextVariable;
