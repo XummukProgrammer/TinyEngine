@@ -4,26 +4,41 @@
 #include <TinyEngine/Core/Logger.hpp>
 #include <TinyEngine/Core/World/World.hpp>
 #include <TinyEngine/Core/Application.hpp>
+#include <TinyEngine/Core/FileSystem.hpp>
+#include <TinyEngine/Core/Assets/Assets.hpp>
 
 namespace TinyEngine
 {
+	StatesSharedPtr Project::GetStates() const
+	{
+		static StatesSharedPtr states;
+		if (!states)
+		{
+			states = Assets::GetInstance()->GetAsset<States>("States");
+		}
+		return states;
+	}
+
 	void ProjectUtils::LoadProject(std::string_view filePath)
 	{
 		auto& project = Application::GetInstance()->GetProject();
 		auto& world = Application::GetInstance()->GetWorld();
 
-		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, &project, false);
-		Assets::GetInstance()->LoadFromFile(project.GetMainAssetsFile());
-		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, project.GetWorldFile(), &world);
+		FileSystem::GetInstance()->SetProjectPath(filePath);
 
+		SerializationUtils::LoadRootFromFile(ArchiveFormat::Xml, filePath, &project, false);
+
+		project.GetAssetHolder().OnAssetLoad();
 		world.OnInit();
-		project.SetFilePath(filePath);
-		project.GetStates().OnInit();
+		project.GetStates()->OnInit();
 	}
 
 	void ProjectUtils::SaveProject()
 	{
 		auto& project = Application::GetInstance()->GetProject();
-		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, project.GetFilePath(), &project, false);
+		const auto& projectPath = FileSystem::GetInstance()->GetProjectPath();
+		SerializationUtils::SaveRootToFile(ArchiveFormat::Xml, projectPath, &project, false);
+
+		Assets::GetInstance()->SaveAllAssets();
 	}
 }

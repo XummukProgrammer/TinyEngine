@@ -9,9 +9,13 @@ namespace TinyEngine
 	void FileSystem::SetExecutePath(std::string_view executePath)
 	{
 		_executePath = executePath;
-		_executeDir = std::filesystem::path(_executePath).remove_filename().generic_string();
+		_executeDir = RemoveFileName(_executePath);
+	}
 
-		TINY_ENGINE_INFO("FileSystem", "Success init (ExecutePath: {}, ExecuteDir: {})", _executePath, _executeDir);
+	void FileSystem::SetProjectPath(std::string_view projectPath)
+	{
+		_projectPath = projectPath;
+		_projectDir = RemoveFileName(_projectPath);
 	}
 
 	std::string FileSystem::BuildPath(DirType type, std::string_view path) const
@@ -19,18 +23,19 @@ namespace TinyEngine
 		return GetDirFromType(type) + std::string{path};
 	}
 
+	std::string FileSystem::RemoveFileName(std::string_view filePath)
+	{
+		return std::filesystem::path(filePath).remove_filename().generic_string();
+	}
+
 	std::string FileSystem::GetDirFromType(DirType type) const
 	{
-		switch(type)
+		switch (type)
 		{
-			case TinyEngine::DirType::Execute:
-				return GetExecuteDir();
-			case TinyEngine::DirType::Root:
-				return GetRootDir();
-			case TinyEngine::DirType::Assets:
-				return GetAssetsDir();
-			case TinyEngine::DirType::Logs:
-				return GetLogsDir();
+		case DirType::Logs:
+			return GetLogsDir();
+		case DirType::Project:
+			return GetProjectDir();
 		}
 
 		return "";

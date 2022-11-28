@@ -29,6 +29,17 @@ namespace TinyEngine
 		template<typename T>
 		std::shared_ptr<T> Create(std::string_view id) const;
 
+		MetaClassSharedPtr CreateBase(std::string_view id) const
+		{
+			auto it = _createCallbacks.find(std::string{id});
+			if (it != _createCallbacks.end())
+			{
+				return it->second();
+			}
+
+			return nullptr;
+		}
+
 		template<typename T>
 		bool Has() const;
 

@@ -43,11 +43,21 @@ namespace TinyEngine
 		void OnProcess();
 		void OnUpdate();
 
+		void OnRegisterFactory();
+		void OnLoadGlobalContext();
+		void OnLoadGui();
+
 		void OnOpenProject();
 		void OnSaveProject();
 		void OnClose();
 
-		void OnOpenProjectFile(EventPtr event);
+		void OnCreateAssetFile();
+
+		void OnOpenProjectProperties();
+		void OnOpenAssetFileProperties();
+		
+		void OnOpenFileBrowserHandler(EventPtr event);
+		void OnSaveFileBrowserHandler(EventPtr event);
 
 	private:
 		Project _project;
@@ -58,6 +68,11 @@ namespace TinyEngine
 		std::string _projectFilePath;
 
 		EventSubscriberSharedPtr _fileBrowserOpenFileSubscriber;
+		EventSubscriberSharedPtr _fileBrowserSaveFileSubscriber;
+
+	private:
+		static inline const std::string OPEN_PROJECT_SOURCE = "OpenProject";
+		static inline const std::string CREATE_ASSET_SOURCE = "CreateAsset";
 	};
 }
 

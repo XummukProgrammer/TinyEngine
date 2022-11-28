@@ -3,6 +3,7 @@
 
 #include <TinyEngine/Core/Data/Meta/MetaDefines.hpp>
 #include <TinyEngine/Core/Forwards.hpp>
+#include <TinyEngine/Core/Assets/Asset.hpp>
 
 #include <TinyEngine/Core/States/State.hpp>
 
@@ -11,9 +12,9 @@
 
 namespace TinyEngine
 {
-	class States final : public MetaClass
+	class States final : public Asset
 	{
-		TINY_ENGINE_META_CLASS_BEGIN(States)
+		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(States, Asset)
 		{
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_states, "States", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_startStateId, "StartStateID", "");
