@@ -9,6 +9,13 @@
 					</pointer>
 				</value>
 			</element>
+			<element>
+				<value>
+					<pointer type="TextureAsset">
+						<object ID="Test" FilePath="test.png" IsRepeated="false" IsSmooth="false" IsSrgb="false" />
+					</pointer>
+				</value>
+			</element>
 		</Assets>
 	</AssetHolder>
 </root>
