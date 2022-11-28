@@ -52,6 +52,9 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Assets/Assets.hpp
 	src/TinyEngine/Core/Assets/Common/TextureAsset.hpp
 	src/TinyEngine/Core/Assets/Common/LinkAsset.hpp
+	src/TinyEngine/Core/Assets/Resources/Resource.hpp
+	src/TinyEngine/Core/Assets/Resources/Resources.hpp
+	src/TinyEngine/Core/Assets/Resources/Common/TextureResource.hpp
 	src/TinyEngine/Core/World/World.hpp
 	src/TinyEngine/Core/World/Entity.hpp
 	src/TinyEngine/Core/World/Component.hpp
@@ -117,6 +120,9 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Assets/Assets.cpp
 	src/TinyEngine/Core/Assets/Common/TextureAsset.cpp
 	src/TinyEngine/Core/Assets/Common/LinkAsset.cpp
+	src/TinyEngine/Core/Assets/Resources/Resource.cpp
+	src/TinyEngine/Core/Assets/Resources/Resources.cpp
+	src/TinyEngine/Core/Assets/Resources/Common/TextureResource.cpp
 	src/TinyEngine/Core/World/World.cpp
 	src/TinyEngine/Core/World/Entity.cpp
 	src/TinyEngine/Core/World/Common/Components/VisualComponent.cpp
