@@ -6,9 +6,7 @@
 #include <TinyEngine/Core/Render/RenderObject.hpp>
 #include <TinyEngine/Core/Render/RenderWindowSettings.hpp>
 
-#ifdef TINY_ENGINE_USE_SFML
 #include <SFML/Graphics.hpp>
-#endif
 
 #include <functional>
 
@@ -38,12 +36,10 @@ namespace TinyEngine
 	
 		void SetOnEventReceived(const EventReceivedCallback& callback) { _onEventReceived = callback; }
 
-#ifdef TINY_ENGINE_USE_SFML
 		sf::RenderWindow* GetRenderWindow() const { return _renderWindow; }
 
 		sf::Event& GetEvent() { return _event; }
 		const sf::Event& GetConstEvent() const { return _event; }
-#endif
 
 	private:
 		void OnEventReceived() { if (_onEventReceived) _onEventReceived(); }
@@ -51,10 +47,10 @@ namespace TinyEngine
 	private:
 		EventReceivedCallback _onEventReceived;
 
-#ifdef TINY_ENGINE_USE_SFML
 		sf::RenderWindow* _renderWindow = nullptr;
 		sf::Event _event;
-#endif
+		sf::Clock _timeClock;
+		sf::Time _deltaTime;
 	};
 };
 

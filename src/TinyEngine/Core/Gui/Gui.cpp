@@ -1,9 +1,11 @@
 ﻿#include "Gui.hpp"
 
 #include <TinyEngine/Core/Gui/Widgets/GuiWindowWidget.hpp>
+#include <TinyEngine/Core/Render/RenderWindow.hpp>
 
 #include "imgui.h"
 #include "imgui_internal.h"
+#include "imgui-SFML.h"
 
 namespace TinyEngine
 {
@@ -107,5 +109,35 @@ namespace TinyEngine
 		//colors[ImGuiCol_NavWindowingHighlight]  = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
 		//colors[ImGuiCol_NavWindowingDimBg]      = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
 		colors[ImGuiCol_ModalWindowDimBg]       = ImVec4(0.04, 0.10, 0.09, 0.51);
+	}
+
+	void Gui::PreInit()
+	{
+		auto& renderWindow = *RenderWindow::GetInstance()->GetRenderWindow();
+		ImGui::SFML::Init(renderWindow);
+	}
+
+	void Gui::EventReceived()
+	{
+		auto& renderWindow = *RenderWindow::GetInstance()->GetRenderWindow();
+		auto& event = RenderWindow::GetInstance()->GetEvent();
+		ImGui::SFML::ProcessEvent(renderWindow, event);
+	}
+
+	void Gui::Update(float deltaTime)
+	{
+		auto& renderWindow = *RenderWindow::GetInstance()->GetRenderWindow();
+		ImGui::SFML::Update(renderWindow, sf::seconds(deltaTime));
+	}
+
+	void Gui::Display()
+	{
+		auto& renderWindow = *RenderWindow::GetInstance()->GetRenderWindow();
+		ImGui::SFML::Render(renderWindow);
+	}
+
+	void Gui::Shutdown()
+	{
+		ImGui::SFML::Shutdown();
 	}
 }

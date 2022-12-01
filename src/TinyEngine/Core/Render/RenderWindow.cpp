@@ -1,9 +1,5 @@
-﻿#include <TinyEngine/Core/Render/RenderWindow.hpp>
-
-#include <TinyEngine/Core/Render/RenderObject.hpp>
-
-sf::Clock timeClock;
-sf::Time deltaTime;
+﻿#include "RenderWindow.hpp"
+#include "RenderObject.hpp"
 
 namespace TinyEngine
 {
@@ -67,16 +63,16 @@ namespace TinyEngine
 
 	void RenderWindow::ResetClock()
 	{
-		timeClock.restart();
+		_timeClock.restart();
 	}
 
 	void RenderWindow::UpdateClock()
 	{
-		deltaTime = timeClock.restart();
+		_deltaTime = _timeClock.restart();
 	}
 
 	float RenderWindow::GetDeltaTime() const
 	{
-		return deltaTime.asSeconds();
+		return _deltaTime.asSeconds();
 	}
 }

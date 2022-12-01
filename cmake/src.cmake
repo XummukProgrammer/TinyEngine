@@ -142,13 +142,11 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Conditions/Common/AndCondition.cpp
 	src/TinyEngine/Core/Conditions/Common/CompareCondition.cpp
 	src/TinyEngine/Core/Conditions/Common/OrCondition.cpp
+	src/TinyEngine/Core/Gui/Gui.cpp
+	src/TinyEngine/Core/Render/RenderObject.cpp
+	src/TinyEngine/Core/Render/RenderWindow.cpp
 	
 	src/TinyEngine/Core/Project.cpp
 	
 	src/TinyEngine/Libs/ImGui-Addons/FileBrowser/ImGuiFileBrowser.cpp
-	
-	# TODO: Не подключать, если сборка с SFML отключена
-	src/TinyEngine/Core/Backends/SFML/GUI/SfmlGuiImpl.cpp
-	src/TinyEngine/Core/Backends/SFML/Render/SfmlRenderObjectImpl.cpp
-	src/TinyEngine/Core/Backends/SFML/Render/SfmlRenderWindowImpl.cpp
 )
