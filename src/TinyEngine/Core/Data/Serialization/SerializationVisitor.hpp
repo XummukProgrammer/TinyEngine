@@ -12,6 +12,7 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include <utility>
 
 namespace TinyEngine
 {
@@ -155,7 +156,7 @@ namespace TinyEngine
 			{
 				if (archive->ToItem(id))
 				{
-					SerializationVisitor<T>::Save(archive, "", &dataElement);
+					SerializationVisitor<T>::Save(archive, SerializationVisitorUtils::GetValueStringForContainer<T>(), &dataElement);
 
 					archive->EndItem();
 				}
@@ -171,7 +172,7 @@ namespace TinyEngine
 				do
 				{
 					T value;
-					SerializationVisitor<T>::Load(archive, "", &value);
+					SerializationVisitor<T>::Load(archive, SerializationVisitorUtils::GetValueStringForContainer<T>(), &value);
 					dataRef.push_back(value);
 				}
 				while (archive->ToNextItem(id));
@@ -195,7 +196,7 @@ namespace TinyEngine
 				{
 					auto key = dataKey;
 					SerializationVisitor<K>::Save(archive, "key", &key);
-					SerializationVisitor<V>::Save(archive, "", &dataElement);
+					SerializationVisitor<V>::Save(archive, SerializationVisitorUtils::GetValueStringForContainer<V>(), &dataElement);
 
 					archive->EndItem();
 				}
@@ -213,7 +214,7 @@ namespace TinyEngine
 					K key;
 					V value;
 					SerializationVisitor<K>::Load(archive, "key", &key);
-					SerializationVisitor<V>::Load(archive, "", &value);
+					SerializationVisitor<V>::Load(archive, SerializationVisitorUtils::GetValueStringForContainer<V>(), &value);
 					dataRef[key] = value;
 				}
 				while (archive->ToNextItem(id));
@@ -296,6 +297,25 @@ namespace TinyEngine
 			std::string name;
 			SerializationVisitor<std::string>::Load(archive, id, &name);
 			*data = magic_enum::enum_cast<T>(name).value();
+		}
+	};
+
+	class SerializationVisitorUtils
+	{
+	public:
+		template<typename T> struct is_shared_ptr : std::false_type {};
+		template<typename T> struct is_shared_ptr<std::shared_ptr<T>> : std::true_type {};
+
+		template<typename T>
+		static bool IsSharedPtr()
+		{
+			return is_shared_ptr<T>::value;
+		}
+
+		template<typename T>
+		static std::string GetValueStringForContainer()
+		{
+			return IsSharedPtr<T>() ? "" : "value";
 		}
 	};
 }
