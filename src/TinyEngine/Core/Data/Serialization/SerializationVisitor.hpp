@@ -121,7 +121,11 @@ namespace TinyEngine
 			if (archive->ToSection(id))
 			{
 				data->GetMembers().SaveToArchive(archive);
-				archive->EndSection();
+
+				if (!id.empty())
+				{
+					archive->EndSection();
+				}
 			}
 		}
 
@@ -130,7 +134,11 @@ namespace TinyEngine
 			if (archive->ToSection(id))
 			{
 				data->GetMembers().LoadFromArchive(archive);
-				archive->EndSection();
+
+				if (!id.empty())
+				{
+					archive->EndSection();
+				}
 			}
 		}
 	};
@@ -141,44 +149,34 @@ namespace TinyEngine
 	public:
 		static void Save(OutputArchivePtr archive, std::string_view id, std::vector<T>* data) 
 		{
-			if (archive->ToArray(id))
+			auto& dataRef = *data;
+
+			for (auto& dataElement : dataRef)
 			{
-				auto& dataRef = *data;
-
-				for (auto& dataElement : dataRef)
+				if (archive->ToItem(id))
 				{
-					if (archive->ToItem("element"))
-					{
-						SerializationVisitor<T>::Save(archive, "value", &dataElement);
+					SerializationVisitor<T>::Save(archive, "", &dataElement);
 
-						archive->EndItem();
-					}
+					archive->EndItem();
 				}
-
-				archive->EndArray();
 			}
 		}
 
 		static void Load(InputArchivePtr archive, std::string_view id, std::vector<T>* data) 
 		{
-			if (archive->ToArray(id))
+			if (archive->ToItem(id))
 			{
-				if (archive->ToItem("element"))
+				auto& dataRef = *data;
+
+				do
 				{
-					auto& dataRef = *data;
-
-					do
-					{
-						T value;
-						SerializationVisitor<T>::Load(archive, "value", &value);
-						dataRef.push_back(value);
-					}
-					while (archive->ToNextItem("element"));
-
-					archive->EndItem();
+					T value;
+					SerializationVisitor<T>::Load(archive, "", &value);
+					dataRef.push_back(value);
 				}
+				while (archive->ToNextItem(id));
 
-				archive->EndArray();
+				archive->EndItem();
 			}
 		}
 	};
@@ -189,48 +187,38 @@ namespace TinyEngine
 	public:
 		static void Save(OutputArchivePtr archive, std::string_view id, std::map<K, V>* data) 
 		{
-			if (archive->ToArray(id))
+			auto& dataRef = *data;
+
+			for (auto& [ dataKey, dataElement ] : dataRef)
 			{
-				auto& dataRef = *data;
-
-				for (auto& [ dataKey, dataElement ] : dataRef)
+				if (archive->ToItem(id))
 				{
-					if (archive->ToItem("pair"))
-					{
-						auto key = dataKey;
-						SerializationVisitor<K>::Save(archive, "key", &key);
-						SerializationVisitor<V>::Save(archive, "value", &dataElement);
+					auto key = dataKey;
+					SerializationVisitor<K>::Save(archive, "key", &key);
+					SerializationVisitor<V>::Save(archive, "", &dataElement);
 
-						archive->EndItem();
-					}
+					archive->EndItem();
 				}
-
-				archive->EndArray();
 			}
 		}
 
 		static void Load(InputArchivePtr archive, std::string_view id, std::map<K, V>* data) 
 		{
-			if (archive->ToArray(id))
+			if (archive->ToItem(id))
 			{
-				if (archive->ToItem("pair"))
+				auto& dataRef = *data;
+
+				do
 				{
-					auto& dataRef = *data;
-
-					do
-					{
-						K key;
-						V value;
-						SerializationVisitor<K>::Load(archive, "key", &key);
-						SerializationVisitor<V>::Load(archive, "value", &value);
-						dataRef[key] = value;
-					}
-					while (archive->ToNextItem("pair"));
-
-					archive->EndItem();
+					K key;
+					V value;
+					SerializationVisitor<K>::Load(archive, "key", &key);
+					SerializationVisitor<V>::Load(archive, "", &value);
+					dataRef[key] = value;
 				}
+				while (archive->ToNextItem(id));
 
-				archive->EndArray();
+				archive->EndItem();
 			}
 		}
 	};
@@ -241,24 +229,27 @@ namespace TinyEngine
 	public:
 		static void Save(OutputArchivePtr archive, std::string_view id, std::shared_ptr<T>* data) 
 		{
-			if (archive->ToSection(id))
-			{
-				if (archive->ToItem("pointer"))
-				{
-					auto rawPointer = data->get();
+			auto rawPointer = data->get();
 
-					if (rawPointer)
+			if (rawPointer)
+			{
+				if (archive->ToSection(id))
+				{
+					if (archive->ToItem("pointer"))
 					{
 						std::string type = rawPointer->GetClassName();
 						SerializationVisitor<std::string>::Save(archive, "type", &type);
 
-						SerializationVisitor<T>::Save(archive, "object", rawPointer);
+						SerializationVisitor<T>::Save(archive, "", rawPointer);
+
+						archive->EndItem();
 					}
 
-					archive->EndItem();
+					if (!id.empty())
+					{
+						archive->EndSection();
+					}
 				}
-
-				archive->EndSection();
 			}
 		}
 
@@ -275,13 +266,16 @@ namespace TinyEngine
 					{
 						auto rawPointer = data->get();
 						
-						SerializationVisitor<T>::Load(archive, "object", rawPointer);
+						SerializationVisitor<T>::Load(archive, "", rawPointer);
 					}
 
 					archive->EndItem();
 				}
 
-				archive->EndSection();
+				if (!id.empty())
+				{
+					archive->EndSection();
+				}
 			}
 		}
 	};

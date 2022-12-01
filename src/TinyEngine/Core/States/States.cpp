@@ -8,9 +8,12 @@ namespace TinyEngine
 	{
 		for (const auto& [ id, state ] : _states)
 		{
-			state->SetStates(this);
-			state->SetStateId(id);
-			state->OnInit();
+			if (state)
+			{
+				state->SetStates(this);
+				state->SetStateId(id);
+				state->OnInit();
+			}
 		}
 
 		ChangeState(_startStateId);
@@ -20,7 +23,10 @@ namespace TinyEngine
 	{
 		for (const auto& [ id, state ] : _states)
 		{
-			state->OnDeinit();
+			if (state)
+			{
+				state->OnDeinit();
+			}
 		}
 	}
 
@@ -29,12 +35,15 @@ namespace TinyEngine
 		auto it = _states.find(_currentStateId);
 		if (it != _states.end())
 		{
-			it->second->OnUpdate();
-
-			const auto& newStateId = it->second->GetNewStateId();
-			if (!newStateId.empty())
+			if (it->second)
 			{
-				ChangeState(newStateId);
+				it->second->OnUpdate();
+
+				const auto& newStateId = it->second->GetNewStateId();
+				if (!newStateId.empty())
+				{
+					ChangeState(newStateId);
+				}
 			}
 		}
 	}
@@ -43,7 +52,10 @@ namespace TinyEngine
 	{
 		if (auto it = _states.find(_currentStateId); it != _states.end())
 		{
-			it->second->OnExit();
+			if (it->second)
+			{
+				it->second->OnExit();
+			}
 		}
 
 		const auto prevStateId = _currentStateId;
@@ -51,8 +63,11 @@ namespace TinyEngine
 
 		if (auto it = _states.find(_currentStateId); it != _states.end())
 		{
-			it->second->SetPrevStateId(prevStateId);
-			it->second->OnEnter();
+			if (it->second)
+			{
+				it->second->SetPrevStateId(prevStateId);
+				it->second->OnEnter();
+			}
 		}
 	}
 }
