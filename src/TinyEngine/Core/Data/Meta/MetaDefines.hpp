@@ -44,7 +44,7 @@ namespace TinyEngine
 	private:
 
 #define TINY_ENGINE_META_CLASS_DELC_MEMBER(field, ...) \
-	TinyEngine::MetaVisitor<decltype(field)>::AddMemberWrapper(&GetMembers(false), &field, { __VA_ARGS__ })
+	TinyEngine::MetaVisitor<decltype(field)>::AddMemberWrapper(&GetMembers(false), field, { __VA_ARGS__ })
 
 #define TINY_ENGINE_META_CLASS_MEMBER_NAME(name) std::make_shared<TinyEngine::MetaMemberNameInitializer>(name)
 #define TINY_ENGINE_META_CLASS_MEMBER_DESCRIPTION(description) std::make_shared<TinyEngine::MetaMemberDescriptionInitializer>(description)

@@ -116,6 +116,7 @@ namespace TinyEngine
 		void AddGuiWidgetsToContainer(GuiWidgetContainerPtr container);
 
 		bool IsEmpty() const { return _members.empty(); }
+		void Clear() { _members.clear(); }
 
 	private:
 		std::vector<std::pair<std::string, IMetaMemberSharedPtr>> _members;

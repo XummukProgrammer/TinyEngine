@@ -6,9 +6,9 @@ namespace TinyEngine
 	{
 		if (isCheckLoaded)
 		{
-			TryLoad();
+			_members.Clear();
+			OnLoad();
 		}
-		
 		return _members;
 	}
 
