@@ -4,6 +4,11 @@ namespace TinyEngine
 {
 	bool XmlOutputArchive::ToSection(std::string_view id)
 	{
+		if (id.empty())
+		{
+			return true;
+		}
+
 		pugi::xml_node node;
 		
 		if (_data.poolSections.empty())
@@ -123,6 +128,11 @@ namespace TinyEngine
 
 	bool XmlInputArchive::ToSection(std::string_view id)
 	{
+		if (id.empty())
+		{
+			return true;
+		}
+
 		pugi::xml_node node;
 
 		if (_data.poolSections.empty())

@@ -31,7 +31,7 @@ namespace TinyEngine
 		All = Info | Assert | Verify | Error
 	};
 
-	enum class CompareConditionType
+	enum class CompareConditionOperation
 	{
 		Equal,
 		Less,

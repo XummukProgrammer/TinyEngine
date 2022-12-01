@@ -161,6 +161,13 @@ namespace TinyEngine
 
 		_fileBrowserSaveFileSubscriber = EventSubscriber::Create(std::bind(&Application::OnSaveFileBrowserHandler, this, std::placeholders::_1));
 		fileBrowser->GetOnSaveFileSender().AddSubscriber(_fileBrowserSaveFileSubscriber);
+
+		// For tests
+        auto mainWindowWidgetPtr = TinyEngine::Gui::GetInstance()->GetMainWindow();
+
+        auto propertiesWindow = TinyEngine::GuiPropertiesWidget::Create();
+		propertiesWindow->InitFromMetaClass(&TinyEngine::Application::GetInstance()->GetProject());
+		mainWindowWidgetPtr->AddWidget("Properties", propertiesWindow);
 	}
 
 	void Application::OnOpenProject()

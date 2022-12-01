@@ -21,21 +21,21 @@ namespace TinyEngine
     {
         if (_leftVariable && _rightVariable)
         {
-            switch (_type)
+            switch (_operation)
             {
-            case CompareConditionType::Equal:
+            case CompareConditionOperation::Equal:
                 return _leftVariable->IsEqual(_rightVariable.get());
 
-            case CompareConditionType::Less:
+            case CompareConditionOperation::Less:
                 return _leftVariable->IsLess(_rightVariable.get());
 
-            case CompareConditionType::LessOrEqual:
+            case CompareConditionOperation::LessOrEqual:
                 return _leftVariable->IsLessOrEqual(_rightVariable.get());
 
-            case CompareConditionType::More:
+            case CompareConditionOperation::More:
                 return _leftVariable->IsMore(_rightVariable.get());
 
-            case CompareConditionType::MoreOrEqual:
+            case CompareConditionOperation::MoreOrEqual:
                 return _leftVariable->IsMoreOrEqual(_rightVariable.get());
             }
         }

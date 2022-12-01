@@ -6,7 +6,10 @@ namespace TinyEngine
 	{
 		for (const auto& asset : _assets)
 		{
-			asset->OnAssetLoad();
+			if (asset)
+			{
+				asset->OnAssetLoad();
+			}
 		}
 	}
 }
