@@ -24,33 +24,24 @@ set_target_properties(magic_enum PROPERTIES FOLDER "deps")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/stacktrace" "${CMAKE_CURRENT_BINARY_DIR}/deps/stacktrace")
 set_target_properties(stacktrace PROPERTIES FOLDER "deps")
 
-set(SFML_STATIC_LIBRARIES TRUE)
-find_package(SFML COMPONENTS audio graphics main network system window REQUIRED)
-	
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/Candle" "${CMAKE_CURRENT_BINARY_DIR}/deps/Candle")
-set_target_properties(Candle-s PROPERTIES FOLDER "deps")
-target_compile_definitions(Candle-s PUBLIC -DRADIAL_LIGHT_FIX)
-	
-set(IMGUI_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui")
-set(IMGUI_SFML_IMGUI_DEMO ON)
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui-sfml" "${CMAKE_CURRENT_BINARY_DIR}/deps/imgui-sfml")
-set_target_properties(ImGui-SFML PROPERTIES FOLDER "deps")
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/raylib" "${CMAKE_CURRENT_BINARY_DIR}/deps/raylib")
+set_target_properties(raylib PROPERTIES FOLDER "deps")
 
 include(cmake/src.cmake)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/src" FILES ${ENGINE_HEADERS} ${ENGINE_SOURCES})
 add_library(TinyEngine ${ENGINE_HEADERS} ${ENGINE_SOURCES})
 target_include_directories(TinyEngine PUBLIC src)
 target_link_libraries(TinyEngine PUBLIC 
-	sfml-audio
-	sfml-graphics
-	sfml-main
-	sfml-network
-	sfml-system
-	sfml-window
 	pugixml-static
 	fmt
-	Candle-s
-	ImGui-SFML
 	magic_enum
 	stacktrace
+	raylib
 )
+
+# Checks if OSX and links appropriate frameworks (only required on MacOS)
+if (APPLE)
+    target_link_libraries(${PROJECT_NAME} "-framework IOKit")
+    target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
+    target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
+endif()
