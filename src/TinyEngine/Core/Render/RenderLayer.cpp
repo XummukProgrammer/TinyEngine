@@ -19,7 +19,7 @@ namespace TinyEngine
 	{
 		for (const auto& object : _objects)
 		{
-			RenderWindow::GetInstance()->Draw(object.get());
+			object->Draw();
 		}
 	}
 

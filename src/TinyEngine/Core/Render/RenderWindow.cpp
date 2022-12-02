@@ -1,6 +1,8 @@
 ﻿#include "RenderWindow.hpp"
 #include "RenderObject.hpp"
 
+#include "raylib.h"
+
 namespace TinyEngine
 {
 	RenderWindow::RenderWindow()
@@ -13,43 +15,32 @@ namespace TinyEngine
 
 	void RenderWindow::Create(const RenderWindowSettings& windowSettings)
 	{
+		InitWindow(windowSettings.width, windowSettings.height, windowSettings.title.c_str());
+		SetTargetFPS(windowSettings.maxFramerate);
 	}
 
 	bool RenderWindow::IsClosed() const
 	{
-		return true;
+		return WindowShouldClose();
 	}
 
 	void RenderWindow::Clear()
 	{
+		ClearBackground(RAYWHITE);
 	}
 
-	void RenderWindow::ExtractEvents()
+	void RenderWindow::Begin()
 	{
+		BeginDrawing();
 	}
 
-	void RenderWindow::Draw(RenderObject* object) const
+	void RenderWindow::End()
 	{
-	}
-
-	void RenderWindow::Display()
-	{
+		EndDrawing();
 	}
 
 	void RenderWindow::Close()
 	{
-	}
-
-	void RenderWindow::ResetClock()
-	{
-	}
-
-	void RenderWindow::UpdateClock()
-	{
-	}
-
-	float RenderWindow::GetDeltaTime() const
-	{
-		return 0.f;
+		CloseWindow();
 	}
 }

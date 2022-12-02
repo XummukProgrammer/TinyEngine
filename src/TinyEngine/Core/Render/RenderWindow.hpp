@@ -13,9 +13,6 @@ namespace TinyEngine
 	class RenderWindow final : public Singleton<RenderWindow>
 	{
 	public:
-		using EventReceivedCallback = std::function<void()>;
-
-	public:
 		RenderWindow();
 		~RenderWindow();
 
@@ -23,22 +20,9 @@ namespace TinyEngine
 		void Create(const RenderWindowSettings& windowSettings);
 		bool IsClosed() const;
 		void Clear();
-		void ExtractEvents();
-		void Draw(RenderObject* object) const;
-		void Display();
+		void Begin();
+		void End();
 		void Close();
-
-		void ResetClock();
-		void UpdateClock();
-		float GetDeltaTime() const;
-	
-		void SetOnEventReceived(const EventReceivedCallback& callback) { _onEventReceived = callback; }
-
-	private:
-		void OnEventReceived() { if (_onEventReceived) _onEventReceived(); }
-
-	private:
-		EventReceivedCallback _onEventReceived;
 	};
 };
 

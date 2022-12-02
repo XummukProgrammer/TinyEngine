@@ -20,9 +20,11 @@ namespace TinyEngine
 		SetMainWindow(GuiMainWindowWidget::Create());
 	}
 
-	void Gui::Draw(float deltaTime)
+	void Gui::Draw()
 	{
-		_mainWindowPtr->Draw(deltaTime);
+		rlImGuiBegin();
+		_mainWindowPtr->Draw(0.f);
+		rlImGuiEnd();
 	}
 
 	void Gui::SetMainWindow(GuiMainWindowWidgetSharedPtr mainWindowPtr)
@@ -37,9 +39,9 @@ namespace TinyEngine
 
 	void Gui::SettingsIO()
 	{
-		//auto& io = ImGui::GetIO();
-		//io.IniFilename = nullptr;
-		//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+		auto& io = ImGui::GetIO();
+		io.IniFilename = nullptr;
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 	}
 
 	void Gui::SettingsStyle()
@@ -48,21 +50,11 @@ namespace TinyEngine
 
 	void Gui::PreInit()
 	{
-	}
-
-	void Gui::EventReceived()
-	{
-	}
-
-	void Gui::Update(float deltaTime)
-	{
-	}
-
-	void Gui::Display()
-	{
+		rlImGuiSetup(true);
 	}
 
 	void Gui::Shutdown()
 	{
+		rlImGuiShutdown();
 	}
 }

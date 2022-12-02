@@ -17,10 +17,7 @@ namespace TinyEngine
 	public:
 		void PreInit();
 		void Init();
-		void EventReceived();
-		void Update(float deltaTime);
-		void Draw(float deltaTime);
-		void Display();
+		void Draw();
 		void Shutdown();
 
 	public:

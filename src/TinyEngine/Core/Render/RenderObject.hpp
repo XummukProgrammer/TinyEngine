@@ -34,6 +34,7 @@ namespace TinyEngine
 		int GetLayerId() const { return _layerId; }
 
 		void Update(float deltaTime);
+		void Draw() {}
 
 	private:
 		int _layerId = 0;
