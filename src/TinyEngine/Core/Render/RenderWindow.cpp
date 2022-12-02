@@ -26,7 +26,7 @@ namespace TinyEngine
 
 	void RenderWindow::Clear()
 	{
-		ClearBackground(RAYWHITE);
+		ClearBackground(BLACK);
 	}
 
 	void RenderWindow::Begin()
