@@ -3,8 +3,6 @@
 
 #include <TinyEngine/Core/Assets/Resources/Resource.hpp>
 
-#include <SFML/Graphics.hpp>
-
 #include <string>
 
 namespace TinyEngine
@@ -22,11 +20,7 @@ namespace TinyEngine
 		void SetSmooth(bool isSmooth);
 		void SetSrgb(bool isSrgb);
 
-		sf::Texture& GetTexture() { return _texture; }
-		const sf::Texture& GetConstTexture() const { return _texture; }
-
 	public:
-		sf::Texture _texture;
 	};
 }
 

@@ -4,8 +4,6 @@
 #include <TinyEngine/Core/Render/Point.hpp>
 #include <TinyEngine/Core/Render/Rect.hpp>
 
-#include <SFML/Graphics.hpp>
-
 #include <string>
 
 namespace TinyEngine
@@ -37,12 +35,7 @@ namespace TinyEngine
 
 		void Update(float deltaTime);
 
-		sf::Sprite& GetSprite() { return _sprite; }
-		const sf::Sprite& GetConstSprite() const { return _sprite; }
-
 	private:
-		sf::Sprite _sprite;
-
 		int _layerId = 0;
 	};
 };

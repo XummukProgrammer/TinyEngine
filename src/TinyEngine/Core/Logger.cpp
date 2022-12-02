@@ -1,7 +1,5 @@
 ﻿#include "Logger.hpp"
 
-#include <TinyEngine/../../stacktrace/stacktrace.hpp>
-
 #include <TinyEngine/Core/FileSystem.hpp>
 
 namespace TinyEngine
