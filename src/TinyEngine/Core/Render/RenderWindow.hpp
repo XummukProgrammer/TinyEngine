@@ -6,7 +6,10 @@
 #include <TinyEngine/Core/Render/RenderObject.hpp>
 #include <TinyEngine/Core/Render/RenderWindowSettings.hpp>
 
+#include "raylib-cpp.hpp"
+
 #include <functional>
+#include <memory>
 
 namespace TinyEngine
 {
@@ -23,6 +26,9 @@ namespace TinyEngine
 		void Begin();
 		void End();
 		void Close();
+
+	private:
+		std::unique_ptr<raylib::Window> _window;
 	};
 };
 
