@@ -8,6 +8,9 @@ namespace TinyEngine
 	public:
 		Resource() = default;
 		virtual ~Resource() = default;
+
+	public:
+		virtual void Unload() = 0;
 	};
 }
 

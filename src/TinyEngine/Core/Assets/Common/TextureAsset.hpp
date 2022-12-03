@@ -10,9 +10,6 @@ namespace TinyEngine
 		TINY_ENGINE_META_CLASS_DERIVED_BEGIN(TextureAsset, Asset)
 		{
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_filePath, "FilePath", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_isRepeated, "IsRepeated", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_isSmooth, "IsSmooth", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_isSrgb, "IsSrgb", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 
@@ -25,9 +22,6 @@ namespace TinyEngine
 
 	private:
 		std::string _filePath;
-		bool _isRepeated;
-		bool _isSmooth;
-		bool _isSrgb;
 	};
 }
 

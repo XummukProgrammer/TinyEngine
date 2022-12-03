@@ -2,19 +2,23 @@
 
 namespace TinyEngine
 {
+	void TextureResource::Unload()
+	{
+		if (IsCreate())
+		{
+			UnloadTexture(_info->texture);
+			_info.reset();
+		}
+	}
+
+	bool TextureResource::IsCreate() const
+	{
+		return _info != nullptr;
+	}
+
 	void TextureResource::LoadFromFile(std::string_view filePath)
 	{
-	}
-
-	void TextureResource::SetRepeated(bool isRepeated)
-	{
-	}
-
-	void TextureResource::SetSmooth(bool isSmooth)
-	{
-	}
-
-	void TextureResource::SetSrgb(bool isSrgb)
-	{
+		auto texture = LoadTexture(filePath.data());
+		_info = std::make_unique<Info>(std::move(texture));
 	}
 }
