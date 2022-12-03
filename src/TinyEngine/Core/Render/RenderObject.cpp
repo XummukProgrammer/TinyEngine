@@ -25,9 +25,9 @@ namespace TinyEngine
 	{
 		if (auto textureResource = _textureResourceWeak.lock())
 		{
-			auto& texture = textureResource->GetTexture();
+			auto& texture2D = textureResource->GetTexture2D();
 			Rectangle dest = { _position.x, _position.y, _rectangle.width * _scale.x, _rectangle.height * _scale.y };
-			DrawTexturePro(texture, _rectangle, dest, _origin, _rotation, WHITE);
+			texture2D.Draw(_rectangle, dest, _origin, _rotation);
 		}
 	}
 
