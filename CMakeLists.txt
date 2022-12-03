@@ -27,6 +27,9 @@ set_target_properties(stacktrace PROPERTIES FOLDER "deps")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/raylib" "${CMAKE_CURRENT_BINARY_DIR}/deps/raylib")
 set_target_properties(raylib PROPERTIES FOLDER "deps")
 
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/deps/raylib-cpp" "${CMAKE_CURRENT_BINARY_DIR}/deps/raylib-cpp")
+set_target_properties(raylib_cpp PROPERTIES FOLDER "deps")
+
 include(cmake/src.cmake)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/src" FILES ${ENGINE_HEADERS} ${ENGINE_SOURCES})
 add_library(TinyEngine ${ENGINE_HEADERS} ${ENGINE_SOURCES})
@@ -37,6 +40,7 @@ target_link_libraries(TinyEngine PUBLIC
 	magic_enum
 	stacktrace
 	raylib
+	raylib_cpp
 )
 
 # Checks if OSX and links appropriate frameworks (only required on MacOS)
