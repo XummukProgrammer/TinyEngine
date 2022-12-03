@@ -12,9 +12,6 @@ namespace TinyEngine
 
 		auto textureResource = std::make_shared<TextureResource>();
 		textureResource->LoadFromFile(filePath);
-		textureResource->SetRepeated(_isRepeated);
-		textureResource->SetSmooth(_isSmooth);
-		textureResource->SetSrgb(_isSrgb);
 
 		Resources::GetInstance()->AddResource(GetId(), textureResource);
 	}

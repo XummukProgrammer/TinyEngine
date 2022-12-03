@@ -4,7 +4,7 @@
 #include <TinyEngine/Core/Render/Point.hpp>
 #include <TinyEngine/Core/Render/Rect.hpp>
 
-#include <SFML/Graphics.hpp>
+#include "raylib.h"
 
 #include <string>
 
@@ -26,24 +26,26 @@ namespace TinyEngine
 		void SetRotation(float rotation);
 		float GetRotation() const;
 
-		void SetTexture(std::string_view assetId);
+		void SetTexture(std::string_view resourceId);
 		void SetTextureRect(const Rect& rectangle);
-
-		bool IsPointIntersects(const PointF& point) const;
-		bool IsRectIntersects(const RectF& rectangle) const;
 
 		void SetLayerId(int layerId) { _layerId = layerId; }
 		int GetLayerId() const { return _layerId; }
 
-		void Update(float deltaTime);
+		void SetOrigin(const PointF& origin);
+		PointF GetOrigin() const;
 
-		sf::Sprite& GetSprite() { return _sprite; }
-		const sf::Sprite& GetConstSprite() const { return _sprite; }
+		void Update(float deltaTime);
+		void Draw();
 
 	private:
-		sf::Sprite _sprite;
-
 		int _layerId = 0;
+		TextureResourceWeakPtr _textureResourceWeak;
+		Vector2 _position { 0.f, 0.f };
+		Vector2 _scale { 1.f, 1.f };
+		float _rotation = 0.f;
+		Rectangle _rectangle;
+		Vector2 _origin { 0.f, 0.f };
 	};
 };
 

@@ -1,6 +1,8 @@
 ﻿#include "RenderWindow.hpp"
 #include "RenderObject.hpp"
 
+#include "raylib.h"
+
 namespace TinyEngine
 {
 	RenderWindow::RenderWindow()
@@ -9,70 +11,36 @@ namespace TinyEngine
 
 	RenderWindow::~RenderWindow()
 	{
-		delete _renderWindow;
-		_renderWindow = nullptr;
 	}
 
 	void RenderWindow::Create(const RenderWindowSettings& windowSettings)
 	{
-		_renderWindow = new sf::RenderWindow(sf::VideoMode(windowSettings.width, windowSettings.height), windowSettings.title);
-		_renderWindow->setFramerateLimit(windowSettings.maxFramerate);
-		_renderWindow->setVerticalSyncEnabled(false);
+		InitWindow(windowSettings.width, windowSettings.height, windowSettings.title.c_str());
+		SetTargetFPS(windowSettings.maxFramerate);
 	}
 
 	bool RenderWindow::IsClosed() const
 	{
-		return !_renderWindow->isOpen();
+		return WindowShouldClose();
 	}
 
 	void RenderWindow::Clear()
 	{
-		_renderWindow->clear();
+		ClearBackground(BLACK);
 	}
 
-	void RenderWindow::ExtractEvents()
+	void RenderWindow::Begin()
 	{
-		while (_renderWindow->pollEvent(_event))
-		{
-			if (_event.type == sf::Event::Closed)
-			{
-				Close();
-			}
-			else
-			{
-				OnEventReceived();
-			}
-		}
+		BeginDrawing();
 	}
 
-	void RenderWindow::Draw(RenderObject* object) const
+	void RenderWindow::End()
 	{
-		auto& sprite = object->GetSprite();
-		_renderWindow->draw(sprite);
-	}
-
-	void RenderWindow::Display()
-	{
-		_renderWindow->display();
+		EndDrawing();
 	}
 
 	void RenderWindow::Close()
 	{
-		_renderWindow->close();
-	}
-
-	void RenderWindow::ResetClock()
-	{
-		_timeClock.restart();
-	}
-
-	void RenderWindow::UpdateClock()
-	{
-		_deltaTime = _timeClock.restart();
-	}
-
-	float RenderWindow::GetDeltaTime() const
-	{
-		return _deltaTime.asSeconds();
+		CloseWindow();
 	}
 }

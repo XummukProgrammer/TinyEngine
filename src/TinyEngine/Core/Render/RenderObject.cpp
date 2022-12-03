@@ -1,65 +1,78 @@
 ﻿#include "RenderObject.hpp"
 
-#include <SFML/Graphics.hpp>
+#include <TinyEngine/Core/Assets/Resources/Resources.hpp>
+#include <TinyEngine/Core/Assets/Resources/Common/TextureResource.hpp>
 
 namespace TinyEngine
 {
+	void RenderObject::SetOrigin(const PointF& origin)
+	{
+		_origin.x = origin.GetX();
+		_origin.y = origin.GetY();
+	}
+
+	PointF RenderObject::GetOrigin() const
+	{
+		return { _origin.x, _origin.y };
+	}
+
 	void RenderObject::Update(float deltaTime)
 	{
 
 	}
 
+	void RenderObject::Draw()
+	{
+		if (auto textureResource = _textureResourceWeak.lock())
+		{
+			auto& texture = textureResource->GetTexture();
+			Rectangle dest = { _position.x, _position.y, _rectangle.width * _scale.x, _rectangle.height * _scale.y };
+			DrawTexturePro(texture, _rectangle, dest, _origin, _rotation, WHITE);
+		}
+	}
+
 	void RenderObject::SetPosition(const PointF& position)
 	{
-		_sprite.setPosition({ position.GetX(), position.GetY() });
+		_position.x = position.GetX();
+		_position.y = position.GetY();
 	}
 
 	PointF RenderObject::GetPosition() const
 	{
-		const auto& position = _sprite.getPosition();
-		return { position.x, position.y };
+		return { _position.x, _position.y };
 	}
 
 	void RenderObject::SetScale(const PointF& factors)
 	{
-		_sprite.setScale({ factors.GetX(), factors.GetY() });
+		_scale.x = factors.GetX();
+		_scale.y = factors.GetY();
 	}
 
 	PointF RenderObject::GetScale() const
 	{
-		const auto& scale = _sprite.getScale();
-		return { scale.x, scale.y };
+		return { _scale.x, _scale.y };
 	}
 
 	void RenderObject::SetRotation(float rotation)
 	{
-		_sprite.setRotation(rotation);
+		_rotation = rotation;
 	}
 
 	float RenderObject::GetRotation() const
 	{
-		return _sprite.getRotation();
+		return _rotation;
 	}
 
-	void RenderObject::SetTexture(std::string_view filePath)
+	void RenderObject::SetTexture(std::string_view resourceId)
 	{
-		// TODO: Доработать
-		_sprite.setTexture(sf::Texture());
-		_sprite.setColor(sf::Color::White);
+		_textureResourceWeak = Resources::GetInstance()->GetResource<TextureResource>(resourceId);
 	}
 
 	void RenderObject::SetTextureRect(const Rect& rectangle)
 	{
-		_sprite.setTextureRect({ rectangle.x, rectangle.y, rectangle.w, rectangle.h });
-	}
-
-	bool RenderObject::IsPointIntersects(const PointF& point) const
-	{
-		return _sprite.getGlobalBounds().contains({ point.GetX(), point.GetY() });
-	}
-
-	bool RenderObject::IsRectIntersects(const RectF& rectangle) const
-	{
-		return _sprite.getGlobalBounds().intersects({ rectangle.x, rectangle.y, rectangle.w, rectangle.h });
+		_rectangle.x = static_cast<float>(rectangle.x);
+		_rectangle.y = static_cast<float>(rectangle.y);
+		_rectangle.width = static_cast<float>(rectangle.w);
+		_rectangle.height = static_cast<float>(rectangle.h);
 	}
 }

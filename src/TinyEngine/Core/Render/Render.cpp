@@ -10,27 +10,26 @@
 
 #include <TinyEngine/Core/Render/RenderLayer.hpp>
 
+#include <TinyEngine/Core/Application.hpp>
+
 namespace TinyEngine
 {
 	Render& Render::Execute()
 	{
-		RenderWindow::GetInstance()->ResetClock();
-
 		while (!RenderWindow::GetInstance()->IsClosed())
 		{
-			RenderWindow::GetInstance()->UpdateClock();
-			const float deltaTime = RenderWindow::GetInstance()->GetDeltaTime();
-
-			RenderWindow::GetInstance()->ExtractEvents();
+			const float deltaTime = 0.f;
 
 			Update(deltaTime);
 
-			RenderWindow::GetInstance()->Clear();
-			Draw();
-			RenderWindow::GetInstance()->Display();
+			if (!Application::GetInstance()->IsClose())
+			{
+				RenderWindow::GetInstance()->Begin();
+				RenderWindow::GetInstance()->Clear();
+				Draw();
+				RenderWindow::GetInstance()->End();
+			}
 		}
-
-		Gui::GetInstance()->Shutdown();
 
 		return *this;
 	}
@@ -62,16 +61,13 @@ namespace TinyEngine
 
 	void Render::Close()
 	{
+		Gui::GetInstance()->Shutdown();
 		RenderWindow::GetInstance()->Close();
 	}
 
 	void Render::Update(float deltaTime)
 	{
 		_renderLayers.Update(deltaTime);
-
-		auto gui = Gui::GetInstance();
-		gui->Update(deltaTime);
-		gui->Draw(deltaTime);
 
 		OnUpdate();
 	}
@@ -80,12 +76,7 @@ namespace TinyEngine
 	{
 		_renderLayers.Draw();
 
-		Gui::GetInstance()->Display();
-	}
-
-	void Render::OnEventReceived()
-	{
-		Gui::GetInstance()->EventReceived();
+		Gui::GetInstance()->Draw();
 	}
 
 	void Render::OnUpdate()
@@ -99,7 +90,6 @@ namespace TinyEngine
 	void Render::CreateWindow(const RenderWindowSettings& windowSettings)
 	{
 		RenderWindow::GetInstance()->Create(windowSettings);
-		RenderWindow::GetInstance()->SetOnEventReceived(std::bind(&Render::OnEventReceived, this));
 
 		auto gui = Gui::GetInstance();
 		gui->Init();

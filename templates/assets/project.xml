@@ -5,7 +5,7 @@
 			<pointer type="LinkAsset" ID="States" FilePath="states.xml" Type="States" />
 		</Assets>
 		<Assets>
-			<pointer type="TextureAsset" ID="Test" FilePath="test.png" IsRepeated="false" IsSmooth="false" IsSrgb="false" />
+			<pointer type="TextureAsset" ID="Test" FilePath="test.png" />
 		</Assets>
 	</AssetHolder>
 </root>

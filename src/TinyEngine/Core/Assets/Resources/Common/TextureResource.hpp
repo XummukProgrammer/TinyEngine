@@ -2,31 +2,43 @@
 #define _TEXTURE_RESOURCE_HEADER_
 
 #include <TinyEngine/Core/Assets/Resources/Resource.hpp>
+#include <TinyEngine/Core/Forwards.hpp>
 
-#include <SFML/Graphics.hpp>
+#include "raylib.h"
 
 #include <string>
+#include <memory>
 
 namespace TinyEngine
 {
 	class TextureResource final : public Resource
 	{
+		struct Info
+		{
+			Texture2D texture;
+
+			Info(const Texture2D& texture)
+				: texture(texture)
+			{
+			}
+		};
+
 	public:
 		TextureResource() = default;
 		~TextureResource() = default;
 
 	public:
-		void LoadFromFile(std::string_view filePath);
-
-		void SetRepeated(bool isRepeated);
-		void SetSmooth(bool isSmooth);
-		void SetSrgb(bool isSrgb);
-
-		sf::Texture& GetTexture() { return _texture; }
-		const sf::Texture& GetConstTexture() const { return _texture; }
+		void Unload() override;
 
 	public:
-		sf::Texture _texture;
+		bool IsCreate() const;
+		void LoadFromFile(std::string_view filePath);
+
+		// Перед использованием необходима проверка IsCreate()
+		Texture2D& GetTexture() { return _info->texture; }
+
+	private:
+		std::unique_ptr<Info> _info;
 	};
 }
 

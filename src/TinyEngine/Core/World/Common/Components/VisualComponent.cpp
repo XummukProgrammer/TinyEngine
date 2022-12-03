@@ -137,22 +137,4 @@ namespace TinyEngine
 			_object->SetTextureRect(rectangle);
 		}
 	}
-
-	bool VisualComponent::IsPointIntersects(const PointF& point) const
-	{
-		if (_object)
-		{
-			return _object->IsPointIntersects(point);
-		}
-		return false;
-	}
-
-	bool VisualComponent::IsRectIntersects(const RectF& rectangle) const
-	{
-		if (_object)
-		{
-			return _object->IsRectIntersects(rectangle);
-		}
-		return false;
-	}
 }

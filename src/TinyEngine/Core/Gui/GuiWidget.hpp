@@ -3,8 +3,8 @@
 
 #include <TinyEngine/Core/Render/Render.hpp>
 
-#include "imgui.h"
-#include "imgui_internal.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
 
 namespace TinyEngine
 {

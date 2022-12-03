@@ -37,7 +37,6 @@ namespace TinyEngine
 		void Update(float deltaTime);
 		void Draw();
 
-		void OnEventReceived();
 		void OnUpdate();
 
 	private:

@@ -35,9 +35,6 @@ namespace TinyEngine
 		void SetTexture(std::string_view assetId);
 		void SetTextureRect(const Rect& rectangle);
 
-		bool IsPointIntersects(const PointF& point) const;
-		bool IsRectIntersects(const RectF& rectangle) const;
-
 	private:
 		void SetPosition(const PointF& position);
 		void SetScale(const PointF& factors);
