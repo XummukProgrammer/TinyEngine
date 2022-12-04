@@ -4,9 +4,6 @@
 [submodule "deps/fmt"]
 	path = deps/fmt
 	url = https://github.com/fmtlib/fmt.git
-[submodule "deps/Candle"]
-	path = deps/Candle
-	url = https://github.com/MiguelMJ/Candle.git
 [submodule "deps/imgui"]
 	path = deps/imgui
 	url = https://github.com/ocornut/imgui.git
