@@ -8,20 +8,6 @@
 
 namespace TinyEngine
 {
-	class TestData : public MetaClass
-	{
-		TINY_ENGINE_META_CLASS_BEGIN(TestData)
-		{
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_a, "A", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_b, "B", "");
-		}
-		TINY_ENGINE_META_CLASS_END
-
-	public:
-		int _a = 0;
-		int _b = 0;
-	};
-
 	class Project final : public MetaClass
 	{
 		TINY_ENGINE_META_CLASS_BEGIN(Project)
@@ -30,7 +16,6 @@ namespace TinyEngine
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_description, "Description", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_version, "Version", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_assetHolder, "AssetHolder", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_testData, "TestData", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 
@@ -53,7 +38,6 @@ namespace TinyEngine
 		std::string _description = "Default Game";
 		std::string _version = "1.0.0";
 		AssetHolder _assetHolder;
-		std::vector<TestData> _testData;
 	};
 
 	class ProjectUtils
