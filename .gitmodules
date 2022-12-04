@@ -19,3 +19,9 @@
 [submodule "deps/stacktrace"]
 	path = deps/stacktrace
 	url = git@github.com:XummukProgrammer/stacktrace.git
+[submodule "deps/raylib"]
+	path = deps/raylib
+	url = https://github.com/raysan5/raylib.git
+[submodule "deps/raylib-cpp"]
+	path = deps/raylib-cpp
+	url = https://github.com/RobLoach/raylib-cpp.git

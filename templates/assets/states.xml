@@ -1,48 +1,24 @@
 <?xml version="1.0"?>
 <root ID="States" StartStateID="Start">
-	<States>
-		<pair key="Close">
-			<value>
-				<pointer type="CloseState">
-					<object>
-						<Transitions />
-					</object>
+	<States key="Close">
+		<pointer type="CloseState" />
+	</States>
+	<States key="Start">
+		<pointer type="StartState">
+			<Transitions>
+				<pointer type="StateConditionTransition" PrevStateID="" NextStateID="Close">
+					<Condition>
+						<pointer type="CompareCondition" Operation="Equal">
+							<LeftVariable>
+								<pointer type="ConditionContextVariable" ContextVariableID="IsClose" IsGlobalContext="true" />
+							</LeftVariable>
+							<RightVariable>
+								<pointer type="ConditionBoolVariable" Value="true" />
+							</RightVariable>
+						</pointer>
+					</Condition>
 				</pointer>
-			</value>
-		</pair>
-		<pair key="Start">
-			<value>
-				<pointer type="StartState">
-					<object>
-						<Transitions>
-							<element>
-								<value>
-									<pointer type="StateConditionTransition">
-										<object PrevStateID="" NextStateID="Close">
-											<Condition>
-												<pointer type="CompareCondition">
-													<object Type="Equal">
-														<LeftVariable>
-															<pointer type="ConditionContextVariable">
-																<object ContextVariableID="IsClose" IsGlobalContext="true" />
-															</pointer>
-														</LeftVariable>
-														<RightVariable>
-															<pointer type="ConditionBoolVariable">
-																<object Value="true" />
-															</pointer>
-														</RightVariable>
-													</object>
-												</pointer>
-											</Condition>
-										</object>
-									</pointer>
-								</value>
-							</element>
-						</Transitions>
-					</object>
-				</pointer>
-			</value>
-		</pair>
+			</Transitions>
+		</pointer>
 	</States>
 </root>

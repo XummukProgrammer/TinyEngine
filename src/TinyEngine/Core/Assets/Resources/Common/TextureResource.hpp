@@ -2,10 +2,12 @@
 #define _TEXTURE_RESOURCE_HEADER_
 
 #include <TinyEngine/Core/Assets/Resources/Resource.hpp>
+#include <TinyEngine/Core/Forwards.hpp>
 
-#include <SFML/Graphics.hpp>
+#include "raylib-cpp.hpp"
 
 #include <string>
+#include <memory>
 
 namespace TinyEngine
 {
@@ -18,15 +20,10 @@ namespace TinyEngine
 	public:
 		void LoadFromFile(std::string_view filePath);
 
-		void SetRepeated(bool isRepeated);
-		void SetSmooth(bool isSmooth);
-		void SetSrgb(bool isSrgb);
+		raylib::Texture2D& GetTexture2D() { return _texture2D; }
 
-		sf::Texture& GetTexture() { return _texture; }
-		const sf::Texture& GetConstTexture() const { return _texture; }
-
-	public:
-		sf::Texture _texture;
+	private:
+		raylib::Texture2D _texture2D;
 	};
 }
 

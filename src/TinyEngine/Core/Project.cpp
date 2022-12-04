@@ -6,6 +6,9 @@
 #include <TinyEngine/Core/Application.hpp>
 #include <TinyEngine/Core/FileSystem.hpp>
 #include <TinyEngine/Core/Assets/Assets.hpp>
+#include <TinyEngine/Core/Gui/Widgets/Containers/GuiPropertiesWidget.hpp>
+#include <TinyEngine/Core/Gui/Widgets/GuiWindowWidget.hpp>
+#include <TinyEngine/Core/Gui/Gui.hpp>
 
 namespace TinyEngine
 {
@@ -30,7 +33,15 @@ namespace TinyEngine
 
 		project.GetAssetHolder().OnAssetLoad();
 		world.OnInit();
-		project.GetStates()->OnInit();
+
+		if (auto states = project.GetStates())
+		{
+			states->OnInit();
+		}
+
+		auto mainWindowWidgetPtr = TinyEngine::Gui::GetInstance()->GetMainWindow();
+		auto propertiesWindow = mainWindowWidgetPtr->GetWidget<GuiPropertiesWidget>("Properties");
+		propertiesWindow->InitFromMetaClass(&TinyEngine::Application::GetInstance()->GetProject());
 	}
 
 	void ProjectUtils::SaveProject()

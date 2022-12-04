@@ -1,6 +1,21 @@
 
 set(ENGINE_HEADERS
+	src/extras/IconsFontAwesome6.h
+	src/extras/FA6FreeSolidFontData.h
+
+	src/imgui/imconfig.h
+	src/imgui/imgui.h
+	src/imgui/imgui_internal.h
+	src/imgui/imstb_rectpack.h
+	src/imgui/imstb_textedit.h
+	src/imgui/imstb_truetype.h
+	src/imgui/misc/cpp/imgui_stdlib.h
+
 	src/TinyEngine/TinyEngine.hpp
+	
+	src/TinyEngine/Libs/rlImGui/rlImGui.h
+	src/TinyEngine/Libs/rlImGui/rlImGuiColors.h
+	
 	src/TinyEngine/Core/Application.hpp
 	src/TinyEngine/Core/Logger.hpp
 	src/TinyEngine/Core/Debug.hpp
@@ -87,6 +102,17 @@ set(ENGINE_HEADERS
 )
 
 set(ENGINE_SOURCES
+	src/imgui/imgui.cpp
+	src/imgui/imgui_demo.cpp
+	src/imgui/imgui_draw.cpp
+	src/imgui/imgui_tables.cpp
+	src/imgui/imgui_widgets.cpp
+	src/imgui/misc/cpp/imgui_stdlib.cpp
+
+	src/TinyEngine/TinyEngine.cpp
+	
+	src/TinyEngine/Libs/rlImGui/rlImGui.cpp
+	
 	src/TinyEngine/Core/Application.cpp
 	src/TinyEngine/Core/Logger.cpp
 	src/TinyEngine/Core/Debug.cpp
@@ -144,13 +170,11 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Conditions/Common/AndCondition.cpp
 	src/TinyEngine/Core/Conditions/Common/CompareCondition.cpp
 	src/TinyEngine/Core/Conditions/Common/OrCondition.cpp
+	src/TinyEngine/Core/Gui/Gui.cpp
+	src/TinyEngine/Core/Render/RenderObject.cpp
+	src/TinyEngine/Core/Render/RenderWindow.cpp
 	
 	src/TinyEngine/Core/Project.cpp
 	
 	src/TinyEngine/Libs/ImGui-Addons/FileBrowser/ImGuiFileBrowser.cpp
-	
-	# TODO: Не подключать, если сборка с SFML отключена
-	src/TinyEngine/Core/Backends/SFML/GUI/SfmlGuiImpl.cpp
-	src/TinyEngine/Core/Backends/SFML/Render/SfmlRenderObjectImpl.cpp
-	src/TinyEngine/Core/Backends/SFML/Render/SfmlRenderWindowImpl.cpp
 )

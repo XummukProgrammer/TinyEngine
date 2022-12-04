@@ -36,6 +36,8 @@ namespace TinyEngine
 		ConditionContext& GetGlobalContext() { return _globalContext; }
 		const ConditionContext& GetConstGlobalContext() const { return _globalContext; }
 
+		bool IsClose() const { return _isClose; }
+
 	private:
 		void OnInit();
 		void OnDeinit();

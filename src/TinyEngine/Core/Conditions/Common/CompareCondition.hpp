@@ -13,7 +13,7 @@ namespace TinyEngine
 		{
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_leftVariable, "LeftVariable", "");
 			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_rightVariable, "RightVariable", "");
-			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_type, "Type", "");
+			TINY_ENGINE_META_CLASS_DELC_MEMBER_DEFAULT(_operation, "Operation", "");
 		}
 		TINY_ENGINE_META_CLASS_END
 
@@ -28,7 +28,7 @@ namespace TinyEngine
 	private:
 		BaseConditionVariableSharedPtr _leftVariable;
 		BaseConditionVariableSharedPtr _rightVariable;
-		CompareConditionType _type;
+		CompareConditionOperation _operation;
 	};
 }
 

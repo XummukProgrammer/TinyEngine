@@ -9,13 +9,20 @@ namespace TinyEngine
 	{
 		for (const auto& transition : _transitions)
 		{
-			transition->OnInit();
+			if (transition)
+			{
+				transition->OnInit();
+			}
 		}
 	}
 
 	bool State::IsActive() const
 	{
-		return _states->GetCurrentStateId() == GetStateId();
+		if (_states)
+		{
+			return _states->GetCurrentStateId() == GetStateId();
+		}
+		return false;
 	}
 
 	bool State::HasQueryToChangeState() const
@@ -38,9 +45,12 @@ namespace TinyEngine
 		{
 			for (const auto& transition : _transitions)
 			{
-				if ((_prevStateId == transition->GetPrevStateId()) && transition->CanChangeState())
+				if (transition)
 				{
-					return transition;
+					if ((_prevStateId == transition->GetPrevStateId()) && transition->CanChangeState())
+					{
+						return transition;
+					}
 				}
 			}
 		}
