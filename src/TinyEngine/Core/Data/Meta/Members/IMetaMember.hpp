@@ -44,7 +44,7 @@ namespace TinyEngine
 	class MetaMember final : public IMetaMember
 	{
 	public:
-		MetaMember(T& value);
+		MetaMember(T* value);
 		~MetaMember() = default;
 
 	public:
@@ -73,11 +73,11 @@ namespace TinyEngine
 		std::string _name;
 		std::string _description;
 		int _flags;
-		T& _value;
+		T* _value = nullptr;
 	};
 
 	template<typename T>
-	MetaMember<T>::MetaMember(T& value)
+	MetaMember<T>::MetaMember(T* value)
 		: _value(value)
 	{
 	}
@@ -85,23 +85,18 @@ namespace TinyEngine
 	template<typename T>
 	void MetaMember<T>::LoadFromArchive(InputArchivePtr archive)
 	{
-		if (IsLoadable())
+		if (IsLoadable() && _value)
 		{
-			SerializationVisitor<T>::Load(archive, GetName(), &_value);
+			SerializationVisitor<T>::Load(archive, GetName(), _value);
 		}
 	}
 
 	template<typename T>
 	void MetaMember<T>::SaveToArchive(OutputArchivePtr archive)
 	{
-		if (IsSaved())
+		if (IsSaved() && _value)
 		{
-			if (GetName() == "A")
-			{
-				auto i = 0;
-			}
-
-			SerializationVisitor<T>::Save(archive, GetName(), &_value);
+			SerializationVisitor<T>::Save(archive, GetName(), _value);
 		}
 	}
 
@@ -110,7 +105,7 @@ namespace TinyEngine
 	{
 		if (IsEditable())
 		{
-			GuiVisitor<T>::AddWidget(container, GetName(), GetDescription(), &_value);
+			GuiVisitor<T>::AddWidget(container, GetName(), GetDescription(), _value);
 		}
 	}
 }

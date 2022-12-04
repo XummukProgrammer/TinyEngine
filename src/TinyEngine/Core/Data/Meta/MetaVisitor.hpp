@@ -15,7 +15,7 @@ namespace TinyEngine
 	class MetaVisitor
 	{
 	public:
-		static void AddMemberWrapper(MetaMembersPtr members, T& value, const MetaMembers::MemberInitializerList& initializerList) 
+		static void AddMemberWrapper(MetaMembersPtr members, T* value, const MetaMembers::MemberInitializerList& initializerList) 
 		{
 			if constexpr (std::is_base_of_v<MetaClass, T>)
 			{
