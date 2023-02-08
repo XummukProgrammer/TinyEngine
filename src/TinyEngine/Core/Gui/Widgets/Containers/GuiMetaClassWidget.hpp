@@ -1,8 +1,0 @@
-﻿#ifndef _GUI_META_CLASS_WIDGET_HEADER_
-#define _GUI_META_CLASS_WIDGET_HEADER_
-
-namespace TinyEngine
-{
-}
-
-#endif // _GUI_META_CLASS_WIDGET_HEADER_
