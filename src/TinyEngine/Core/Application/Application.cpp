@@ -1,5 +1,7 @@
 ﻿#include "Application.hpp"
 
+#include <TinyEngine/Core/VisualObject/Transform.hpp>
+
 #include <fmt/format.h>
 
 namespace TinyEngine
