@@ -1,11 +1,11 @@
 ﻿#include "Application.hpp"
 
-#include <TinyEngine/Core/VisualObject/Transform.hpp>
-
 #include <fmt/format.h>
 
 namespace TinyEngine
 {
+    Application Application::_singleton;
+
     void Application::Load()
     {
     }
@@ -22,6 +22,11 @@ namespace TinyEngine
             _window.BeginDrawing();
 
             _window.ClearBackground(RAYWHITE);
+
+            if (_rootTransform)
+            {
+                _rootTransform->Draw();
+            }
 
             _window.EndDrawing();
         }
@@ -41,9 +46,11 @@ namespace TinyEngine
         context.SetScreenWidth(800);
         context.SetScreenHeight(600);
         context.SetWindowTitle(fmt::format("TinyEngine {0}", applicationVersion));
+        context.SetScalePixelCoef(50);
 
-        Application application;
+        auto& application = Application::GetSingleton();
         application.SetContext(context);
+
         application.Load();
         application.Create();
         application.Run();

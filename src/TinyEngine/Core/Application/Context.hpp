@@ -23,12 +23,16 @@ namespace TinyEngine
 		void SetWindowTitle(std::string_view windowTitle) { _windowTitle = windowTitle; }
 		const std::string& GetWindowTitle() const { return _windowTitle; }
 
+		void SetScalePixelCoef(float scalePixelCoef) { _scalePixelCoef = scalePixelCoef; }
+		float GetScalePixelCoef() const { return _scalePixelCoef; }
+
 	private:
 		int _argc;
 		char** _argv;
 		int _screenWidth;
 		int _screenHeight;
 		std::string _windowTitle;
+		float _scalePixelCoef;
 	};
 }
 

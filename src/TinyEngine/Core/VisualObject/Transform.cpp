@@ -1,5 +1,9 @@
 ﻿#include "Transform.hpp"
 
+#include <TinyEngine/Core/Application/Application.hpp>
+
+#include <raylib-cpp.hpp>
+
 namespace TinyEngine
 {
     void Transform::Attach(std::shared_ptr<Transform> transform)
@@ -16,17 +20,50 @@ namespace TinyEngine
             if ((*it) == transform)
             {
                 _attached.erase(it);
+                Recalculate();
                 break;
             }
         }
-
-        Recalculate();
     }
 
     void Transform::SetLocalPosition(const RVector2& position)
     {
         _localPosition = position;
         Recalculate();
+    }
+
+    RVector2 Transform::GetPosition() const
+    {
+        return _anchor.GetPositionWithAnchor(_centerPosition, _localScale);
+    }
+
+    void Transform::SetLocalScale(const RVector2& scale)
+    {
+        _localScale = scale;
+        Recalculate();
+    }
+
+    void Transform::Draw()
+    {
+        OnDrawGizmos();
+
+        for (const auto& attached : _attached)
+        {
+            attached->Draw();
+        }
+    }
+
+    void Transform::OnDrawGizmos()
+    {
+        const float scalePixelCoef = Application::GetSingleton().GetContext().GetScalePixelCoef();
+        auto rectanglePosition = GetPosition();
+        rectanglePosition.x -= (_localScale * scalePixelCoef / 2.f).x;
+        rectanglePosition.y -= (_localScale * scalePixelCoef / 2.f).y;
+
+        RRectangle rectangle;
+        rectangle.SetPosition(rectanglePosition);
+        rectangle.SetSize(_localScale * scalePixelCoef);
+        rectangle.DrawLines(RColor::Red());
     }
 
     void Transform::Recalculate()
@@ -37,7 +74,7 @@ namespace TinyEngine
             parentPosition = parent->GetPosition();
         }
 
-        _position = _localPosition + parentPosition;
+        _centerPosition = _localPosition + parentPosition;
 
         for (const auto& attached : _attached)
         {

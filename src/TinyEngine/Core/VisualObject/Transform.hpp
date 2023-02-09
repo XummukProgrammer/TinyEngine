@@ -1,6 +1,8 @@
 ﻿#ifndef _TRANSFORM_HEADER_
 #define _TRANSFORM_HEADER_
 
+#include <TinyEngine/Core/VisualObject/Anchor.hpp>
+
 #include <raylib-cpp.hpp>
 
 #include <memory>
@@ -23,9 +25,18 @@ namespace TinyEngine
 		void SetLocalPosition(const RVector2& position);
 		const RVector2& GetLocalPosition() const { return _localPosition; }
 
-		const RVector2& GetPosition() const { return _position; }
+		RVector2 GetPosition() const;
 
-		virtual void Draw() {}
+		void SetLocalScale(const RVector2& scale);
+		const RVector2& GetLocalScale() const { return _localScale; }
+
+		const Anchor& GetAnchor() const { return _anchor; }
+		Anchor& GetRefAnchor() { return _anchor; }
+
+		virtual void Draw();
+
+	protected:
+		virtual void OnDrawGizmos();
 
 	private:
 		void Recalculate();
@@ -34,7 +45,9 @@ namespace TinyEngine
 		std::shared_ptr<Transform> _parent;
 		std::vector<std::shared_ptr<Transform>> _attached;
 		RVector2 _localPosition;
-		RVector2 _position;
+		RVector2 _centerPosition;
+		RVector2 _localScale;
+		Anchor _anchor;
 	};
 }
 
