@@ -15,7 +15,7 @@ namespace TinyEngine
 		void SetVerticalALignment(VerticalAlignment verticalAlignment) { _verticalAlignment = verticalAlignment; }
 		VerticalAlignment GetVerticalAlignment() const { return _verticalAlignment; }
 
-		RVector2 GetPositionWithAnchor(const RVector2& centerPosition, const RVector2& localScale) const;
+		RRectangle GetRectangle(const RVector2& position, const RVector2& localScale) const;
 
 	private:
 		HorizontalAlignment _horizontalAlignment = HorizontalAlignment::Center;

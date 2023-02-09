@@ -32,29 +32,24 @@ namespace TinyEngine
         Recalculate();
     }
 
-    RVector2 Transform::GetPosition() const
-    {
-        auto position = _centerPosition;
-
-        if (_anchor)
-        {
-            position = _anchor->GetPositionWithAnchor(_centerPosition, _localScale);
-        }
-
-        return position;
-    }
-
     RRectangle Transform::GetRectangle() const
     {
         auto rectangle = RRectangle();
 
-        const float scalePixelCoef = Application::GetSingleton().GetContext().GetScalePixelCoef();
-        auto rectanglePosition = GetPosition();
-        rectanglePosition.x -= (_localScale * scalePixelCoef / 2.f).x;
-        rectanglePosition.y -= (_localScale * scalePixelCoef / 2.f).y;
+        if (_anchor)
+        {
+            rectangle = _anchor->GetRectangle(GetPosition(), _localScale);
+        }
+        else
+        {
+            const float scalePixelCoef = Application::GetSingleton().GetContext().GetScalePixelCoef();
+            auto rectanglePosition = GetPosition();
+            rectanglePosition.x -= (_localScale * scalePixelCoef / 2.f).x;
+            rectanglePosition.y -= (_localScale * scalePixelCoef / 2.f).y;
 
-        rectangle.SetPosition(rectanglePosition);
-        rectangle.SetSize(_localScale * scalePixelCoef);
+            rectangle.SetPosition(rectanglePosition);
+            rectangle.SetSize(_localScale * scalePixelCoef);
+        }
 
         return rectangle;
     }
@@ -73,7 +68,10 @@ namespace TinyEngine
 
     void Transform::Draw()
     {
-        OnDrawGizmos();
+        if (Application::GetSingleton().GetContext().IsDrawGizmos())
+        {
+            OnDrawGizmos();
+        }
 
         for (const auto& attached : _attached)
         {
@@ -85,6 +83,8 @@ namespace TinyEngine
     {
         RRectangle rectangle = GetRectangle();
         rectangle.DrawLines(RColor::Red());
+
+        DrawCircle(GetPosition().x, GetPosition().y, 2, RColor::Red());
     }
 
     void Transform::Recalculate()
@@ -95,7 +95,7 @@ namespace TinyEngine
             parentPosition = parent->GetPosition();
         }
 
-        _centerPosition = _localPosition + parentPosition;
+        _position = _localPosition + parentPosition;
 
         if (_layout)
         {

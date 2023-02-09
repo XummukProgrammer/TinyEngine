@@ -14,7 +14,7 @@ namespace TinyEngine
 	{
 		Center,
 		Top,
-		Botton
+		Bottom
 	};
 }
 

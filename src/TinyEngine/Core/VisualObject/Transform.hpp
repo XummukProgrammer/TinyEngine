@@ -25,8 +25,8 @@ namespace TinyEngine
 
 		void SetLocalPosition(const RVector2& position);
 		const RVector2& GetLocalPosition() const { return _localPosition; }
+		const RVector2& GetPosition() const { return _position; }
 
-		RVector2 GetPosition() const;
 		RRectangle GetRectangle() const;
 
 		void SetLocalScale(const RVector2& scale);
@@ -50,7 +50,7 @@ namespace TinyEngine
 		std::shared_ptr<Transform> _parent;
 		std::vector<std::shared_ptr<Transform>> _attached;
 		RVector2 _localPosition;
-		RVector2 _centerPosition;
+		RVector2 _position;
 		RVector2 _localScale;
 		std::shared_ptr<Anchor> _anchor;
 		std::shared_ptr<Layout> _layout;

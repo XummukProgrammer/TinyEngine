@@ -47,6 +47,7 @@ namespace TinyEngine
         context.SetScreenHeight(600);
         context.SetWindowTitle(fmt::format("TinyEngine {0}", applicationVersion));
         context.SetScalePixelCoef(50);
+        context.SetIsDrawGizmos(true);
 
         auto& application = Application::GetSingleton();
         application.SetContext(context);
@@ -54,10 +55,20 @@ namespace TinyEngine
         auto rootTransform = application.GetRootTransform();
         rootTransform->SetLocalPosition({ 250, 250 });
         rootTransform->SetLocalScale({ 7, 7 });
+        {
+            auto anchor = std::make_shared<Anchor>();
+            anchor->SetVerticalALignment(VerticalAlignment::Bottom);
+            rootTransform->SetAnchor(anchor);
+        }
 
         auto attached1 = std::make_shared<TinyEngine::Transform>();
-        attached1->SetLocalPosition({ 0, -150 });
-        attached1->SetLocalScale({ 6.5, 0.85 });
+        attached1->SetLocalPosition({ 0, 0 });
+        attached1->SetLocalScale({ 2, 2 });
+        {
+            auto anchor = std::make_shared<Anchor>();
+            anchor->SetVerticalALignment(VerticalAlignment::Top);
+            attached1->SetAnchor(anchor);
+        }
         rootTransform->Attach(attached1);
 
         application.Load();

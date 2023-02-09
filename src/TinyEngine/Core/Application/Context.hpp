@@ -26,6 +26,9 @@ namespace TinyEngine
 		void SetScalePixelCoef(float scalePixelCoef) { _scalePixelCoef = scalePixelCoef; }
 		float GetScalePixelCoef() const { return _scalePixelCoef; }
 
+		void SetIsDrawGizmos(bool isDrawGizmos) { _isDrawGizmos = isDrawGizmos; }
+		bool IsDrawGizmos() const { return _isDrawGizmos; }
+
 	private:
 		int _argc;
 		char** _argv;
@@ -33,6 +36,7 @@ namespace TinyEngine
 		int _screenHeight;
 		std::string _windowTitle;
 		float _scalePixelCoef;
+		bool _isDrawGizmos;
 	};
 }
 
