@@ -2,6 +2,7 @@
 #define _TRANSFORM_HEADER_
 
 #include <TinyEngine/Core/VisualObject/Anchor.hpp>
+#include <TinyEngine/Core/VisualObject/Layout.hpp>
 
 #include <raylib-cpp.hpp>
 
@@ -34,6 +35,9 @@ namespace TinyEngine
 		void SetAnchor(const std::shared_ptr<Anchor>& anchor) { _anchor = anchor; }
 		std::shared_ptr<Anchor> GetAnchor() const { return _anchor; }
 
+		void SetLayout(const std::shared_ptr<Layout>& layout);
+		std::shared_ptr<Layout> GetLayout() const { return _layout; }
+
 		virtual void Draw();
 
 	protected:
@@ -49,6 +53,7 @@ namespace TinyEngine
 		RVector2 _centerPosition;
 		RVector2 _localScale;
 		std::shared_ptr<Anchor> _anchor;
+		std::shared_ptr<Layout> _layout;
 	};
 }
 

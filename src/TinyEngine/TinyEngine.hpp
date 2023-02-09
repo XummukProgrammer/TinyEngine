@@ -8,5 +8,6 @@
 #include <TinyEngine/Core/VisualObject/VisualObject.hpp>
 #include <TinyEngine/Core/VisualObject/Anchor.hpp>
 #include <TinyEngine/Core/VisualObject/Alignment.hpp>
+#include <TinyEngine/Core/VisualObject/Layout.hpp>
 
 #endif // _TINY_ENGINE_HEADER_

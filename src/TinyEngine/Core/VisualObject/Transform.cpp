@@ -65,6 +65,12 @@ namespace TinyEngine
         Recalculate();
     }
 
+    void Transform::SetLayout(const std::shared_ptr<Layout>& layout)
+    {
+        _layout = layout;
+        _layout->SetTransform(shared_from_this());
+    }
+
     void Transform::Draw()
     {
         OnDrawGizmos();
@@ -91,9 +97,16 @@ namespace TinyEngine
 
         _centerPosition = _localPosition + parentPosition;
 
-        for (const auto& attached : _attached)
+        if (_layout)
         {
-            attached->Recalculate();
+            _layout->Recalculate();
         }
+        else
+        {
+            for (const auto& attached : _attached)
+            {
+                attached->Recalculate();
+            }
+        }       
     }
 }
