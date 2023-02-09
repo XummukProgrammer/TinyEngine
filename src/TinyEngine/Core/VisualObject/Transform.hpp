@@ -26,12 +26,13 @@ namespace TinyEngine
 		const RVector2& GetLocalPosition() const { return _localPosition; }
 
 		RVector2 GetPosition() const;
+		RRectangle GetRectangle() const;
 
 		void SetLocalScale(const RVector2& scale);
 		const RVector2& GetLocalScale() const { return _localScale; }
 
-		const Anchor& GetAnchor() const { return _anchor; }
-		Anchor& GetRefAnchor() { return _anchor; }
+		void SetAnchor(const std::shared_ptr<Anchor>& anchor) { _anchor = anchor; }
+		std::shared_ptr<Anchor> GetAnchor() const { return _anchor; }
 
 		virtual void Draw();
 
@@ -47,7 +48,7 @@ namespace TinyEngine
 		RVector2 _localPosition;
 		RVector2 _centerPosition;
 		RVector2 _localScale;
-		Anchor _anchor;
+		std::shared_ptr<Anchor> _anchor;
 	};
 }
 

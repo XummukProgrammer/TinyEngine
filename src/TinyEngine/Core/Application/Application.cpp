@@ -51,6 +51,15 @@ namespace TinyEngine
         auto& application = Application::GetSingleton();
         application.SetContext(context);
 
+        auto rootTransform = application.GetRootTransform();
+        rootTransform->SetLocalPosition({ 250, 250 });
+        rootTransform->SetLocalScale({ 7, 7 });
+
+        auto attached1 = std::make_shared<TinyEngine::Transform>();
+        attached1->SetLocalPosition({ 0, -150 });
+        attached1->SetLocalScale({ 6.5, 0.85 });
+        rootTransform->Attach(attached1);
+
         application.Load();
         application.Create();
         application.Run();

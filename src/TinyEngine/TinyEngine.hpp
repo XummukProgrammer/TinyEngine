@@ -7,5 +7,6 @@
 #include <TinyEngine/Core/VisualObject/Transform.hpp>
 #include <TinyEngine/Core/VisualObject/VisualObject.hpp>
 #include <TinyEngine/Core/VisualObject/Anchor.hpp>
+#include <TinyEngine/Core/VisualObject/Alignment.hpp>
 
 #endif // _TINY_ENGINE_HEADER_

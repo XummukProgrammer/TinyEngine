@@ -34,7 +34,29 @@ namespace TinyEngine
 
     RVector2 Transform::GetPosition() const
     {
-        return _anchor.GetPositionWithAnchor(_centerPosition, _localScale);
+        auto position = _centerPosition;
+
+        if (_anchor)
+        {
+            position = _anchor->GetPositionWithAnchor(_centerPosition, _localScale);
+        }
+
+        return position;
+    }
+
+    RRectangle Transform::GetRectangle() const
+    {
+        auto rectangle = RRectangle();
+
+        const float scalePixelCoef = Application::GetSingleton().GetContext().GetScalePixelCoef();
+        auto rectanglePosition = GetPosition();
+        rectanglePosition.x -= (_localScale * scalePixelCoef / 2.f).x;
+        rectanglePosition.y -= (_localScale * scalePixelCoef / 2.f).y;
+
+        rectangle.SetPosition(rectanglePosition);
+        rectangle.SetSize(_localScale * scalePixelCoef);
+
+        return rectangle;
     }
 
     void Transform::SetLocalScale(const RVector2& scale)
@@ -55,14 +77,7 @@ namespace TinyEngine
 
     void Transform::OnDrawGizmos()
     {
-        const float scalePixelCoef = Application::GetSingleton().GetContext().GetScalePixelCoef();
-        auto rectanglePosition = GetPosition();
-        rectanglePosition.x -= (_localScale * scalePixelCoef / 2.f).x;
-        rectanglePosition.y -= (_localScale * scalePixelCoef / 2.f).y;
-
-        RRectangle rectangle;
-        rectangle.SetPosition(rectanglePosition);
-        rectangle.SetSize(_localScale * scalePixelCoef);
+        RRectangle rectangle = GetRectangle();
         rectangle.DrawLines(RColor::Red());
     }
 
