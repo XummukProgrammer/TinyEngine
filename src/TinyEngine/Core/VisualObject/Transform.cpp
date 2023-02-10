@@ -66,6 +66,18 @@ namespace TinyEngine
         _layout->SetTransform(shared_from_this());
     }
 
+    bool Transform::IsControlledByLayout() const
+    {
+        if (auto parent = GetParent())
+        {
+            if (parent->GetLayout())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void Transform::Draw()
     {
         if (Application::GetSingleton().GetContext().IsDrawGizmos())
@@ -90,23 +102,25 @@ namespace TinyEngine
     void Transform::Recalculate()
     {
         auto parentPosition = RVector2();
+
         if (auto parent = GetParent())
         {
             parentPosition = parent->GetPosition();
         }
 
-        _position = _localPosition + parentPosition;
+        if (!IsControlledByLayout())
+        {
+            _position = _localPosition + parentPosition;
+        }
 
         if (_layout)
         {
             _layout->Recalculate();
         }
-        else
+
+        for (const auto& attached : _attached)
         {
-            for (const auto& attached : _attached)
-            {
-                attached->Recalculate();
-            }
-        }       
+            attached->Recalculate();
+        }  
     }
 }

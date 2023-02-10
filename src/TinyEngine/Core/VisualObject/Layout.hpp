@@ -10,12 +10,27 @@ namespace TinyEngine
 	class Layout
 	{
 	public:
+		Layout() = default;
+		virtual ~Layout() = default;
+
 		void SetTransform(const std::shared_ptr<Transform>& transform);
 
-		void Recalculate();
+		virtual void Recalculate() {}
+
+	protected:
+		std::shared_ptr<Transform> GetTransform() const { return _transform; }
 
 	private:
 		std::shared_ptr<Transform> _transform;
+	};
+
+	class VerticalLayout : public Layout
+	{
+	public:
+		VerticalLayout() = default;
+		~VerticalLayout() = default;
+
+		void Recalculate() override;
 	};
 }
 

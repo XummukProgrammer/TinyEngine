@@ -56,20 +56,39 @@ namespace TinyEngine
         rootTransform->SetLocalPosition({ 250, 250 });
         rootTransform->SetLocalScale({ 7, 7 });
         {
-            auto anchor = std::make_shared<Anchor>();
-            anchor->SetVerticalALignment(VerticalAlignment::Bottom);
-            rootTransform->SetAnchor(anchor);
+            rootTransform->SetLayout(std::make_shared<VerticalLayout>());
         }
 
-        auto attached1 = std::make_shared<TinyEngine::Transform>();
-        attached1->SetLocalPosition({ 0, 0 });
-        attached1->SetLocalScale({ 2, 2 });
         {
-            auto anchor = std::make_shared<Anchor>();
-            anchor->SetVerticalALignment(VerticalAlignment::Top);
-            attached1->SetAnchor(anchor);
+            auto attached = std::make_shared<TinyEngine::Transform>();
+            attached->SetLocalScale({ 3, 1 });
+            rootTransform->Attach(attached);
         }
-        rootTransform->Attach(attached1);
+        {
+            auto attached = std::make_shared<TinyEngine::Transform>();
+            attached->SetLocalScale({ 3, 1 });
+            rootTransform->Attach(attached);
+        }
+        {
+            auto attached = std::make_shared<TinyEngine::Transform>();
+            attached->SetLocalScale({ 3, 1 });
+            rootTransform->Attach(attached);
+        }
+        {
+            auto attached = std::make_shared<TinyEngine::Transform>();
+            attached->SetLocalScale({ 3, 1 });
+            rootTransform->Attach(attached);
+        }
+        {
+            auto attached = std::make_shared<TinyEngine::Transform>();
+            attached->SetLocalScale({ 3, 1 });
+            rootTransform->Attach(attached);
+        }
+        {
+            auto attached = std::make_shared<TinyEngine::Transform>();
+            attached->SetLocalScale({ 3, 1 });
+            rootTransform->Attach(attached);
+        }
 
         application.Load();
         application.Create();
