@@ -1,5 +1,7 @@
 ﻿#include "Application.hpp"
 
+#include <TinyEngine/Core/VisualObject/VisualObject.hpp>
+
 #include <fmt/format.h>
 
 namespace TinyEngine
@@ -52,16 +54,20 @@ namespace TinyEngine
         auto& application = Application::GetSingleton();
         application.SetContext(context);
 
+        application.Load();
+        application.Create();
+
         auto rootTransform = application.GetRootTransform();
         rootTransform->SetLocalPosition({ 250, 250 });
-        rootTransform->SetLocalScale({ 7, 7 });
+        rootTransform->SetLocalScale({ 8, 8 });
         {
             rootTransform->SetLayout(std::make_shared<VerticalLayout>());
         }
 
         {
-            auto attached = std::make_shared<TinyEngine::Transform>();
+            auto attached = std::make_shared<TinyEngine::VisualObject>();
             attached->SetLocalScale({ 3, 1 });
+            attached->Load("rectangle.png");
             rootTransform->Attach(attached);
         }
         {
@@ -70,8 +76,9 @@ namespace TinyEngine
             rootTransform->Attach(attached);
         }
         {
-            auto attached = std::make_shared<TinyEngine::Transform>();
+            auto attached = std::make_shared<TinyEngine::VisualObject>();
             attached->SetLocalScale({ 3, 1 });
+            attached->Load("rectangle.png");
             rootTransform->Attach(attached);
         }
         {
@@ -90,8 +97,7 @@ namespace TinyEngine
             rootTransform->Attach(attached);
         }
 
-        application.Load();
-        application.Create();
+        
         application.Run();
     }
 }
