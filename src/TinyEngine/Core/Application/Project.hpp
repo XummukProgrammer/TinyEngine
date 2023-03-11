@@ -65,6 +65,8 @@ namespace TinyEngine
 		void Load(const ProjectFileLoadParams& params);
 		void Create(const ProjectFileCreateParams& params);
 
+		const ProjectFile& GetProjectFile() const { return _projectFile; }
+
 	private:
 		void OnLoaded();
 

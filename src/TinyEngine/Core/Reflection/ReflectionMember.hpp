@@ -71,6 +71,21 @@ namespace TinyEngine
 	};
 
 	template<>
+	class ReflectionMemberVisitor<bool>
+	{
+	public:
+		static void Serialize(bool* value, std::string_view name, IOutputArchive* archive)
+		{
+			archive->WriteBool(name, *value);
+		}
+
+		static void Deserialize(bool* value, std::string_view name, IInputArchive* archive)
+		{
+			*value = archive->ReadBool(name);
+		}
+	};
+
+	template<>
 	class ReflectionMemberVisitor<int>
 	{
 	public:

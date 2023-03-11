@@ -20,6 +20,7 @@ namespace TinyEngine
 		void ReadKey(std::string_view name) override;
 		void EndKey() override;
 
+		bool ReadBool(std::string_view id) const override;
 		int ReadInt(std::string_view id) const override;
 		float ReadFloat(std::string_view id) const override;
 		std::string ReadString(std::string_view id) const override;
@@ -40,6 +41,7 @@ namespace TinyEngine
 		void WriteKey(std::string_view name) override;
 		void EndKey() override;
 
+		void WriteBool(std::string_view id, bool value) override;
 		void WriteInt(std::string_view id, int value) override;
 		void WriteFloat(std::string_view id, float value) override;
 		void WriteString(std::string_view id, std::string_view value) override;

@@ -16,6 +16,15 @@ namespace TinyEngine
     void Application::Create()
     {
         _window.Init(_context.GetScreenWidth(), _context.GetScreenHeight(), _context.GetWindowTitle());
+
+        ProjectFileCreateParams params;
+        params.path = _context.GetFileSystem().BuildPath(FileSystem::Assets, L"project.xml");
+        params.name = "TinyEngine";
+        params.description = "Game Engine";
+        params.author = "Xummuk97";
+        params.version = "1.0.0.0 alpha";
+        params.librariesPath = "libs.xml";
+        _context.GetProject()->Create(params);
     }
 
     void Application::Run()
@@ -65,15 +74,6 @@ namespace TinyEngine
     {
         _context.GetRefFileSystem().Init();
         _context.GetProject()->Init();
-
-        ProjectFileCreateParams params;
-        params.path = _context.GetFileSystem().BuildPath(FileSystem::Assets, L"project.xml");
-        params.name = "TinyEngine";
-        params.description = "Game Engine";
-        params.author = "Xummuk97";
-        params.version = "1.0.0.0 alpha";
-        params.librariesPath = "libs.xml";
-        _context.GetProject()->Create(params);
     }
 
     void Application::OnDeinit()
@@ -93,6 +93,8 @@ namespace TinyEngine
 
     void Application::OnProjectLoaded()
     {
+        const auto& projectFile = _context.GetProject()->GetProjectFile();
+        _window.SetTitle(fmt::format("{}_{}", projectFile.GetName(), projectFile.GetVersion()));
     }
 
     void Application::OnStarted()
@@ -108,7 +110,7 @@ namespace TinyEngine
         context.SetArgv(argv);
         context.SetScreenWidth(800);
         context.SetScreenHeight(600);
-        context.SetWindowTitle(fmt::format("TinyEngine {0}", applicationVersion));
+        context.SetWindowTitle("TinyEngine");
         context.SetScalePixelCoef(50);
         context.SetIsDrawGizmos(true);
 

@@ -71,7 +71,7 @@ namespace TinyEngine
         RRectangle rectangle = GetRectangle();
         rectangle.DrawLines(RColor::Red());
 
-        DrawCircle(GetPosition().x, GetPosition().y, 2, RColor::Red());
+        DrawCircle(static_cast<int>(GetPosition().x), static_cast<int>(GetPosition().y), 2, RColor::Red());
     }
 
     void Transform::Recalculate()

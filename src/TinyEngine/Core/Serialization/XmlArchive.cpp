@@ -24,6 +24,11 @@ namespace TinyEngine
 		_stack.pop();
 	}
 
+	void XmlOutputArchive::WriteBool(std::string_view id, bool value)
+	{
+		_stack.top().append_attribute(id.data()).set_value(value);
+	}
+
 	void XmlOutputArchive::WriteInt(std::string_view id, int value)
 	{
 		_stack.top().append_attribute(id.data()).set_value(value);
@@ -59,6 +64,11 @@ namespace TinyEngine
 	void XmlInputArchive::EndKey()
 	{
 		_stack.pop();
+	}
+
+	bool XmlInputArchive::ReadBool(std::string_view id) const
+	{
+		return _stack.top().attribute(id.data()).as_bool();
 	}
 
 	int XmlInputArchive::ReadInt(std::string_view id) const
