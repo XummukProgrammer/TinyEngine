@@ -25,8 +25,20 @@ namespace TinyEngine
 		TypeFactory() = default;
 		~TypeFactory() = default;
 
-	private:
+	public:
+		template<typename T, typename = std::enable_if_t<std::is_base_of_v<ITypeFactorable, T>>> 
+		void RegisterType()
+		{
+			_registeredTypes[T::GetStaticTypeName()] = []()
+			{
+				return std::make_shared<T>();
+			};
+		}
 
+		std::shared_ptr<ITypeFactorable> CreateType(std::string_view typeName) const;
+
+	private:
+		std::map<std::string, std::function<std::shared_ptr<ITypeFactorable>()>> _registeredTypes;
 	};
 }
 

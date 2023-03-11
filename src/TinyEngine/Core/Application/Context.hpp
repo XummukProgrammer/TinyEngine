@@ -4,6 +4,7 @@
 #include <TinyEngine/Core/VisualObject/Transform.hpp>
 #include <TinyEngine/Core/Resources/FileSystem.hpp>
 #include <TinyEngine/Core/Serialization/XmlArchive.hpp>
+#include <TinyEngine/Core/Reflection/TypeFactory.hpp>
 
 #include <string>
 #include <memory>
@@ -42,6 +43,9 @@ namespace TinyEngine
 		std::unique_ptr<IInputArchive> CreateInputArchive(FileSystem::DirType dirType, std::wstring_view path) const;
 		std::unique_ptr<IOutputArchive> CreateOutputArchive(FileSystem::DirType dirType, std::wstring_view path) const;
 
+		const TypeFactory& GetTypeFactory() const { return _typeFactory; }
+		TypeFactory& GetRefTypeFactory() { return _typeFactory; }
+
 	private:
 		int _argc;
 		char** _argv;
@@ -52,6 +56,7 @@ namespace TinyEngine
 		bool _isDrawGizmos;
 		std::shared_ptr<TinyEngine::Transform> _rootTransform = std::make_shared<TinyEngine::Transform>();
 		FileSystem _fileSystem;
+		TypeFactory _typeFactory;
 	};
 }
 

@@ -3,7 +3,7 @@
 
 #include <TinyEngine/Core/Reflection/IReflectionMember.hpp>
 #include <TinyEngine/Core/Reflection/ReflectionObject.hpp>
-#include <TinyEngine/Core/Reflection/TypeFactory.hpp>
+#include <TinyEngine/Core/Application/Application.hpp>
 
 #include <fmt/format.h>
 
@@ -250,6 +250,7 @@ namespace TinyEngine
 			if constexpr (std::is_base_of_v<ITypeFactorable, T>)
 			{
 				const std::string type = archive->ReadString("type");
+				*value = std::dynamic_pointer_cast<T>(Application::GetSingleton().GetContext().GetTypeFactory().CreateType(type));
 			}
 			else
 			{
