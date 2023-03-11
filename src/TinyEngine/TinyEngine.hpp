@@ -7,4 +7,8 @@
 #include <TinyEngine/Core/VisualObject/Transform.hpp>
 #include <TinyEngine/Core/VisualObject/VisualObject.hpp>
 
+#include <TinyEngine/Core/Resources/FileSystem.hpp>
+
+#include <TinyEngine/Core/Serialization/XmlArchive.hpp>
+
 #endif // _TINY_ENGINE_HEADER_

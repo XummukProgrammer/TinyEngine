@@ -29,7 +29,7 @@ namespace TinyEngine
 		std::wstring GetExePath() const { return _exePath.generic_wstring(); }
 		std::wstring GetExeDir() const { return _exePath.remove_filename().generic_wstring(); }
 		std::wstring GetDirByType(DirType type) const;
-		std::wstring BuildPath(DirType type, std::wstring_view path);
+		std::wstring BuildPath(DirType type, std::wstring_view path) const;
 
 	private:
 		mutable std::filesystem::path _exePath;

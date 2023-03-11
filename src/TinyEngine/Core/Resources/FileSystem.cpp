@@ -34,7 +34,7 @@ namespace TinyEngine
 		return L"";
 	}
 
-	std::wstring FileSystem::BuildPath(DirType type, std::wstring_view path)
+	std::wstring FileSystem::BuildPath(DirType type, std::wstring_view path) const
 	{
 		return GetDirByType(type) + std::wstring{path};
 	}
