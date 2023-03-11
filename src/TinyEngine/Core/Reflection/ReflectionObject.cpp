@@ -1,10 +1,11 @@
 ﻿#include "ReflectionObject.hpp"
 
+#include <TinyEngine/Core/Application/Application.hpp>
+
 namespace TinyEngine
 {
-    void ReflectionObject::AddMember(std::string_view name, std::unique_ptr<IReflectionMember>&& member)
+    void ReflectionObject::AddMember(std::unique_ptr<IReflectionMember>&& member)
     {
-        member->SetName(name);
         _members.push_back(std::move(member));
     }
 
@@ -34,5 +35,39 @@ namespace TinyEngine
         {
             func(member.get());
         }
+    }
+
+    void ReflectionObject::Serialize(IOutputArchive* archive)
+    {
+        ForEachMembers([archive](IReflectionMember* member)
+        {
+            member->Serialize(archive);
+        });
+    }
+
+    void ReflectionObject::Deserialize(IInputArchive* archive)
+    {
+        ForEachMembers([archive](IReflectionMember* member)
+        {
+            member->Deserialize(archive);
+        });
+    }
+
+    void ReflectionObject::SaveToFile(FileSystem::DirType dirType, std::wstring_view path)
+    {
+        auto archive = Application::GetSingleton().GetContext().CreateOutputArchive(dirType, path);
+        archive->WriteKey(GetName());
+        Serialize(archive.get());
+        archive->EndKey();
+        archive->Save();
+    }
+
+    void ReflectionObject::LoadFromFile(FileSystem::DirType dirType, std::wstring_view path)
+    {
+        auto archive = Application::GetSingleton().GetContext().CreateInputArchive(dirType, path);
+        archive->Load();
+        archive->ReadKey(GetName());
+        Deserialize(archive.get());
+        archive->EndKey();
     }
 }

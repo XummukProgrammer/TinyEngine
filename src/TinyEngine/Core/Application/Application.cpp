@@ -1,6 +1,7 @@
 ﻿#include "Application.hpp"
 
 #include <TinyEngine/Core/VisualObject/VisualObject.hpp>
+#include <TinyEngine/Core/Reflection/ReflectionObject.hpp>
 
 #include <fmt/format.h>
 
@@ -39,6 +40,30 @@ namespace TinyEngine
     void Application::OnInit()
     {
         _context.GetRefFileSystem().Init();
+
+        class Vector2
+        {
+        public:
+            float x = 0;
+            float y = 0;
+        };
+
+        Vector2 obj;
+        
+        ReflectionObject reflectionObject;
+        reflectionObject.SetName("obj");
+
+        auto xReflectionMember = std::make_unique<ReflectionMember<float>>();
+        xReflectionMember->SetName("x");
+        xReflectionMember->SetValue(obj.x);
+        reflectionObject.AddMember(std::move(xReflectionMember));
+
+        auto yReflectionMember = std::make_unique<ReflectionMember<float>>();
+        yReflectionMember->SetName("y");
+        yReflectionMember->SetValue(obj.y);
+        reflectionObject.AddMember(std::move(yReflectionMember));
+
+        reflectionObject.SaveToFile(FileSystem::Assets, L"obj.xml");
     }
 
     void Application::OnDeinit()

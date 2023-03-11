@@ -52,6 +52,42 @@ namespace TinyEngine
 	inline void ReflectionMember<T>::Deserialize(IInputArchive* archive)
 	{
 	}
+
+	template<>
+	inline void ReflectionMember<int>::Serialize(IOutputArchive* archive)
+	{
+		archive->WriteInt(GetName(), GetValue());
+	}
+
+	template<>
+	inline void ReflectionMember<float>::Serialize(IOutputArchive* archive)
+	{
+		archive->WriteFloat(GetName(), GetValue());
+	}
+
+	template<>
+	inline void ReflectionMember<std::string>::Serialize(IOutputArchive* archive)
+	{
+		archive->WriteString(GetName(), GetValue());
+	}
+
+	template<>
+	inline void ReflectionMember<int>::Deserialize(IInputArchive* archive)
+	{
+		*_value = archive->ReadInt(GetName());
+	}
+
+	template<>
+	inline void ReflectionMember<float>::Deserialize(IInputArchive* archive)
+	{
+		*_value = archive->ReadFloat(GetName());
+	}
+
+	template<>
+	inline void ReflectionMember<std::string>::Deserialize(IInputArchive* archive)
+	{
+		*_value = archive->ReadString(GetName());
+	}
 }
 
 #endif // _REFLECTION_MEMBER_HEADER_
