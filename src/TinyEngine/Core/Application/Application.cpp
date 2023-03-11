@@ -10,6 +10,7 @@ namespace TinyEngine
 
     void Application::Load()
     {
+        OnInit();
     }
 
     void Application::Create()
@@ -32,6 +33,17 @@ namespace TinyEngine
 
     void Application::Stop()
     {
+        OnDeinit();
+    }
+
+    void Application::OnInit()
+    {
+        _context.GetRefFileSystem().Init();
+    }
+
+    void Application::OnDeinit()
+    {
+        _context.GetRefFileSystem().Deinit();
     }
 
     void Application::OnUpdate()
@@ -63,5 +75,6 @@ namespace TinyEngine
         application.Create();
 
         application.Run();
+        application.Stop();
     }
 }

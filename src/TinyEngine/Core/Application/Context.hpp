@@ -2,6 +2,7 @@
 #define _CONTEXT_HEADER_
 
 #include <TinyEngine/Core/VisualObject/Transform.hpp>
+#include <TinyEngine/Core/Resources/FileSystem.hpp>
 
 #include <string>
 
@@ -33,6 +34,9 @@ namespace TinyEngine
 
 		std::shared_ptr<TinyEngine::Transform> GetRootTransform() const { return _rootTransform; }
 
+		const FileSystem& GetFileSystem() const { return _fileSystem; }
+		FileSystem& GetRefFileSystem() { return _fileSystem; }
+
 	private:
 		int _argc;
 		char** _argv;
@@ -42,6 +46,7 @@ namespace TinyEngine
 		float _scalePixelCoef;
 		bool _isDrawGizmos;
 		std::shared_ptr<TinyEngine::Transform> _rootTransform = std::make_shared<TinyEngine::Transform>();
+		FileSystem _fileSystem;
 	};
 }
 

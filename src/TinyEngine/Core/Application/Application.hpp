@@ -22,6 +22,8 @@ namespace TinyEngine
 		void Stop();
 
 	private:
+		void OnInit();
+		void OnDeinit();
 		void OnUpdate();
 		void OnDraw();
 
