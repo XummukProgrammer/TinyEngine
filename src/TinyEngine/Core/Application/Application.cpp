@@ -61,23 +61,17 @@ namespace TinyEngine
                 REFLECTION_MEMBER("pos", pos)
                 REFLECTION_MEMBER("size", size)
                 REFLECTION_MEMBER("test", test)
+                REFLECTION_MEMBER("test2", test2)
             REFLECTION_OBJECT_END
 
         public:
             Vector2 pos;
             Vector2 size;
             std::vector<Vector2> test;
+            std::map<std::string, int> test2;
         };
 
         Rect obj;
-
-        obj.test.push_back(Vector2());
-        obj.test.back().x = 99.24f;
-        obj.test.back().y = 12.50f;
-
-        obj.test.push_back(Vector2());
-        obj.test.back().x = 51.21f;
-        obj.test.back().y = 24.26f;
 
         obj.CreateReflectionObject()->SaveToFile(FileSystem::Assets, L"obj.xml");
     }

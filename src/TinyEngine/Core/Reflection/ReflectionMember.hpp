@@ -7,6 +7,7 @@
 #include <fmt/format.h>
 
 #include <vector>
+#include <map>
 
 namespace TinyEngine
 {
@@ -166,6 +167,50 @@ namespace TinyEngine
 				T value{};
 				ReflectionMemberVisitor<T>::Deserialize(&value, "value", archive);
 				values->push_back(std::move(value));
+				archive->EndKey();
+			}
+
+			archive->EndKey();
+		}
+	};
+
+	template<typename K, typename V>
+	class ReflectionMemberVisitor<std::map<K, V>>
+	{
+	public:
+		static void Serialize(std::map<K, V>* values, std::string_view name, IOutputArchive* archive)
+		{
+			archive->WriteKey(name);
+			archive->WriteInt("size", static_cast<int>(values->size()));
+
+			int index = 0;
+			for (auto& [ key, value ] : *values)
+			{
+				archive->WriteKey(fmt::format("element_{}", index));
+				K constKey = key;
+				ReflectionMemberVisitor<K>::Serialize(&constKey, "key", archive);
+				ReflectionMemberVisitor<V>::Serialize(&value, "value", archive);
+				archive->EndKey();
+
+				++index;
+			}
+
+			archive->EndKey();
+		}
+
+		static void Deserialize(std::map<K, V>* values, std::string_view name, IInputArchive* archive)
+		{
+			archive->ReadKey(name);
+
+			const int size = archive->ReadInt("size");
+			for (int i = 0; i < size; ++i)
+			{
+				archive->ReadKey(fmt::format("element_{}", i));
+				K key{};
+				V value{};
+				ReflectionMemberVisitor<K>::Deserialize(&key, "key", archive);
+				ReflectionMemberVisitor<V>::Deserialize(&value, "value", archive);
+				values->emplace(key, value);
 				archive->EndKey();
 			}
 
