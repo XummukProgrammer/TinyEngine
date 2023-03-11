@@ -21,21 +21,26 @@ namespace TinyEngine
     {
         while (!_window.ShouldClose())
         {
+            OnUpdate();
+
             _window.BeginDrawing();
-
             _window.ClearBackground(RAYWHITE);
-
-            if (_rootTransform)
-            {
-                _rootTransform->Draw();
-            }
-
+            OnDraw();
             _window.EndDrawing();
         }
     }
 
     void Application::Stop()
     {
+    }
+
+    void Application::OnUpdate()
+    {
+    }
+
+    void Application::OnDraw()
+    {
+        _context.GetRootTransform()->Draw();
     }
 
     void StartApp(int argc, char** argv)

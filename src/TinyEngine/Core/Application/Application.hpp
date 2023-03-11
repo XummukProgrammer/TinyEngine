@@ -2,7 +2,6 @@
 #define _APPLICATION_HEADER_
 
 #include <TinyEngine/Core/Application/Context.hpp>
-#include <TinyEngine/Core/VisualObject/Transform.hpp>
 #include <raylib-cpp.hpp>
 
 namespace TinyEngine
@@ -17,17 +16,18 @@ namespace TinyEngine
 		const Context& GetContext() const { return _context; }
 		Context& GetRefContext() { return _context; }
 
-		std::shared_ptr<TinyEngine::Transform> GetRootTransform() const { return _rootTransform; }
-
 		void Load();
 		void Create();
 		void Run();
 		void Stop();
 
 	private:
+		void OnUpdate();
+		void OnDraw();
+
+	private:
 		Context _context;
 		RWindow _window;
-		std::shared_ptr<TinyEngine::Transform> _rootTransform = std::make_shared<TinyEngine::Transform>();
 
 	private:
 		static Application _singleton;

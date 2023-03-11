@@ -1,6 +1,8 @@
 ﻿#ifndef _CONTEXT_HEADER_
 #define _CONTEXT_HEADER_
 
+#include <TinyEngine/Core/VisualObject/Transform.hpp>
+
 #include <string>
 
 namespace TinyEngine
@@ -29,6 +31,8 @@ namespace TinyEngine
 		void SetIsDrawGizmos(bool isDrawGizmos) { _isDrawGizmos = isDrawGizmos; }
 		bool IsDrawGizmos() const { return _isDrawGizmos; }
 
+		std::shared_ptr<TinyEngine::Transform> GetRootTransform() const { return _rootTransform; }
+
 	private:
 		int _argc;
 		char** _argv;
@@ -37,6 +41,7 @@ namespace TinyEngine
 		std::string _windowTitle;
 		float _scalePixelCoef;
 		bool _isDrawGizmos;
+		std::shared_ptr<TinyEngine::Transform> _rootTransform = std::make_shared<TinyEngine::Transform>();
 	};
 }
 
