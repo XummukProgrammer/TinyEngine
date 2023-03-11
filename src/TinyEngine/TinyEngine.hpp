@@ -11,4 +11,7 @@
 
 #include <TinyEngine/Core/Serialization/XmlArchive.hpp>
 
+#include <TinyEngine/Core/Reflection/ReflectionObject.hpp>
+#include <TinyEngine/Core/Reflection/ReflectionMember.hpp>
+
 #endif // _TINY_ENGINE_HEADER_

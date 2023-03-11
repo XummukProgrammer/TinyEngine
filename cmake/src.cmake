@@ -11,6 +11,9 @@ set(ENGINE_HEADERS
 	
 	src/TinyEngine/Core/Serialization/IArchive.hpp
 	src/TinyEngine/Core/Serialization/XmlArchive.hpp
+	
+	src/TinyEngine/Core/Reflection/ReflectionObject.hpp
+	src/TinyEngine/Core/Reflection/ReflectionMember.hpp
 )
 
 set(ENGINE_SOURCES
@@ -26,4 +29,7 @@ set(ENGINE_SOURCES
 	
 	src/TinyEngine/Core/Serialization/IArchive.cpp
 	src/TinyEngine/Core/Serialization/XmlArchive.cpp
+	
+	src/TinyEngine/Core/Reflection/ReflectionObject.cpp
+	src/TinyEngine/Core/Reflection/ReflectionMember.cpp
 )
