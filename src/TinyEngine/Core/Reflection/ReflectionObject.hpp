@@ -35,6 +35,36 @@ namespace TinyEngine
 		std::string _name;
 		std::vector<std::unique_ptr<IReflectionMember>> _members;
 	};
+
+	class ReflectionObjectCreator
+	{
+	public:
+		ReflectionObjectCreator() = default;
+		virtual ~ReflectionObjectCreator() = default;
+
+	public:
+		virtual std::unique_ptr<ReflectionObject> GetReflectionObject() = 0;
+	};
 }
+
+#define REFLECTION_OBJECT_BEGIN(name) \
+	public: \
+		virtual std::unique_ptr<TinyEngine::ReflectionObject> GetReflectionObject() override \
+		{ \
+			auto reflectionObject = std::make_unique<TinyEngine::ReflectionObject>(); \
+			reflectionObject->SetName(#name);
+
+#define REFLECTION_OBJECT_END \
+			return std::move(reflectionObject); \
+		} \
+	private:
+
+#define REFLECTION_MEMBER(name, member) \
+			{ \
+				auto reflectionMember = std::make_unique<ReflectionMember<decltype(member)>>(); \
+				reflectionMember->SetName(name); \
+				reflectionMember->SetValue(member); \
+				reflectionObject->AddMember(std::move(reflectionMember)); \
+			}
 
 #endif // _REFLECTION_OBJECT_HEADER_

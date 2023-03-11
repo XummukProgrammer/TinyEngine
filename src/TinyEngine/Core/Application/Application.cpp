@@ -41,29 +41,21 @@ namespace TinyEngine
     {
         _context.GetRefFileSystem().Init();
 
-        class Vector2
+        class Vector2 : public ReflectionObjectCreator
         {
+            REFLECTION_OBJECT_BEGIN(Vector2)
+                REFLECTION_MEMBER("x", x)
+                REFLECTION_MEMBER("y", y)
+            REFLECTION_OBJECT_END
+
         public:
             float x = 0;
             float y = 0;
         };
 
         Vector2 obj;
-        
-        ReflectionObject reflectionObject;
-        reflectionObject.SetName("obj");
 
-        auto xReflectionMember = std::make_unique<ReflectionMember<float>>();
-        xReflectionMember->SetName("x");
-        xReflectionMember->SetValue(obj.x);
-        reflectionObject.AddMember(std::move(xReflectionMember));
-
-        auto yReflectionMember = std::make_unique<ReflectionMember<float>>();
-        yReflectionMember->SetName("y");
-        yReflectionMember->SetValue(obj.y);
-        reflectionObject.AddMember(std::move(yReflectionMember));
-
-        reflectionObject.SaveToFile(FileSystem::Assets, L"obj.xml");
+        obj.GetReflectionObject()->SaveToFile(FileSystem::Assets, L"obj.xml");
     }
 
     void Application::OnDeinit()
