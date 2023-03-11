@@ -4,6 +4,10 @@
 #include <TinyEngine/Core/Reflection/IReflectionMember.hpp>
 #include <TinyEngine/Core/Reflection/ReflectionObject.hpp>
 
+#include <fmt/format.h>
+
+#include <vector>
+
 namespace TinyEngine
 {
 	template<typename T>
@@ -48,7 +52,7 @@ namespace TinyEngine
 	public:
 		static void Serialize(T* value, std::string_view name, IOutputArchive* archive)
 		{
-			if (std::is_base_of_v<ReflectionObjectCreator, T>)
+			if constexpr (std::is_base_of_v<ReflectionObjectCreator, T>)
 			{
 				ReflectionMemberVisitor<ReflectionObjectCreator>::Serialize(value, name, archive);
 			}
@@ -56,7 +60,7 @@ namespace TinyEngine
 
 		static void Deserialize(T* value, std::string_view name, IInputArchive* archive)
 		{
-			if (std::is_base_of_v<ReflectionObjectCreator, T>)
+			if constexpr (std::is_base_of_v<ReflectionObjectCreator, T>)
 			{
 				ReflectionMemberVisitor<ReflectionObjectCreator>::Deserialize(value, name, archive);
 			}
@@ -125,6 +129,46 @@ namespace TinyEngine
 			auto reflectionObjectCreator = value->CreateReflectionObject();
 			archive->ReadKey(name);
 			reflectionObjectCreator->Deserialize(archive);
+			archive->EndKey();
+		}
+	};
+
+	template<typename T>
+	class ReflectionMemberVisitor<std::vector<T>>
+	{
+	public:
+		static void Serialize(std::vector<T>* values, std::string_view name, IOutputArchive* archive)
+		{
+			archive->WriteKey(name);
+			archive->WriteInt("size", static_cast<int>(values->size()));
+
+			int index = 0;
+			for (auto& value : *values)
+			{
+				archive->WriteKey(fmt::format("element_{}", index));
+				ReflectionMemberVisitor<T>::Serialize(&value, "value", archive);
+				archive->EndKey();
+
+				++index;
+			}
+
+			archive->EndKey();
+		}
+
+		static void Deserialize(std::vector<T>* values, std::string_view name, IInputArchive* archive)
+		{
+			archive->ReadKey(name);
+			
+			const int size = archive->ReadInt("size");
+			for (int i = 0; i < size; ++i)
+			{
+				archive->ReadKey(fmt::format("element_{}", i));
+				T value{};
+				ReflectionMemberVisitor<T>::Deserialize(&value, "value", archive);
+				values->push_back(std::move(value));
+				archive->EndKey();
+			}
+
 			archive->EndKey();
 		}
 	};
