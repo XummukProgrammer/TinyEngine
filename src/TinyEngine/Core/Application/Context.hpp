@@ -42,7 +42,6 @@ namespace TinyEngine
 		std::unique_ptr<IInputArchive> CreateInputArchive(FileSystem::DirType dirType, std::wstring_view path) const;
 		std::unique_ptr<IOutputArchive> CreateOutputArchive(FileSystem::DirType dirType, std::wstring_view path) const;
 
-
 	private:
 		int _argc;
 		char** _argv;

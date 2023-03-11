@@ -39,14 +39,6 @@ namespace TinyEngine
     void Application::OnInit()
     {
         _context.GetRefFileSystem().Init();
-
-        auto testOutputArchive = _context.CreateOutputArchive(FileSystem::DirType::Assets, L"test.xml");
-        testOutputArchive->WriteKey("test");
-        testOutputArchive->WriteInt("int", 123);
-        testOutputArchive->WriteFloat("float", 12.24f);
-        testOutputArchive->WriteString("string", "Hello, World!");
-        testOutputArchive->EndKey();
-        testOutputArchive->Save();
     }
 
     void Application::OnDeinit()

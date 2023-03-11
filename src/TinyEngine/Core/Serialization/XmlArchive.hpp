@@ -9,6 +9,26 @@
 
 namespace TinyEngine
 {
+	class XmlInputArchive final : public IInputArchive
+	{
+	public:
+		XmlInputArchive() = default;
+		~XmlInputArchive() = default;
+
+		void Load() override;
+
+		void ReadKey(std::string_view name) override;
+		void EndKey() override;
+
+		int ReadInt(std::string_view id) const override;
+		float ReadFloat(std::string_view id) const override;
+		std::string ReadString(std::string_view id) const override;
+
+	private:
+		pugi::xml_document _document;
+		std::stack<pugi::xml_node> _stack;
+	};
+
 	class XmlOutputArchive final : public IOutputArchive
 	{
 	public:
