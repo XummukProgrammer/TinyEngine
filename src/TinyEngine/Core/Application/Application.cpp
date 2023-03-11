@@ -1,8 +1,6 @@
 ﻿#include "Application.hpp"
 
-#include <TinyEngine/Core/VisualObject/VisualObject.hpp>
-#include <TinyEngine/Core/Reflection/ReflectionObject.hpp>
-#include <TinyEngine/Core/Reflection/ReflectionMember.hpp>
+#include <TinyEngine/Core/Application/Project.hpp>
 
 #include <fmt/format.h>
 
@@ -38,49 +36,50 @@ namespace TinyEngine
         OnDeinit();
     }
 
+    void Application::ChangeState(State state)
+    {
+        switch (state)
+        {
+        case State::NotInitialized:
+            break;
+        case State::ProjectLoaded:
+            if (_state == State::NotInitialized)
+            {
+                OnProjectLoaded();
+            }
+            break;
+        case State::Started:
+            if (_state == State::ProjectLoaded)
+            {
+                OnStarted();
+            }
+            break;
+        default:
+            break;
+        }
+
+        _state = state;
+    }
+
     void Application::OnInit()
     {
         _context.GetRefFileSystem().Init();
+        _context.GetProject()->Init();
 
-        class Vector2 : public ReflectionableObject
-        {
-            REFLECTION_OBJECT_BEGIN(Vector2)
-                REFLECTION_MEMBER("x", x)
-                REFLECTION_MEMBER("y", y)
-            REFLECTION_OBJECT_END
-
-        public:
-            float x = 0;
-            float y = 0;
-        };
-
-        class Rect : public ReflectionableObject
-        {
-        public:
-            REFLECTION_OBJECT_BEGIN(Rect)
-                REFLECTION_MEMBER("pos", pos)
-                REFLECTION_MEMBER("size", size)
-                REFLECTION_MEMBER("test", test)
-                REFLECTION_MEMBER("test2", test2)
-                REFLECTION_MEMBER("test3", test3)
-            REFLECTION_OBJECT_END
-
-        public:
-            Vector2 pos;
-            Vector2 size;
-            std::vector<Vector2> test;
-            std::map<std::string, int> test2;
-            std::shared_ptr<int> test3;
-        };
-
-        Rect obj;
-
-        obj.CreateReflectionObject()->LoadFromFile(FileSystem::Assets, L"obj.xml");
+        ProjectFileCreateParams params;
+        params.path = _context.GetFileSystem().BuildPath(FileSystem::Assets, L"project.xml");
+        params.name = "TinyEngine";
+        params.description = "Game Engine";
+        params.author = "Xummuk97";
+        params.version = "1.0.0.0 alpha";
+        params.librariesPath = "libs.xml";
+        _context.GetProject()->Create(params);
     }
 
     void Application::OnDeinit()
     {
         _context.GetRefFileSystem().Deinit();
+        _context.GetProject()->Deinit();
     }
 
     void Application::OnUpdate()
@@ -90,6 +89,14 @@ namespace TinyEngine
     void Application::OnDraw()
     {
         _context.GetRootTransform()->Draw();
+    }
+
+    void Application::OnProjectLoaded()
+    {
+    }
+
+    void Application::OnStarted()
+    {
     }
 
     void StartApp(int argc, char** argv)

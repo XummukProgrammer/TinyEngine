@@ -11,6 +11,8 @@
 
 namespace TinyEngine
 {
+	class Project;
+
 	class Context
 	{
 	public:
@@ -41,10 +43,15 @@ namespace TinyEngine
 		FileSystem& GetRefFileSystem() { return _fileSystem; }
 
 		std::unique_ptr<IInputArchive> CreateInputArchive(FileSystem::DirType dirType, std::wstring_view path) const;
+		std::unique_ptr<IInputArchive> CreateInputArchive(std::wstring_view path) const;
+
 		std::unique_ptr<IOutputArchive> CreateOutputArchive(FileSystem::DirType dirType, std::wstring_view path) const;
+		std::unique_ptr<IOutputArchive> CreateOutputArchive(std::wstring_view path) const;
 
 		const TypeFactory& GetTypeFactory() const { return _typeFactory; }
 		TypeFactory& GetRefTypeFactory() { return _typeFactory; }
+
+		Project* GetProject() const;
 
 	private:
 		int _argc;

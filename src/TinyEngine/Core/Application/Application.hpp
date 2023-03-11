@@ -9,6 +9,14 @@ namespace TinyEngine
 	class Application
 	{
 	public:
+		enum class State
+		{
+			NotInitialized,
+			ProjectLoaded,
+			Started
+		};
+
+	public:
 		static Application& GetSingleton() { return _singleton; }
 
 	public:
@@ -21,15 +29,21 @@ namespace TinyEngine
 		void Run();
 		void Stop();
 
+		void ChangeState(State state);
+
 	private:
 		void OnInit();
 		void OnDeinit();
 		void OnUpdate();
 		void OnDraw();
 
+		void OnProjectLoaded();
+		void OnStarted();
+
 	private:
 		Context _context;
 		RWindow _window;
+		State _state = State::NotInitialized;
 
 	private:
 		static Application _singleton;

@@ -4,6 +4,7 @@ set(ENGINE_HEADERS
 	
 	src/TinyEngine/Core/Application/Application.hpp
 	src/TinyEngine/Core/Application/Context.hpp
+	src/TinyEngine/Core/Application/Project.hpp
 	
 	src/TinyEngine/Core/VisualObject/Transform.hpp
 	src/TinyEngine/Core/VisualObject/VisualObject.hpp
@@ -23,6 +24,7 @@ set(ENGINE_SOURCES
 	
 	src/TinyEngine/Core/Application/Application.cpp
 	src/TinyEngine/Core/Application/Context.cpp
+	src/TinyEngine/Core/Application/Project.cpp
 	
 	src/TinyEngine/Core/VisualObject/Transform.cpp
 	src/TinyEngine/Core/VisualObject/VisualObject.cpp

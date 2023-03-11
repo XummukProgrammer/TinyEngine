@@ -55,7 +55,12 @@ namespace TinyEngine
 
     void ReflectionObject::SaveToFile(FileSystem::DirType dirType, std::wstring_view path)
     {
-        auto archive = Application::GetSingleton().GetContext().CreateOutputArchive(dirType, path);
+        SaveToFile(Application::GetSingleton().GetContext().GetFileSystem().BuildPath(dirType, path));
+    }
+
+    void ReflectionObject::SaveToFile(std::wstring_view path)
+    {
+        auto archive = Application::GetSingleton().GetContext().CreateOutputArchive(path);
         archive->WriteKey(GetName());
         Serialize(archive.get());
         archive->EndKey();
@@ -64,7 +69,12 @@ namespace TinyEngine
 
     void ReflectionObject::LoadFromFile(FileSystem::DirType dirType, std::wstring_view path)
     {
-        auto archive = Application::GetSingleton().GetContext().CreateInputArchive(dirType, path);
+        LoadFromFile(Application::GetSingleton().GetContext().GetFileSystem().BuildPath(dirType, path));
+    }
+
+    void ReflectionObject::LoadFromFile(std::wstring_view path)
+    {
+        auto archive = Application::GetSingleton().GetContext().CreateInputArchive(path);
         archive->Load();
         archive->ReadKey(GetName());
         Deserialize(archive.get());

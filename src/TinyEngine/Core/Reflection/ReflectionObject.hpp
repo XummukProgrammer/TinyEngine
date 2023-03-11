@@ -30,7 +30,10 @@ namespace TinyEngine
 		void Deserialize(IInputArchive* archive);
 
 		void SaveToFile(FileSystem::DirType dirType, std::wstring_view path);
+		void SaveToFile(std::wstring_view path);
+
 		void LoadFromFile(FileSystem::DirType dirType, std::wstring_view path);
+		void LoadFromFile(std::wstring_view path);
 
 	private:
 		std::string _name;
