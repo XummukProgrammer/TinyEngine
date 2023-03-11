@@ -15,6 +15,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Reflection/ReflectionObject.hpp
 	src/TinyEngine/Core/Reflection/IReflectionMember.hpp
 	src/TinyEngine/Core/Reflection/ReflectionMember.hpp
+	src/TinyEngine/Core/Reflection/TypeFactory.hpp
 )
 
 set(ENGINE_SOURCES
@@ -34,4 +35,5 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Reflection/ReflectionObject.cpp
 	src/TinyEngine/Core/Reflection/IReflectionMember.cpp
 	src/TinyEngine/Core/Reflection/ReflectionMember.cpp
+	src/TinyEngine/Core/Reflection/TypeFactory.cpp
 )

@@ -3,11 +3,13 @@
 
 #include <TinyEngine/Core/Reflection/IReflectionMember.hpp>
 #include <TinyEngine/Core/Reflection/ReflectionObject.hpp>
+#include <TinyEngine/Core/Reflection/TypeFactory.hpp>
 
 #include <fmt/format.h>
 
 #include <vector>
 #include <map>
+#include <memory>
 
 namespace TinyEngine
 {
@@ -214,6 +216,49 @@ namespace TinyEngine
 				archive->EndKey();
 			}
 
+			archive->EndKey();
+		}
+	};
+
+	template<typename T>
+	class ReflectionMemberVisitor<std::shared_ptr<T>>
+	{
+	public:
+		static void Serialize(std::shared_ptr<T>* value, std::string_view name, IOutputArchive* archive)
+		{
+			archive->WriteKey(name);
+			archive->WriteKey("ptr");
+
+			T* rawPointer = value->get();
+
+			if constexpr (std::is_base_of_v<ITypeFactorable, T>)
+			{
+				const std::string type = dynamic_cast<ITypeFactorable*>(rawPointer)->GetTypeName();
+				archive->WriteString("type", type);
+			}
+
+			ReflectionMemberVisitor<T>::Serialize(rawPointer, "value", archive);
+			archive->EndKey();
+			archive->EndKey();
+		}
+
+		static void Deserialize(std::shared_ptr<T>* value, std::string_view name, IInputArchive* archive)
+		{
+			archive->ReadKey(name);
+			archive->ReadKey("ptr");
+			
+			if constexpr (std::is_base_of_v<ITypeFactorable, T>)
+			{
+				const std::string type = archive->ReadString("type");
+			}
+			else
+			{
+				*value = std::make_shared<T>();
+			}
+
+			ReflectionMemberVisitor<T>::Deserialize(value->get(), "value", archive);
+
+			archive->EndKey();
 			archive->EndKey();
 		}
 	};

@@ -62,6 +62,7 @@ namespace TinyEngine
                 REFLECTION_MEMBER("size", size)
                 REFLECTION_MEMBER("test", test)
                 REFLECTION_MEMBER("test2", test2)
+                REFLECTION_MEMBER("test3", test3)
             REFLECTION_OBJECT_END
 
         public:
@@ -69,11 +70,12 @@ namespace TinyEngine
             Vector2 size;
             std::vector<Vector2> test;
             std::map<std::string, int> test2;
+            std::shared_ptr<int> test3;
         };
 
         Rect obj;
 
-        obj.CreateReflectionObject()->SaveToFile(FileSystem::Assets, L"obj.xml");
+        obj.CreateReflectionObject()->LoadFromFile(FileSystem::Assets, L"obj.xml");
     }
 
     void Application::OnDeinit()
