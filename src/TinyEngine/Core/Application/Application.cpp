@@ -3,6 +3,7 @@
 #include <TinyEngine/Core/Application/Project.hpp>
 
 #include <fmt/format.h>
+#include "rlImGui.h"
 
 namespace TinyEngine
 {
@@ -16,6 +17,7 @@ namespace TinyEngine
     void Application::Create()
     {
         _window.Init(_context.GetScreenWidth(), _context.GetScreenHeight(), _context.GetWindowTitle());
+        rlImGuiSetup(true);
 
         ProjectFileCreateParams params;
         params.path = _context.GetFileSystem().BuildPath(FileSystem::Assets, L"project.xml");
@@ -36,6 +38,9 @@ namespace TinyEngine
             _window.BeginDrawing();
             _window.ClearBackground(RAYWHITE);
             OnDraw();
+            rlImGuiBegin();
+            ImGui::Text("Hello, World!");
+            rlImGuiEnd();
             _window.EndDrawing();
         }
     }
@@ -80,6 +85,8 @@ namespace TinyEngine
     {
         _context.GetRefFileSystem().Deinit();
         _context.GetProject()->Deinit();
+
+        rlImGuiShutdown();
     }
 
     void Application::OnUpdate()
