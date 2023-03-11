@@ -36,20 +36,13 @@ namespace TinyEngine
     {
         auto rectangle = RRectangle();
 
-        if (_anchor)
-        {
-            rectangle = _anchor->GetRectangle(GetPosition(), _localScale);
-        }
-        else
-        {
-            const float scalePixelCoef = Application::GetSingleton().GetContext().GetScalePixelCoef();
-            auto rectanglePosition = GetPosition();
-            rectanglePosition.x -= (_localScale * scalePixelCoef / 2.f).x;
-            rectanglePosition.y -= (_localScale * scalePixelCoef / 2.f).y;
+        const float scalePixelCoef = Application::GetSingleton().GetContext().GetScalePixelCoef();
+        auto rectanglePosition = GetPosition();
+        rectanglePosition.x -= (_localScale * scalePixelCoef / 2.f).x;
+        rectanglePosition.y -= (_localScale * scalePixelCoef / 2.f).y;
 
-            rectangle.SetPosition(rectanglePosition);
-            rectangle.SetSize(_localScale * scalePixelCoef);
-        }
+        rectangle.SetPosition(rectanglePosition);
+        rectangle.SetSize(_localScale * scalePixelCoef);
 
         return rectangle;
     }
@@ -58,24 +51,6 @@ namespace TinyEngine
     {
         _localScale = scale;
         Recalculate();
-    }
-
-    void Transform::SetLayout(const std::shared_ptr<Layout>& layout)
-    {
-        _layout = layout;
-        _layout->SetTransform(shared_from_this());
-    }
-
-    bool Transform::IsControlledByLayout() const
-    {
-        if (auto parent = GetParent())
-        {
-            if (parent->GetLayout())
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
     void Transform::Draw()
@@ -108,15 +83,7 @@ namespace TinyEngine
             parentPosition = parent->GetPosition();
         }
 
-        if (!IsControlledByLayout())
-        {
-            _position = _localPosition + parentPosition;
-        }
-
-        if (_layout)
-        {
-            _layout->Recalculate();
-        }
+        _position = _localPosition + parentPosition;
 
         for (const auto& attached : _attached)
         {

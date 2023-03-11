@@ -5,9 +5,6 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Application/Context.hpp
 	src/TinyEngine/Core/VisualObject/Transform.hpp
 	src/TinyEngine/Core/VisualObject/VisualObject.hpp
-	src/TinyEngine/Core/VisualObject/Alignment.hpp
-	src/TinyEngine/Core/VisualObject/Anchor.hpp
-	src/TinyEngine/Core/VisualObject/Layout.hpp
 )
 
 set(ENGINE_SOURCES
@@ -16,7 +13,4 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Application/Context.cpp
 	src/TinyEngine/Core/VisualObject/Transform.cpp
 	src/TinyEngine/Core/VisualObject/VisualObject.cpp
-	src/TinyEngine/Core/VisualObject/Alignment.cpp
-	src/TinyEngine/Core/VisualObject/Anchor.cpp
-	src/TinyEngine/Core/VisualObject/Layout.cpp
 )

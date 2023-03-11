@@ -57,47 +57,6 @@ namespace TinyEngine
         application.Load();
         application.Create();
 
-        auto rootTransform = application.GetRootTransform();
-        rootTransform->SetLocalPosition({ 250, 250 });
-        rootTransform->SetLocalScale({ 8, 8 });
-        {
-            rootTransform->SetLayout(std::make_shared<VerticalLayout>());
-        }
-
-        {
-            auto attached = std::make_shared<TinyEngine::VisualObject>();
-            attached->SetLocalScale({ 3, 1 });
-            attached->Load("rectangle.png");
-            rootTransform->Attach(attached);
-        }
-        {
-            auto attached = std::make_shared<TinyEngine::Transform>();
-            attached->SetLocalScale({ 3, 1 });
-            rootTransform->Attach(attached);
-        }
-        {
-            auto attached = std::make_shared<TinyEngine::VisualObject>();
-            attached->SetLocalScale({ 3, 1 });
-            attached->Load("rectangle.png");
-            rootTransform->Attach(attached);
-        }
-        {
-            auto attached = std::make_shared<TinyEngine::Transform>();
-            attached->SetLocalScale({ 3, 1 });
-            rootTransform->Attach(attached);
-        }
-        {
-            auto attached = std::make_shared<TinyEngine::Transform>();
-            attached->SetLocalScale({ 3, 1 });
-            rootTransform->Attach(attached);
-        }
-        {
-            auto attached = std::make_shared<TinyEngine::Transform>();
-            attached->SetLocalScale({ 3, 1 });
-            rootTransform->Attach(attached);
-        }
-
-        
         application.Run();
     }
 }
