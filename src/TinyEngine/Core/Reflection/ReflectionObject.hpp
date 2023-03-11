@@ -1,7 +1,7 @@
 ﻿#ifndef _REFLECTION_OBJECT_HEADER_
 #define _REFLECTION_OBJECT_HEADER_
 
-#include <TinyEngine/Core/Reflection/ReflectionMember.hpp>
+#include <TinyEngine/Core/Reflection/IReflectionMember.hpp>
 #include <TinyEngine/Core/Resources/FileSystem.hpp>
 
 #include <vector>

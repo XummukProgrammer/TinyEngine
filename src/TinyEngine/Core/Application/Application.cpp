@@ -2,6 +2,7 @@
 
 #include <TinyEngine/Core/VisualObject/VisualObject.hpp>
 #include <TinyEngine/Core/Reflection/ReflectionObject.hpp>
+#include <TinyEngine/Core/Reflection/ReflectionMember.hpp>
 
 #include <fmt/format.h>
 
