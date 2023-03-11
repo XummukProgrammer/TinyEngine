@@ -55,7 +55,7 @@ namespace TinyEngine
 
         Vector2 obj;
 
-        obj.GetReflectionObject()->SaveToFile(FileSystem::Assets, L"obj.xml");
+        obj.CreateReflectionObject()->SaveToFile(FileSystem::Assets, L"obj.xml");
     }
 
     void Application::OnDeinit()

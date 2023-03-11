@@ -43,13 +43,13 @@ namespace TinyEngine
 		virtual ~ReflectionObjectCreator() = default;
 
 	public:
-		virtual std::unique_ptr<ReflectionObject> GetReflectionObject() = 0;
+		virtual std::unique_ptr<ReflectionObject> CreateReflectionObject() = 0;
 	};
 }
 
 #define REFLECTION_OBJECT_BEGIN(name) \
 	public: \
-		virtual std::unique_ptr<TinyEngine::ReflectionObject> GetReflectionObject() override \
+		virtual std::unique_ptr<TinyEngine::ReflectionObject> CreateReflectionObject() override \
 		{ \
 			auto reflectionObject = std::make_unique<TinyEngine::ReflectionObject>(); \
 			reflectionObject->SetName(#name);
