@@ -3,6 +3,7 @@
 
 #include <TinyEngine/Core/Reflection/IReflectionMember.hpp>
 #include <TinyEngine/Core/Resources/FileSystem.hpp>
+#include <TinyEngine/Core/Reflection/TypeFactory.hpp>
 
 #include <vector>
 #include <memory>
@@ -36,11 +37,11 @@ namespace TinyEngine
 		std::vector<std::unique_ptr<IReflectionMember>> _members;
 	};
 
-	class ReflectionObjectCreator
+	class ReflectionableObject : public ITypeFactorable
 	{
 	public:
-		ReflectionObjectCreator() = default;
-		virtual ~ReflectionObjectCreator() = default;
+		ReflectionableObject() = default;
+		virtual ~ReflectionableObject() = default;
 
 	public:
 		virtual std::unique_ptr<ReflectionObject> CreateReflectionObject() = 0;
@@ -49,6 +50,8 @@ namespace TinyEngine
 
 #define REFLECTION_OBJECT_BEGIN(name) \
 	public: \
+		virtual std::string GetTypeName() const override { return #name; } \
+		static std::string GetStaticTypeName() { return #name; } \
 		virtual std::unique_ptr<TinyEngine::ReflectionObject> CreateReflectionObject() override \
 		{ \
 			auto reflectionObject = std::make_unique<TinyEngine::ReflectionObject>(); \

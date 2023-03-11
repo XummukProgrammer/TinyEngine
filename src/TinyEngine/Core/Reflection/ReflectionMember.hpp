@@ -55,17 +55,17 @@ namespace TinyEngine
 	public:
 		static void Serialize(T* value, std::string_view name, IOutputArchive* archive)
 		{
-			if constexpr (std::is_base_of_v<ReflectionObjectCreator, T>)
+			if constexpr (std::is_base_of_v<ReflectionableObject, T>)
 			{
-				ReflectionMemberVisitor<ReflectionObjectCreator>::Serialize(value, name, archive);
+				ReflectionMemberVisitor<ReflectionableObject>::Serialize(value, name, archive);
 			}
 		}
 
 		static void Deserialize(T* value, std::string_view name, IInputArchive* archive)
 		{
-			if constexpr (std::is_base_of_v<ReflectionObjectCreator, T>)
+			if constexpr (std::is_base_of_v<ReflectionableObject, T>)
 			{
-				ReflectionMemberVisitor<ReflectionObjectCreator>::Deserialize(value, name, archive);
+				ReflectionMemberVisitor<ReflectionableObject>::Deserialize(value, name, archive);
 			}
 		}
 	};
@@ -116,10 +116,10 @@ namespace TinyEngine
 	};
 
 	template<>
-	class ReflectionMemberVisitor<ReflectionObjectCreator>
+	class ReflectionMemberVisitor<ReflectionableObject>
 	{
 	public:
-		static void Serialize(ReflectionObjectCreator* value, std::string_view name, IOutputArchive* archive)
+		static void Serialize(ReflectionableObject* value, std::string_view name, IOutputArchive* archive)
 		{
 			auto reflectionObjectCreator = value->CreateReflectionObject();
 			archive->WriteKey(name);
@@ -127,7 +127,7 @@ namespace TinyEngine
 			archive->EndKey();
 		}
 
-		static void Deserialize(ReflectionObjectCreator* value, std::string_view name, IInputArchive* archive)
+		static void Deserialize(ReflectionableObject* value, std::string_view name, IInputArchive* archive)
 		{
 			auto reflectionObjectCreator = value->CreateReflectionObject();
 			archive->ReadKey(name);

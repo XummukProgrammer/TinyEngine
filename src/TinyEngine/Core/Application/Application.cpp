@@ -42,7 +42,7 @@ namespace TinyEngine
     {
         _context.GetRefFileSystem().Init();
 
-        class Vector2 : public ReflectionObjectCreator
+        class Vector2 : public ReflectionableObject
         {
             REFLECTION_OBJECT_BEGIN(Vector2)
                 REFLECTION_MEMBER("x", x)
@@ -54,7 +54,7 @@ namespace TinyEngine
             float y = 0;
         };
 
-        class Rect : public ReflectionObjectCreator
+        class Rect : public ReflectionableObject
         {
         public:
             REFLECTION_OBJECT_BEGIN(Rect)
