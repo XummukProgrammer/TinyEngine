@@ -2,6 +2,7 @@
 #define _REFLECTION_MEMBER_HEADER_
 
 #include <TinyEngine/Core/Reflection/IReflectionMember.hpp>
+#include <TinyEngine/Core/Reflection/ReflectionObject.hpp>
 
 namespace TinyEngine
 {
@@ -30,50 +31,103 @@ namespace TinyEngine
 	};
 
 	template<typename T>
-	inline void ReflectionMember<T>::Serialize(IOutputArchive* archive)
+	void ReflectionMember<T>::Serialize(IOutputArchive* archive)
 	{
+		ReflectionMemberVisitor<T>::Serialize(_value, GetName(), archive);
 	}
 
 	template<typename T>
-	inline void ReflectionMember<T>::Deserialize(IInputArchive* archive)
+	void ReflectionMember<T>::Deserialize(IInputArchive* archive)
 	{
+		ReflectionMemberVisitor<T>::Deserialize(_value, GetName(), archive);
 	}
 
-	template<>
-	inline void ReflectionMember<int>::Serialize(IOutputArchive* archive)
+	template<typename T>
+	class ReflectionMemberVisitor
 	{
-		archive->WriteInt(GetName(), GetValue());
-	}
+	public:
+		static void Serialize(T* value, std::string_view name, IOutputArchive* archive)
+		{
+			if (std::is_base_of_v<ReflectionObjectCreator, T>)
+			{
+				ReflectionMemberVisitor<ReflectionObjectCreator>::Serialize(value, name, archive);
+			}
+		}
+
+		static void Deserialize(T* value, std::string_view name, IInputArchive* archive)
+		{
+			if (std::is_base_of_v<ReflectionObjectCreator, T>)
+			{
+				ReflectionMemberVisitor<ReflectionObjectCreator>::Deserialize(value, name, archive);
+			}
+		}
+	};
 
 	template<>
-	inline void ReflectionMember<float>::Serialize(IOutputArchive* archive)
+	class ReflectionMemberVisitor<int>
 	{
-		archive->WriteFloat(GetName(), GetValue());
-	}
+	public:
+		static void Serialize(int* value, std::string_view name, IOutputArchive* archive)
+		{
+			archive->WriteInt(name, *value);
+		}
+
+		static void Deserialize(int* value, std::string_view name, IInputArchive* archive)
+		{
+			*value = archive->ReadInt(name);
+		}
+	};
 
 	template<>
-	inline void ReflectionMember<std::string>::Serialize(IOutputArchive* archive)
+	class ReflectionMemberVisitor<float>
 	{
-		archive->WriteString(GetName(), GetValue());
-	}
+	public:
+		static void Serialize(float* value, std::string_view name, IOutputArchive* archive)
+		{
+			archive->WriteFloat(name, *value);
+		}
+
+		static void Deserialize(float* value, std::string_view name, IInputArchive* archive)
+		{
+			*value = archive->ReadFloat(name);
+		}
+	};
 
 	template<>
-	inline void ReflectionMember<int>::Deserialize(IInputArchive* archive)
+	class ReflectionMemberVisitor<std::string>
 	{
-		*_value = archive->ReadInt(GetName());
-	}
+	public:
+		static void Serialize(std::string* value, std::string_view name, IOutputArchive* archive)
+		{
+			archive->WriteString(name, *value);
+		}
+
+		static void Deserialize(std::string* value, std::string_view name, IInputArchive* archive)
+		{
+			*value = archive->ReadString(name);
+		}
+	};
 
 	template<>
-	inline void ReflectionMember<float>::Deserialize(IInputArchive* archive)
+	class ReflectionMemberVisitor<ReflectionObjectCreator>
 	{
-		*_value = archive->ReadFloat(GetName());
-	}
+	public:
+		static void Serialize(ReflectionObjectCreator* value, std::string_view name, IOutputArchive* archive)
+		{
+			auto reflectionObjectCreator = value->CreateReflectionObject();
+			archive->WriteKey(name);
+			reflectionObjectCreator->Serialize(archive);
+			archive->EndKey();
+		}
 
-	template<>
-	inline void ReflectionMember<std::string>::Deserialize(IInputArchive* archive)
-	{
-		*_value = archive->ReadString(GetName());
-	}
+		static void Deserialize(ReflectionObjectCreator* value, std::string_view name, IInputArchive* archive)
+		{
+			auto reflectionObjectCreator = value->CreateReflectionObject();
+			archive->ReadKey(name);
+			reflectionObjectCreator->Deserialize(archive);
+			archive->EndKey();
+		}
+	};
 }
 
 #endif // _REFLECTION_MEMBER_HEADER_

@@ -54,7 +54,20 @@ namespace TinyEngine
             float y = 0;
         };
 
-        Vector2 obj;
+        class Rect : public ReflectionObjectCreator
+        {
+        public:
+            REFLECTION_OBJECT_BEGIN(Rect)
+                REFLECTION_MEMBER("pos", pos)
+                REFLECTION_MEMBER("size", size)
+            REFLECTION_OBJECT_END
+
+        public:
+            Vector2 pos;
+            Vector2 size;
+        };
+
+        Rect obj;
 
         obj.CreateReflectionObject()->SaveToFile(FileSystem::Assets, L"obj.xml");
     }
