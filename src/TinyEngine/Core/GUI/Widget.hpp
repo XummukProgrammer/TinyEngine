@@ -24,12 +24,13 @@ namespace TinyEngine
 		virtual void Init() {}
 		virtual void Deinit() {}
 
-		void Draw();
+		virtual void Draw();
 
 		void SetName(std::string_view name) { _name = name; }
 		const std::string& GetName() const { return _name; }
 
 		void MakeView(ViewType type);
+		ViewType GetViewType() const { return _viewType; }
 		void SetView(std::unique_ptr<IWidgetView>&& view);
 		IWidgetView* GetView() const { return _view.get(); }
 
@@ -39,6 +40,7 @@ namespace TinyEngine
 	private:
 		std::string _name;
 		std::unique_ptr<IWidgetView> _view;
+		ViewType _viewType;
 	};
 }
 

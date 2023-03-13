@@ -4,6 +4,7 @@
 #include <TinyEngine/Core/GUI/GUI.hpp>
 
 #include <TinyEngine/Core/GUI/Widgets/TextBox/TextBox.hpp>
+#include <TinyEngine/Core/GUI/Widgets/Window/Window.hpp>
 
 #include <fmt/format.h>
 #include "rlImGui.h"
@@ -31,9 +32,14 @@ namespace TinyEngine
         params.librariesPath = "libs.xml";
         _context.GetProject()->Create(params);
 
+        auto window = GUI::MakeImGUIWidget<Window>("Window");
+        window->SetTitle("Main Window");
+
         auto textBox = GUI::MakeImGUIWidget<TextBox>("TextBox");
         textBox->SetText("Hello, World!");
-        _context.GetGUI()->AddWidget(std::move(textBox));
+        window->GetRefWidgetsContainer().AddWidget(std::move(textBox));
+
+        _context.GetGUI()->AddWidget(std::move(window));
     }
 
     void Application::Run()
@@ -46,7 +52,7 @@ namespace TinyEngine
             _window.ClearBackground(RAYWHITE);
             OnDraw();
             rlImGuiBegin();
-            _context.GetGUI()->Draw();
+            _context.GetGUI()->GetRefImGUIWidgetsContainer().Draw();
             rlImGuiEnd();
             _window.EndDrawing();
         }

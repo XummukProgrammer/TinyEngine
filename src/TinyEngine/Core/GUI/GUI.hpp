@@ -1,11 +1,7 @@
 ﻿#ifndef _GUI_HEADER_
 #define _GUI_HEADER_
 
-#include <TinyEngine/Core/GUI/Widget.hpp>
-
-#include <vector>
-#include <memory>
-#include <string>
+#include <TinyEngine/Core/GUI/WidgetsContainer.hpp>
 
 namespace TinyEngine
 {
@@ -25,12 +21,11 @@ namespace TinyEngine
 		}
 
 	public:
-		void Draw();
+		void AddWidget(std::unique_ptr<Widget>&& widget);
 
 	public:
-		void AddWidget(std::unique_ptr<Widget>&& widget);
-		bool HasWidget(std::string_view name) const;
-		Widget* GetWidget(std::string_view name) const;
+		const WidgetsContainer& GetImGUIWidgetsContainer() const { return _imGUIWidgetsContainer; }
+		WidgetsContainer& GetRefImGUIWidgetsContainer() { return _imGUIWidgetsContainer; }
 
 	private:
 		template<typename T, typename = std::enable_if<std::is_base_of_v<T, Widget>>>
@@ -42,7 +37,7 @@ namespace TinyEngine
 		}
 
 	private:
-		std::vector<std::unique_ptr<Widget>> _widgets;
+		WidgetsContainer _imGUIWidgetsContainer;
 	};
 }
 

@@ -17,6 +17,8 @@ namespace TinyEngine
         default:
             break;
         }
+
+        _viewType = type;
     }
 
     void Widget::SetView(std::unique_ptr<IWidgetView>&& view)
