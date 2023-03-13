@@ -7,8 +7,6 @@ namespace TinyEngine
     void TextBox::Init()
     {
         Widget::Init();
-
-        SetView(std::move(GetTextBoxView()));
     }
 
     void TextBox::Deinit()
@@ -21,7 +19,7 @@ namespace TinyEngine
         dynamic_cast<ITextBoxView*>(GetView())->SetText(text);
     }
 
-    std::unique_ptr<ITextBoxView> TextBox::GetTextBoxView() const
+    std::unique_ptr<IWidgetView> TextBox::MakeImGUIView() const
     {
         return std::make_unique<TextBoxImGUIView>();
     }

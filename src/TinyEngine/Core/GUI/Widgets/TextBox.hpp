@@ -20,7 +20,7 @@ namespace TinyEngine
 		void SetText(std::string_view text);
 
 	private:
-		std::unique_ptr<ITextBoxView> GetTextBoxView() const;
+		virtual std::unique_ptr<IWidgetView> MakeImGUIView() const override;
 	};
 }
 

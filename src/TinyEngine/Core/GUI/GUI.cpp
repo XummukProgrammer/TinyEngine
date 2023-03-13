@@ -13,6 +13,7 @@ namespace TinyEngine
     void GUI::AddWidget(std::unique_ptr<Widget>&& widget)
     {
         _widgets.push_back(std::move(widget));
+        _widgets.back()->Init();
     }
 
     bool GUI::HasWidget(std::string_view name) const

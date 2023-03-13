@@ -7,6 +7,18 @@ namespace TinyEngine
         _view->OnDraw();
     }
 
+    void Widget::MakeView(ViewType type)
+    {
+        switch (type)
+        {
+        case TinyEngine::Widget::ViewType::ImGUI:
+            SetView(std::move(MakeImGUIView()));
+            break;
+        default:
+            break;
+        }
+    }
+
     void Widget::SetView(std::unique_ptr<IWidgetView>&& view)
     {
         _view = std::move(view);

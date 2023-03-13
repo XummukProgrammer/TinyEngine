@@ -31,9 +31,7 @@ namespace TinyEngine
         params.librariesPath = "libs.xml";
         _context.GetProject()->Create(params);
 
-        auto textBox = std::make_unique<TextBox>();
-        textBox->SetName("TextBox");
-        textBox->Init();
+        auto textBox = GUI::MakeImGUIWidget<TextBox>("TextBox");
         textBox->SetText("Hello, World!");
         _context.GetGUI()->AddWidget(std::move(textBox));
     }
