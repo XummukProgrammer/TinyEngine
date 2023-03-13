@@ -12,6 +12,7 @@
 namespace TinyEngine
 {
 	class Project;
+	class GUI;
 
 	class Context
 	{
@@ -52,6 +53,7 @@ namespace TinyEngine
 		TypeFactory& GetRefTypeFactory() { return _typeFactory; }
 
 		Project* GetProject() const;
+		GUI* GetGUI() const;
 
 	private:
 		int _argc;

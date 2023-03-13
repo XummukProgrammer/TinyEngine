@@ -2,6 +2,7 @@
 
 #include <TinyEngine/Core/Serialization/XmlArchive.hpp>
 #include <TinyEngine/Core/Application/Project.hpp>
+#include <TinyEngine/Core/GUI/GUI.hpp>
 
 namespace TinyEngine
 {
@@ -33,5 +34,11 @@ namespace TinyEngine
     {
         static Project project;
         return &project;
+    }
+
+    GUI* Context::GetGUI() const
+    {
+        static GUI gui;
+        return &gui;
     }
 }

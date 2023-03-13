@@ -17,6 +17,13 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Reflection/IReflectionMember.hpp
 	src/TinyEngine/Core/Reflection/ReflectionMember.hpp
 	src/TinyEngine/Core/Reflection/TypeFactory.hpp
+	
+	src/TinyEngine/Core/GUI/GUI.hpp
+	src/TinyEngine/Core/GUI/Widget.hpp
+	src/TinyEngine/Core/GUI/WidgetView.hpp
+	src/TinyEngine/Core/GUI/Widgets/TextBox.hpp
+	src/TinyEngine/Core/GUI/Widgets/ITextBoxView.hpp
+	src/TinyEngine/Core/GUI/Widgets/Views/ImGUI/TextBoxImGUIView.hpp
 )
 
 set(ENGINE_SOURCES
@@ -38,4 +45,11 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Reflection/IReflectionMember.cpp
 	src/TinyEngine/Core/Reflection/ReflectionMember.cpp
 	src/TinyEngine/Core/Reflection/TypeFactory.cpp
+	
+	src/TinyEngine/Core/GUI/GUI.cpp
+	src/TinyEngine/Core/GUI/Widget.cpp
+	src/TinyEngine/Core/GUI/WidgetView.cpp
+	src/TinyEngine/Core/GUI/Widgets/TextBox.cpp
+	src/TinyEngine/Core/GUI/Widgets/ITextBoxView.cpp
+	src/TinyEngine/Core/GUI/Widgets/Views/ImGUI/TextBoxImGUIView.cpp
 )
