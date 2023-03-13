@@ -1,7 +1,7 @@
 ﻿#ifndef _TEXT_BOX_IMGUI_VIEW_HEADER_
 #define _TEXT_BOX_IMGUI_VIEW_HEADER_
 
-#include <TinyEngine/Core/GUI/Widgets/ITextBoxView.hpp>
+#include <TinyEngine/Core/GUI/Widgets/TextBox/ITextBoxView.hpp>
 
 namespace TinyEngine
 {

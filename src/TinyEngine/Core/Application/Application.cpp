@@ -3,7 +3,7 @@
 #include <TinyEngine/Core/Application/Project.hpp>
 #include <TinyEngine/Core/GUI/GUI.hpp>
 
-#include <TinyEngine/Core/GUI/Widgets/TextBox.hpp>
+#include <TinyEngine/Core/GUI/Widgets/TextBox/TextBox.hpp>
 
 #include <fmt/format.h>
 #include "rlImGui.h"

@@ -2,7 +2,7 @@
 #define _TEXT_BOX_HEADER_
 
 #include <TinyEngine/Core/GUI/Widget.hpp>
-#include <TinyEngine/Core/GUI/Widgets/ITextBoxView.hpp>
+#include <TinyEngine/Core/GUI/Widgets/TextBox/ITextBoxView.hpp>
 
 namespace TinyEngine
 {

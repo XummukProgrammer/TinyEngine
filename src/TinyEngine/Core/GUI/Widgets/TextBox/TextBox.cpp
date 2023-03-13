@@ -1,6 +1,6 @@
 ﻿#include "TextBox.hpp"
 
-#include <TinyEngine/Core/GUI/Widgets/Views/ImGUI/TextBoxImGUIView.hpp>
+#include <TinyEngine/Core/GUI/Widgets/TextBox/TextBoxImGUIView.hpp>
 
 namespace TinyEngine
 {

@@ -16,4 +16,9 @@
 #include <TinyEngine/Core/Reflection/ReflectionMember.hpp>
 #include <TinyEngine/Core/Reflection/TypeFactory.hpp>
 
+#include <TinyEngine/Core/GUI/GUI.hpp>
+#include <TinyEngine/Core/GUI/Widget.hpp>
+#include <TinyEngine/Core/GUI/WidgetView.hpp>
+#include <TinyEngine/Core/GUI/Widgets/TextBox/TextBox.hpp>
+
 #endif // _TINY_ENGINE_HEADER_
