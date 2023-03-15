@@ -22,5 +22,6 @@
 #include <TinyEngine/Core/GUI/WidgetView.hpp>
 #include <TinyEngine/Core/GUI/Widgets/TextBox/TextBox.hpp>
 #include <TinyEngine/Core/GUI/Widgets/Window/Window.hpp>
+#include <TinyEngine/Core/GUI/Widgets/SameLine/SameLine.hpp>
 
 #endif // _TINY_ENGINE_HEADER_

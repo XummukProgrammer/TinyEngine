@@ -5,6 +5,7 @@
 
 #include <TinyEngine/Core/GUI/Widgets/TextBox/TextBox.hpp>
 #include <TinyEngine/Core/GUI/Widgets/Window/Window.hpp>
+#include <TinyEngine/Core/GUI/Widgets/SameLine/SameLine.hpp>
 
 #include <fmt/format.h>
 #include "rlImGui.h"
@@ -35,9 +36,19 @@ namespace TinyEngine
         auto window = GUI::MakeImGUIWidget<Window>("Window");
         window->SetTitle("Main Window");
 
-        auto textBox = GUI::MakeImGUIWidget<TextBox>("TextBox");
-        textBox->SetText("Hello, World!");
-        window->GetRefWidgetsContainer().AddWidget(std::move(textBox));
+        {
+            auto textBox = GUI::MakeImGUIWidget<TextBox>("First");
+            textBox->SetText("First!");
+            window->GetRefWidgetsContainer().AddWidget(std::move(textBox));
+        }
+        {
+            window->GetRefWidgetsContainer().AddWidget(GUI::MakeImGUIWidget<SameLine>("SameLine1"));
+        }
+        {
+            auto textBox = GUI::MakeImGUIWidget<TextBox>("Second");
+            textBox->SetText("Second!");
+            window->GetRefWidgetsContainer().AddWidget(std::move(textBox));
+        }
 
         _context.GetGUI()->AddWidget(std::move(window));
     }

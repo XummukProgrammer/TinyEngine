@@ -28,6 +28,9 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/GUI/Widgets/Window/Window.hpp
 	src/TinyEngine/Core/GUI/Widgets/Window/IWindowView.hpp
 	src/TinyEngine/Core/GUI/Widgets/Window/WindowImGUIView.hpp
+	src/TinyEngine/Core/GUI/Widgets/SameLine/SameLine.hpp
+	src/TinyEngine/Core/GUI/Widgets/SameLine/ISameLineView.hpp
+	src/TinyEngine/Core/GUI/Widgets/SameLine/SameLineImGUIView.hpp
 )
 
 set(ENGINE_SOURCES
@@ -60,4 +63,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/GUI/Widgets/Window/Window.cpp
 	src/TinyEngine/Core/GUI/Widgets/Window/IWindowView.cpp
 	src/TinyEngine/Core/GUI/Widgets/Window/WindowImGUIView.cpp
+	src/TinyEngine/Core/GUI/Widgets/SameLine/SameLine.cpp
+	src/TinyEngine/Core/GUI/Widgets/SameLine/ISameLineView.cpp
+	src/TinyEngine/Core/GUI/Widgets/SameLine/SameLineImGUIView.cpp
 )
