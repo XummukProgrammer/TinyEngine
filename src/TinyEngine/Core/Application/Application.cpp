@@ -6,6 +6,7 @@
 #include <TinyEngine/Core/GUI/Widgets/TextBox/TextBox.hpp>
 #include <TinyEngine/Core/GUI/Widgets/Window/Window.hpp>
 #include <TinyEngine/Core/GUI/Widgets/SameLine/SameLine.hpp>
+#include <TinyEngine/Core/GUI/Widgets/Button/Button.hpp>
 
 #include <fmt/format.h>
 #include "rlImGui.h"
@@ -48,6 +49,16 @@ namespace TinyEngine
             auto textBox = GUI::MakeImGUIWidget<TextBox>("Second");
             textBox->SetText("Second!");
             window->GetRefWidgetsContainer().AddWidget(std::move(textBox));
+        }
+        {
+            auto button = GUI::MakeImGUIWidget<Button>("Button");
+            button->SetText("Hello, World!");
+            auto slot = button->GetOnPressedSignal().MakeSlot([]()
+                {
+                    fmt::print("OnButtonClick!");
+                });
+            button->GetOnPressedSignal().Connect(slot);
+            window->GetRefWidgetsContainer().AddWidget(std::move(button));
         }
 
         _context.GetGUI()->AddWidget(std::move(window));

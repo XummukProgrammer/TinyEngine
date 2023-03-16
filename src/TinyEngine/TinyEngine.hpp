@@ -23,5 +23,8 @@
 #include <TinyEngine/Core/GUI/Widgets/TextBox/TextBox.hpp>
 #include <TinyEngine/Core/GUI/Widgets/Window/Window.hpp>
 #include <TinyEngine/Core/GUI/Widgets/SameLine/SameLine.hpp>
+#include <TinyEngine/Core/GUI/Widgets/Button/Button.hpp>
+
+#include <TinyEngine/Core/Events/Signal.hpp>
 
 #endif // _TINY_ENGINE_HEADER_
