@@ -6,6 +6,9 @@
 namespace TinyEngine
 {
 	template<typename ... Args>
+	class Signal;
+
+	template<typename ... Args>
 	class Slot final
 	{
 	public:

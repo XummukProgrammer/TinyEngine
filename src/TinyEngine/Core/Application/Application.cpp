@@ -11,6 +11,8 @@
 #include <fmt/format.h>
 #include "rlImGui.h"
 
+#include "imgui.h"
+
 namespace TinyEngine
 {
     Application Application::_singleton;
@@ -58,6 +60,7 @@ namespace TinyEngine
                     fmt::print("OnButtonClick!");
                 });
             button->GetOnPressedSignal().Connect(slot);
+            button->GetOnPressedSignal().Disconnect(slot);
             window->GetRefWidgetsContainer().AddWidget(std::move(button));
         }
 

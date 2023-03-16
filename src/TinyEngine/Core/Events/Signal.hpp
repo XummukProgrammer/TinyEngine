@@ -49,6 +49,12 @@ namespace TinyEngine
 		{
 			return slot == conSlot;
 		});
+
+
+		if (it != _slots.end())
+		{
+			_slots.erase(it);
+		}
 	}
 
 	template<typename ...Args>
