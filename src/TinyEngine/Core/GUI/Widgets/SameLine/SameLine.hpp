@@ -12,6 +12,11 @@ namespace TinyEngine
 		~SameLine() = default;
 
 	public:
+		virtual void OnActive() override;
+		virtual void OnDeactive() override;
+
+		virtual void OnShow() override;
+		virtual void OnHide() override;
 
 	protected:
 		virtual std::unique_ptr<IWidgetView> MakeImGUIView() const override;

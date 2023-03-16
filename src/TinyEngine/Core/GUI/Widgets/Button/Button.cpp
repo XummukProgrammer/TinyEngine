@@ -4,16 +4,32 @@
 
 namespace TinyEngine
 {
-    void Button::Init()
+    void Button::OnInit()
     {
-        Widget::Init();
+        Widget::OnInit();
 
         dynamic_cast<IButtonView*>(GetView())->Init(this);
     }
 
-    void Button::Deinit()
+    void Button::OnDeinit()
     {
-        Widget::Deinit();
+        Widget::OnDeinit();
+    }
+
+    void Button::OnActive()
+    {
+    }
+
+    void Button::OnDeactive()
+    {
+    }
+
+    void Button::OnShow()
+    {
+    }
+
+    void Button::OnHide()
+    {
     }
 
     void Button::OnPressed()

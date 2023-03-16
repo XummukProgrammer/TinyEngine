@@ -6,14 +6,17 @@ namespace TinyEngine
     {
         for (auto& widget : _widgets)
         {
-            widget->Draw();
+            if (widget->IsActive())
+            {
+                widget->OnDraw();
+            }
         }
     }
 
     void WidgetsContainer::AddWidget(std::unique_ptr<Widget>&& widget)
     {
         _widgets.push_back(std::move(widget));
-        _widgets.back()->Init();
+        _widgets.back()->OnInit();
     }
 
     bool WidgetsContainer::HasWidget(std::string_view name) const

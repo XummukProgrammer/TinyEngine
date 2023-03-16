@@ -60,7 +60,6 @@ namespace TinyEngine
                     fmt::print("OnButtonClick!");
                 });
             button->GetOnPressedSignal().Connect(slot);
-            button->GetOnPressedSignal().Disconnect(slot);
             window->GetRefWidgetsContainer().AddWidget(std::move(button));
         }
 

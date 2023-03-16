@@ -4,14 +4,30 @@
 
 namespace TinyEngine
 {
-    void TextBox::Init()
+    void TextBox::OnInit()
     {
-        Widget::Init();
+        Widget::OnInit();
     }
 
-    void TextBox::Deinit()
+    void TextBox::OnDeinit()
     {
-        Widget::Deinit();
+        Widget::OnDeinit();
+    }
+
+    void TextBox::OnActive()
+    {
+    }
+
+    void TextBox::OnDeactive()
+    {
+    }
+
+    void TextBox::OnShow()
+    {
+    }
+
+    void TextBox::OnHide()
+    {
     }
 
     void TextBox::SetText(std::string_view text)

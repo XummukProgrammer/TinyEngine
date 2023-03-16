@@ -17,8 +17,14 @@ namespace TinyEngine
 		~Button() = default;
 
 	public:
-		virtual void Init() override;
-		virtual void Deinit() override;
+		virtual void OnInit() override;
+		virtual void OnDeinit() override;
+
+		virtual void OnActive() override;
+		virtual void OnDeactive() override;
+
+		virtual void OnShow() override;
+		virtual void OnHide() override;
 
 	public:
 		void OnPressed();

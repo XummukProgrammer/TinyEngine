@@ -4,15 +4,31 @@
 
 namespace TinyEngine
 {
-    void Window::Init()
+    void Window::OnInit()
     {
     }
 
-    void Window::Deinit()
+    void Window::OnDeinit()
     {
     }
 
-    void Window::Draw()
+    void Window::OnActive()
+    {
+    }
+
+    void Window::OnDeactive()
+    {
+    }
+
+    void Window::OnShow()
+    {
+    }
+
+    void Window::OnHide()
+    {
+    }
+
+    void Window::OnDraw()
     {
         auto view = dynamic_cast<WindowImGUIView*>(GetView());
         view->Begin();

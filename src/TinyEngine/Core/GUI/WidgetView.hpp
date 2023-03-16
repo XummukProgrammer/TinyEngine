@@ -11,6 +11,12 @@ namespace TinyEngine
 
 	public:
 		virtual void OnDraw() = 0;
+
+		virtual void OnActive() = 0;
+		virtual void OnDeactive() = 0;
+
+		virtual void OnShow() = 0;
+		virtual void OnHide() = 0;
 	};
 }
 

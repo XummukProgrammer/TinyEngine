@@ -21,10 +21,16 @@ namespace TinyEngine
 		virtual ~Widget() = default;
 
 	public:
-		virtual void Init() {}
-		virtual void Deinit() {}
+		virtual void OnInit() {}
+		virtual void OnDeinit() {}
 
-		virtual void Draw();
+		virtual void OnActive() {}
+		virtual void OnDeactive() {}
+
+		virtual void OnShow() {}
+		virtual void OnHide() {}
+
+		virtual void OnDraw();
 
 		void SetName(std::string_view name) { _name = name; }
 		const std::string& GetName() const { return _name; }
@@ -34,6 +40,12 @@ namespace TinyEngine
 		void SetView(std::unique_ptr<IWidgetView>&& view);
 		IWidgetView* GetView() const { return _view.get(); }
 
+		void SetActive(bool isActive);
+		bool IsActive() const { return _isActive; }
+
+		void SetVisible(bool isVisible);
+		bool IsVisible() const { return _isVisible; }
+
 	protected:
 		virtual std::unique_ptr<IWidgetView> MakeImGUIView() const = 0;
 
@@ -41,6 +53,8 @@ namespace TinyEngine
 		std::string _name;
 		std::unique_ptr<IWidgetView> _view;
 		ViewType _viewType;
+		bool _isActive = true;
+		bool _isVisible = true;
 	};
 }
 
