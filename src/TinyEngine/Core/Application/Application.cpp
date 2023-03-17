@@ -50,6 +50,7 @@ namespace TinyEngine
         {
             auto textBox = GUI::MakeImGUIWidget<TextBox>("Second");
             textBox->SetText("Second!");
+            textBox->SetActive(false);
             window->GetRefWidgetsContainer().AddWidget(std::move(textBox));
         }
         {

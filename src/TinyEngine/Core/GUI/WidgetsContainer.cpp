@@ -6,7 +6,7 @@ namespace TinyEngine
     {
         for (auto& widget : _widgets)
         {
-            if (widget->IsActive())
+            if (widget->IsVisible())
             {
                 widget->OnDraw();
             }
