@@ -42,6 +42,7 @@ namespace TinyEngine
         {
             auto textBox = GUI::MakeImGUIWidget<TextBox>("First");
             textBox->SetText("First!");
+            textBox->SetIsMarker(true);
             window->GetRefWidgetsContainer().AddWidget(std::move(textBox));
         }
         {

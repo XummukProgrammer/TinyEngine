@@ -6,17 +6,22 @@ namespace TinyEngine
 {
     void TextBoxImGUIView::OnDraw()
     {
-        auto widget = GetWidget();
-
-        if (widget->IsActive())
+        if (GetWidget()->IsActive())
         {
-            if (_colorOpt)
+            if (_isMarker)
             {
-                ImGui::TextColored(_colorOpt.value(), _text.c_str());
+                ImGui::BulletText(_text.c_str());
             }
             else
             {
-                ImGui::Text(_text.c_str());
+                if (_colorOpt)
+                {
+                    ImGui::TextColored(_colorOpt.value(), _text.c_str());
+                }
+                else
+                {
+                    ImGui::Text(_text.c_str());
+                }
             }
         }
         else
@@ -38,5 +43,10 @@ namespace TinyEngine
             Normalize(static_cast<float>(color.b), 0, 255),
             Normalize(static_cast<float>(color.a), 0, 255)
         );
+    }
+
+    void TextBoxImGUIView::SetIsMarker(bool isMarker)
+    {
+        _isMarker = isMarker;
     }
 }

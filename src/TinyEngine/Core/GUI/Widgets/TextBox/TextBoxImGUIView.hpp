@@ -21,10 +21,12 @@ namespace TinyEngine
 	public:
 		virtual void SetText(std::string_view text) override;
 		virtual void SetColor(const raylib::Color& color) override;
+		virtual void SetIsMarker(bool isMarker) override;
 
 	private:
 		std::string _text;
 		std::optional<ImVec4> _colorOpt;
+		bool _isMarker = false;
 	};
 }
 

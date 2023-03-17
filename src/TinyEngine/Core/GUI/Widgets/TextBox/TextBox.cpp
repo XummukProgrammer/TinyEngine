@@ -14,6 +14,11 @@ namespace TinyEngine
         dynamic_cast<ITextBoxView*>(GetView())->SetColor(color);
     }
 
+    void TextBox::SetIsMarker(bool isMarker)
+    {
+        dynamic_cast<ITextBoxView*>(GetView())->SetIsMarker(isMarker);
+    }
+
     std::unique_ptr<IWidgetView> TextBox::MakeImGUIView() const
     {
         return std::make_unique<TextBoxImGUIView>();

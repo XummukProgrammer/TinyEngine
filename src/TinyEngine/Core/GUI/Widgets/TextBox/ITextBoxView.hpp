@@ -18,6 +18,7 @@ namespace TinyEngine
 	public:
 		virtual void SetText(std::string_view text) = 0;
 		virtual void SetColor(const raylib::Color& color) = 0;
+		virtual void SetIsMarker(bool isMarker) = 0;
 	};
 }
 
