@@ -3,6 +3,8 @@
 
 #include <TinyEngine/Core/GUI/WidgetView.hpp>
 
+#include "raylib-cpp.hpp"
+
 #include <string>
 
 namespace TinyEngine
@@ -15,6 +17,7 @@ namespace TinyEngine
 
 	public:
 		virtual void SetText(std::string_view text) = 0;
+		virtual void SetColor(const raylib::Color& color) = 0;
 	};
 }
 

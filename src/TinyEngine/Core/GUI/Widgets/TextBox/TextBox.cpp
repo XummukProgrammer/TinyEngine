@@ -9,6 +9,11 @@ namespace TinyEngine
         dynamic_cast<ITextBoxView*>(GetView())->SetText(text);
     }
 
+    void TextBox::SetColor(const raylib::Color& color)
+    {
+        dynamic_cast<ITextBoxView*>(GetView())->SetColor(color);
+    }
+
     std::unique_ptr<IWidgetView> TextBox::MakeImGUIView() const
     {
         return std::make_unique<TextBoxImGUIView>();

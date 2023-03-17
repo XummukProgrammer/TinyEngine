@@ -14,6 +14,7 @@ namespace TinyEngine
 
 	public:
 		void SetText(std::string_view text);
+		void SetColor(const raylib::Color& color);
 
 	private:
 		virtual std::unique_ptr<IWidgetView> MakeImGUIView() const override;
