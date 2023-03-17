@@ -21,8 +21,8 @@ namespace TinyEngine
 		virtual ~Widget() = default;
 
 	public:
-		virtual void OnInit() {}
-		virtual void OnDeinit() {}
+		virtual void OnInit();
+		virtual void OnDeinit();
 
 		virtual void OnActive() {}
 		virtual void OnDeactive() {}

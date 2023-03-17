@@ -13,12 +13,6 @@ namespace TinyEngine
 
 	public:
 		virtual void OnDraw() override;
-
-		virtual void OnActive() override;
-		virtual void OnDeactive() override;
-
-		virtual void OnShow() override;
-		virtual void OnHide() override;
 	};
 }
 

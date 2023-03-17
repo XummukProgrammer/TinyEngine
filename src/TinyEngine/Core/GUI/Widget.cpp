@@ -2,6 +2,17 @@
 
 namespace TinyEngine
 {
+    void Widget::OnInit()
+    {
+        _view->SetWidget(this);
+        _view->OnInit();
+    }
+
+    void Widget::OnDeinit()
+    {
+        _view->OnDeinit();
+    }
+
     void Widget::OnDraw()
     {
         _view->OnDraw();

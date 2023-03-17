@@ -12,15 +12,6 @@ namespace TinyEngine
 		~Window() = default;
 
 	public:
-		virtual void OnInit() override;
-		virtual void OnDeinit() override;
-
-		virtual void OnActive() override;
-		virtual void OnDeactive() override;
-
-		virtual void OnShow() override;
-		virtual void OnHide() override;
-
 		virtual void OnDraw() override;
 
 	public:

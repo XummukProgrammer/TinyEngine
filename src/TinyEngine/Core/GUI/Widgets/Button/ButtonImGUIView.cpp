@@ -11,16 +11,4 @@ namespace TinyEngine
             OnPressed();
         }
     }
-    void ButtonImGUIView::OnActive()
-    {
-    }
-    void ButtonImGUIView::OnDeactive()
-    {
-    }
-    void ButtonImGUIView::OnShow()
-    {
-    }
-    void ButtonImGUIView::OnHide()
-    {
-    }
 }

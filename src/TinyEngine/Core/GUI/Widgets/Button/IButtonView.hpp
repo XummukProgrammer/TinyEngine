@@ -2,7 +2,6 @@
 #define _I_BUTTON_VIEW_HEADER_
 
 #include <TinyEngine/Core/GUI/WidgetView.hpp>
-#include <TinyEngine/Core/GUI/Widgets/Button/Button.hpp>
 
 #include <string>
 
@@ -15,9 +14,6 @@ namespace TinyEngine
 		~IButtonView() = default;
 
 	public:
-		void Init(Button* button);
-
-	public:
 		void SetText(std::string_view text) { _text = text; }
 
 	protected:
@@ -27,7 +23,6 @@ namespace TinyEngine
 		const std::string& GetText() const { return _text; }
 
 	private:
-		Button* _button = nullptr;
 		std::string _text;
 	};
 }

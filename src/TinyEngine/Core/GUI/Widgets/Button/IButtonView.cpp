@@ -1,14 +1,11 @@
 ﻿#include "IButtonView.hpp"
 
+#include <TinyEngine/Core/GUI/Widgets/Button/Button.hpp>
+
 namespace TinyEngine
 {
-    void IButtonView::Init(Button* button)
-    {
-        _button = button;
-    }
-
     void IButtonView::OnPressed()
     {
-        _button->OnPressed();
+        dynamic_cast<Button*>(GetWidget())->OnPressed();
     }
 }

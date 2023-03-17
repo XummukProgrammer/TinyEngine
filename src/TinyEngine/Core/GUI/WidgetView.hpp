@@ -3,6 +3,8 @@
 
 namespace TinyEngine
 {
+	class Widget;
+
 	class IWidgetView
 	{
 	public:
@@ -10,13 +12,23 @@ namespace TinyEngine
 		virtual ~IWidgetView() = default;
 
 	public:
+		virtual void OnInit() {}
+		virtual void OnDeinit() {}
+
 		virtual void OnDraw() = 0;
 
-		virtual void OnActive() = 0;
-		virtual void OnDeactive() = 0;
+		virtual void OnActive() {}
+		virtual void OnDeactive() {}
 
-		virtual void OnShow() = 0;
-		virtual void OnHide() = 0;
+		virtual void OnShow() {}
+		virtual void OnHide() {}
+
+	public:
+		void SetWidget(Widget* widget);
+		Widget* GetWidget() const;
+
+	private:
+		Widget* _widget;
 	};
 }
 

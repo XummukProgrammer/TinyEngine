@@ -8,16 +8,4 @@ namespace TinyEngine
     {
         ImGui::SameLine();
     }
-    void SameLineImGUIView::OnActive()
-    {
-    }
-    void SameLineImGUIView::OnDeactive()
-    {
-    }
-    void SameLineImGUIView::OnShow()
-    {
-    }
-    void SameLineImGUIView::OnHide()
-    {
-    }
 }
