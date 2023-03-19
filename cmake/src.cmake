@@ -21,7 +21,7 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/GUI/GUI.hpp
 	src/TinyEngine/Core/GUI/Widget.hpp
 	src/TinyEngine/Core/GUI/WidgetView.hpp
-	src/TinyEngine/Core/GUI/WidgetsContainer.hpp
+	src/TinyEngine/Core/GUI/WidgetsLayersContainer.hpp
 	src/TinyEngine/Core/GUI/Widgets/TextBox/TextBox.hpp
 	src/TinyEngine/Core/GUI/Widgets/TextBox/ITextBoxView.hpp
 	src/TinyEngine/Core/GUI/Widgets/TextBox/TextBoxImGUIView.hpp
@@ -66,7 +66,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/GUI/GUI.cpp
 	src/TinyEngine/Core/GUI/Widget.cpp
 	src/TinyEngine/Core/GUI/WidgetView.cpp
-	src/TinyEngine/Core/GUI/WidgetsContainer.cpp
+	src/TinyEngine/Core/GUI/WidgetsLayersContainer.cpp
 	src/TinyEngine/Core/GUI/Widgets/TextBox/TextBox.cpp
 	src/TinyEngine/Core/GUI/Widgets/TextBox/ITextBoxView.cpp
 	src/TinyEngine/Core/GUI/Widgets/TextBox/TextBoxImGUIView.cpp

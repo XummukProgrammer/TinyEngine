@@ -1,7 +1,7 @@
 ﻿#ifndef _WINDOW_HEADER_
 #define _WINDOW_HEADER_
 
-#include <TinyEngine/Core/GUI/WidgetsContainer.hpp>
+#include <TinyEngine/Core/GUI/WidgetsLayersContainer.hpp>
 
 namespace TinyEngine
 {
@@ -12,11 +12,14 @@ namespace TinyEngine
 		~Window() = default;
 
 	public:
+		virtual void OnInit() override;
+		virtual void OnDeinit() override;
+
 		virtual void OnDraw() override;
 
 	public:
-		const WidgetsContainer& GetWidgetsContainer() const { return _widgetsContainer; }
-		WidgetsContainer& GetRefWidgetsContainer() { return _widgetsContainer; }
+		const WidgetsLayersContainer& GetWidgetsContainer() const { return _widgetsLayersContainer; }
+		WidgetsLayersContainer& GetRefWidgetsContainer() { return _widgetsLayersContainer; }
 
 		void SetTitle(std::string_view title);
 
@@ -24,7 +27,7 @@ namespace TinyEngine
 		virtual std::unique_ptr<IWidgetView> MakeImGUIView() const override;
 
 	private:
-		WidgetsContainer _widgetsContainer;
+		WidgetsLayersContainer _widgetsLayersContainer;
 	};
 }
 

@@ -4,11 +4,25 @@
 
 namespace TinyEngine
 {
+    void Window::OnInit()
+    {
+        Widget::OnInit();
+
+        _widgetsLayersContainer.Init();
+    }
+
+    void Window::OnDeinit()
+    {
+        Widget::OnDeinit();
+
+        _widgetsLayersContainer.Deinit();
+    }
+
     void Window::OnDraw()
     {
         auto view = dynamic_cast<WindowImGUIView*>(GetView());
         view->Begin();
-        _widgetsContainer.Draw();
+        _widgetsLayersContainer.Draw();
         view->End();
     }
 

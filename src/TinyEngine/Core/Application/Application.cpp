@@ -18,6 +18,8 @@ namespace TinyEngine
 {
     Application Application::_singleton;
 
+    bool isOpenTestModal = false;
+
     void Application::Load()
     {
         OnInit();
@@ -41,33 +43,29 @@ namespace TinyEngine
         params.librariesPath = "libs.xml";
         _context.GetProject()->Create(params);
 
-        auto window = GUI::MakeImGUIWidget<Window>("DebugWindow");
+        auto window = _context.GetGUI()->MakeWidget<Window>("DebugWindow", Widget::ViewType::ImGUI);
         window->SetTitle("Main Window");
 
         {
-            auto textBox = GUI::MakeImGUIWidget<TextBox>("First");
+            auto textBox = window->GetRefWidgetsContainer().MakeWidget<TextBox>("First", Widget::ViewType::ImGUI);
             textBox->SetText("First!");
             textBox->SetIsMarker(true);
-            window->GetRefWidgetsContainer().AddWidget(std::move(textBox));
         }
         {
-            window->GetRefWidgetsContainer().AddWidget(GUI::MakeImGUIWidget<SameLine>("SameLine1"));
+            window->GetRefWidgetsContainer().MakeWidget<SameLine>("SameLine1", Widget::ViewType::ImGUI);
         }
         {
-            auto textBox = GUI::MakeImGUIWidget<TextBox>("Second");
+            auto textBox = window->GetRefWidgetsContainer().MakeWidget<TextBox>("Second", Widget::ViewType::ImGUI);
             textBox->SetText("Second!");
             textBox->SetActive(false);
-            window->GetRefWidgetsContainer().AddWidget(std::move(textBox));
         }
         {
-            auto button = GUI::MakeImGUIWidget<Button>("Button");
-            button->SetText("Hello, World!");
+            auto button = window->GetRefWidgetsContainer().MakeWidget<Button>("Button", Widget::ViewType::ImGUI);
+            button->SetText("Open Modal");
             auto slot = button->GetOnPressedSignal().MakeSlot([]()
                 {
-                    fmt::print("OnButtonClick!");
                 });
             button->GetOnPressedSignal().Connect(slot);
-            window->GetRefWidgetsContainer().AddWidget(std::move(button));
         }
         {
             auto menuBar = _context.GetGUI()->GetMenuBar();
@@ -79,15 +77,13 @@ namespace TinyEngine
             projectCloseAppItem->SetTitle("Close App");
             projectCloseAppItem->GetOnActionSignal().Connect(projectCloseAppItem->GetOnActionSignal().MakeSlot([]()
             {
-                    fmt::print("Close App!\n");
+                isOpenTestModal = true;
             }));
 
             projectMenu->AddItem(std::move(projectCloseAppItem));
 
             menuBar->GetRefMenuContainer().AddMenu(std::move(projectMenu));
         }
-
-        _context.GetGUI()->GetMainWindow()->GetRefWidgetsContainer().AddWidget(std::move(window));
     }
 
     void Application::Run()
@@ -101,6 +97,15 @@ namespace TinyEngine
             OnDraw();
             rlImGuiBegin();
             _context.GetGUI()->GetRefImGUIWidgetsContainer().Draw();
+            if (isOpenTestModal)
+            {
+                ImGui::OpenPopup("Test Modal");
+            }
+            if (ImGui::BeginPopupModal("Test Modal", nullptr))
+            {
+                ImGui::Text("Test");
+                ImGui::EndPopup();
+            }
             rlImGuiEnd();
             _window.EndDrawing();
         }
