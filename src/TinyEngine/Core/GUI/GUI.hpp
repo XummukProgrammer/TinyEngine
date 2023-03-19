@@ -5,6 +5,9 @@
 
 namespace TinyEngine
 {
+	class Window;
+	class MenuBar;
+
 	class GUI final
 	{
 	public:
@@ -13,15 +16,21 @@ namespace TinyEngine
 
 	public:
 		template<typename T, typename = std::enable_if<std::is_base_of_v<T, Widget>>>
-		static std::unique_ptr<T> MakeImGUIWidget(std::string_view name)
+		static std::unique_ptr<T> MakeImGUIWidget(std::string_view name, const Widget::CustomMakeViewCallback& makeCallback = nullptr)
 		{
 			auto newWidget = MakeWidget<T>(name);
-			newWidget->MakeView(Widget::ViewType::ImGUI);
+			newWidget->MakeView(Widget::ViewType::ImGUI, makeCallback);
 			return std::move(newWidget);
 		}
 
 	public:
+		void Init();
+		void Deinit();
+
 		void AddWidget(std::unique_ptr<Widget>&& widget);
+
+		Window* GetMainWindow() const;
+		MenuBar* GetMenuBar() const;
 
 	public:
 		const WidgetsContainer& GetImGUIWidgetsContainer() const { return _imGUIWidgetsContainer; }
@@ -38,6 +47,8 @@ namespace TinyEngine
 
 	private:
 		WidgetsContainer _imGUIWidgetsContainer;
+		Window* _mainWindow = nullptr;
+		MenuBar* _menuBar = nullptr;
 	};
 }
 

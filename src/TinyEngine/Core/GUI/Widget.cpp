@@ -18,15 +18,22 @@ namespace TinyEngine
         _view->OnDraw();
     }
 
-    void Widget::MakeView(ViewType type)
+    void Widget::MakeView(ViewType type, const CustomMakeViewCallback& makeCallback)
     {
-        switch (type)
+        if (makeCallback)
         {
-        case TinyEngine::Widget::ViewType::ImGUI:
-            SetView(std::move(MakeImGUIView()));
-            break;
-        default:
-            break;
+            SetView(makeCallback());
+        }
+        else
+        {
+            switch (type)
+            {
+            case TinyEngine::Widget::ViewType::ImGUI:
+                SetView(std::move(MakeImGUIView()));
+                break;
+            default:
+                break;
+            }
         }
 
         _viewType = type;

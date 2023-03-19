@@ -7,6 +7,7 @@
 #include <TinyEngine/Core/GUI/Widgets/Window/Window.hpp>
 #include <TinyEngine/Core/GUI/Widgets/SameLine/SameLine.hpp>
 #include <TinyEngine/Core/GUI/Widgets/Button/Button.hpp>
+#include <TinyEngine/Core/GUI/Widgets/MenuBar/MenuBar.hpp>
 
 #include <fmt/format.h>
 #include "rlImGui.h"
@@ -26,6 +27,10 @@ namespace TinyEngine
     {
         _window.Init(_context.GetScreenWidth(), _context.GetScreenHeight(), _context.GetWindowTitle());
         rlImGuiSetup(true);
+        _context.GetGUI()->Init();
+
+        auto& io = ImGui::GetIO();
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
         ProjectFileCreateParams params;
         params.path = _context.GetFileSystem().BuildPath(FileSystem::Assets, L"project.xml");
@@ -36,7 +41,7 @@ namespace TinyEngine
         params.librariesPath = "libs.xml";
         _context.GetProject()->Create(params);
 
-        auto window = GUI::MakeImGUIWidget<Window>("Window");
+        auto window = GUI::MakeImGUIWidget<Window>("DebugWindow");
         window->SetTitle("Main Window");
 
         {
@@ -64,8 +69,25 @@ namespace TinyEngine
             button->GetOnPressedSignal().Connect(slot);
             window->GetRefWidgetsContainer().AddWidget(std::move(button));
         }
+        {
+            auto menuBar = _context.GetGUI()->GetMenuBar();
 
-        _context.GetGUI()->AddWidget(std::move(window));
+            auto projectMenu = std::make_unique<MenuBarData>();
+            projectMenu->SetTitle("Project");
+
+            auto projectCloseAppItem = std::make_unique<MenuBarItem>();
+            projectCloseAppItem->SetTitle("Close App");
+            projectCloseAppItem->GetOnActionSignal().Connect(projectCloseAppItem->GetOnActionSignal().MakeSlot([]()
+            {
+                    fmt::print("Close App!\n");
+            }));
+
+            projectMenu->AddItem(std::move(projectCloseAppItem));
+
+            menuBar->GetRefMenuContainer().AddMenu(std::move(projectMenu));
+        }
+
+        _context.GetGUI()->GetMainWindow()->GetRefWidgetsContainer().AddWidget(std::move(window));
     }
 
     void Application::Run()
@@ -116,6 +138,7 @@ namespace TinyEngine
 
     void Application::OnInit()
     {
+        _context.GetGUI()->Deinit();
         _context.GetRefFileSystem().Init();
         _context.GetProject()->Init();
     }

@@ -34,6 +34,10 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/GUI/Widgets/Button/Button.hpp
 	src/TinyEngine/Core/GUI/Widgets/Button/IButtonView.hpp
 	src/TinyEngine/Core/GUI/Widgets/Button/ButtonImGUIView.hpp
+	src/TinyEngine/Core/GUI/Widgets/MenuBar/MenuBar.hpp
+	src/TinyEngine/Core/GUI/Widgets/MenuBar/IMenuBarView.hpp
+	src/TinyEngine/Core/GUI/Widgets/MenuBar/MenuBarImGUIView.hpp
+	src/TinyEngine/Core/GUI/Widgets/MenuBar/MenuBarItem.hpp
 	
 	src/TinyEngine/Core/Events/Signal.hpp
 	src/TinyEngine/Core/Events/Slot.hpp
@@ -75,6 +79,10 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/GUI/Widgets/Button/Button.cpp
 	src/TinyEngine/Core/GUI/Widgets/Button/IButtonView.cpp
 	src/TinyEngine/Core/GUI/Widgets/Button/ButtonImGUIView.cpp
+	src/TinyEngine/Core/GUI/Widgets/MenuBar/MenuBar.cpp
+	src/TinyEngine/Core/GUI/Widgets/MenuBar/IMenuBarView.cpp
+	src/TinyEngine/Core/GUI/Widgets/MenuBar/MenuBarImGUIView.cpp
+	src/TinyEngine/Core/GUI/Widgets/MenuBar/MenuBarItem.cpp
 	
 	src/TinyEngine/Core/Events/Signal.cpp
 	src/TinyEngine/Core/Events/Slot.cpp

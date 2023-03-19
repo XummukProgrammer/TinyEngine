@@ -5,11 +5,11 @@
 
 namespace TinyEngine
 {
-	class WindowImGUIView final : public IWindowView
+	class WindowImGUIView : public IWindowView
 	{
 	public:
 		WindowImGUIView() = default;
-		~WindowImGUIView() = default;
+		virtual ~WindowImGUIView() = default;
 
 	public:
 		virtual void Begin() override;
@@ -21,6 +21,17 @@ namespace TinyEngine
 
 	private:
 		std::string _title;
+	};
+
+	class MainWindowImGUIView final : public WindowImGUIView
+	{
+	public:
+		MainWindowImGUIView() = default;
+		~MainWindowImGUIView() = default;
+
+	public:
+		virtual void Begin() override;
+		virtual void End() override;
 	};
 }
 

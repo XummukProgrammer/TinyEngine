@@ -24,6 +24,7 @@
 #include <TinyEngine/Core/GUI/Widgets/Window/Window.hpp>
 #include <TinyEngine/Core/GUI/Widgets/SameLine/SameLine.hpp>
 #include <TinyEngine/Core/GUI/Widgets/Button/Button.hpp>
+#include <TinyEngine/Core/GUI/Widgets/MenuBar/MenuBar.hpp>
 
 #include <TinyEngine/Core/Events/Signal.hpp>
 
