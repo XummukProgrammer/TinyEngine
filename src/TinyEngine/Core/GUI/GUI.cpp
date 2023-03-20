@@ -15,12 +15,12 @@ namespace TinyEngine
             container->Init();
         }
 
-        _mainWindow = MakeWidget<Window>("MainWindow", Widget::ViewType::ImGUI, []()
+        _mainWindow = MakeWidget<ImGUIWindow>("MainWindow", Widget::ViewType::ImGUI, []()
         {
             return std::make_unique<MainWindowImGUIView>();
         });
         
-        _menuBar = _mainWindow->GetRefWidgetsContainer().MakeWidget<MenuBar>("MenuBar", Widget::ViewType::ImGUI);
+        _menuBar = _mainWindow->MakeWidget<MenuBar>("MenuBar");
     }
 
     void GUI::Deinit()

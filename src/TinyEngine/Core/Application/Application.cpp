@@ -43,24 +43,24 @@ namespace TinyEngine
         params.librariesPath = "libs.xml";
         _context.GetProject()->Create(params);
 
-        auto window = _context.GetGUI()->MakeWidget<Window>("DebugWindow", Widget::ViewType::ImGUI);
+        auto window = _context.GetGUI()->GetMainWindow()->MakeWidget<ImGUIWindow>("DebugWindow");
         window->SetTitle("Main Window");
 
         {
-            auto textBox = window->GetRefWidgetsContainer().MakeWidget<TextBox>("First", Widget::ViewType::ImGUI);
+            auto textBox = window->MakeWidget<TextBox>("First");
             textBox->SetText("First!");
             textBox->SetIsMarker(true);
         }
         {
-            window->GetRefWidgetsContainer().MakeWidget<SameLine>("SameLine1", Widget::ViewType::ImGUI);
+            window->MakeWidget<SameLine>("SameLine1");
         }
         {
-            auto textBox = window->GetRefWidgetsContainer().MakeWidget<TextBox>("Second", Widget::ViewType::ImGUI);
+            auto textBox = window->MakeWidget<TextBox>("Second");
             textBox->SetText("Second!");
             textBox->SetActive(false);
         }
         {
-            auto button = window->GetRefWidgetsContainer().MakeWidget<Button>("Button", Widget::ViewType::ImGUI);
+            auto button = window->MakeWidget<Button>("Button");
             button->SetText("Open Modal");
             auto slot = button->GetOnPressedSignal().MakeSlot([]()
                 {
