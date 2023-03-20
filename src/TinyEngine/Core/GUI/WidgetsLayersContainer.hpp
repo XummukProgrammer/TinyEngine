@@ -47,8 +47,6 @@ namespace TinyEngine
 		void Draw();
 
 	public:
-		WidgetsLayerContainer* GetContainer(WidgetLayerType type) const;
-
 		template<typename T>
 		T* MakeWidget(std::string_view widgetName, Widget::ViewType widgetType, WidgetLayerType layerType, const Widget::CustomMakeViewCallback& makeCallback = nullptr);
 
@@ -57,6 +55,15 @@ namespace TinyEngine
 
 		template<typename T>
 		T* MakePopup(std::string_view widgetName, Widget::ViewType widgetType, const Widget::CustomMakeViewCallback& makeCallback = nullptr);
+
+		template<typename T>
+		T* GetWidget(Widget::ViewType widgetType, std::string_view widgetName) const;
+
+		template<typename T>
+		T* GetBackWidget(Widget::ViewType widgetType) const;
+
+	private:
+		WidgetsLayerContainer* GetContainer(WidgetLayerType type) const;
 
 	private:
 		std::map<WidgetLayerType, std::unique_ptr<WidgetsLayerContainer>> _layers;
@@ -85,6 +92,20 @@ namespace TinyEngine
 	T* WidgetsLayersContainer::MakePopup(std::string_view widgetName, Widget::ViewType widgetType, const Widget::CustomMakeViewCallback& makeCallback)
 	{
 		return MakeWidget<T>(widgetName, widgetType, WidgetLayerType::PopupWindows, makeCallback);
+	}
+
+	template<typename T>
+	T* WidgetsLayersContainer::GetWidget(Widget::ViewType widgetType, std::string_view widgetName) const
+	{
+		auto container = GetContainer(widgetType);
+		return dynamic_cast<T*>(container->GetWidget(widgetName));
+	}
+
+	template<typename T>
+	T* WidgetsLayersContainer::GetBackWidget(Widget::ViewType widgetType) const
+	{
+		auto container = GetContainer(widgetType);
+		return dynamic_cast<T*>(container->GetBackWidget());
 	}
 }
 

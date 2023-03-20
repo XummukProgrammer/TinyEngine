@@ -8,7 +8,12 @@ namespace TinyEngine
 {
     void GUI::Init()
     {
-        _imGUIWidgetsLayersContainer.Init();
+        _widgetsLayersContainers[WidgetsContainerType::ImGui] = std::make_unique<WidgetsLayersContainer>();
+
+        for (auto& [type, container] : _widgetsLayersContainers)
+        {
+            container->Init();
+        }
 
         _mainWindow = MakeWidget<Window>("MainWindow", Widget::ViewType::ImGUI, []()
         {
@@ -20,7 +25,15 @@ namespace TinyEngine
 
     void GUI::Deinit()
     {
-        _imGUIWidgetsLayersContainer.Deinit();
+        for (auto& [type, container] : _widgetsLayersContainers)
+        {
+            container->Deinit();
+        }
+    }
+
+    void GUI::Draw()
+    {
+        _widgetsLayersContainers[WidgetsContainerType::ImGui]->Draw();
     }
 
     Window* GUI::GetMainWindow() const
@@ -31,5 +44,23 @@ namespace TinyEngine
     MenuBar* GUI::GetMenuBar() const
     {
         return _menuBar;
+    }
+
+    GUI::WidgetsContainerType GUI::ViewToContainerType(Widget::ViewType widgetType)
+    {
+        switch (widgetType)
+        {
+        case TinyEngine::Widget::ViewType::ImGUI:
+            return WidgetsContainerType::ImGui;
+        default:
+            break;
+        }
+
+        return WidgetsContainerType::ImGui;
+    }
+
+    WidgetsLayersContainer* GUI::GetContainerByViewType(Widget::ViewType viewType) const
+    {
+        return _widgetsLayersContainers.at(ViewToContainerType(viewType)).get();
     }
 }

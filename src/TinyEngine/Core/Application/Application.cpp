@@ -96,7 +96,7 @@ namespace TinyEngine
             _window.ClearBackground(RAYWHITE);
             OnDraw();
             rlImGuiBegin();
-            _context.GetGUI()->GetRefImGUIWidgetsContainer().Draw();
+            _context.GetGUI()->Draw();
             if (isOpenTestModal)
             {
                 ImGui::OpenPopup("Test Modal");
