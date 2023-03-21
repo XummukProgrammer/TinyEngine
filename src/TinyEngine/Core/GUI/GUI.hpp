@@ -16,7 +16,8 @@ namespace TinyEngine
 	public:
 		enum class WidgetsContainerType
 		{
-			ImGui
+			ImGUIWidgets,
+			ImGUIPopups
 		};
 
 	public:
@@ -28,8 +29,8 @@ namespace TinyEngine
 		void Deinit();
 		void Draw();
 
-		Window* GetMainWindow() const;
-		MenuBar* GetMenuBar() const;
+		Window* GetMainImGUIWindow() const;
+		MenuBar* GetImGUIMenuBar() const;
 
 		template<typename T>
 		T* MakeWidget(std::string_view widgetName, Widget::ViewType widgetType, WidgetLayerType layerType, const Widget::CustomMakeViewCallback& makeCallback = nullptr);
@@ -46,46 +47,61 @@ namespace TinyEngine
 		template<typename T>
 		T* GetBackWidget(Widget::ViewType widgetType) const;
 
-	public:
-		static WidgetsContainerType ViewToContainerType(Widget::ViewType widgetType);
+		template<typename T>
+		T* GetPopup(std::string_view widgetName, Widget::ViewType widgetType) const;
+
+		template<typename T>
+		T* GetBackPopup(Widget::ViewType widgetType) const;
 
 	private:
-		WidgetsLayersContainer* GetContainerByViewType(Widget::ViewType viewType) const;
+		WidgetsLayersContainer* GetContainer(Widget::ViewType viewType, bool isWidgets) const;
 
 	private:
 		std::map<WidgetsContainerType, std::unique_ptr<WidgetsLayersContainer>> _widgetsLayersContainers;
-		Window* _mainWindow = nullptr;
-		MenuBar* _menuBar = nullptr;
+		Window* _mainImGUIWindow = nullptr;
+		MenuBar* _imGUIMenuBar = nullptr;
 	};
 
 	template<typename T>
 	T* GUI::MakeWidget(std::string_view widgetName, Widget::ViewType widgetType, WidgetLayerType layerType, const Widget::CustomMakeViewCallback& makeCallback)
 	{
-		return GetContainerByViewType(widgetType)->MakeWidget<T>(widgetName, widgetType, layerType, makeCallback);
+		return GetContainer(widgetType, true)->MakeWidget<T>(widgetName, widgetType, layerType, makeCallback);
 	}
 
 	template<typename T>
 	T* GUI::MakeWidget(std::string_view widgetName, Widget::ViewType widgetType, const Widget::CustomMakeViewCallback& makeCallback)
 	{
-		return GetContainerByViewType(widgetType)->MakeWidget<T>(widgetName, widgetType, makeCallback);
+		return GetContainer(widgetType, true)->MakeWidget<T>(widgetName, widgetType, makeCallback);
 	}
 
 	template<typename T>
 	T* GUI::MakePopup(std::string_view widgetName, Widget::ViewType widgetType, const Widget::CustomMakeViewCallback& makeCallback)
 	{
-		return GetContainerByViewType(widgetType)->MakePopup<T>(widgetName, widgetType, makeCallback);
+		return GetContainer(widgetType, false)->MakePopup<T>(widgetName, widgetType, makeCallback);
 	}
 
 	template<typename T>
 	T* GUI::GetWidget(std::string_view widgetName, Widget::ViewType widgetType) const
 	{
-		return GetContainerByViewType(widgetType)->GetWidget<T>(widgetName, widgetType);
+		return GetContainer(widgetType, true)->GetWidget<T>(widgetName, widgetType);
 	}
 
 	template<typename T>
 	T* GUI::GetBackWidget(Widget::ViewType widgetType) const
 	{
-		return GetContainerByViewType(widgetType)->GetBackWidget<T>(widgetType);
+		return GetContainer(widgetType, true)->GetBackWidget<T>(widgetType);
+	}
+
+	template<typename T>
+	T* GUI::GetPopup(std::string_view widgetName, Widget::ViewType widgetType) const
+	{
+		return GetContainer(widgetType, false)->GetWidget<T>(widgetName, widgetType);
+	}
+
+	template<typename T>
+	T* GUI::GetBackPopup(Widget::ViewType widgetType) const
+	{
+		return GetContainer(widgetType, false)->GetBackWidget<T>(widgetType);
 	}
 }
 

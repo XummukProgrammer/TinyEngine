@@ -43,7 +43,7 @@ namespace TinyEngine
         params.librariesPath = "libs.xml";
         _context.GetProject()->Create(params);
 
-        auto window = _context.GetGUI()->GetMainWindow()->MakeWidget<ImGUIWindow>("DebugWindow");
+        auto window = _context.GetGUI()->GetMainImGUIWindow()->MakeWidget<ImGUIWindow>("DebugWindow");
         window->SetTitle("Main Window");
 
         {
@@ -68,7 +68,7 @@ namespace TinyEngine
             button->GetOnPressedSignal().Connect(slot);
         }
         {
-            auto menuBar = _context.GetGUI()->GetMenuBar();
+            auto menuBar = _context.GetGUI()->GetImGUIMenuBar();
 
             auto projectMenu = std::make_unique<MenuBarData>();
             projectMenu->SetTitle("Project");

@@ -8,19 +8,20 @@ namespace TinyEngine
 {
     void GUI::Init()
     {
-        _widgetsLayersContainers[WidgetsContainerType::ImGui] = std::make_unique<WidgetsLayersContainer>();
+        _widgetsLayersContainers[WidgetsContainerType::ImGUIWidgets] = std::make_unique<WidgetsLayersContainer>();
+        _widgetsLayersContainers[WidgetsContainerType::ImGUIPopups] = std::make_unique<WidgetsLayersContainer>();
 
         for (auto& [type, container] : _widgetsLayersContainers)
         {
             container->Init();
         }
 
-        _mainWindow = MakeWidget<ImGUIWindow>("MainWindow", Widget::ViewType::ImGUI, []()
+        _mainImGUIWindow = MakeWidget<ImGUIWindow>("MainWindow", Widget::ViewType::ImGUI, []()
         {
             return std::make_unique<MainWindowImGUIView>();
         });
         
-        _menuBar = _mainWindow->MakeWidget<MenuBar>("MenuBar");
+        _imGUIMenuBar = _mainImGUIWindow->MakeWidget<MenuBar>("MenuBar");
     }
 
     void GUI::Deinit()
@@ -33,34 +34,46 @@ namespace TinyEngine
 
     void GUI::Draw()
     {
-        _widgetsLayersContainers[WidgetsContainerType::ImGui]->Draw();
+        _widgetsLayersContainers[WidgetsContainerType::ImGUIWidgets]->Draw();
     }
 
-    Window* GUI::GetMainWindow() const
+    Window* GUI::GetMainImGUIWindow() const
     {
-        return _mainWindow;
+        return _mainImGUIWindow;
     }
 
-    MenuBar* GUI::GetMenuBar() const
+    MenuBar* GUI::GetImGUIMenuBar() const
     {
-        return _menuBar;
+        return _imGUIMenuBar;
     }
 
-    GUI::WidgetsContainerType GUI::ViewToContainerType(Widget::ViewType widgetType)
+    WidgetsLayersContainer* GUI::GetContainer(Widget::ViewType viewType, bool isWidgets) const
     {
-        switch (widgetType)
+        WidgetsContainerType containerType{};
+
+        if (isWidgets)
         {
-        case TinyEngine::Widget::ViewType::ImGUI:
-            return WidgetsContainerType::ImGui;
-        default:
-            break;
+            switch (viewType)
+            {
+            case TinyEngine::Widget::ViewType::ImGUI:
+                containerType = WidgetsContainerType::ImGUIWidgets;
+                break;
+            default:
+                break;
+            }
         }
-
-        return WidgetsContainerType::ImGui;
-    }
-
-    WidgetsLayersContainer* GUI::GetContainerByViewType(Widget::ViewType viewType) const
-    {
-        return _widgetsLayersContainers.at(ViewToContainerType(viewType)).get();
+        else
+        {
+            switch (viewType)
+            {
+            case TinyEngine::Widget::ViewType::ImGUI:
+                containerType = WidgetsContainerType::ImGUIPopups;
+                break;
+            default:
+                break;
+            }
+        }
+        
+        return _widgetsLayersContainers.at(containerType).get();
     }
 }
