@@ -4,9 +4,9 @@
 
 namespace TinyEngine
 {
-    void WindowImGUIView::Begin()
+    bool WindowImGUIView::TryBegin()
     {
-        ImGui::Begin(_title.c_str());
+        return ImGui::Begin(_title.c_str());
     }
 
     void WindowImGUIView::End()
@@ -19,7 +19,7 @@ namespace TinyEngine
         _title = title;
     }
 
-    void MainWindowImGUIView::Begin()
+    bool MainWindowImGUIView::TryBegin()
     {
         ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
 
@@ -49,6 +49,8 @@ namespace TinyEngine
             ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
             ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
         }
+
+        return true;
     }
 
     void MainWindowImGUIView::End()

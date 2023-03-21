@@ -24,9 +24,6 @@ namespace TinyEngine
 		T* MakeWidget(std::string_view widgetName, const Widget::CustomMakeViewCallback& makeCallback = nullptr);
 
 		template<typename T>
-		T* MakePopup(std::string_view widgetName, const Widget::CustomMakeViewCallback& makeCallback = nullptr);
-
-		template<typename T>
 		T* GetWidget(std::string_view widgetName) const;
 
 		template<typename T>
@@ -46,12 +43,6 @@ namespace TinyEngine
 	T* Window::MakeWidget(std::string_view widgetName, const Widget::CustomMakeViewCallback& makeCallback)
 	{
 		return _widgetsLayersContainer.MakeWidget<T>(widgetName, GetViewType(), makeCallback);
-	}
-
-	template<typename T>
-	T* Window::MakePopup(std::string_view widgetName, const Widget::CustomMakeViewCallback& makeCallback)
-	{
-		return _widgetsLayersContainer.MakePopup<T>(widgetName, GetViewType(), makeCallback);
 	}
 
 	template<typename T>

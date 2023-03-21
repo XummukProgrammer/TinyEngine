@@ -38,6 +38,9 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/GUI/Widgets/MenuBar/IMenuBarView.hpp
 	src/TinyEngine/Core/GUI/Widgets/MenuBar/MenuBarImGUIView.hpp
 	src/TinyEngine/Core/GUI/Widgets/MenuBar/MenuBarItem.hpp
+	src/TinyEngine/Core/GUI/Widgets/Popup/Popup.hpp
+	src/TinyEngine/Core/GUI/Widgets/Popup/IPopupView.hpp
+	src/TinyEngine/Core/GUI/Widgets/Popup/PopupImGUIView.hpp
 	
 	src/TinyEngine/Core/Events/Signal.hpp
 	src/TinyEngine/Core/Events/Slot.hpp
@@ -83,6 +86,9 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/GUI/Widgets/MenuBar/IMenuBarView.cpp
 	src/TinyEngine/Core/GUI/Widgets/MenuBar/MenuBarImGUIView.cpp
 	src/TinyEngine/Core/GUI/Widgets/MenuBar/MenuBarItem.cpp
+	src/TinyEngine/Core/GUI/Widgets/Popup/Popup.cpp
+	src/TinyEngine/Core/GUI/Widgets/Popup/IPopupView.cpp
+	src/TinyEngine/Core/GUI/Widgets/Popup/PopupImGUIView.cpp
 	
 	src/TinyEngine/Core/Events/Signal.cpp
 	src/TinyEngine/Core/Events/Slot.cpp

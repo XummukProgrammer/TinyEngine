@@ -20,15 +20,17 @@ namespace TinyEngine
 
     void Window::OnDraw()
     {
-        auto view = dynamic_cast<WindowImGUIView*>(GetView());
-        view->Begin();
-        _widgetsLayersContainer.Draw();
-        view->End();
+        auto view = dynamic_cast<IWindowView*>(GetView());
+        if (view->TryBegin())
+        {
+            _widgetsLayersContainer.Draw();
+            view->End();
+        }
     }
 
     void Window::SetTitle(std::string_view title)
     {
-        dynamic_cast<WindowImGUIView*>(GetView())->SetTitle(title);
+        dynamic_cast<IWindowView*>(GetView())->SetTitle(title);
     }
 
     std::unique_ptr<IWidgetView> Window::MakeImGUIView() const

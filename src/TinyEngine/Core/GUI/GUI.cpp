@@ -16,6 +16,7 @@ namespace TinyEngine
             container->Init();
         }
 
+        // TODO: Убрать CustomMake, указывать вьюху в контроллере
         _mainImGUIWindow = MakeWidget<ImGUIWindow>("MainWindow", Widget::ViewType::ImGUI, []()
         {
             return std::make_unique<MainWindowImGUIView>();
@@ -34,7 +35,10 @@ namespace TinyEngine
 
     void GUI::Draw()
     {
-        _widgetsLayersContainers[WidgetsContainerType::ImGUIWidgets]->Draw();
+        for (auto& [type, container] : _widgetsLayersContainers)
+        {
+            container->Draw();
+        }
     }
 
     Window* GUI::GetMainImGUIWindow() const

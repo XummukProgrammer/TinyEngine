@@ -8,6 +8,7 @@
 #include <TinyEngine/Core/GUI/Widgets/SameLine/SameLine.hpp>
 #include <TinyEngine/Core/GUI/Widgets/Button/Button.hpp>
 #include <TinyEngine/Core/GUI/Widgets/MenuBar/MenuBar.hpp>
+#include <TinyEngine/Core/GUI/Widgets/Popup/Popup.hpp>
 
 #include <fmt/format.h>
 #include "rlImGui.h"
@@ -84,6 +85,12 @@ namespace TinyEngine
 
             menuBar->GetRefMenuContainer().AddMenu(std::move(projectMenu));
         }
+        if (auto popup = _context.GetGUI()->MakePopup<ImGUIPopup>("Popup1", Widget::ViewType::ImGUI))
+        {
+            auto textBox = popup->MakeWidget<TextBox>("Hello");
+            textBox->SetText("Hello, World!!");
+            textBox->SetActive(false);
+        }
     }
 
     void Application::Run()
@@ -99,12 +106,7 @@ namespace TinyEngine
             _context.GetGUI()->Draw();
             if (isOpenTestModal)
             {
-                ImGui::OpenPopup("Test Modal");
-            }
-            if (ImGui::BeginPopupModal("Test Modal", nullptr))
-            {
-                ImGui::Text("Test");
-                ImGui::EndPopup();
+                ImGui::OpenPopup("Popup1");
             }
             rlImGuiEnd();
             _window.EndDrawing();

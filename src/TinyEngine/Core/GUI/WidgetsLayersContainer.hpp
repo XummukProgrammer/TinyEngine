@@ -91,7 +91,9 @@ namespace TinyEngine
 	template<typename T>
 	T* WidgetsLayersContainer::MakePopup(std::string_view widgetName, Widget::ViewType widgetType, const Widget::CustomMakeViewCallback& makeCallback)
 	{
-		return MakeWidget<T>(widgetName, widgetType, WidgetLayerType::PopupWindows, makeCallback);
+		auto widget = MakeWidget<T>(widgetName, widgetType, WidgetLayerType::PopupWindows, makeCallback);
+		widget->SetTitle(widgetName);
+		return widget;
 	}
 
 	template<typename T>

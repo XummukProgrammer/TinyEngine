@@ -12,7 +12,7 @@ namespace TinyEngine
 		virtual ~WindowImGUIView() = default;
 
 	public:
-		virtual void Begin() override;
+		virtual bool TryBegin() override;
 		virtual void End() override;
 
 		virtual void OnDraw() override {}
@@ -30,7 +30,7 @@ namespace TinyEngine
 		~MainWindowImGUIView() = default;
 
 	public:
-		virtual void Begin() override;
+		virtual bool TryBegin() override;
 		virtual void End() override;
 	};
 }
