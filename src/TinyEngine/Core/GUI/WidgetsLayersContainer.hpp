@@ -23,7 +23,7 @@ namespace TinyEngine
 
 	public:
 		template<typename T>
-		T* MakeWidget(std::string_view widgetName, Widget::ViewType widgetType, const Widget::CustomMakeViewCallback& makeCallback);
+		T* MakeWidget(std::string_view widgetName, Widget::ViewType widgetType);
 		bool HasWidget(std::string_view name) const;
 		template<typename T>
 		T* GetWidget(std::string_view name) const;
@@ -35,12 +35,12 @@ namespace TinyEngine
 	};
 
 	template<typename T>
-	T* WidgetsLayerContainer::MakeWidget(std::string_view widgetName, Widget::ViewType widgetType, const Widget::CustomMakeViewCallback& makeCallback)
+	T* WidgetsLayerContainer::MakeWidget(std::string_view widgetName, Widget::ViewType widgetType)
 	{
 		auto widget = std::make_unique<T>();
 
 		widget->SetName(widgetName);
-		widget->MakeView(widgetType, makeCallback);
+		widget->MakeView(widgetType);
 
 		_widgets.push_back(std::move(widget));
 		auto backWidget = GetBackWidget<T>();

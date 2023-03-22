@@ -38,4 +38,9 @@ namespace TinyEngine
     {
         return std::make_unique<WindowImGUIView>();
     }
+
+    std::unique_ptr<IWidgetView> MainImGUIWindow::MakeImGUIView() const
+    {
+        return std::make_unique<MainWindowImGUIView>();
+    }
 }

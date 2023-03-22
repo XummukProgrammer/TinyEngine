@@ -12,9 +12,6 @@ namespace TinyEngine
 	class Widget
 	{
 	public:
-		using CustomMakeViewCallback = std::function<std::unique_ptr<IWidgetView>()>;
-
-	public:
 		enum class ViewType
 		{
 			ImGUI
@@ -39,7 +36,7 @@ namespace TinyEngine
 		void SetName(std::string_view name) { _name = name; }
 		const std::string& GetName() const { return _name; }
 
-		void MakeView(ViewType type, const CustomMakeViewCallback& makeCallback);
+		void MakeView(ViewType type);
 		ViewType GetViewType() const { return _viewType; }
 		void SetView(std::unique_ptr<IWidgetView>&& view);
 		IWidgetView* GetView() const { return _view.get(); }

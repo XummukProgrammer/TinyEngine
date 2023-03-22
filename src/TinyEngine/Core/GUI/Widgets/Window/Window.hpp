@@ -22,7 +22,7 @@ namespace TinyEngine
 		const std::string& GetTitle() const { return _title; }
 
 		template<typename T>
-		T* MakeWidget(std::string_view widgetName, const Widget::CustomMakeViewCallback& makeCallback = nullptr);
+		T* MakeWidget(std::string_view widgetName);
 
 		template<typename T>
 		T* GetWidget(std::string_view widgetName) const;
@@ -42,9 +42,9 @@ namespace TinyEngine
 	};
 
 	template<typename T>
-	T* Window::MakeWidget(std::string_view widgetName, const Widget::CustomMakeViewCallback& makeCallback)
+	T* Window::MakeWidget(std::string_view widgetName)
 	{
-		return _widgetsLayersContainer.MakeWidget<T>(widgetName, GetViewType(), makeCallback);
+		return _widgetsLayersContainer.MakeWidget<T>(widgetName, GetViewType());
 	}
 
 	template<typename T>
@@ -59,14 +59,24 @@ namespace TinyEngine
 		return _widgetsLayersContainer.GetBackWidget<T>(GetViewType());
 	}
 
-	class ImGUIWindow final : public Window
+	class ImGUIWindow : public Window
 	{
 	public:
 		ImGUIWindow() = default;
-		~ImGUIWindow() = default;
+		virtual ~ImGUIWindow() = default;
 
 	protected:
 		virtual ViewType GetViewType() const override { return ViewType::ImGUI; }
+	};
+
+	class MainImGUIWindow final : public ImGUIWindow
+	{
+	public:
+		MainImGUIWindow() = default;
+		~MainImGUIWindow() = default;
+
+	protected:
+		virtual std::unique_ptr<IWidgetView> MakeImGUIView() const override;
 	};
 }
 

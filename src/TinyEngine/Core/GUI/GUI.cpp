@@ -18,12 +18,7 @@ namespace TinyEngine
             container->Init();
         }
 
-        // TODO: Убрать CustomMake, указывать вьюху в контроллере
-        _mainImGUIWindow = MakeWidget<ImGUIWindow>("MainWindow", Widget::ViewType::ImGUI, []()
-        {
-            return std::make_unique<MainWindowImGUIView>();
-        });
-        
+        _mainImGUIWindow = MakeWidget<MainImGUIWindow>("MainWindow", Widget::ViewType::ImGUI);
         _imGUIMenuBar = _mainImGUIWindow->MakeWidget<MenuBar>("MenuBar");
     }
 
