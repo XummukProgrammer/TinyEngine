@@ -19,6 +19,12 @@ namespace TinyEngine
 			ImGUIWidgets,
 			ImGUIPopups
 		};
+		
+		enum class WidgetsContainerAction
+		{
+			Widgets,
+			Popups
+		};
 
 	public:
 		GUI() = default;
@@ -53,7 +59,7 @@ namespace TinyEngine
 		void SetImGUIOpenPopup(std::string_view widgetName);
 
 	private:
-		WidgetsLayerContainer* GetContainer(Widget::ViewType viewType, bool isWidgets) const;
+		WidgetsLayerContainer* GetContainer(Widget::ViewType viewType, WidgetsContainerAction action) const;
 
 		void TryOpenPopup();
 
@@ -67,13 +73,13 @@ namespace TinyEngine
 	template<typename T>
 	T* GUI::MakeWidget(std::string_view widgetName, Widget::ViewType widgetType)
 	{
-		return GetContainer(widgetType, true)->MakeWidget<T>(widgetName, widgetType);
+		return GetContainer(widgetType, WidgetsContainerAction::Widgets)->MakeWidget<T>(widgetName, widgetType);
 	}
 
 	template<typename T>
 	T* GUI::MakePopup(std::string_view widgetName, Widget::ViewType widgetType)
 	{
-		auto widget = GetContainer(widgetType, false)->MakeWidget<T>(widgetName, widgetType);
+		auto widget = GetContainer(widgetType, WidgetsContainerAction::Popups)->MakeWidget<T>(widgetName, widgetType);
 		widget->SetTitle(widgetName);
 		return widget;
 	}
@@ -81,25 +87,25 @@ namespace TinyEngine
 	template<typename T>
 	T* GUI::GetWidget(std::string_view widgetName, Widget::ViewType widgetType) const
 	{
-		return GetContainer(widgetType, true)->GetWidget<T>(widgetName);
+		return GetContainer(widgetType, WidgetsContainerAction::Widgets)->GetWidget<T>(widgetName);
 	}
 
 	template<typename T>
 	T* GUI::GetBackWidget(Widget::ViewType widgetType) const
 	{
-		return GetContainer(widgetType, true)->GetBackWidget<T>(widgetType);
+		return GetContainer(widgetType, WidgetsContainerAction::Widgets)->GetBackWidget<T>(widgetType);
 	}
 
 	template<typename T>
 	T* GUI::GetPopup(std::string_view widgetName, Widget::ViewType widgetType) const
 	{
-		return GetContainer(widgetType, false)->GetWidget<T>(widgetName);
+		return GetContainer(widgetType, WidgetsContainerAction::Popups)->GetWidget<T>(widgetName);
 	}
 
 	template<typename T>
 	T* GUI::GetBackPopup(Widget::ViewType widgetType) const
 	{
-		return GetContainer(widgetType, false)->GetBackWidget<T>(widgetType);
+		return GetContainer(widgetType, WidgetsContainerAction::Popups)->GetBackWidget<T>(widgetType);
 	}
 }
 

@@ -55,31 +55,38 @@ namespace TinyEngine
         _imGUIOpenPopup = widgetName;
     }
 
-    WidgetsLayerContainer* GUI::GetContainer(Widget::ViewType viewType, bool isWidgets) const
+    WidgetsLayerContainer* GUI::GetContainer(Widget::ViewType viewType, WidgetsContainerAction action) const
     {
         WidgetsContainerType containerType{};
 
-        if (isWidgets)
+        switch (action)
         {
-            switch (viewType)
+        case TinyEngine::GUI::WidgetsContainerAction::Widgets:
             {
-            case TinyEngine::Widget::ViewType::ImGUI:
-                containerType = WidgetsContainerType::ImGUIWidgets;
-                break;
-            default:
-                break;
+                switch (viewType)
+                {
+                    case TinyEngine::Widget::ViewType::ImGUI:
+                        containerType = WidgetsContainerType::ImGUIWidgets;
+                        break;
+                    default:
+                        break;
+                }
             }
-        }
-        else
-        {
-            switch (viewType)
+            break;
+        case TinyEngine::GUI::WidgetsContainerAction::Popups:
             {
-            case TinyEngine::Widget::ViewType::ImGUI:
-                containerType = WidgetsContainerType::ImGUIPopups;
-                break;
-            default:
-                break;
+                switch (viewType)
+                {
+                    case TinyEngine::Widget::ViewType::ImGUI:
+                        containerType = WidgetsContainerType::ImGUIPopups;
+                        break;
+                    default:
+                        break;
+                }
             }
+            break;
+        default:
+            break;
         }
         
         return _widgetsLayersContainers.at(containerType).get();
