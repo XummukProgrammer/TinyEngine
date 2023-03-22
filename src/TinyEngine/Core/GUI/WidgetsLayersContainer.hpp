@@ -10,36 +10,11 @@
 
 namespace TinyEngine
 {
-	enum class WidgetLayerType
-	{
-		MainWindow,
-		PopupWindows
-	};
-
 	class WidgetsLayerContainer final
 	{
 	public:
 		WidgetsLayerContainer() = default;
 		~WidgetsLayerContainer() = default;
-
-	public:
-		void Draw();
-
-	public:
-		void AddWidget(std::unique_ptr<Widget>&& widget);
-		bool HasWidget(std::string_view name) const;
-		Widget* GetWidget(std::string_view name) const;
-		Widget* GetBackWidget() const;
-
-	private:
-		std::vector<std::unique_ptr<Widget>> _widgets;
-	};
-
-	class WidgetsLayersContainer final
-	{
-	public:
-		WidgetsLayersContainer() = default;
-		~WidgetsLayersContainer() = default;
 
 	public:
 		void Init();
@@ -48,66 +23,51 @@ namespace TinyEngine
 
 	public:
 		template<typename T>
-		T* MakeWidget(std::string_view widgetName, Widget::ViewType widgetType, WidgetLayerType layerType, const Widget::CustomMakeViewCallback& makeCallback = nullptr);
-
+		T* MakeWidget(std::string_view widgetName, Widget::ViewType widgetType, const Widget::CustomMakeViewCallback& makeCallback);
+		bool HasWidget(std::string_view name) const;
 		template<typename T>
-		T* MakeWidget(std::string_view widgetName, Widget::ViewType widgetType, const Widget::CustomMakeViewCallback& makeCallback = nullptr);
-
+		T* GetWidget(std::string_view name) const;
 		template<typename T>
-		T* MakePopup(std::string_view widgetName, Widget::ViewType widgetType, const Widget::CustomMakeViewCallback& makeCallback = nullptr);
-
-		template<typename T>
-		T* GetWidget(Widget::ViewType widgetType, std::string_view widgetName) const;
-
-		template<typename T>
-		T* GetBackWidget(Widget::ViewType widgetType) const;
+		T* GetBackWidget() const;
 
 	private:
-		WidgetsLayerContainer* GetContainer(WidgetLayerType type) const;
-
-	private:
-		std::map<WidgetLayerType, std::unique_ptr<WidgetsLayerContainer>> _layers;
+		std::vector<std::unique_ptr<Widget>> _widgets;
 	};
 
 	template<typename T>
-	T* WidgetsLayersContainer::MakeWidget(std::string_view widgetName, Widget::ViewType widgetType, WidgetLayerType layerType, const Widget::CustomMakeViewCallback& makeCallback)
+	T* WidgetsLayerContainer::MakeWidget(std::string_view widgetName, Widget::ViewType widgetType, const Widget::CustomMakeViewCallback& makeCallback)
 	{
 		auto widget = std::make_unique<T>();
 
 		widget->SetName(widgetName);
 		widget->MakeView(widgetType, makeCallback);
 
-		auto container = GetContainer(layerType);
-		container->AddWidget(std::move(widget));
-		return dynamic_cast<T*>(container->GetBackWidget());
+		_widgets.push_back(std::move(widget));
+		auto backWidget = GetBackWidget<T>();
+		backWidget->OnInit();
+		return backWidget;
 	}
 
 	template<typename T>
-	T* WidgetsLayersContainer::MakeWidget(std::string_view widgetName, Widget::ViewType widgetType, const Widget::CustomMakeViewCallback& makeCallback)
+	T* WidgetsLayerContainer::GetWidget(std::string_view name) const
 	{
-		return MakeWidget<T>(widgetName, widgetType, WidgetLayerType::MainWindow, makeCallback);
+		auto it = std::find_if(_widgets.begin(), _widgets.end(), [name](const std::unique_ptr<Widget>& widget)
+			{
+				return widget->GetName() == name;
+			});
+
+		if (it != _widgets.end())
+		{
+			return static_cast<T*>(it->get());
+		}
+
+		return nullptr;
 	}
 
 	template<typename T>
-	T* WidgetsLayersContainer::MakePopup(std::string_view widgetName, Widget::ViewType widgetType, const Widget::CustomMakeViewCallback& makeCallback)
+	T* WidgetsLayerContainer::GetBackWidget() const
 	{
-		auto widget = MakeWidget<T>(widgetName, widgetType, WidgetLayerType::PopupWindows, makeCallback);
-		widget->SetTitle(widgetName);
-		return widget;
-	}
-
-	template<typename T>
-	T* WidgetsLayersContainer::GetWidget(Widget::ViewType widgetType, std::string_view widgetName) const
-	{
-		auto container = GetContainer(widgetType);
-		return dynamic_cast<T*>(container->GetWidget(widgetName));
-	}
-
-	template<typename T>
-	T* WidgetsLayersContainer::GetBackWidget(Widget::ViewType widgetType) const
-	{
-		auto container = GetContainer(widgetType);
-		return dynamic_cast<T*>(container->GetBackWidget());
+		return static_cast<T*>(_widgets.back().get());
 	}
 }
 

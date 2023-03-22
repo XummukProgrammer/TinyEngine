@@ -19,6 +19,7 @@ namespace TinyEngine
 
 	public:
 		void SetTitle(std::string_view title);
+		const std::string& GetTitle() const { return _title; }
 
 		template<typename T>
 		T* MakeWidget(std::string_view widgetName, const Widget::CustomMakeViewCallback& makeCallback = nullptr);
@@ -36,7 +37,8 @@ namespace TinyEngine
 		virtual ViewType GetViewType() const = 0;
 
 	private:
-		WidgetsLayersContainer _widgetsLayersContainer;
+		WidgetsLayerContainer _widgetsLayersContainer;
+		std::string _title;
 	};
 
 	template<typename T>

@@ -4,12 +4,14 @@
 #include <TinyEngine/Core/GUI/Widgets/Window/WindowImGUIView.hpp>
 #include <TinyEngine/Core/GUI/Widgets/MenuBar/MenuBar.hpp>
 
+#include "imgui.h"
+
 namespace TinyEngine
 {
     void GUI::Init()
     {
-        _widgetsLayersContainers[WidgetsContainerType::ImGUIWidgets] = std::make_unique<WidgetsLayersContainer>();
-        _widgetsLayersContainers[WidgetsContainerType::ImGUIPopups] = std::make_unique<WidgetsLayersContainer>();
+        _widgetsLayersContainers[WidgetsContainerType::ImGUIWidgets] = std::make_unique<WidgetsLayerContainer>();
+        _widgetsLayersContainers[WidgetsContainerType::ImGUIPopups] = std::make_unique<WidgetsLayerContainer>();
 
         for (auto& [type, container] : _widgetsLayersContainers)
         {
@@ -39,6 +41,8 @@ namespace TinyEngine
         {
             container->Draw();
         }
+
+        TryOpenPopup();
     }
 
     Window* GUI::GetMainImGUIWindow() const
@@ -51,7 +55,12 @@ namespace TinyEngine
         return _imGUIMenuBar;
     }
 
-    WidgetsLayersContainer* GUI::GetContainer(Widget::ViewType viewType, bool isWidgets) const
+    void GUI::SetImGUIOpenPopup(std::string_view widgetName)
+    {
+        _imGUIOpenPopup = widgetName;
+    }
+
+    WidgetsLayerContainer* GUI::GetContainer(Widget::ViewType viewType, bool isWidgets) const
     {
         WidgetsContainerType containerType{};
 
@@ -79,5 +88,14 @@ namespace TinyEngine
         }
         
         return _widgetsLayersContainers.at(containerType).get();
+    }
+
+    void GUI::TryOpenPopup()
+    {
+        if (!_imGUIOpenPopup.empty())
+        {
+            ImGui::OpenPopup(_imGUIOpenPopup.c_str());
+            _imGUIOpenPopup.clear();
+        }
     }
 }

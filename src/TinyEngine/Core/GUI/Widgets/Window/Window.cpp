@@ -30,6 +30,7 @@ namespace TinyEngine
 
     void Window::SetTitle(std::string_view title)
     {
+        _title = title;
         dynamic_cast<IWindowView*>(GetView())->SetTitle(title);
     }
 

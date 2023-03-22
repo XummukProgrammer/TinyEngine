@@ -12,6 +12,7 @@ namespace TinyEngine
 		virtual ~Popup() = default;
 
 	public:
+		void Open();
 
 	protected:
 		virtual std::unique_ptr<IWidgetView> MakeImGUIView() const override;

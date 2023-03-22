@@ -19,8 +19,6 @@ namespace TinyEngine
 {
     Application Application::_singleton;
 
-    bool isOpenTestModal = false;
-
     void Application::Load()
     {
         OnInit();
@@ -76,9 +74,9 @@ namespace TinyEngine
 
             auto projectCloseAppItem = std::make_unique<MenuBarItem>();
             projectCloseAppItem->SetTitle("Close App");
-            projectCloseAppItem->GetOnActionSignal().Connect(projectCloseAppItem->GetOnActionSignal().MakeSlot([]()
+            projectCloseAppItem->GetOnActionSignal().Connect(projectCloseAppItem->GetOnActionSignal().MakeSlot([this]()
             {
-                isOpenTestModal = true;
+                GetRefContext().GetGUI()->GetPopup<ImGUIPopup>("Popup1", Widget::ViewType::ImGUI)->Open();
             }));
 
             projectMenu->AddItem(std::move(projectCloseAppItem));
@@ -104,10 +102,6 @@ namespace TinyEngine
             OnDraw();
             rlImGuiBegin();
             _context.GetGUI()->Draw();
-            if (isOpenTestModal)
-            {
-                ImGui::OpenPopup("Popup1");
-            }
             rlImGuiEnd();
             _window.EndDrawing();
         }
