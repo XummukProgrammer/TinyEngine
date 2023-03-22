@@ -13,6 +13,7 @@ namespace TinyEngine
 {
 	class Project;
 	class GUI;
+	class Debug;
 
 	class Context
 	{
@@ -54,6 +55,7 @@ namespace TinyEngine
 
 		Project* GetProject() const;
 		GUI* GetGUI() const;
+		Debug* GetDebug() const;
 
 	private:
 		int _argc;

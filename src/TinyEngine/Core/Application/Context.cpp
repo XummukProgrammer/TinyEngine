@@ -3,6 +3,7 @@
 #include <TinyEngine/Core/Serialization/XmlArchive.hpp>
 #include <TinyEngine/Core/Application/Project.hpp>
 #include <TinyEngine/Core/GUI/GUI.hpp>
+#include <TinyEngine/Core/Debug/Debug.hpp>
 
 namespace TinyEngine
 {
@@ -40,5 +41,11 @@ namespace TinyEngine
     {
         static GUI gui;
         return &gui;
+    }
+
+    Debug* Context::GetDebug() const
+    {
+        static Debug debug;
+        return &debug;
     }
 }

@@ -2,6 +2,7 @@
 
 #include <TinyEngine/Core/Application/Project.hpp>
 #include <TinyEngine/Core/GUI/GUI.hpp>
+#include <TinyEngine/Core/Debug/Debug.hpp>
 
 #include <TinyEngine/Core/GUI/Widgets/TextBox/TextBox.hpp>
 #include <TinyEngine/Core/GUI/Widgets/Window/Window.hpp>
@@ -139,15 +140,19 @@ namespace TinyEngine
 
     void Application::OnInit()
     {
-        _context.GetGUI()->Deinit();
         _context.GetRefFileSystem().Init();
+        _context.GetDebug()->Init();
         _context.GetProject()->Init();
+
+        _context.GetDebug()->InfoMessage("Init Engine");
     }
 
     void Application::OnDeinit()
     {
-        _context.GetRefFileSystem().Deinit();
+        _context.GetGUI()->Deinit();
         _context.GetProject()->Deinit();
+        _context.GetDebug()->Deinit();
+        _context.GetRefFileSystem().Deinit();
 
         rlImGuiShutdown();
     }

@@ -44,6 +44,8 @@ set(ENGINE_HEADERS
 	
 	src/TinyEngine/Core/Events/Signal.hpp
 	src/TinyEngine/Core/Events/Slot.hpp
+	
+	src/TinyEngine/Core/Debug/Debug.hpp
 )
 
 set(ENGINE_SOURCES
@@ -92,4 +94,6 @@ set(ENGINE_SOURCES
 	
 	src/TinyEngine/Core/Events/Signal.cpp
 	src/TinyEngine/Core/Events/Slot.cpp
+	
+	src/TinyEngine/Core/Debug/Debug.cpp
 )
