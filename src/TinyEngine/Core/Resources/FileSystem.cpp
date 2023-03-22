@@ -2,11 +2,14 @@
 
 #include <TinyEngine/Core/Application/Application.hpp>
 
+#include <vector>
+
 namespace TinyEngine
 {
 	void FileSystem::Init()
 	{
 		_exePath = std::filesystem::path(Application::GetSingleton().GetContext().GetArgv()[0]);
+		CreateSystemDirs();
 	}
 
 	void FileSystem::Deinit()
@@ -37,5 +40,18 @@ namespace TinyEngine
 	std::wstring FileSystem::BuildPath(DirType type, std::wstring_view path) const
 	{
 		return GetDirByType(type) + std::wstring{path};
+	}
+
+	void FileSystem::CreateSystemDirs()
+	{
+		const std::vector<DirType> _dirTypesToCreate = { DirType::Assets, DirType::Logs };
+		for (const auto& dirType : _dirTypesToCreate)
+		{
+			const auto& dir = GetDirByType(dirType);
+			if (!std::filesystem::exists(dir))
+			{
+				std::filesystem::create_directories(dir);
+			}
+		}
 	}
 }

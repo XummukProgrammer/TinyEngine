@@ -32,6 +32,9 @@ namespace TinyEngine
 		std::wstring BuildPath(DirType type, std::wstring_view path) const;
 
 	private:
+		void CreateSystemDirs();
+
+	private:
 		mutable std::filesystem::path _exePath;
 	};
 }
