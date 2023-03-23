@@ -11,10 +11,6 @@
 #include <TinyEngine/Core/GUI/Widgets/MenuBar/MenuBar.hpp>
 #include <TinyEngine/Core/GUI/Widgets/Popup/Popup.hpp>
 
-#include <fmt/format.h>
-
-#include "imgui.h"
-
 namespace TinyEngine
 {
     Application Application::_singleton;
@@ -136,8 +132,6 @@ namespace TinyEngine
         _context.GetRefFileSystem().Init();
         _context.GetDebug()->Init();
         _context.GetProject()->Init();
-
-        _context.GetDebug()->InfoMessage("Init Engine");
     }
 
     void Application::OnDeinit()

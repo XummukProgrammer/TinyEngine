@@ -3,6 +3,8 @@
 #include <TinyEngine/Core/Data/Time.hpp>
 #include <TinyEngine/Core/Data/String.hpp>
 
+#include <TinyEngine/Core/Application/Application.hpp>
+
 namespace TinyEngine
 {
     void DebugLogMessage::Init(std::string_view prefix, std::string_view time, std::string_view text)
@@ -76,5 +78,34 @@ namespace TinyEngine
     {
         const auto& time = Time().GetNowTimeString();
         return String(time).Replace("\n", "").Get();
+    }
+
+    void DebugUtils::Info(std::string_view text)
+    {
+        Application::GetSingleton().GetRefContext().GetDebug()->InfoMessage(text);
+    }
+
+    void DebugUtils::Debug(std::string_view text)
+    {
+        Application::GetSingleton().GetRefContext().GetDebug()->DebugMessage(text);
+    }
+
+    void DebugUtils::Error(std::string_view text)
+    {
+        Application::GetSingleton().GetRefContext().GetDebug()->ErrorMessage(text);
+    }
+
+    void DebugUtils::Assert(bool condition, std::string_view text)
+    {
+        if (!condition)
+        {
+            Error(text);
+            DebugBreak();
+        }
+    }
+
+    void DebugUtils::DebugBreak()
+    {
+        __debugbreak();
     }
 }
