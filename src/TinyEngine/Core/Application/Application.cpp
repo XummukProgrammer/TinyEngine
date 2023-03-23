@@ -132,10 +132,14 @@ namespace TinyEngine
         _context.GetRefFileSystem().Init();
         _context.GetDebug()->Init();
         _context.GetProject()->Init();
+
+        DEBUG_INFO("Tiny Engine initialized!");
     }
 
     void Application::OnDeinit()
     {
+        DEBUG_INFO("Tiny Engine destroy");
+
         _context.GetGUI()->Deinit();
         _context.GetProject()->Deinit();
         _context.GetDebug()->Deinit();
@@ -155,10 +159,13 @@ namespace TinyEngine
     {
         const auto& projectFile = _context.GetProject()->GetProjectFile();
         _window.SetTitle(fmt::format("{}_{}", projectFile.GetName(), projectFile.GetVersion()));
+
+        DEBUG_INFO("Project loaded! Name: {}, Version: {}", projectFile.GetName(), projectFile.GetVersion());
     }
 
     void Application::OnStarted()
     {
+        DEBUG_INFO("Tiny Engine started!");
     }
 
     void StartApp(int argc, char** argv)
