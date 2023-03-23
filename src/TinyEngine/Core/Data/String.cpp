@@ -27,7 +27,7 @@ namespace TinyEngine
         return _string.c_str();
     }
 
-    void String::Replace(std::string_view target, std::string_view replacement)
+    String& String::Replace(std::string_view target, std::string_view replacement)
     {
         std::string buf;
         std::size_t pos = 0;
@@ -52,5 +52,7 @@ namespace TinyEngine
 
         buf.append(_string, prevPos, _string.size() - prevPos);
         _string.swap(buf);
+
+        return *this;
     }
 }

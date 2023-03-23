@@ -75,8 +75,6 @@ namespace TinyEngine
     std::string Debug::GetTime() const
     {
         const auto& time = Time().GetNowTimeString();
-        auto timeStr = String(time);
-        timeStr.Replace("\n", "");
-        return timeStr.Get();
+        return String(time).Replace("\n", "").Get();
     }
 }
