@@ -12,7 +12,6 @@
 #include <TinyEngine/Core/GUI/Widgets/Popup/Popup.hpp>
 
 #include <fmt/format.h>
-#include "rlImGui.h"
 
 #include "imgui.h"
 
@@ -28,11 +27,7 @@ namespace TinyEngine
     void Application::Create()
     {
         _window.Init(_context.GetScreenWidth(), _context.GetScreenHeight(), _context.GetWindowTitle());
-        rlImGuiSetup(true);
         _context.GetGUI()->Init();
-
-        auto& io = ImGui::GetIO();
-        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
         ProjectFileCreateParams params;
         params.path = _context.GetFileSystem().BuildPath(FileSystem::Assets, L"project.xml");
@@ -101,9 +96,7 @@ namespace TinyEngine
             _window.BeginDrawing();
             _window.ClearBackground(RAYWHITE);
             OnDraw();
-            rlImGuiBegin();
             _context.GetGUI()->Draw();
-            rlImGuiEnd();
             _window.EndDrawing();
         }
     }
@@ -153,8 +146,6 @@ namespace TinyEngine
         _context.GetProject()->Deinit();
         _context.GetDebug()->Deinit();
         _context.GetRefFileSystem().Deinit();
-
-        rlImGuiShutdown();
     }
 
     void Application::OnUpdate()

@@ -5,11 +5,17 @@
 #include <TinyEngine/Core/GUI/Widgets/MenuBar/MenuBar.hpp>
 
 #include "imgui.h"
+#include "rlImGui.h"
 
 namespace TinyEngine
 {
     void GUI::Init()
     {
+        rlImGuiSetup(true);
+
+        auto& io = ImGui::GetIO();
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+
         _widgetsLayersContainers[WidgetsContainerType::ImGUIWidgets] = std::make_unique<WidgetsLayerContainer>();
         _widgetsLayersContainers[WidgetsContainerType::ImGUIPopups] = std::make_unique<WidgetsLayerContainer>();
 
@@ -28,16 +34,22 @@ namespace TinyEngine
         {
             container->Deinit();
         }
+
+        rlImGuiShutdown();
     }
 
     void GUI::Draw()
     {
+        rlImGuiBegin();
+
         for (auto& [type, container] : _widgetsLayersContainers)
         {
             container->Draw();
         }
 
         TryOpenPopup();
+
+        rlImGuiEnd();
     }
 
     Window* GUI::GetMainImGUIWindow() const
