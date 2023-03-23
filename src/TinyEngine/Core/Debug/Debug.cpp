@@ -1,5 +1,8 @@
 ﻿#include "Debug.hpp"
 
+#include <TinyEngine/Core/Data/Time.hpp>
+#include <TinyEngine/Core/Data/String.hpp>
+
 namespace TinyEngine
 {
     void DebugLogMessage::Init(std::string_view prefix, std::string_view time, std::string_view text)
@@ -71,6 +74,9 @@ namespace TinyEngine
 
     std::string Debug::GetTime() const
     {
-        return "";
+        const auto& time = Time().GetNowTimeString();
+        auto timeStr = String(time);
+        timeStr.Replace("\n", "");
+        return timeStr.Get();
     }
 }

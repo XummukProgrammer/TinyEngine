@@ -46,6 +46,9 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/Events/Slot.hpp
 	
 	src/TinyEngine/Core/Debug/Debug.hpp
+	
+	src/TinyEngine/Core/Data/Time.hpp
+	src/TinyEngine/Core/Data/String.hpp
 )
 
 set(ENGINE_SOURCES
@@ -96,4 +99,7 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/Events/Slot.cpp
 	
 	src/TinyEngine/Core/Debug/Debug.cpp
+	
+	src/TinyEngine/Core/Data/Time.cpp
+	src/TinyEngine/Core/Data/String.cpp
 )

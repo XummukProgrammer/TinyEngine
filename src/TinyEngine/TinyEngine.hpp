@@ -29,4 +29,7 @@
 
 #include <TinyEngine/Core/Events/Signal.hpp>
 
+#include <TinyEngine/Core/Data/Time.hpp>
+#include <TinyEngine/Core/Data/String.hpp>
+
 #endif // _TINY_ENGINE_HEADER_
