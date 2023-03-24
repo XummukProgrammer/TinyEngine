@@ -7,11 +7,15 @@
 #include <memory>
 #include <string>
 #include <map>
+#include <functional>
 
 namespace TinyEngine
 {
 	class WidgetsLayerContainer final
 	{
+	public:
+		using DrawCallback = std::function<void(Widget*, bool)>;
+
 	public:
 		WidgetsLayerContainer() = default;
 		~WidgetsLayerContainer() = default;
@@ -19,7 +23,7 @@ namespace TinyEngine
 	public:
 		void Init();
 		void Deinit();
-		void Draw();
+		void Draw(const DrawCallback& onDrawCallback = nullptr);
 
 	public:
 		template<typename T>

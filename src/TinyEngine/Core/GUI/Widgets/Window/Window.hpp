@@ -30,6 +30,10 @@ namespace TinyEngine
 		template<typename T>
 		T* GetBackWidget() const;
 
+	protected:
+		const WidgetsLayerContainer& GetWidgetsLayersContainer() const { return _widgetsLayersContainer; }
+		WidgetsLayerContainer& GetRefWidgetsLayersContainer() { return _widgetsLayersContainer; }
+
 	private:
 		virtual std::unique_ptr<IWidgetView> MakeImGUIView() const override;
 

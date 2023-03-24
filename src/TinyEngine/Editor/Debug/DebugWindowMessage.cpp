@@ -9,13 +9,12 @@ namespace TinyEngine
         _message = message;
         _showParams = showParams;
 
-        _prefix = MakeWidget<TextBox>("prefix");
-        _sameLines.push_back(MakeWidget<SameLine>("sameline_1"));
-        _time = MakeWidget<TextBox>("time");
-        _sameLines.push_back(MakeWidget<SameLine>("sameline_2"));
-        _function = MakeWidget<TextBox>("function");
-        _sameLines.push_back(MakeWidget<SameLine>("sameline_3"));
-        _text = MakeWidget<TextBox>("text");
+        _horizontalLayout = MakeWidget<HorizontalLayout>("HorizontalLayout");
+
+        _prefix = _horizontalLayout->MakeWidget<TextBox>("prefix");
+        _time = _horizontalLayout->MakeWidget<TextBox>("time");
+        _function = _horizontalLayout->MakeWidget<TextBox>("function");
+        _text = _horizontalLayout->MakeWidget<TextBox>("text");
 
         _prefix->SetText(String("[{}]").Params(message.GetPrefix()).Get());
         _prefix->SetColor(raylib::Color::Blue());
@@ -40,9 +39,5 @@ namespace TinyEngine
         _prefix->SetVisible(_showParams->isShowPrefix);
         _time->SetVisible(_showParams->isShowTime);
         _function->SetVisible(_showParams->isShowFunction);
-
-        _sameLines[0]->SetVisible(_showParams->isShowPrefix);
-        _sameLines[1]->SetVisible(_showParams->isShowTime);
-        _sameLines[2]->SetVisible(_showParams->isShowFunction);
     }
 }

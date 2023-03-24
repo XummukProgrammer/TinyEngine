@@ -27,6 +27,7 @@
 #include <TinyEngine/Core/GUI/Widgets/MenuBar/MenuBar.hpp>
 #include <TinyEngine/Core/GUI/Widgets/Popup/Popup.hpp>
 #include <TinyEngine/Core/GUI/Widgets/Child/Child.hpp>
+#include <TinyEngine/Core/GUI/Widgets/HorizontalLayout/HorizontalLayout.hpp>
 
 #include <TinyEngine/Core/Events/Signal.hpp>
 

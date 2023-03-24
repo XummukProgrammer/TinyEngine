@@ -44,6 +44,9 @@ set(ENGINE_HEADERS
 	src/TinyEngine/Core/GUI/Widgets/Child/Child.hpp
 	src/TinyEngine/Core/GUI/Widgets/Child/IChildView.hpp
 	src/TinyEngine/Core/GUI/Widgets/Child/ChildImGUIView.hpp
+	src/TinyEngine/Core/GUI/Widgets/HorizontalLayout/HorizontalLayout.hpp
+	src/TinyEngine/Core/GUI/Widgets/HorizontalLayout/IHorizontalLayoutView.hpp
+	src/TinyEngine/Core/GUI/Widgets/HorizontalLayout/HorizontalLayoutImGUIView.hpp
 	
 	src/TinyEngine/Core/Events/Signal.hpp
 	src/TinyEngine/Core/Events/Slot.hpp
@@ -104,6 +107,9 @@ set(ENGINE_SOURCES
 	src/TinyEngine/Core/GUI/Widgets/Child/Child.cpp
 	src/TinyEngine/Core/GUI/Widgets/Child/IChildView.cpp
 	src/TinyEngine/Core/GUI/Widgets/Child/ChildImGUIView.cpp
+	src/TinyEngine/Core/GUI/Widgets/HorizontalLayout/HorizontalLayout.cpp
+	src/TinyEngine/Core/GUI/Widgets/HorizontalLayout/IHorizontalLayoutView.cpp
+	src/TinyEngine/Core/GUI/Widgets/HorizontalLayout/HorizontalLayoutImGUIView.cpp
 	
 	src/TinyEngine/Core/Events/Signal.cpp
 	src/TinyEngine/Core/Events/Slot.cpp
