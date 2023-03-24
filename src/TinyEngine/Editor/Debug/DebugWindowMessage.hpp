@@ -27,16 +27,6 @@ namespace TinyEngine
 		std::vector<SameLine*> _sameLines;
 		DebugLogMessage _message;
 	};
-
-	class ImGUIDebugWindowMessage final : public DebugWindowMessage
-	{
-	public:
-		ImGUIDebugWindowMessage() = default;
-		~ImGUIDebugWindowMessage() = default;
-
-	protected:
-		virtual ViewType GetViewType() const override { return ViewType::ImGUI; }
-	};
 }
 
 #endif // _DEBUG_WINDOW_MESSAGE_HEADER_

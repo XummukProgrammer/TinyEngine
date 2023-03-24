@@ -29,7 +29,7 @@ namespace TinyEngine
     void DebugWindowMessages::AddMessage(const DebugLogMessage& message)
     {
         static int i = 0;
-        auto msg = MakeWidget<ImGUIDebugWindowMessage>(String("message_{}").Params(i).Get());
+        auto msg = MakeWidget<DebugWindowMessage>(String("message_{}").Params(i).Get());
         msg->SetTitle(String("message_{}").Params(i).Get());
         msg->Init(message, _isShowPrefix, _isShowTime, _isShowFunction);
         ++i;

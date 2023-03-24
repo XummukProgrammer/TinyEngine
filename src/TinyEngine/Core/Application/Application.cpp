@@ -48,7 +48,7 @@ namespace TinyEngine
             menuBar->GetRefMenuContainer().AddMenu(std::move(projectMenu));
         }
 
-        auto debugWindow = _context.GetGUI()->GetMainImGUIWindow()->MakeWidget<DebugImGUIWindow>("DebugWindow");
+        auto debugWindow = _context.GetGUI()->GetMainImGUIWindow()->MakeWidget<DebugWindow>("DebugWindow");
         debugWindow->SetTitle("DebugWindow");
     }
 

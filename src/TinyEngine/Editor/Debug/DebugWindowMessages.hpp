@@ -44,21 +44,11 @@ namespace TinyEngine
 		MessageAddedSlot _messageAddedSlot;
 
 	private:
-		std::vector<ImGUIDebugWindowMessage*> _messages;
+		std::vector<DebugWindowMessage*> _messages;
 
 		bool _isShowPrefix = true;
 		bool _isShowFunction = true;
 		bool _isShowTime = true;
-	};
-
-	class ImGUIDebugWindowMessages final : public DebugWindowMessages
-	{
-	public:
-		ImGUIDebugWindowMessages() = default;
-		~ImGUIDebugWindowMessages() = default;
-
-	protected:
-		virtual ViewType GetViewType() const override { return ViewType::ImGUI; }
 	};
 }
 

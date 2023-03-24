@@ -17,16 +17,6 @@ namespace TinyEngine
 	protected:
 		virtual std::unique_ptr<IWidgetView> MakeImGUIView() const override;
 	};
-
-	class ImGUIChild : public Child
-	{
-	public:
-		ImGUIChild() = default;
-		virtual ~ImGUIChild() = default;
-
-	protected:
-		virtual ViewType GetViewType() const override { return ViewType::ImGUI; }
-	};
 }
 
 #endif // _CHILD_HEADER_

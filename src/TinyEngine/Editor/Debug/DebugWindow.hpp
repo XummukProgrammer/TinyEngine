@@ -65,17 +65,7 @@ namespace TinyEngine
 		Button* _hidePrefixButton = nullptr;
 		Button* _hideFunctionButton = nullptr;
 		Button* _hideTimeButton = nullptr;
-		ImGUIDebugWindowMessages* _messages;
-	};
-
-	class DebugImGUIWindow final : public DebugWindow
-	{
-	public:
-		DebugImGUIWindow() = default;
-		~DebugImGUIWindow() = default;
-
-	protected:
-		virtual ViewType GetViewType() const override { return ViewType::ImGUI; }
+		DebugWindowMessages* _messages;
 	};
 }
 

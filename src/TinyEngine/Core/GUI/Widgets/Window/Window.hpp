@@ -33,9 +33,6 @@ namespace TinyEngine
 	private:
 		virtual std::unique_ptr<IWidgetView> MakeImGUIView() const override;
 
-	protected:
-		virtual ViewType GetViewType() const = 0;
-
 	private:
 		WidgetsLayerContainer _widgetsLayersContainer;
 		std::string _title;
@@ -59,17 +56,7 @@ namespace TinyEngine
 		return _widgetsLayersContainer.GetBackWidget<T>(GetViewType());
 	}
 
-	class ImGUIWindow : public Window
-	{
-	public:
-		ImGUIWindow() = default;
-		virtual ~ImGUIWindow() = default;
-
-	protected:
-		virtual ViewType GetViewType() const override { return ViewType::ImGUI; }
-	};
-
-	class MainImGUIWindow final : public ImGUIWindow
+	class MainImGUIWindow final : public Window
 	{
 	public:
 		MainImGUIWindow() = default;

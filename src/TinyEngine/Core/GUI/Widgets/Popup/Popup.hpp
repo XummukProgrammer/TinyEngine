@@ -17,16 +17,6 @@ namespace TinyEngine
 	protected:
 		virtual std::unique_ptr<IWidgetView> MakeImGUIView() const override;
 	};
-
-	class ImGUIPopup final : public Popup
-	{
-	public:
-		ImGUIPopup() = default;
-		~ImGUIPopup() = default;
-
-	protected:
-		virtual ViewType GetViewType() const override { return ViewType::ImGUI; }
-	};
 }
 
 #endif // _POPUP_HEADER_

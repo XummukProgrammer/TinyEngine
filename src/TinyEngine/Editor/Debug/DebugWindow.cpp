@@ -49,7 +49,7 @@ namespace TinyEngine
         _hideTimeSlot = _hideTimeButton->GetOnPressedSignal().MakeSlot(std::bind(&DebugWindow::OnHideTime, this));
         _hideTimeButton->GetOnPressedSignal().Connect(_hideTimeSlot);
 
-        _messages = MakeWidget<ImGUIDebugWindowMessages>("MessagesChild");
+        _messages = MakeWidget<DebugWindowMessages>("MessagesChild");
         _messages->SetTitle("MessagesChild");
 
         TogglePrefixButtons();
