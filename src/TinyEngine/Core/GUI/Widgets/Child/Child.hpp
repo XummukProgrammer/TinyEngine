@@ -12,6 +12,7 @@ namespace TinyEngine
 		~Child() = default;
 
 	public:
+		virtual void OnDraw() override;
 
 	protected:
 		virtual std::unique_ptr<IWidgetView> MakeImGUIView() const override;

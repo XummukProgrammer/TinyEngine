@@ -4,6 +4,8 @@
 #include <TinyEngine/Core/GUI/Widgets/Window/WindowImGUIView.hpp>
 #include <TinyEngine/Core/GUI/Widgets/MenuBar/MenuBar.hpp>
 
+#include <TinyEngine/Core/Data/String.hpp>
+
 #include "imgui.h"
 #include "rlImGui.h"
 

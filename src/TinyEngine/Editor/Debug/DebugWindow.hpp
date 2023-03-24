@@ -2,10 +2,9 @@
 #define _DEBUG_WINDOW_HEADER_
 
 #include <TinyEngine/Core/GUI/Widgets/Window/Window.hpp>
-#include <TinyEngine/Core/GUI/Widgets/TextBox/TextBox.hpp>
 #include <TinyEngine/Core/GUI/Widgets/Button/Button.hpp>
 #include <TinyEngine/Core/GUI/Widgets/SameLine/SameLine.hpp>
-#include <TinyEngine/Core/GUI/Widgets/Child/Child.hpp>
+#include <TinyEngine/Editor/Debug/DebugWindowMessages.hpp>
 
 #include <TinyEngine/Core/Debug/Debug.hpp>
 
@@ -18,18 +17,6 @@ namespace TinyEngine
 	class DebugWindow : public Window
 	{
 	public:
-		struct Msg
-		{
-			TextBox* prefix = nullptr;
-			TextBox* time = nullptr;
-			TextBox* function = nullptr;
-			TextBox* text = nullptr;
-			std::vector<SameLine*> sameLines;
-			DebugLogMessage message;
-		};
-
-	public:
-		using MessageAddedSlot = std::shared_ptr<Slot<const DebugLogMessage&>>;
 		using ButtonPressedSlot = std::shared_ptr<Slot<>>;
 
 	public:
@@ -41,10 +28,6 @@ namespace TinyEngine
 		virtual void OnDeinit() override;
 
 	private:
-		void AddMessage(const DebugLogMessage& message);
-		void UpdateMessagesText();
-		void UpdateMessageText(const Msg& msg);
-
 		void SetIsShowPrefix(bool isShow);
 		void SetIsShowFunction(bool isShow);
 		void SetIsShowTime(bool isShow);
@@ -56,8 +39,6 @@ namespace TinyEngine
 	private:
 		void OnClear();
 
-		void OnMessageAdded(const DebugLogMessage& message);
-
 		void OnShowPrefix();
 		void OnHidePrefix();
 
@@ -68,7 +49,6 @@ namespace TinyEngine
 		void OnHideTime();
 
 	private:
-		MessageAddedSlot _messageAddedSlot;
 		ButtonPressedSlot _clearSlot;
 		ButtonPressedSlot _showPrefixSlot;
 		ButtonPressedSlot _hidePrefixSlot;
@@ -85,13 +65,7 @@ namespace TinyEngine
 		Button* _hidePrefixButton = nullptr;
 		Button* _hideFunctionButton = nullptr;
 		Button* _hideTimeButton = nullptr;
-		Child* _messagesChild;
-
-		std::vector<Msg> _msgs;
-
-		bool _isShowPrefix = true;
-		bool _isShowFunction = true;
-		bool _isShowTime = true;
+		ImGUIDebugWindowMessages* _messages;
 	};
 
 	class DebugImGUIWindow final : public DebugWindow

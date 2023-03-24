@@ -49,7 +49,7 @@ namespace TinyEngine
         }
 
         auto debugWindow = _context.GetGUI()->GetMainImGUIWindow()->MakeWidget<DebugImGUIWindow>("DebugWindow");
-        debugWindow->SetTitle("Debug Window");
+        debugWindow->SetTitle("DebugWindow");
     }
 
     void Application::Run()

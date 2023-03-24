@@ -49,33 +49,18 @@ namespace TinyEngine
         _hideTimeSlot = _hideTimeButton->GetOnPressedSignal().MakeSlot(std::bind(&DebugWindow::OnHideTime, this));
         _hideTimeButton->GetOnPressedSignal().Connect(_hideTimeSlot);
 
+        _messages = MakeWidget<ImGUIDebugWindowMessages>("MessagesChild");
+        _messages->SetTitle("MessagesChild");
+
         TogglePrefixButtons();
         ToggleFunctionButtons();
         ToggleTimeButtons();
-
-        _messagesChild = MakeWidget<ImGUIChild>("MessagesChild");
-        _messagesChild->SetTitle("MessagesChild");
-
-        auto allLogMessages = Application::GetSingleton().GetRefContext().GetDebug()->GetDebugLogMessages(Debug::DebugLogMessagesType::All);
-        for (int i = 0; i < 100; ++i)
-        for (const auto& message : allLogMessages->GetMessages())
-        {
-            AddMessage(message);
-        }
-
-        auto& onMessageAddedSignal = allLogMessages->GetOnMessageAddedSignal();
-        _messageAddedSlot = onMessageAddedSignal.MakeSlot(std::bind(&DebugWindow::OnMessageAdded, this, std::placeholders::_1));
-        onMessageAddedSignal.Connect(_messageAddedSlot);
 
         Window::OnInit();
     }
 
     void DebugWindow::OnDeinit()
     {
-        auto& onMessageAddedSignal = Application::GetSingleton().GetRefContext().GetDebug()->GetDebugLogMessages(Debug::DebugLogMessagesType::All)->GetOnMessageAddedSignal();
-        onMessageAddedSignal.Disconnect(_messageAddedSlot);
-        _messageAddedSlot.reset();
-
         _clearButton->GetOnPressedSignal().Disconnect(_clearSlot);
         _clearSlot.reset();
 
@@ -100,103 +85,44 @@ namespace TinyEngine
         Window::OnDeinit();
     }
 
-    void DebugWindow::AddMessage(const DebugLogMessage& message)
-    {
-        auto msg = Msg();
-        
-        static int i = 0;
-        msg.prefix = _messagesChild->MakeWidget<TextBox>(String("message_{}_prefix").Params(i).Get());
-        msg.sameLines.push_back(_messagesChild->MakeWidget<SameLine>(String("message_{}_sameline_1").Params(i).Get()));
-        msg.time = _messagesChild->MakeWidget<TextBox>(String("message_{}_time").Params(i).Get());
-        msg.sameLines.push_back(_messagesChild->MakeWidget<SameLine>(String("message_{}_sameline_2").Params(i).Get()));
-        msg.function = _messagesChild->MakeWidget<TextBox>(String("message_{}_function").Params(i).Get());
-        msg.sameLines.push_back(_messagesChild->MakeWidget<SameLine>(String("message_{}_sameline_3").Params(i).Get()));
-        msg.text = _messagesChild->MakeWidget<TextBox>(String("message_{}_text").Params(i).Get());
-        ++i;
-
-        msg.prefix->SetText(String("[{}]").Params(message.GetPrefix()).Get());
-        msg.prefix->SetColor(raylib::Color::Blue());
-
-        msg.time->SetText(String("[{}]").Params(message.GetTime()).Get());
-        msg.time->SetColor(raylib::Color::Green());
-
-        msg.function->SetText(String("[{}]").Params(message.GetFunction()).Get());
-        msg.function->SetColor(raylib::Color::Red());
-
-        msg.text->SetText(message.GetText());
-
-        msg.message = message;
-
-        UpdateMessageText(msg);
-
-        _msgs.push_back(msg);
-    }
-
-    void DebugWindow::UpdateMessagesText()
-    {
-        for (const auto& msg : _msgs)
-        {
-            UpdateMessageText(msg);
-        }
-    }
-
-    void DebugWindow::UpdateMessageText(const Msg& msg)
-    {
-        msg.prefix->SetVisible(_isShowPrefix);
-        msg.time->SetVisible(_isShowTime);
-        msg.function->SetVisible(_isShowFunction);
-
-        msg.sameLines[0]->SetVisible(_isShowPrefix);
-        msg.sameLines[1]->SetVisible(_isShowTime);
-        msg.sameLines[2]->SetVisible(_isShowFunction);
-    }
-
     void DebugWindow::SetIsShowPrefix(bool isShow)
     {
-        _isShowPrefix = isShow;
+        _messages->SetIsShowPrefix(isShow);
         TogglePrefixButtons();
-        UpdateMessagesText();
     }
 
     void DebugWindow::SetIsShowFunction(bool isShow)
     {
-        _isShowFunction = isShow;
+        _messages->SetIsShowFunction(isShow);
         ToggleFunctionButtons();
-        UpdateMessagesText();
     }
 
     void DebugWindow::SetIsShowTime(bool isShow)
     {
-        _isShowTime = isShow;
+        _messages->SetIsShowTime(isShow);
         ToggleTimeButtons();
-        UpdateMessagesText();
     }
 
     void DebugWindow::TogglePrefixButtons()
     {
-        _showPrefixButton->SetVisible(!_isShowPrefix);
-        _hidePrefixButton->SetVisible(_isShowPrefix);
+        _showPrefixButton->SetVisible(!_messages->IsShowPrefix());
+        _hidePrefixButton->SetVisible(_messages->IsShowPrefix());
     }
 
     void DebugWindow::ToggleFunctionButtons()
     {
-        _showFunctionButton->SetVisible(!_isShowFunction);
-        _hideFunctionButton->SetVisible(_isShowFunction);
+        _showFunctionButton->SetVisible(!_messages->IsShowFunction());
+        _hideFunctionButton->SetVisible(_messages->IsShowFunction());
     }
 
     void DebugWindow::ToggleTimeButtons()
     {
-        _showTimeButton->SetVisible(!_isShowTime);
-        _hideTimeButton->SetVisible(_isShowTime);
+        _showTimeButton->SetVisible(!_messages->IsShowTime());
+        _hideTimeButton->SetVisible(_messages->IsShowTime());
     }
 
     void DebugWindow::OnClear()
     {
-    }
-
-    void DebugWindow::OnMessageAdded(const DebugLogMessage& message)
-    {
-        AddMessage(message);
     }
 
     void DebugWindow::OnShowPrefix()

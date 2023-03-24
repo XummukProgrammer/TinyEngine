@@ -24,8 +24,8 @@ namespace TinyEngine
         if (view->TryBegin())
         {
             _widgetsLayersContainer.Draw();
-            view->End();
         }
+        view->End();
     }
 
     void Window::SetTitle(std::string_view title)
