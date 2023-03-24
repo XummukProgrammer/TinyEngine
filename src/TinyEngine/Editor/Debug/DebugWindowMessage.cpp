@@ -4,9 +4,10 @@
 
 namespace TinyEngine
 {
-    void DebugWindowMessage::Init(const DebugLogMessage& message, bool isShowPrefix, bool isShowTime, bool isShowFunction)
+    void DebugWindowMessage::Init(const DebugLogMessage& message, DebugLogShowParams* showParams)
     {
         _message = message;
+        _showParams = showParams;
 
         _prefix = MakeWidget<TextBox>("prefix");
         _sameLines.push_back(MakeWidget<SameLine>("sameline_1"));
@@ -29,19 +30,19 @@ namespace TinyEngine
 
         _message = message;
 
-        UpdateText(isShowPrefix, isShowTime, isShowFunction);
+        UpdateText();
 
         dynamic_cast<ChildImGUIView*>(GetView())->SetSize({ 1000, 20 });
     }
 
-    void DebugWindowMessage::UpdateText(bool isShowPrefix, bool isShowTime, bool isShowFunction)
+    void DebugWindowMessage::UpdateText()
     {
-        _prefix->SetVisible(isShowPrefix);
-        _time->SetVisible(isShowTime);
-        _function->SetVisible(isShowFunction);
+        _prefix->SetVisible(_showParams->isShowPrefix);
+        _time->SetVisible(_showParams->isShowTime);
+        _function->SetVisible(_showParams->isShowFunction);
 
-        _sameLines[0]->SetVisible(isShowPrefix);
-        _sameLines[1]->SetVisible(isShowTime);
-        _sameLines[2]->SetVisible(isShowFunction);
+        _sameLines[0]->SetVisible(_showParams->isShowPrefix);
+        _sameLines[1]->SetVisible(_showParams->isShowTime);
+        _sameLines[2]->SetVisible(_showParams->isShowFunction);
     }
 }

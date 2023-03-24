@@ -29,13 +29,10 @@ namespace TinyEngine
 		void UpdateMessagesText();
 
 		void SetIsShowPrefix(bool isShow);
-		bool IsShowPrefix() const { return _isShowPrefix; }
-
 		void SetIsShowFunction(bool isShow);
-		bool IsShowFunction() const { return _isShowFunction; }
-
 		void SetIsShowTime(bool isShow);
-		bool IsShowTime() const { return _isShowTime; }
+
+		const DebugLogShowParams& GetShowParams() const { return _showParams; }
 
 	private:
 		void OnMessageAdded(const DebugLogMessage& message);
@@ -46,9 +43,7 @@ namespace TinyEngine
 	private:
 		std::vector<DebugWindowMessage*> _messages;
 
-		bool _isShowPrefix = true;
-		bool _isShowFunction = true;
-		bool _isShowTime = true;
+		DebugLogShowParams _showParams;
 	};
 }
 

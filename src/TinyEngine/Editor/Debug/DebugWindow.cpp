@@ -105,20 +105,23 @@ namespace TinyEngine
 
     void DebugWindow::TogglePrefixButtons()
     {
-        _showPrefixButton->SetVisible(!_messages->IsShowPrefix());
-        _hidePrefixButton->SetVisible(_messages->IsShowPrefix());
+        const auto& showParams = _messages->GetShowParams();
+        _showPrefixButton->SetVisible(!showParams.isShowPrefix);
+        _hidePrefixButton->SetVisible(showParams.isShowPrefix);
     }
 
     void DebugWindow::ToggleFunctionButtons()
     {
-        _showFunctionButton->SetVisible(!_messages->IsShowFunction());
-        _hideFunctionButton->SetVisible(_messages->IsShowFunction());
+        const auto& showParams = _messages->GetShowParams();
+        _showFunctionButton->SetVisible(!showParams.isShowFunction);
+        _hideFunctionButton->SetVisible(showParams.isShowFunction);
     }
 
     void DebugWindow::ToggleTimeButtons()
     {
-        _showTimeButton->SetVisible(!_messages->IsShowTime());
-        _hideTimeButton->SetVisible(_messages->IsShowTime());
+        const auto& showParams = _messages->GetShowParams();
+        _showTimeButton->SetVisible(!showParams.isShowTime);
+        _hideTimeButton->SetVisible(showParams.isShowTime);
     }
 
     void DebugWindow::OnClear()

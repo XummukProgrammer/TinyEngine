@@ -31,7 +31,7 @@ namespace TinyEngine
         static int i = 0;
         auto msg = MakeWidget<DebugWindowMessage>(String("message_{}").Params(i).Get());
         msg->SetTitle(String("message_{}").Params(i).Get());
-        msg->Init(message, _isShowPrefix, _isShowTime, _isShowFunction);
+        msg->Init(message, &_showParams);
         ++i;
 
         _messages.push_back(msg);
@@ -41,25 +41,25 @@ namespace TinyEngine
     {
         for (const auto& msg : _messages)
         {
-            msg->UpdateText(_isShowPrefix, _isShowTime, _isShowFunction);
+            msg->UpdateText();
         }
     }
 
     void DebugWindowMessages::SetIsShowPrefix(bool isShow)
     {
-        _isShowPrefix = isShow;
+        _showParams.isShowPrefix = isShow;
         UpdateMessagesText();
     }
 
     void DebugWindowMessages::SetIsShowFunction(bool isShow)
     {
-        _isShowFunction = isShow;
+        _showParams.isShowFunction = isShow;
         UpdateMessagesText();
     }
 
     void DebugWindowMessages::SetIsShowTime(bool isShow)
     {
-        _isShowTime = isShow;
+        _showParams.isShowTime = isShow;
         UpdateMessagesText();
     }
 

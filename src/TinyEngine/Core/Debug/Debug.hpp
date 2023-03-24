@@ -14,6 +14,13 @@
 
 namespace TinyEngine
 {
+	struct DebugLogShowParams
+	{
+		bool isShowPrefix = true;
+		bool isShowTime = true;
+		bool isShowFunction = true;
+	};
+
 	class DebugLogMessage final : public ReflectionableObject
 	{
 		REFLECTION_OBJECT_BEGIN(DebugLogMessage)
@@ -35,7 +42,7 @@ namespace TinyEngine
 		const std::string& GetFunction() const { return _function; }
 		const std::string& GetText() const { return _text; }
 
-		std::string GetString(bool isShowPrefix = true, bool isShowTime = true, bool isShowFunction = true) const;
+		std::string GetString(const DebugLogShowParams& params) const;
 
 	private:
 		std::string _prefix;

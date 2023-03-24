@@ -16,8 +16,8 @@ namespace TinyEngine
 		virtual ~DebugWindowMessage() = default;
 
 	public:
-		void Init(const DebugLogMessage& message, bool isShowPrefix, bool isShowTime, bool isShowFunction);
-		void UpdateText(bool isShowPrefix, bool isShowTime, bool isShowFunction);
+		void Init(const DebugLogMessage& message, DebugLogShowParams* showParams);
+		void UpdateText();
 
 	private:
 		TextBox* _prefix = nullptr;
@@ -26,6 +26,7 @@ namespace TinyEngine
 		TextBox* _text = nullptr;
 		std::vector<SameLine*> _sameLines;
 		DebugLogMessage _message;
+		DebugLogShowParams* _showParams = nullptr;
 	};
 }
 

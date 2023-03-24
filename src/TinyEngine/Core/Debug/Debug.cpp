@@ -17,18 +17,18 @@ namespace TinyEngine
         _text = text;
     }
 
-    std::string DebugLogMessage::GetString(bool isShowPrefix, bool isShowTime, bool isShowFunction) const
+    std::string DebugLogMessage::GetString(const DebugLogShowParams& params) const
     {
         std::string str;
-        if (isShowPrefix)
+        if (params.isShowPrefix)
         {
             str += "[" + _prefix + "] ";
         }
-        if (isShowTime)
+        if (params.isShowTime)
         {
             str += "[" + _time + "] ";
         }
-        if (isShowFunction)
+        if (params.isShowFunction)
         {
             str += "[" + _function + "] ";
         }
@@ -142,7 +142,7 @@ namespace TinyEngine
 
             if (!isMessageShowed)
             {
-                std::cout << message.GetString() << std::endl;
+                std::cout << message.GetString({}) << std::endl;
                 isMessageShowed = true;
             }
         }
