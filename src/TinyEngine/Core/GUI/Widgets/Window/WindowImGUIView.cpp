@@ -6,7 +6,7 @@ namespace TinyEngine
 {
     bool WindowImGUIView::TryBegin()
     {
-        return ImGui::Begin(_title.c_str(), nullptr, ImGuiWindowFlags_HorizontalScrollbar);
+        return ImGui::Begin(_title.c_str());
     }
 
     void WindowImGUIView::End()

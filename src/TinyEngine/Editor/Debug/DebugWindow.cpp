@@ -4,8 +4,6 @@
 
 #include <TinyEngine/Core/Data/String.hpp>
 
-#include <TinyEngine/Core/GUI/Widgets/SameLine/SameLine.hpp>
-
 namespace TinyEngine
 {
     void DebugWindow::OnInit()
@@ -55,7 +53,11 @@ namespace TinyEngine
         ToggleFunctionButtons();
         ToggleTimeButtons();
 
+        _messagesChild = MakeWidget<ImGUIChild>("MessagesChild");
+        _messagesChild->SetTitle("MessagesChild");
+
         auto allLogMessages = Application::GetSingleton().GetRefContext().GetDebug()->GetDebugLogMessages(Debug::DebugLogMessagesType::All);
+        for (int i = 0; i < 100; ++i)
         for (const auto& message : allLogMessages->GetMessages())
         {
             AddMessage(message);
@@ -103,13 +105,13 @@ namespace TinyEngine
         auto msg = Msg();
         
         static int i = 0;
-        msg.prefix = MakeWidget<TextBox>(String("message_{}_prefix").Params(i).Get());
-        MakeWidget<SameLine>(String("message_{}_sameline_1").Params(i).Get());
-        msg.time = MakeWidget<TextBox>(String("message_{}_time").Params(i).Get());
-        MakeWidget<SameLine>(String("message_{}_sameline_2").Params(i).Get());
-        msg.function = MakeWidget<TextBox>(String("message_{}_function").Params(i).Get());
-        MakeWidget<SameLine>(String("message_{}_sameline_3").Params(i).Get());
-        msg.text = MakeWidget<TextBox>(String("message_{}_text").Params(i).Get());
+        msg.prefix = _messagesChild->MakeWidget<TextBox>(String("message_{}_prefix").Params(i).Get());
+        msg.sameLines.push_back(_messagesChild->MakeWidget<SameLine>(String("message_{}_sameline_1").Params(i).Get()));
+        msg.time = _messagesChild->MakeWidget<TextBox>(String("message_{}_time").Params(i).Get());
+        msg.sameLines.push_back(_messagesChild->MakeWidget<SameLine>(String("message_{}_sameline_2").Params(i).Get()));
+        msg.function = _messagesChild->MakeWidget<TextBox>(String("message_{}_function").Params(i).Get());
+        msg.sameLines.push_back(_messagesChild->MakeWidget<SameLine>(String("message_{}_sameline_3").Params(i).Get()));
+        msg.text = _messagesChild->MakeWidget<TextBox>(String("message_{}_text").Params(i).Get());
         ++i;
 
         msg.prefix->SetText(String("[{}]").Params(message.GetPrefix()).Get());
@@ -143,6 +145,10 @@ namespace TinyEngine
         msg.prefix->SetVisible(_isShowPrefix);
         msg.time->SetVisible(_isShowTime);
         msg.function->SetVisible(_isShowFunction);
+
+        msg.sameLines[0]->SetVisible(_isShowPrefix);
+        msg.sameLines[1]->SetVisible(_isShowTime);
+        msg.sameLines[2]->SetVisible(_isShowFunction);
     }
 
     void DebugWindow::SetIsShowPrefix(bool isShow)

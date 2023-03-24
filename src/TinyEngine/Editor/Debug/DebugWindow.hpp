@@ -4,6 +4,8 @@
 #include <TinyEngine/Core/GUI/Widgets/Window/Window.hpp>
 #include <TinyEngine/Core/GUI/Widgets/TextBox/TextBox.hpp>
 #include <TinyEngine/Core/GUI/Widgets/Button/Button.hpp>
+#include <TinyEngine/Core/GUI/Widgets/SameLine/SameLine.hpp>
+#include <TinyEngine/Core/GUI/Widgets/Child/Child.hpp>
 
 #include <TinyEngine/Core/Debug/Debug.hpp>
 
@@ -18,10 +20,11 @@ namespace TinyEngine
 	public:
 		struct Msg
 		{
-			TextBox* prefix;
-			TextBox* time;
-			TextBox* function;
-			TextBox* text;
+			TextBox* prefix = nullptr;
+			TextBox* time = nullptr;
+			TextBox* function = nullptr;
+			TextBox* text = nullptr;
+			std::vector<SameLine*> sameLines;
 			DebugLogMessage message;
 		};
 
@@ -82,6 +85,7 @@ namespace TinyEngine
 		Button* _hidePrefixButton = nullptr;
 		Button* _hideFunctionButton = nullptr;
 		Button* _hideTimeButton = nullptr;
+		Child* _messagesChild;
 
 		std::vector<Msg> _msgs;
 
