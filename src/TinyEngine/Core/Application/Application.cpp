@@ -4,12 +4,9 @@
 #include <TinyEngine/Core/GUI/GUI.hpp>
 #include <TinyEngine/Core/Debug/Debug.hpp>
 
-#include <TinyEngine/Core/GUI/Widgets/TextBox/TextBox.hpp>
-#include <TinyEngine/Core/GUI/Widgets/Window/Window.hpp>
-#include <TinyEngine/Core/GUI/Widgets/SameLine/SameLine.hpp>
-#include <TinyEngine/Core/GUI/Widgets/Button/Button.hpp>
 #include <TinyEngine/Core/GUI/Widgets/MenuBar/MenuBar.hpp>
-#include <TinyEngine/Core/GUI/Widgets/Popup/Popup.hpp>
+#include <TinyEngine/Core/GUI/Widgets/Window/Window.hpp>
+#include <TinyEngine/Editor/Debug/DebugWindow.hpp>
 
 namespace TinyEngine
 {
@@ -34,30 +31,6 @@ namespace TinyEngine
         params.librariesPath = "libs.xml";
         _context.GetProject()->Create(params);
 
-        auto window = _context.GetGUI()->GetMainImGUIWindow()->MakeWidget<ImGUIWindow>("DebugWindow");
-        window->SetTitle("Main Window");
-
-        {
-            auto textBox = window->MakeWidget<TextBox>("First");
-            textBox->SetText("First!");
-            textBox->SetIsMarker(true);
-        }
-        {
-            window->MakeWidget<SameLine>("SameLine1");
-        }
-        {
-            auto textBox = window->MakeWidget<TextBox>("Second");
-            textBox->SetText("Second!");
-            textBox->SetActive(false);
-        }
-        {
-            auto button = window->MakeWidget<Button>("Button");
-            button->SetText("Open Modal");
-            auto slot = button->GetOnPressedSignal().MakeSlot([]()
-                {
-                });
-            button->GetOnPressedSignal().Connect(slot);
-        }
         {
             auto menuBar = _context.GetGUI()->GetImGUIMenuBar();
 
@@ -68,19 +41,15 @@ namespace TinyEngine
             projectCloseAppItem->SetTitle("Close App");
             projectCloseAppItem->GetOnActionSignal().Connect(projectCloseAppItem->GetOnActionSignal().MakeSlot([this]()
             {
-                GetRefContext().GetGUI()->GetPopup<ImGUIPopup>("Popup1", Widget::ViewType::ImGUI)->Open();
             }));
 
             projectMenu->AddItem(std::move(projectCloseAppItem));
 
             menuBar->GetRefMenuContainer().AddMenu(std::move(projectMenu));
         }
-        if (auto popup = _context.GetGUI()->MakePopup<ImGUIPopup>("Popup1", Widget::ViewType::ImGUI))
-        {
-            auto textBox = popup->MakeWidget<TextBox>("Hello");
-            textBox->SetText("Hello, World!!");
-            textBox->SetActive(false);
-        }
+
+        auto debugWindow = _context.GetGUI()->GetMainImGUIWindow()->MakeWidget<DebugImGUIWindow>("DebugWindow");
+        debugWindow->SetTitle("Debug Window");
     }
 
     void Application::Run()

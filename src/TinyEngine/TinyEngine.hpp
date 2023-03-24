@@ -32,4 +32,6 @@
 #include <TinyEngine/Core/Data/Time.hpp>
 #include <TinyEngine/Core/Data/String.hpp>
 
+#include <TinyEngine/Editor/Debug/DebugWindow.hpp>
+
 #endif // _TINY_ENGINE_HEADER_

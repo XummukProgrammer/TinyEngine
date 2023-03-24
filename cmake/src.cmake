@@ -49,6 +49,8 @@ set(ENGINE_HEADERS
 	
 	src/TinyEngine/Core/Data/Time.hpp
 	src/TinyEngine/Core/Data/String.hpp
+	
+	src/TinyEngine/Editor/Debug/DebugWindow.hpp
 )
 
 set(ENGINE_SOURCES
@@ -102,4 +104,6 @@ set(ENGINE_SOURCES
 	
 	src/TinyEngine/Core/Data/Time.cpp
 	src/TinyEngine/Core/Data/String.cpp
+	
+	src/TinyEngine/Editor/Debug/DebugWindow.cpp
 )
