@@ -3,17 +3,28 @@
 
 #include <TinyEngine/Core/GUI/Widgets/Window/Window.hpp>
 #include <TinyEngine/Core/GUI/Widgets/TextBox/TextBox.hpp>
+#include <TinyEngine/Core/GUI/Widgets/Button/Button.hpp>
 
 #include <TinyEngine/Core/Debug/Debug.hpp>
 
 #include <TinyEngine/Core/Events/Slot.hpp>
+
+#include <vector>
 
 namespace TinyEngine
 {
 	class DebugWindow : public Window
 	{
 	public:
+		struct Msg
+		{
+			TextBox* textBox;
+			DebugLogMessage message;
+		};
+
+	public:
 		using MessageAddedSlot = std::shared_ptr<Slot<const DebugLogMessage&>>;
+		using ButtonPressedSlot = std::shared_ptr<Slot<>>;
 
 	public:
 		DebugWindow() = default;
@@ -25,12 +36,54 @@ namespace TinyEngine
 
 	private:
 		void AddMessage(const DebugLogMessage& message);
+		void UpdateMessagesText();
+
+		void SetIsShowPrefix(bool isShow);
+		void SetIsShowFunction(bool isShow);
+		void SetIsShowTime(bool isShow);
+
+		void TogglePrefixButtons();
+		void ToggleFunctionButtons();
+		void ToggleTimeButtons();
 
 	private:
+		void OnClear();
+
 		void OnMessageAdded(const DebugLogMessage& message);
+
+		void OnShowPrefix();
+		void OnHidePrefix();
+
+		void OnShowFunction();
+		void OnHideFunction();
+
+		void OnShowTime();
+		void OnHideTime();
 
 	private:
 		MessageAddedSlot _messageAddedSlot;
+		ButtonPressedSlot _clearSlot;
+		ButtonPressedSlot _showPrefixSlot;
+		ButtonPressedSlot _hidePrefixSlot;
+		ButtonPressedSlot _showFunctionSlot;
+		ButtonPressedSlot _hideFunctionSlot;
+		ButtonPressedSlot _showTimeSlot;
+		ButtonPressedSlot _hideTimeSlot;
+
+	private:
+		Button* _clearButton = nullptr;
+		Button* _showPrefixButton = nullptr;
+		Button* _showFunctionButton = nullptr;
+		Button* _showTimeButton = nullptr;
+		Button* _hidePrefixButton = nullptr;
+		Button* _hideFunctionButton = nullptr;
+		Button* _hideTimeButton = nullptr;
+
+		std::vector<Msg> _msgs;
+
+		bool _isShowPrefix = true;
+		bool _isShowFunction = true;
+		bool _isShowTime = true;
 	};
 
 	class DebugImGUIWindow final : public DebugWindow
