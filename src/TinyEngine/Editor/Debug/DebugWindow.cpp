@@ -11,7 +11,7 @@ namespace TinyEngine
     void DebugWindow::OnInit()
     {
         _clearButton = MakeWidget<Button>("ClearButton");
-        _clearButton->SetText("Clear Button");
+        _clearButton->SetText("Clear");
         _clearSlot = _clearButton->GetOnPressedSignal().MakeSlot(std::bind(&DebugWindow::OnClear, this));
         _clearButton->GetOnPressedSignal().Connect(_clearSlot);
 
@@ -103,12 +103,29 @@ namespace TinyEngine
         auto msg = Msg();
         
         static int i = 0;
-        msg.textBox = MakeWidget<TextBox>(String("message_{}").Params(i).Get());
+        msg.prefix = MakeWidget<TextBox>(String("message_{}_prefix").Params(i).Get());
+        MakeWidget<SameLine>(String("message_{}_sameline_1").Params(i).Get());
+        msg.time = MakeWidget<TextBox>(String("message_{}_time").Params(i).Get());
+        MakeWidget<SameLine>(String("message_{}_sameline_2").Params(i).Get());
+        msg.function = MakeWidget<TextBox>(String("message_{}_function").Params(i).Get());
+        MakeWidget<SameLine>(String("message_{}_sameline_3").Params(i).Get());
+        msg.text = MakeWidget<TextBox>(String("message_{}_text").Params(i).Get());
         ++i;
 
-        msg.textBox->SetText(message.GetString(_isShowPrefix, _isShowTime, _isShowFunction));
+        msg.prefix->SetText(String("[{}]").Params(message.GetPrefix()).Get());
+        msg.prefix->SetColor(raylib::Color::Blue());
+
+        msg.time->SetText(String("[{}]").Params(message.GetTime()).Get());
+        msg.time->SetColor(raylib::Color::Green());
+
+        msg.function->SetText(String("[{}]").Params(message.GetFunction()).Get());
+        msg.function->SetColor(raylib::Color::Red());
+
+        msg.text->SetText(message.GetText());
 
         msg.message = message;
+
+        UpdateMessageText(msg);
 
         _msgs.push_back(msg);
     }
@@ -117,8 +134,15 @@ namespace TinyEngine
     {
         for (const auto& msg : _msgs)
         {
-            msg.textBox->SetText(msg.message.GetString(_isShowPrefix, _isShowTime, _isShowFunction));
+            UpdateMessageText(msg);
         }
+    }
+
+    void DebugWindow::UpdateMessageText(const Msg& msg)
+    {
+        msg.prefix->SetVisible(_isShowPrefix);
+        msg.time->SetVisible(_isShowTime);
+        msg.function->SetVisible(_isShowFunction);
     }
 
     void DebugWindow::SetIsShowPrefix(bool isShow)

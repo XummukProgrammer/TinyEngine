@@ -18,7 +18,10 @@ namespace TinyEngine
 	public:
 		struct Msg
 		{
-			TextBox* textBox;
+			TextBox* prefix;
+			TextBox* time;
+			TextBox* function;
+			TextBox* text;
 			DebugLogMessage message;
 		};
 
@@ -37,6 +40,7 @@ namespace TinyEngine
 	private:
 		void AddMessage(const DebugLogMessage& message);
 		void UpdateMessagesText();
+		void UpdateMessageText(const Msg& msg);
 
 		void SetIsShowPrefix(bool isShow);
 		void SetIsShowFunction(bool isShow);
