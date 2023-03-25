@@ -41,19 +41,19 @@ namespace TinyEngine
 	template<typename T>
 	T* Window::MakeWidget(std::string_view widgetName)
 	{
-		return _widgetsLayersContainer.MakeWidget<T>(widgetName, GetViewType());
+		return _widgetsLayersContainer.MakeWidget<T>(widgetName, GetView()->GetType());
 	}
 
 	template<typename T>
 	T* Window::GetWidget(std::string_view widgetName) const
 	{
-		return _widgetsLayersContainer.GetWidget<T>(GetViewType(), widgetName);
+		return _widgetsLayersContainer.GetWidget<T>(GetView()->GetType(), widgetName);
 	}
 
 	template<typename T>
 	T* Window::GetBackWidget() const
 	{
-		return _widgetsLayersContainer.GetBackWidget<T>(GetViewType());
+		return _widgetsLayersContainer.GetBackWidget<T>(GetView()->GetType());
 	}
 
 	class MainImGUIWindow final : public Window

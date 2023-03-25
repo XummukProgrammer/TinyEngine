@@ -26,7 +26,7 @@ namespace TinyEngine
             container->Init();
         }
 
-        _mainImGUIWindow = MakeWidget<MainImGUIWindow>("MainWindow", Widget::ViewType::ImGUI);
+        _mainImGUIWindow = MakeWidget<MainImGUIWindow>("MainWindow", IWidgetView::ViewType::ImGUI);
         _imGUIMenuBar = _mainImGUIWindow->MakeWidget<MenuBar>("MenuBar");
     }
 
@@ -69,7 +69,7 @@ namespace TinyEngine
         _imGUIOpenPopup = widgetName;
     }
 
-    WidgetsLayerContainer* GUI::GetContainer(Widget::ViewType viewType, WidgetsContainerAction action) const
+    WidgetsLayerContainer* GUI::GetContainer(IWidgetView::ViewType viewType, WidgetsContainerAction action) const
     {
         WidgetsContainerType containerType{};
 
@@ -79,7 +79,7 @@ namespace TinyEngine
             {
                 switch (viewType)
                 {
-                    case TinyEngine::Widget::ViewType::ImGUI:
+                    case IWidgetView::ViewType::ImGUI:
                         containerType = WidgetsContainerType::ImGUIWidgets;
                         break;
                     default:
@@ -91,7 +91,7 @@ namespace TinyEngine
             {
                 switch (viewType)
                 {
-                    case TinyEngine::Widget::ViewType::ImGUI:
+                    case IWidgetView::ViewType::ImGUI:
                         containerType = WidgetsContainerType::ImGUIPopups;
                         break;
                     default:

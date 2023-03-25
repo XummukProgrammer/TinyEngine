@@ -27,7 +27,7 @@ namespace TinyEngine
 
 	public:
 		template<typename T>
-		T* MakeWidget(std::string_view widgetName, Widget::ViewType widgetType);
+		T* MakeWidget(std::string_view widgetName, IWidgetView::ViewType widgetType);
 		bool HasWidget(std::string_view name) const;
 		template<typename T>
 		T* GetWidget(std::string_view name) const;
@@ -39,7 +39,7 @@ namespace TinyEngine
 	};
 
 	template<typename T>
-	T* WidgetsLayerContainer::MakeWidget(std::string_view widgetName, Widget::ViewType widgetType)
+	T* WidgetsLayerContainer::MakeWidget(std::string_view widgetName, IWidgetView::ViewType widgetType)
 	{
 		auto widget = std::make_unique<T>();
 

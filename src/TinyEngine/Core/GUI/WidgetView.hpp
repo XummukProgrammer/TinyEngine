@@ -8,6 +8,12 @@ namespace TinyEngine
 	class IWidgetView
 	{
 	public:
+		enum class ViewType
+		{
+			ImGUI
+		};
+
+	public:
 		IWidgetView() = default;
 		virtual ~IWidgetView() = default;
 
@@ -27,8 +33,12 @@ namespace TinyEngine
 		void SetWidget(Widget* widget);
 		Widget* GetWidget() const;
 
+		void SetType(ViewType type) { _type = type; }
+		ViewType GetType() const { return _type; }
+
 	private:
 		Widget* _widget = nullptr;
+		ViewType _type;
 	};
 }
 

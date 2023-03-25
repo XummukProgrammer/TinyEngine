@@ -39,27 +39,27 @@ namespace TinyEngine
 		MenuBar* GetImGUIMenuBar() const;
 
 		template<typename T>
-		T* MakeWidget(std::string_view widgetName, Widget::ViewType widgetType);
+		T* MakeWidget(std::string_view widgetName, IWidgetView::ViewType widgetType);
 
 		template<typename T>
-		T* MakePopup(std::string_view widgetName, Widget::ViewType widgetType);
+		T* MakePopup(std::string_view widgetName, IWidgetView::ViewType widgetType);
 
 		template<typename T>
-		T* GetWidget(std::string_view widgetName, Widget::ViewType widgetType) const;
+		T* GetWidget(std::string_view widgetName, IWidgetView::ViewType widgetType) const;
 
 		template<typename T>
-		T* GetBackWidget(Widget::ViewType widgetType) const;
+		T* GetBackWidget(IWidgetView::ViewType widgetType) const;
 
 		template<typename T>
-		T* GetPopup(std::string_view widgetName, Widget::ViewType widgetType) const;
+		T* GetPopup(std::string_view widgetName, IWidgetView::ViewType widgetType) const;
 
 		template<typename T>
-		T* GetBackPopup(Widget::ViewType widgetType) const;
+		T* GetBackPopup(IWidgetView::ViewType widgetType) const;
 
 		void SetImGUIOpenPopup(std::string_view widgetName);
 
 	private:
-		WidgetsLayerContainer* GetContainer(Widget::ViewType viewType, WidgetsContainerAction action) const;
+		WidgetsLayerContainer* GetContainer(IWidgetView::ViewType viewType, WidgetsContainerAction action) const;
 
 		void TryOpenPopup();
 
@@ -71,13 +71,13 @@ namespace TinyEngine
 	};
 
 	template<typename T>
-	T* GUI::MakeWidget(std::string_view widgetName, Widget::ViewType widgetType)
+	T* GUI::MakeWidget(std::string_view widgetName, IWidgetView::ViewType widgetType)
 	{
 		return GetContainer(widgetType, WidgetsContainerAction::Widgets)->MakeWidget<T>(widgetName, widgetType);
 	}
 
 	template<typename T>
-	T* GUI::MakePopup(std::string_view widgetName, Widget::ViewType widgetType)
+	T* GUI::MakePopup(std::string_view widgetName, IWidgetView::ViewType widgetType)
 	{
 		auto widget = GetContainer(widgetType, WidgetsContainerAction::Popups)->MakeWidget<T>(widgetName, widgetType);
 		widget->SetTitle(widgetName);
@@ -85,25 +85,25 @@ namespace TinyEngine
 	}
 
 	template<typename T>
-	T* GUI::GetWidget(std::string_view widgetName, Widget::ViewType widgetType) const
+	T* GUI::GetWidget(std::string_view widgetName, IWidgetView::ViewType widgetType) const
 	{
 		return GetContainer(widgetType, WidgetsContainerAction::Widgets)->GetWidget<T>(widgetName);
 	}
 
 	template<typename T>
-	T* GUI::GetBackWidget(Widget::ViewType widgetType) const
+	T* GUI::GetBackWidget(IWidgetView::ViewType) const
 	{
 		return GetContainer(widgetType, WidgetsContainerAction::Widgets)->GetBackWidget<T>(widgetType);
 	}
 
 	template<typename T>
-	T* GUI::GetPopup(std::string_view widgetName, Widget::ViewType widgetType) const
+	T* GUI::GetPopup(std::string_view widgetName, IWidgetView::ViewType) const
 	{
 		return GetContainer(widgetType, WidgetsContainerAction::Popups)->GetWidget<T>(widgetName);
 	}
 
 	template<typename T>
-	T* GUI::GetBackPopup(Widget::ViewType widgetType) const
+	T* GUI::GetBackPopup(IWidgetView::ViewType) const
 	{
 		return GetContainer(widgetType, WidgetsContainerAction::Popups)->GetBackWidget<T>(widgetType);
 	}

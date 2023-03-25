@@ -12,12 +12,6 @@ namespace TinyEngine
 	class Widget
 	{
 	public:
-		enum class ViewType
-		{
-			ImGUI
-		};
-
-	public:
 		Widget() = default;
 		virtual ~Widget() = default;
 
@@ -36,8 +30,7 @@ namespace TinyEngine
 		void SetName(std::string_view name) { _name = name; }
 		const std::string& GetName() const { return _name; }
 
-		void MakeView(ViewType type);
-		ViewType GetViewType() const { return _viewType; }
+		void MakeView(IWidgetView::ViewType type);
 		void SetView(std::unique_ptr<IWidgetView>&& view);
 		IWidgetView* GetView() const { return _view.get(); }
 
@@ -53,7 +46,6 @@ namespace TinyEngine
 	private:
 		std::string _name;
 		std::unique_ptr<IWidgetView> _view;
-		ViewType _viewType;
 		bool _isActive = true;
 		bool _isVisible = true;
 	};
