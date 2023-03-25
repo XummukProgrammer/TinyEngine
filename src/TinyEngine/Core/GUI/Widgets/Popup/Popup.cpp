@@ -9,7 +9,7 @@ namespace TinyEngine
 {
     void Popup::Open()
     {
-        Application::GetSingleton().GetRefContext().GetGUI()->SetImGUIOpenPopup(GetTitle());
+        Application::GetSingleton().GetRefContext().GetGUI()->SetImGUIOpenPopup(GetName());
     }
 
     std::unique_ptr<IWidgetView> Popup::MakeImGUIView() const

@@ -1,17 +1,14 @@
 ﻿#include "PopupImGUIView.hpp"
 
+#include <TinyEngine/Core/GUI/Widget.hpp>
+
 #include "imgui.h"
 
 namespace TinyEngine
 {
-    void PopupImGUIView::SetTitle(std::string_view title)
-    {
-        _title = title;
-    }
-
     bool PopupImGUIView::TryBegin()
     {
-        return ImGui::BeginPopupModal(_title.c_str(), nullptr);
+        return ImGui::BeginPopupModal(GetWidget()->GetName().c_str(), nullptr);
     }
 
     void PopupImGUIView::End()

@@ -14,7 +14,6 @@ namespace TinyEngine
 		~ChildImGUIView() = default;
 
 	public:
-		virtual void SetTitle(std::string_view title) override;
 		void SetSize(const raylib::Vector2& size);
 		void SetIsHorizontalScrollbar(bool isEnable) { _isHorizontalScrollbar = isEnable; }
 
@@ -24,7 +23,6 @@ namespace TinyEngine
 		virtual void OnDraw() override {}
 
 	private:
-		std::string _title;
 		raylib::Vector2 _size{ 0, 0 };
 		bool _isHorizontalScrollbar = false;
 	};

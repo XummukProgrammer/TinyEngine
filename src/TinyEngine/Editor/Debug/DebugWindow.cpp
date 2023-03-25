@@ -50,7 +50,6 @@ namespace TinyEngine
         _hideTimeButton->GetOnPressedSignal().Connect(_hideTimeSlot);
 
         _messages = MakeWidget<DebugWindowMessages>("MessagesChild");
-        _messages->SetTitle("MessagesChild");
 
         TogglePrefixButtons();
         ToggleFunctionButtons();

@@ -6,6 +6,8 @@ namespace TinyEngine
 {
     void DebugWindowMessages::OnInit()
     {
+        Child::OnInit();
+
         auto allLogMessages = Application::GetSingleton().GetRefContext().GetDebug()->GetDebugLogMessages(Debug::DebugLogMessagesType::All);
         for (const auto& message : allLogMessages->GetMessages())
         {
@@ -24,13 +26,14 @@ namespace TinyEngine
         auto& onMessageAddedSignal = Application::GetSingleton().GetRefContext().GetDebug()->GetDebugLogMessages(Debug::DebugLogMessagesType::All)->GetOnMessageAddedSignal();
         onMessageAddedSignal.Disconnect(_messageAddedSlot);
         _messageAddedSlot.reset();
+
+        Child::OnDeinit();
     }
 
     void DebugWindowMessages::AddMessage(const DebugLogMessage& message)
     {
         static int i = 0;
         auto msg = MakeWidget<DebugWindowMessage>(String("message_{}").Params(i).Get());
-        msg->SetTitle(String("message_{}").Params(i).Get());
         msg->Init(message, &_showParams);
         ++i;
 

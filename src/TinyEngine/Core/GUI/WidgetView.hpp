@@ -28,7 +28,7 @@ namespace TinyEngine
 		Widget* GetWidget() const;
 
 	private:
-		Widget* _widget;
+		Widget* _widget = nullptr;
 	};
 }
 

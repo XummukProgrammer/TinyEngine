@@ -16,11 +16,6 @@ namespace TinyEngine
 		virtual void End() override;
 
 		virtual void OnDraw() override {}
-
-		virtual void SetTitle(std::string_view title) override;
-
-	private:
-		std::string _title;
 	};
 
 	class MainWindowImGUIView final : public WindowImGUIView

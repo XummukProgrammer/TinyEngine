@@ -12,15 +12,10 @@ namespace TinyEngine
 		~PopupImGUIView() = default;
 
 	public:
-		virtual void SetTitle(std::string_view title) override;
-
 		virtual bool TryBegin() override;
 		virtual void End() override;
 
 		virtual void OnDraw() override {}
-
-	private:
-		std::string _title;
 	};
 }
 

@@ -28,12 +28,6 @@ namespace TinyEngine
         view->End();
     }
 
-    void Window::SetTitle(std::string_view title)
-    {
-        _title = title;
-        dynamic_cast<IWindowView*>(GetView())->SetTitle(title);
-    }
-
     std::unique_ptr<IWidgetView> Window::MakeImGUIView() const
     {
         return std::make_unique<WindowImGUIView>();

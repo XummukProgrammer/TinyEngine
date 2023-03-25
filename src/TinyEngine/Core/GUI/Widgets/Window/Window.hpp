@@ -18,9 +18,6 @@ namespace TinyEngine
 		virtual void OnDraw() override;
 
 	public:
-		void SetTitle(std::string_view title);
-		const std::string& GetTitle() const { return _title; }
-
 		template<typename T>
 		T* MakeWidget(std::string_view widgetName);
 
@@ -39,7 +36,6 @@ namespace TinyEngine
 
 	private:
 		WidgetsLayerContainer _widgetsLayersContainer;
-		std::string _title;
 	};
 
 	template<typename T>

@@ -14,8 +14,6 @@ namespace TinyEngine
 		virtual ~IWindowView() = default;
 
 	public:
-		virtual void SetTitle(std::string_view title) = 0;
-
 		virtual bool TryBegin() = 0;
 		virtual void End() = 0;
 	};

@@ -1,22 +1,19 @@
 ﻿#include "WindowImGUIView.hpp"
 
+#include <TinyEngine/Core/GUI/Widget.hpp>
+
 #include "imgui.h"
 
 namespace TinyEngine
 {
     bool WindowImGUIView::TryBegin()
     {
-        return ImGui::Begin(_title.c_str());
+        return ImGui::Begin(GetWidget()->GetName().c_str());
     }
 
     void WindowImGUIView::End()
     {
         ImGui::End();
-    }
-
-    void WindowImGUIView::SetTitle(std::string_view title)
-    {
-        _title = title;
     }
 
     bool MainWindowImGUIView::TryBegin()
